@@ -1,0 +1,7 @@
+<?php
+
+/*
+Requêtes spécifiques admin
+*/
+
+?>

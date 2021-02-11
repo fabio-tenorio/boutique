@@ -1,0 +1,50 @@
+TODO faire une maquette graphique et la placer dans la racine du dossier du projet (maquette.pdf)
+
+TODO faire le modèle relationnel des données (bdd.pdf)
+
+TODO faire un bouton de recherche des produits en vente (soit physiques, soit non)
+
+/* LE CONTENU DU SITE */
+
+TODO le header - onglet boutique (avec des sous-menus: nos promotions, nos produits d'entretien et de soin, promotions thématiques (sous-menus: fête des mères, jour de l'an, saint-valentin, soin d'hiver, soin d'été), des outils pro)
+
+TODO page d'accueil attractive avec des headers et footers différents des autres pages
+TODO une vidéo/mosaique/carroussel du sallon en dessous du header
+TODO une vraie liaison avec facebook, instagram, linkedin
+TODO <section>affichage des produits physiques en vente - soin et beauté</section>
+TODO <section>invitation à la réservation d'un créneau pour faire un rendez-vous</section>
+ 
+TODO partie utilisateur (UI) avec trois profils: non-membres, les membres, et administrateurs
+TODO page d'inscription
+TODO page de connexion
+TODO page de profil
+TODO page admin
+
+TODO partie blog où la proprietaire puisse écrire des textes et recevoir des commentaires des clients
+TODO le blog permettra à la proprietaire de créer des sujets et y insérer des messages (petit textes et photos)
+TODO les clients à leur tour pourront donner leur avis
+TODO le lien vers le blog doit être toujours mis en avant sur chaque page
+
+TODO espace pour l'enregistrement des avis sur la prestation et les produits en vente
+
+TODO partie agenda avec un planning (qui se défile pendant un an) et un formulaire de réservation de rendez-vous
+TODO dans le planning les membres aussi bien que les non-membres pourront réserver un créneau
+TODO le formulaire de réservation contiendra des champs pour:
+        le nom, l'email, le téléphone, le type de rendez-vous (checkbox pour plusieurs options),
+        l'horaire et la date
+TODO ajouter une procédure de confirmation par email
+
+TODO Mise en avant des produits phares / derniers produits mis en ligne
+TODO des promotions Saint-Valentin, Noël,
+TODO des tondeuses, des produits de soin pour les ongles et les cheveux
+TODO Chaque produit doit avoir une page complète générée
+TODO dynamiquement (nom, image, prix, description, ajouter au panier...)
+TODO Création de comptes d’utilisateurs
+TODO Gestion du profil utilisateur (informations, historique d’achat, consultation du panier...)
+TODO Gestion des produits à l’aide de back office pour les admins
+TODO Gestion des catégories et des sous catégories de produits
+TODO 
+TODO Barre de recherche de produits
+TODO Validation du panier (simulation du paiement)
+TODO Design contemporain et respectant la charte graphique de votre entreprise
+

@@ -1,5 +1,4 @@
 <?php
-
 /*
 
 UN CONTROLER GÉNÉRAL QUI PERMET L'ACCÈS À DES DONNÉES DIFFÉRENTES
@@ -23,7 +22,9 @@ Déterminer les différents controlers :
    
 */
 
-class Test {
+namespace App\Application;
+
+class Controller {
     public function index()
     {
         echo 'Hello';

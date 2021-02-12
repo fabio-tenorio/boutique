@@ -1,4 +1,27 @@
 <?php
+use App\Autoloader;
+use App\Application\Controller as Controller;
+use App\Application\ControllerUser as ControllerUser;
+// // use App\Model\Modelaccueil as Modelaccueil;
+
+require 'autoloader.php';
+
+Autoloader::register();
+
+define('ROOT', str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']));
+
+$params = explode('/', $_GET['p']);
+
+if ($params[0]!='')
+{
+    $controller = ucfirst($params[0]);
+    $controller = new Controller;
+    var_dump($controller);
+    die;
+} else
+{
+    echo "pas de controller pour le moment\n";die;
+}
 
 /* 
 
@@ -17,41 +40,44 @@ Génère les erreurs géné : error 404; voous n'avez pas les droits ; lex excep
 
 */
 
-define('ROOT', str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']));
 
 
-echo("<pre>");
-var_dump($_SERVER['SCRIPT_FILENAME']);
-var_dump(ROOT);
-echo("</pre>");
+// echo("<pre>");
+// var_dump($_SERVER['SCRIPT_FILENAME']);
+// var_dump($_GET);
+// echo("</pre>");
+// var_dump($_GET);
 
-var_dump($_GET);
-
-// require_once(ROOT.'app/Model.php');
-//require_once(ROOT.'Controller/Agenda.php');
+require_once(ROOT.'Application/Controller.php');
+// require_once(ROOT.'Controller/Model.php');
 
 // On sépare les paramètres et on les met dans le tableau $params
-$params = explode('/', $_GET['p']);
+
+
+// var_dump($params);
 
 // Si au moins 1 paramètre existe
 if($params[0] != ""){
     // On sauvegarde le 1er paramètre dans $controller en mettant sa 1ère lettre en majuscule
-    $controller = ucfirst($params[0]);
-
+    $controller = 'Application/'.ucfirst($params[0]);
     // On sauvegarde le 2ème paramètre dans $action si il existe, sinon index
-    $action = isset($params[1]) ? $params[1] : '__construct';
+    $action = isset($params[1]) ? $params[1] : 'index';
 
     // On appelle le contrôleur
-    require_once(ROOT.'Controller/'.$controller.'.php');
+    // var_dump(ROOT.$controller.'.php');
+    require_once(ROOT.$controller.'.php');
 
     // On instancie le contrôleur
     $controller = new $controller();
-
+    // var_dump($controller);
     // On appelle la méthode
-    var_dump($controller->$action());
+    $controller->$action();
 }else{
-    // Ici aucun paramètre n'est défini
+    echo "aucun controller appelé";
 }
+
+$test = new Controller;
+$test->index();
 
 ?>
 

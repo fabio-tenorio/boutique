@@ -13,11 +13,11 @@ class Autoloader
     }
     static function autoload($class)
     {
-        $class = str_replace('App\\','',$class);  
-        $class = str_replace('\\','/',$class);    
-        if(file_exists(__DIR__ . '/' . $class . '.php')){
-        require __DIR__ . '/' . $class . '.php';   
-            
+        $class = str_replace(__NAMESPACE__ . '\\', '', $class);
+        $class = str_replace('\\','/',$class);
+        $file = __DIR__ .'/'. $class . '.php';
+        if(file_exists($file)){
+        require_once $file;
         } 
     }
 }

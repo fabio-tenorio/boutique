@@ -10,5 +10,3 @@ Création du discussion sur blog
 Nouvel article dans boutique
 
 */
-
-?>

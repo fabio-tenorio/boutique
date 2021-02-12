@@ -3,5 +3,3 @@
 /*
 Dernier panier
 */
-
-?>

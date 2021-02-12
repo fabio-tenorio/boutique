@@ -1,22 +1,24 @@
 <?php
-use App\Autoloader;
-use App\Application\Controller as Controller;
-use App\Application\ControllerUser as ControllerUser;
+// use App\Autoloader;
+// use App\Application\Controller as Controller;
+// use App\Application\ControllerUser as ControllerUser;
 // // use App\Model\Modelaccueil as Modelaccueil;
 
-require 'autoloader.php';
+// require 'autoloader.php';
 
-Autoloader::register();
+// Autoloader::register();
 
-define('ROOT', str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']));
-
+define('ROOT', str_replace('index.php','Application/',$_SERVER['SCRIPT_FILENAME']));
+var_dump(ROOT);
 $params = explode('/', $_GET['p']);
 
 if ($params[0]!='')
 {
     $controller = ucfirst($params[0]);
-    $controller = new Controller;
-    var_dump($controller);
+    
+    var_dump(require_once(ROOT.$controller.'.php'));
+    $controller = new $controller;
+    var_dump($controller);die;
     die;
 } else
 {

@@ -17,4 +17,15 @@ Contient la classe qui génère les formulaires
 
 */
 
+Namespace App\Application\Controllers;
+Use App\Application\Controller;
+
+class ControllerFormulaires extends Controller {
+
+    public function test()
+    {
+        echo "Je suis le fils de ".$this->index();
+    }
+}
+
 ?>

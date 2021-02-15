@@ -18,9 +18,10 @@ class Autoloader
         $file = __DIR__.'/'.$class_name.'.php';
         if(file_exists($file)){
         require_once __DIR__.'/'.$class_name.'.php';
+        // echo "j'ai trouvé ".__DIR__.'/'.$class_name.'.php';
         } else
         {
-            echo "je n'ai pas trouvé ".__NAMESPACE__.'/'.$class_name.'.php';
+            // echo "je n'ai pas trouvé ".__DIR__.'/'.$class_name.'.php';
         }
     }
 }

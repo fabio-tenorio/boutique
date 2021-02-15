@@ -8,9 +8,6 @@ use App\Application\Controllers\ControllerUser as ControllerUser;
 
 Autoloader::register();
 
-// $test = new ControllerUser;
-// var_dump($test);die;
-
 // define ('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 define('ROOT', str_replace('index.php','Application/',$_SERVER['SCRIPT_FILENAME']));
 // var_dump(WEBROOT);
@@ -19,18 +16,18 @@ $params = explode('/', $_GET['p']);
 if ($params[0]!='')
 {
     $controller = ucfirst($params[0]);
-    $controller = 'App\\'.'Application\\'.$controller;
-    
-    define ('OBJNAME', __NAMESPACE__, '');
-    $controller = OBJNAME.$controller;
-    $controller = new $controller;
-    var_dump($controller);die;
-    if (!is_object($controller))
+    $MainController = 'App\\'.'Application\\'.$controller;
+    // define ('OBJNAME', __NAMESPACE__, '');
+    // $controller = OBJNAME.$controller;
+    if (class_exists($MainController)) {
+        $controller = new $MainController;
+    } else
     {
         $controller = 'App\\'.'Application\\'.'Controllers\\'.$controller;
         $controller = new $controller;
     }
-    var_dump($controller);
+    
+    var_dump($controller);die;
 } else
 {
     echo "pas de controller pour le moment\n";die;

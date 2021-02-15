@@ -11,14 +11,17 @@ class Autoloader
             'autoload'
         ]);
     }
-    static function autoload($class)
+    static function autoload($class_name)
     {
-        $class = str_replace(__NAMESPACE__ . '\\', '', $class);
-        $class = str_replace('\\','/',$class);
-        $file = __DIR__ .'/'. $class . '.php';
+        $class_name = str_replace(__NAMESPACE__ . '\\', '', $class_name);
+        $class_name = str_replace('\\','/', $class_name);
+        $file = __DIR__.'/'.$class_name.'.php';
         if(file_exists($file)){
-        require_once $file;
-        } 
+        require_once __DIR__.'/'.$class_name.'.php';
+        } else
+        {
+            echo "je n'ai pas trouvé ".__NAMESPACE__.'/'.$class_name.'.php';
+        }
     }
 }
 

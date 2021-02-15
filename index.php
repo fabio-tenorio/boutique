@@ -1,25 +1,36 @@
 <?php
-// use App\Autoloader;
-// use App\Application\Controller as Controller;
-// use App\Application\ControllerUser as ControllerUser;
+require_once 'autoloader.php';
+
+use App\Autoloader;
+use App\Application\Controller as Controller;
+use App\Application\Controllers\ControllerUser as ControllerUser;
 // // use App\Model\Modelaccueil as Modelaccueil;
 
-// require 'autoloader.php';
+Autoloader::register();
 
-// Autoloader::register();
+// $test = new ControllerUser;
+// var_dump($test);die;
 
+// define ('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 define('ROOT', str_replace('index.php','Application/',$_SERVER['SCRIPT_FILENAME']));
-var_dump(ROOT);
+// var_dump(WEBROOT);
 $params = explode('/', $_GET['p']);
 
 if ($params[0]!='')
 {
     $controller = ucfirst($params[0]);
+    $controller = 'App\\'.'Application\\'.$controller;
     
-    var_dump(require_once(ROOT.$controller.'.php'));
+    define ('OBJNAME', __NAMESPACE__, '');
+    $controller = OBJNAME.$controller;
     $controller = new $controller;
     var_dump($controller);die;
-    die;
+    if (!is_object($controller))
+    {
+        $controller = 'App\\'.'Application\\'.'Controllers\\'.$controller;
+        $controller = new $controller;
+    }
+    var_dump($controller);
 } else
 {
     echo "pas de controller pour le moment\n";die;
@@ -50,7 +61,7 @@ Génère les erreurs géné : error 404; voous n'avez pas les droits ; lex excep
 // echo("</pre>");
 // var_dump($_GET);
 
-require_once(ROOT.'Application/Controller.php');
+die;
 // require_once(ROOT.'Controller/Model.php');
 
 // On sépare les paramètres et on les met dans le tableau $params

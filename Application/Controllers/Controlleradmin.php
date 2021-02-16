@@ -16,7 +16,7 @@ Nouvel article dans boutique
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
 
-class ControllerAdmin extends Controller {
+class ControllerAdmin extends ControllerUser {
 
     public function test()
     {

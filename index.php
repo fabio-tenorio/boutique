@@ -4,6 +4,7 @@ require_once 'autoloader.php';
 use App\Autoloader;
 use App\Application\Controller as Controller;
 use App\Application\Controllers\ControllerUser as ControllerUser;
+use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 // use App\Model\Modelaccueil as Modelaccueil;
 
 Autoloader::register();
@@ -18,37 +19,48 @@ if ($params[0]!='')
     $MainController = 'App\\'.'Application\\'.$controller;
     if (class_exists($MainController))
     {
-        $controller = new $MainController;
-        var_dump($controller);
-    } else
+       $controller = new $MainController;
+       var_dump($controller);
+    }
+    else
     {
-        $controller = 'App\\'.'Application\\'.'Controllers\\'.$controller;
-        $controller = new $controller;
-        // var_dump($controller);
+       $controller = 'App\\'.'Application\\'.'Controllers\\'.$controller;
+       $controller = new $controller;
+       var_dump($controller);
     }
     // la syntaxe ci-dessous est équivalent à la condition if else ci-dessous
     // $action = isset($params[1]) ? $params[1] : http_response_code(404);
-    if (isset($params[2]))
+    if (isset($params[1]) && !isset($params[2]))
     {
         $action = $params[1];
-        $value = $params[2];
-        $controller->$action($value);
-        if (isset($params[1]))
-        {
-            if (method_exists($controller, $action))
-            {
-                $controller->$action(null);
-            }
-        } else
+        if (method_exists($controller, $action)) {
+            $controller->$action();
+            // var_dump($controller->$action());
+        }
+        else
         {
             http_response_code(404);
-            //faisons une page 404 pour le projet?
             echo "La page n'existe pas";
         }
     }
-} else
+    elseif (isset($params[1]) && isset($params[2]))
+    {
+            // si la méthode accepte des paramètres
+            $action = $params[1];
+            $value = $params[2];
+            $controller->$action($value);
+    }
+    else
+    {
+        // http_response_code(404);
+        //faisons une page 404 pour le projet?
+        $controller->index();
+        // echo "La page n'existe pas";
+    }
+}
+else
 {
-    $controller = new Controller;
+    $controller = new ControllerAccueil;
     $controller->index();
 }
 
@@ -71,5 +83,3 @@ Génère les erreurs géné : error 404; voous n'avez pas les droits ; lex excep
 
 
 ?>
-
-

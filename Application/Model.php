@@ -29,7 +29,7 @@ class Model {
     {
         $this->db_host = "localhost";
         $this->db_login = "root";
-        $this->db_password = "";
+        $this->db_password = '';
         $this->db_name = "boutique";
     }
 
@@ -46,6 +46,25 @@ class Model {
         } catch (\PDOException $e) {
             die('Erreur : ' . $e->getMessage());
         }
+    }
+
+    public function getOne(){
+        $sql = "SELECT * FROM ".$this->table." WHERE id=".$this->id;
+        $query = $this->_connexion->prepare($sql);
+        $query->execute();
+        return $query->fetch();    
+    }
+    
+    /**
+     * Méthode permettant d'obtenir tous les enregistrements de la table choisie
+     *
+     * @return void
+     */
+    public function getAll(){
+        $sql = "SELECT * FROM ".$this->table;
+        $query = $this->_connexion->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();    
     }
 
     // public function getConnection() {

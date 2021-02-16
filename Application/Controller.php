@@ -32,9 +32,39 @@ require_once 'autoloader.php';
 Autoloader::register();
 
 class Controller {
-    public function index()
+    // public function index()
+    // {
+    //     echo 'Hello';
+    // }
+
+    // les méthodes qui permettent de charger un model
+
+    public function load_model($model)
     {
-        echo 'Hello';
+        // voir après si on peut se passer sans attribuer null par défault
+        if ($model!=null)
+        {
+            $modelPath = 'App\\'.'Application\\'.'Models\\'.$model;
+            $this->$model = new $modelPath;
+            // ($this->$model);
+            return $this->$model;
+        }
+    }
+        // les méthodes concernant le View
+
+    public function render(string $fichier, array $data=[])
+    {
+        // décortiquer le tableau avec les données
+        extract($data);
+        // pour démarrer le buffer de sortie
+        ob_start();
+        // pour bien écrire le nom du dossier
+        $fichierRep = ucfirst($fichier);
+        // $fichier = 
+        // $fichier = 'App\View\'
+        // include $fichier;
+        // $rendu = ob_get_clean();
+        return $rendu;
     }
 
     // les méthodes qui permettent de charger un model
@@ -46,14 +76,7 @@ class Controller {
             $modelPath = 'App\\'.'Application\\'.'Models\\'.$model;
             $this->$model = new $modelPath;
         }
-    }
-        
-    //les méthodes concernant le View
-
-    public function render(string $fichier, array $data=[])
-    {
-        
-    }
+    }        
 }
 
 

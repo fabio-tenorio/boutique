@@ -8,6 +8,8 @@ Personnaliser en fonction du user le menu sur le header
 Sections qui permet de récupèrer les derniers articles, afficher le rdv, liens derniers messages...
 
 */
+Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
+$ControllerAccueil = new $ControllerAccueil;
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +20,7 @@ Sections qui permet de récupèrer les derniers articles, afficher le rdv, liens
     <title>Accueil</title>
 </head>
 <body>
+    <h1>Bienvenu!</h1>
     
 </body>
 </html>

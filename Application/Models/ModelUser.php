@@ -30,6 +30,7 @@ class ModelUser extends Model
     
     public function select()
     {
+
         $this->_PDO->prepare("SELECT * FROM 'tableuser' WHERE id=''");
         $this->_PDO->execute();
         $this->_PDO->rowcount(PDO::FETCH_OBJ);
@@ -45,6 +46,10 @@ class ModelUser extends Model
         $this->_PDO->execute(array($a, $b));
         
         $msg = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
+
+        $this->_PDO->prepare("SELECT * FROM 'table' WHERE id=''");
+        $this->_PDO->execute();
+        $this->_PDO->rowcount(PDO::FETCH_OBJ);
     }
 
     public function update()
@@ -56,11 +61,20 @@ class ModelUser extends Model
         $msg = "Vos modifications ont bien été enregistrées";
     }
 
+    public function insert()
+    {
+        $this->_PDO->prepare("INSERT INTO 'table' ('a', 'b') VALUES(?, ?)");
+        $this->_PDO->execute(array($a, $b));
+        
+        $msg = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
+    }
     
+
     public function delete()
     {
         $this->_PDO->prepare("DELETE FROM 'table' WHERE id_table=?");
         $this->_PDO->bindParam(1, $a, PDO::PARAM_INT);
+
         $this->_PDO->execute();
 
         $erreur = "La suppression de... a été pris en compte !<br>";

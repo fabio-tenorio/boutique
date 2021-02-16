@@ -27,41 +27,40 @@ use App\Application\Model as Model;
 use App\Application\Models;
 
 class Controller {
-    public function index()
-    {
-        echo 'Hello';
-    }
+    // public function index()
+    // {
+    //     echo 'Hello';
+    // }
 
     // les méthodes qui permettent de charger un model
 
-    public function loadModel($model)
+    public function load_model($model)
     {
         // voir après si on peut se passer sans attribuer null par défault
         if ($model!=null)
         {
             $modelPath = 'App\\'.'Application\\'.'Models\\'.$model;
             $this->$model = new $modelPath;
-            return $this->$model->connect();
+            // ($this->$model);
+            return $this->$model;
         }
     }
-        
-    //les méthodes concernant le View
+        // les méthodes concernant le View
 
     public function render(string $fichier, array $data=[])
     {
+        // décortiquer le tableau avec les données
         extract($data);
-        var_dump(extract($data));
+        // pour démarrer le buffer de sortie
         ob_start();
         // pour bien écrire le nom du dossier
         $fichierRep = ucfirst($fichier);
-        // // $fichier = 
+        // $fichier = 
         // $fichier = 'App\View\'
         // include $fichier;
         // $rendu = ob_get_clean();
         return $rendu;
     }
 }
-
-
 
 ?>

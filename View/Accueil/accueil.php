@@ -18,6 +18,6 @@ Sections qui permet de récupèrer les derniers articles, afficher le rdv, liens
     <title>Accueil</title>
 </head>
 <body>
-    
+    <h1>Bienvenu!</h1>
 </body>
 </html>

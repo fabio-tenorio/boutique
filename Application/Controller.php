@@ -45,6 +45,7 @@ class Controller {
         {
             $modelPath = 'App\\'.'Application\\'.'Models\\'.$model;
             $this->$model = new $modelPath;
+            $this->$model->connect();
         }
     }
         
@@ -52,7 +53,12 @@ class Controller {
 
     public function render(string $fichier, array $data=[])
     {
-        
+        extract($data);
+        // var_dump(extract($data));
+        ob_start();
+        include $fichier;
+        $rendu = ob_get_clean();
+        // return $rendu;
     }
 }
 

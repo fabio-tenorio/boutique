@@ -12,7 +12,7 @@ class ModelUser extends Model {
     public function connect()
     {
         // $this->connectDb();
-        echo "suis modeluser";
+        echo "Je suis ModelUser";
     }
 }
 

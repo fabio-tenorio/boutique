@@ -25,6 +25,11 @@ Déterminer les différents controlers :
 namespace App\Application;
 use App\Application\Model as Model;
 use App\Application\Models;
+use App\Autoloader;
+
+require_once 'autoloader.php';
+
+Autoloader::register();
 
 class Controller {
     // public function index()
@@ -61,6 +66,19 @@ class Controller {
         // $rendu = ob_get_clean();
         return $rendu;
     }
+
+    // les méthodes qui permettent de charger un model
+
+    public function loadModel($model)
+    {
+        if ($model!=null)
+        {
+            $modelPath = 'App\\'.'Application\\'.'Models\\'.$model;
+            $this->$model = new $modelPath;
+        }
+    }        
 }
+
+
 
 ?>

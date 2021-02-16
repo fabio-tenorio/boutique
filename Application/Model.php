@@ -39,7 +39,7 @@ class Model {
 
     public function connectDb() {
         try {
-            $this->_PDO = new \PDO("mysql:host=$this->db_host;dbname=$this->db_name;", $this->db_login, $this->db_password);
+            $this->_PDO = new \PDO("mysql:dbname=$this->db_name;host=$this->db_host;", $this->db_login, $this->db_password);
             $this->_PDO->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->_PDO->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
             return $this->_PDO;
@@ -50,9 +50,9 @@ class Model {
 
     public function getOne(){
         $sql = "SELECT * FROM ".$this->table." WHERE id=".$this->id;
-        $this->_PDO->prepare($sql);
-        $this->_PDO->execute();
-        return $this->_PDO->fetch();
+        $query = $this->_connexion->prepare($sql);
+        $query->execute();
+        return $query->fetch();    
     }
     
     /**
@@ -60,12 +60,11 @@ class Model {
      *
      * @return void
      */
-    
-     public function getAll(){
+    public function getAll(){
         $sql = "SELECT * FROM ".$this->table;
         $query = $this->_connexion->prepare($sql);
         $query->execute();
-        return $query->fetchAll(); 
+        return $query->fetchAll();    
     }
 
     // public function getConnection() {

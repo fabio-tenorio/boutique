@@ -21,5 +21,6 @@ $ControllerAccueil = new $ControllerAccueil;
 </head>
 <body>
     <h1>Bienvenu!</h1>
+    
 </body>
 </html>

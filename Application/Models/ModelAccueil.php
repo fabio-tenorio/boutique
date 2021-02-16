@@ -15,6 +15,18 @@ class ModelAccueil extends Model {
     {
         return $this->getAll();
     }
+/*
+namespace App\Model;
+
+class Modelaccueil {
+
+    public function test()
+    {
+        echo "je suis Modelaccueil";
+    }
+}
+*/
+
 }
 
 /* 

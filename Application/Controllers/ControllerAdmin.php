@@ -20,7 +20,7 @@ class ControllerAdmin extends Controller {
 
     public function test()
     {
-        echo "Je suis le fils de ".$this->index();
+        echo "Je suis ControllerAdmin ";
     }
 }
 

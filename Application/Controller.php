@@ -25,11 +25,6 @@ Déterminer les différents controlers :
 namespace App\Application;
 use App\Application\Model as Model;
 use App\Application\Models;
-use App\Autoloader;
-
-require_once 'autoloader.php';
-
-Autoloader::register();
 
 class Controller {
     public function index()
@@ -41,11 +36,12 @@ class Controller {
 
     public function loadModel($model)
     {
+        // voir après si on peut se passer sans attribuer null par défault
         if ($model!=null)
         {
             $modelPath = 'App\\'.'Application\\'.'Models\\'.$model;
             $this->$model = new $modelPath;
-            $this->$model->connect();
+            return $this->$model->connect();
         }
     }
         
@@ -54,11 +50,15 @@ class Controller {
     public function render(string $fichier, array $data=[])
     {
         extract($data);
-        // var_dump(extract($data));
+        var_dump(extract($data));
         ob_start();
-        include $fichier;
-        $rendu = ob_get_clean();
-        // return $rendu;
+        // pour bien écrire le nom du dossier
+        $fichierRep = ucfirst($fichier);
+        // // $fichier = 
+        // $fichier = 'App\View\'
+        // include $fichier;
+        // $rendu = ob_get_clean();
+        return $rendu;
     }
 }
 

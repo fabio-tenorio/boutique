@@ -18,18 +18,19 @@ if ($params[0]!='')
     $MainController = 'App\\'.'Application\\'.$controller;
     if (class_exists($MainController))
     {
-        $controller = new $MainController;
-        var_dump($controller);
+       $controller = new $MainController;
+    //    var_dump($controller);
     } else
     {
-        $controller = 'App\\'.'Application\\'.'Controllers\\'.$controller;
-        $controller = new $controller;
-        // var_dump($controller);
+       $controller = 'App\\'.'Application\\'.'Controllers\\'.$controller;
+       $controller = new $controller;
+    //    var_dump($controller);
     }
     // la syntaxe ci-dessous est équivalent à la condition if else ci-dessous
     // $action = isset($params[1]) ? $params[1] : http_response_code(404);
     if (isset($params[2]))
     {
+        // si la méthode accepte des paramètres
         $action = $params[1];
         $value = $params[2];
         $controller->$action($value);
@@ -37,13 +38,28 @@ if ($params[0]!='')
         {
             if (method_exists($controller, $action))
             {
-                $controller->$action(null);
+                $controller->$action($value);
+                // var_dump($controller->$action($value));
             }
         } else
         {
             http_response_code(404);
             //faisons une page 404 pour le projet?
             echo "La page n'existe pas";
+        }
+    } else
+    {
+        // si la méthode n'a pas de paramètre
+        if (isset($params[1])) {
+            $action = $params[1];
+            if (method_exists($controller, $action)) {
+                $controller->$action();
+                // var_dump($controller->$action());
+            } else
+            {
+                http_response_code(404);
+                echo "La page n'existe pas";
+            }
         }
     }
 } else

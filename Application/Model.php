@@ -48,6 +48,26 @@ class Model {
         }
     }
 
+    public function getOne(){
+        $sql = "SELECT * FROM ".$this->table." WHERE id=".$this->id;
+        $this->_PDO->prepare($sql);
+        $this->_PDO->execute();
+        return $this->_PDO->fetch();    
+    }
+    
+    /**
+     * Méthode permettant d'obtenir tous les enregistrements de la table choisie
+     *
+     * @return void
+     */
+    
+     public function getAll(){
+        $sql = "SELECT * FROM ".$this->table;
+        $query = $this->_connexion->prepare($sql);
+        $query->execute();
+        return $query->fetchAll(); 
+    }
+
     // public function getConnection() {
     //     $this->_PDO = null;
 

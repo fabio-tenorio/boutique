@@ -11,7 +11,7 @@ class ControllerAccueil extends Controller {
     }
     public function view_accueil()
     {
-        echo "hello boy!";
+        // echo "hello boy!";
         $this->render('View\Accueil\accueil.php', [2, 3]);
     }
 }

@@ -23,12 +23,39 @@ Déterminer les différents controlers :
 */
 
 namespace App\Application;
+use App\Application\Model as Model;
+use App\Application\Models;
+use App\Autoloader;
+
+require_once 'autoloader.php';
+
+Autoloader::register();
 
 class Controller {
     public function index()
     {
         echo 'Hello';
     }
+
+    // les méthodes qui permettent de charger un model
+
+    public function loadModel($model)
+    {
+        if ($model!=null)
+        {
+            $modelPath = 'App\\'.'Application\\'.'Models\\'.$model;
+            $this->$model = new $modelPath;
+        }
+    }
+        
+    //les méthodes concernant le View
+
+    public function render(string $fichier, array $data=[])
+    {
+        
+    }
 }
+
+
 
 ?>

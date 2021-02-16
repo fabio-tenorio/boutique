@@ -13,4 +13,15 @@ Nouvel article dans boutique
 
 */
 
+Namespace App\Application\Controllers;
+Use App\Application\Controller;
+
+class ControllerAdmin extends Controller {
+
+    public function test()
+    {
+        echo "Je suis le fils de ".$this->index();
+    }
+}
+
 ?>

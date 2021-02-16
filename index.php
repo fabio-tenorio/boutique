@@ -4,36 +4,52 @@ require_once 'autoloader.php';
 use App\Autoloader;
 use App\Application\Controller as Controller;
 use App\Application\Controllers\ControllerUser as ControllerUser;
-// // use App\Model\Modelaccueil as Modelaccueil;
+// use App\Model\Modelaccueil as Modelaccueil;
 
 Autoloader::register();
 
-// $test = new ControllerUser;
-// var_dump($test);die;
-
-// define ('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
-define('ROOT', str_replace('index.php','Application/',$_SERVER['SCRIPT_FILENAME']));
+// define('ROOT', str_replace('index.php','Application/',$_SERVER['SCRIPT_FILENAME']));
 // var_dump(WEBROOT);
 $params = explode('/', $_GET['p']);
 
 if ($params[0]!='')
 {
     $controller = ucfirst($params[0]);
-    $controller = 'App\\'.'Application\\'.$controller;
-    
-    define ('OBJNAME', __NAMESPACE__, '');
-    $controller = OBJNAME.$controller;
-    $controller = new $controller;
-    var_dump($controller);die;
-    if (!is_object($controller))
+    $MainController = 'App\\'.'Application\\'.$controller;
+    if (class_exists($MainController))
+    {
+        $controller = new $MainController;
+        var_dump($controller);
+    } else
     {
         $controller = 'App\\'.'Application\\'.'Controllers\\'.$controller;
         $controller = new $controller;
+        // var_dump($controller);
     }
-    var_dump($controller);
+    // la syntaxe ci-dessous est équivalent à la condition if else ci-dessous
+    // $action = isset($params[1]) ? $params[1] : http_response_code(404);
+    if (isset($params[2]))
+    {
+        $action = $params[1];
+        $value = $params[2];
+        $controller->$action($value);
+        if (isset($params[1]))
+        {
+            if (method_exists($controller, $action))
+            {
+                $controller->$action(null);
+            }
+        } else
+        {
+            http_response_code(404);
+            //faisons une page 404 pour le projet?
+            echo "La page n'existe pas";
+        }
+    }
 } else
 {
-    echo "pas de controller pour le moment\n";die;
+    $controller = new Controller;
+    $controller->index();
 }
 
 /* 
@@ -53,44 +69,6 @@ Génère les erreurs géné : error 404; voous n'avez pas les droits ; lex excep
 
 */
 
-
-
-// echo("<pre>");
-// var_dump($_SERVER['SCRIPT_FILENAME']);
-// var_dump($_GET);
-// echo("</pre>");
-// var_dump($_GET);
-
-die;
-// require_once(ROOT.'Controller/Model.php');
-
-// On sépare les paramètres et on les met dans le tableau $params
-
-
-// var_dump($params);
-
-// Si au moins 1 paramètre existe
-if($params[0] != ""){
-    // On sauvegarde le 1er paramètre dans $controller en mettant sa 1ère lettre en majuscule
-    $controller = 'Application/'.ucfirst($params[0]);
-    // On sauvegarde le 2ème paramètre dans $action si il existe, sinon index
-    $action = isset($params[1]) ? $params[1] : 'index';
-
-    // On appelle le contrôleur
-    // var_dump(ROOT.$controller.'.php');
-    require_once(ROOT.$controller.'.php');
-
-    // On instancie le contrôleur
-    $controller = new $controller();
-    // var_dump($controller);
-    // On appelle la méthode
-    $controller->$action();
-}else{
-    echo "aucun controller appelé";
-}
-
-$test = new Controller;
-$test->index();
 
 ?>
 

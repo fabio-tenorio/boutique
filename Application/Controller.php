@@ -25,6 +25,7 @@ Déterminer les différents controlers :
 namespace App\Application;
 use App\Application\Model as Model;
 use App\Application\Models;
+use App\View;
 use App\Autoloader;
 
 require_once 'autoloader.php';
@@ -60,11 +61,8 @@ class Controller {
         ob_start();
         // pour bien écrire le nom du dossier
         $fichierRep = ucfirst($fichier);
-        // $fichier = 
-        // $fichier = 'App\View\'
-        // include $fichier;
-        // $rendu = ob_get_clean();
-        return $rendu;
+        $fichier = 'App\View'.'\\'.$fichierRep.'\\'.$fichier.'.php'; 
+        include $fichier;
     }
 
     // les méthodes qui permettent de charger un model

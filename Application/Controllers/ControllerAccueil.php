@@ -10,6 +10,7 @@ si non, il affiche la page d'accueil (header) par défault
 
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
+Use App\View;
 
 class ControllerAccueil extends Controller {
 
@@ -17,13 +18,9 @@ class ControllerAccueil extends Controller {
     public function index()
     {
         $this->load_model('ModelAccueil');
+        $this->render('accueil', [2, 3]);
     }
     
-    public function view_accueil()
-    {
-        // echo "hello boy!";
-        $this->render('View\Accueil\accueil.php', [2, 3]);
-    }
 }
 
 /* 

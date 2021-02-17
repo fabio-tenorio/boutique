@@ -47,9 +47,9 @@ class Model
     // protected $_PDO;
     
     //déplacer vers l'intérieur d'une méthode?
-    // public $table;
-    // public $id;
-    // public $msg;
+    public $table;
+    public $id;
+    public $msg;
 
     // public function __construct()
     // {

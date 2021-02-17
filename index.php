@@ -20,13 +20,13 @@ if ($params[0]!='')
     if (class_exists($MainController))
     {
        $controller = new $MainController;
-       var_dump($controller);
+    //    var_dump($controller);
     }
     else
     {
        $controller = 'App\\'.'Application\\'.'Controllers\\'.$controller;
        $controller = new $controller;
-       var_dump($controller);
+    //    var_dump($controller);
     }
     // la syntaxe ci-dessous est équivalent à la condition if else ci-dessous
     // $action = isset($params[1]) ? $params[1] : http_response_code(404);

@@ -16,27 +16,29 @@ class ModelUser extends Model {
 
     public function __construct()
     {
-       
+        //les attributs basiques de l'user, si jamais il est inscrit sur la bdd
     }
-    
-    /*
-    public function connect()
+ 
+    //je vérifie si il y a quelqun enregistré sur la bdd avec les données fournis par ControllerUser 
+    public function search_user($id)
     {
-        // $this->connectDb();
-        echo "suis modeluser";
+        $this->connectDb();
+        $this->pdo->prepare("SELECT * FROM `utilisateurs` WHERE id=$id");
+        $this->pdo->execute();
+        $result = $this->pdo->rowcount(\PDO::FETCH_OBJ);
+        if ($result===1)
+        {
+            return "Vous êtes déjà inscrit";
+        }
+        else
+        {
+            return "Vous n'êtes pas inscrit";
+        }
     }
-    */
-    
-    public function select()
-    {
-        $this->_PDO->prepare("SELECT * FROM 'tableuser' WHERE id=''");
-        $this->_PDO->execute();
-        $this->_PDO->rowcount(\PDO::FETCH_OBJ);
 
-        /*$this->_PDO->prepare("SELECT * FROM 'tableoproduit' WHERE id=''");
+    /*$this->_PDO->prepare("SELECT * FROM 'tableoproduit' WHERE id=''");
         $this->_PDO->execute();
         $this->_PDO->rowcount(PDO::FETCH_OBJ);*/
-    }
 
     public function insert()
     {

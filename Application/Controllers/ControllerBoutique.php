@@ -8,9 +8,9 @@ Use App\Application\Controller;
 
 class ControllerBoutique extends Controller {
 
-    public function test()
+    public function index()
     {
-        echo "Je suis le fils de ".$this->index();
+        echo "Je suis ControllerBoutique";
     }
 }
 

@@ -25,14 +25,14 @@ Déterminer les différents controlers :
 namespace App\Application;
 use App\Application\Model as Model;
 use App\Application\Models;
-use App\View;
+use App\View\Accueil;
 use App\Autoloader;
 
 require_once 'autoloader.php';
 
 Autoloader::register();
 
-class Controller {
+abstract class Controller {
     // public function index()
     // {
     //     echo 'Hello';
@@ -58,11 +58,10 @@ class Controller {
         // décortiquer le tableau avec les données
         extract($data);
         // pour démarrer le buffer de sortie
-        ob_start();
+        // ob_start();
         // pour bien écrire le nom du dossier
-        $fichierRep = ucfirst($fichier);
-        $fichier = 'App\View'.'\\'.$fichierRep.'\\'.$fichier.'.php'; 
-        include $fichier;
+        // $fichier = ucfirst($fichier);
+        include '/var/www/html/unit2/boutique/View/'.$fichier.'.php';
     }
 
     // les méthodes qui permettent de charger un model

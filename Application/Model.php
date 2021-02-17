@@ -29,7 +29,8 @@ class Model
         ];
         try
         {
-         $pdo = new \PDO($dsn, $user, $pass, $options);
+         $this->pdo = new \PDO($dsn, $user, $pass, $options);
+         return $this->pdo;
         } catch (\PDOException $e) {
          throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
@@ -59,10 +60,6 @@ class Model
     //     $this->db_name = "boutique";
     // }
 
-    public function test() {
-        echo "hello number ";
-    }
-
     // public function connectDb() {
     //     try {
     //         $this->_PDO = new \PDO("mysql:dbname=$this->db_name;host=$this->db_host;", $this->db_login, $this->db_password);
@@ -74,9 +71,10 @@ class Model
     //     }
     // }
 
-    public function getOne(){
-        $sql = "SELECT * FROM ".$this->table." WHERE id=".$this->id;
-        $query = $this->_connexion->prepare($sql);
+    public function getOne($table, $id){
+        $this->connectDb();
+        $sql = "SELECT * FROM '$table WHERE id=`$id`";
+        $query = $this->pdo->prepare($sql);
         $query->execute();
         return $query->fetch();    
     }
@@ -86,12 +84,12 @@ class Model
      *
      * @return void
      */
-    public function getAll(){
-        $sql = "SELECT * FROM ".$this->table;
-        $query = $this->_connexion->prepare($sql);
-        $query->execute();
-        return $query->fetchAll();    
-    }
+    // public function getAll(){
+    //     $sql = "SELECT * FROM "$this->table;
+    //     $query = $this->_connexion->prepare($sql);
+    //     $query->execute();
+    //     return $query->fetchAll();    
+    // }
 
     // public function getConnection() {
     //     $this->_PDO = null;

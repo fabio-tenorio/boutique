@@ -17,8 +17,16 @@ class ControllerAccueil extends Controller {
     
     public function index()
     {
-        $this->load_model('ModelAccueil');
-        $this->render('accueil', [2, 3]);
+        //je vérifie si il y a quelqun connecté
+        if (isset($_SESSION['login']))
+        {
+            //
+        }
+        else
+        {
+            $this->render('header');
+        }
+        // $this->render('accueil', [2, 3]);
     }
     
 }

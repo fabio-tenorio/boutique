@@ -38,8 +38,15 @@ abstract class Controller {
     //     echo 'Hello';
     // }
 
-    // les méthodes qui permettent de charger un model
+    public function bonne_affichage($donnee)
+    {
+        echo("<pre>");
+        print_r($donnee);
+        echo("</pre>");
+    }
 
+    // les méthodes qui permettent de charger un model
+    
     public function load_model($model)
     {
         // voir après si on peut se passer sans attribuer null par défault

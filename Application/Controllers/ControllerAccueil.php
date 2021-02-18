@@ -28,7 +28,11 @@ class ControllerAccueil extends Controller {
         }
         // $this->render('accueil', [2, 3]);
     }
-    
+
+    public function select_user()
+    {
+        
+    }    
 }
 
 /* 

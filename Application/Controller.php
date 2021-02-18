@@ -25,12 +25,12 @@ Déterminer les différents controlers :
 namespace App\Application;
 use App\Application\Model as Model;
 use App\Application\Models;
-use App\View\Accueil;
+// use App\View\Accueil;
 use App\Autoloader;
 
-require_once 'autoloader.php';
+// require_once 'autoloader.php';
 
-Autoloader::register();
+// Autoloader::register();
 
 abstract class Controller {
     // public function index()
@@ -61,7 +61,7 @@ abstract class Controller {
         // ob_start();
         // pour bien écrire le nom du dossier
         // $fichier = ucfirst($fichier);
-        include '/var/www/html/unit2/boutique/View/'.$fichier.'.php';
+        require_once '/var/www/html/unit2/boutique/View/'.$fichier.'.php';
     }
 
     // les méthodes qui permettent de charger un model

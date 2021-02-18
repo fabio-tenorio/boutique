@@ -1,13 +1,11 @@
 <?php
 /*
 UN MODEL GÉNÉRAL QUI PERMET L'ACCÈS À DES DONNÉES DIFFÉRENTES DDB MYSQL
-CONTIENT L'ACCÈS À LA BASE DE DONNÉES (voir le code que m'avez montré NADIA)
-"RÉCUPÉRER Ddb et Ddbconstante dans ce controler"
 */
 
 Namespace App\Application;
 
-class Model
+abstract class Model
 {
     private $db_host = 'localhost';
     private $db_login = 'root';
@@ -32,8 +30,6 @@ class Model
     }
     //le choix des variables plutôt que des constants (DEFINE) a été fait pour raison de sécurité
     // vu que les constants restent disponibles globalement
-
-    // Informations de connexion
        
     // des variables utiles pour la construction des templates
     // déplacer vers l'intérieur d'une méthode?
@@ -57,6 +53,7 @@ class Model
         return $result;
     }
 
+    //je sélectionne une ligne dans une table selon l'id donnée
     public function get_one($table, $id)
     {
         $sql = $this->connect_db()->prepare("SELECT * FROM $table WHERE id=$id");
@@ -66,8 +63,6 @@ class Model
     
     /**
      * Méthode permettant d'obtenir tous les enregistrements de la table choisie
-     *
-     * @return void
      */
     public function get_all($table)
     {
@@ -76,27 +71,26 @@ class Model
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function insert($table)
+    /* méthode permettant d'insérer les infos sur un nouveau item dans une table donnée */
+    public function insert($table, $data)
     {
-        for ($i=0;isset($table->id);$i++)
+        $columns = "";
+        $values = "";
+        foreach ($data as $key => $value)
         {
-            foreach ($table as $key => $value)
-            {
-                $key = $key.$i;
-                var_dump($key);
-                echo("<br/>");
-            }
+            $columns = substr_replace($columns, " ".$key.", ", 0, 0);
+            $values = substr_replace($values, "'".$value."', ", 0, 0);
         }
-        //parcourrir les données de la table
-        
-         // $id = $value->id;
-       // $sql = $this->connect_db()->prepare("SELECT * FROM $table WHERE id=$id");
-            // $sql->execute();
-            // return $sql->fetch(\PDO::FETCH_OBJ);
+        $columns = substr($columns, 1, -2);
+        $values = substr($values, 0, -2);
+        $sql = "INSERT INTO $table ($columns) VALUES ($values)";
+        $result = $this->connect_db()->prepare($sql);
+        return $result->execute();
     }
-        // $this->_PDO->prepare("INSERT INTO 'table' ('a', 'b') VALUES(?, ?)");
-        // $this->_PDO->execute(array($a, $b));    
-        // $msg = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
+    
+
+
+
 }
 
 ?>

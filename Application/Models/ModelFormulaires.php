@@ -25,11 +25,7 @@ class ModelFormulaires extends Model {
     public function connect()
     {
         // $this->connectDb();
-<<<<<<< HEAD:Application/Models/ModelFormulaires.php
-        echo "Je suis ModelFormulaires ";
-=======
         echo "suis modeluser";
->>>>>>> 7ba6ca4fc80ee636aea8a0ff4b86c086aadd8d86:Application/Models/ModelFormulaires.php
     }
 }
 

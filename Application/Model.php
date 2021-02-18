@@ -1,58 +1,51 @@
 <?php
-
 /*
 UN MODEL GÉNÉRAL QUI PERMET L'ACCÈS À DES DONNÉES DIFFÉRENTES DDB MYSQL
-
 CONTIENT L'ACCÈS À LA BASE DE DONNÉES (voir le code que m'avez montré NADIA)
-
 "RÉCUPÉRER Ddb et Ddbconstante dans ce controler"
-
 */
 
 Namespace App\Application;
 
-class Model {
+class Model
+{
+    private $db_host = 'localhost';
+    private $db_login = 'root';
+    private $db_password = '';
+    private $db_name = 'boutique';
+    private $db_charset = 'utf8mb4';
+    protected $_PDO;
+
+    public function connect_db()
+    {
+        $dsn = "mysql:host=" . $this->db_host . ";dbname=" . $this->db_name . ";charset=" . $this->db_charset;
+        $options = [
+        \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+        \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_OBJ
+        ];
+        try {
+            $this->_PDO = new \PDO($dsn, $this->db_login, $this->db_password, $options);
+            return $this->_PDO;
+        } catch (\PDOException $e) {
+            throw new \PDOException($e->getMessage(), (int)$e->getCode());
+        }
+    }
     //le choix des variables plutôt que des constants (DEFINE) a été fait pour raison de sécurité
     // vu que les constants restent disponibles globalement
-    private $db_host;
-    private $db_login;
-    private $db_password;
-    private $db_name;
-    protected $_PDO;
-    
-    //déplacer vers l'intérieur d'une méthode?
+
+    // Informations de connexion
+       
+    // des variables utiles pour la construction des templates
+    // déplacer vers l'intérieur d'une méthode?
     public $table;
     public $id;
     public $msg;
-
-    public function __construct()
+    
+    public function get_one($table, $id)
     {
-        $this->db_host = "localhost";
-        $this->db_login = "root";
-        $this->db_password = '';
-        $this->db_name = "boutique";
-    }
-
-    public function test() {
-        echo "hello number ";
-    }
-
-    public function connectDb() {
-        try {
-            $this->_PDO = new \PDO("mysql:dbname=$this->db_name;host=$this->db_host;", $this->db_login, $this->db_password);
-            $this->_PDO->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            $this->_PDO->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
-            return $this->_PDO;
-        } catch (\PDOException $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
-    }
-
-    public function getOne(){
-        $sql = "SELECT * FROM ".$this->table." WHERE id=".$this->id;
-        $query = $this->_connexion->prepare($sql);
-        $query->execute();
-        return $query->fetch();    
+        $sql = $this->connect_db()->prepare("SELECT * FROM $table WHERE id=$id");
+        $sql->execute();
+        return $sql->fetch(\PDO::FETCH_OBJ);
     }
     
     /**
@@ -60,25 +53,34 @@ class Model {
      *
      * @return void
      */
-    public function getAll(){
-        $sql = "SELECT * FROM ".$this->table;
-        $query = $this->_connexion->prepare($sql);
-        $query->execute();
-        return $query->fetchAll();    
+    public function get_all($table)
+    {
+        $sql = $this->connect_db()->prepare("SELECT * FROM $table");
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    // public function getConnection() {
-    //     $this->_PDO = null;
-
-    //     try {
-    //         $this->_PDO = new \PDO("mysql:dbname=$this->db_name;host=$this->db_host;", $this->db_login, $this->db_password);
-    //         $this->_PDO->exec("set names utf8");
-    //         return $this->_PDO;
-    //     } catch (\PDOException $e) {
-    //         die('Erreur : ' . $e->getMessage());
-    //     }
-
-    // }
+    public function insert($table)
+    {
+        for ($i=0;isset($table->id);$i++)
+        {
+            foreach ($table as $key => $value)
+            {
+                $key = $key.$i;
+                var_dump($key);
+                echo("<br/>");
+            }
+        }
+        //parcourrir les données de la table
+        
+         // $id = $value->id;
+       // $sql = $this->connect_db()->prepare("SELECT * FROM $table WHERE id=$id");
+            // $sql->execute();
+            // return $sql->fetch(\PDO::FETCH_OBJ);
+    }
+        // $this->_PDO->prepare("INSERT INTO 'table' ('a', 'b') VALUES(?, ?)");
+        // $this->_PDO->execute(array($a, $b));    
+        // $msg = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
 }
 
 ?>

@@ -7,17 +7,15 @@ Class qui génère tous les tableaux
 (voir si le formulaire est fait ici ou dans formulaire)
 
 */
-
 Namespace App\Application\Models;
 use App\Application\Model;
 
-class ModelTableau extends Model {
+class ModelTableaux extends Model {
     
     public function connect()
     {
         // $this->connectDb();
-        echo "suis modeluser";
+        echo "Je suis ModelTableaux ";
     }
 }
-
 ?>

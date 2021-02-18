@@ -25,20 +25,28 @@ Déterminer les différents controlers :
 namespace App\Application;
 use App\Application\Model as Model;
 use App\Application\Models;
+// use App\View\Accueil;
 use App\Autoloader;
 
-require_once 'autoloader.php';
+// require_once 'autoloader.php';
 
-Autoloader::register();
+// Autoloader::register();
 
-class Controller {
+abstract class Controller {
     // public function index()
     // {
     //     echo 'Hello';
     // }
 
-    // les méthodes qui permettent de charger un model
+    public function bonne_affichage($donnee)
+    {
+        echo("<pre>");
+        print_r($donnee);
+        echo("</pre>");
+    }
 
+    // les méthodes qui permettent de charger un model
+    
     public function load_model($model)
     {
         // voir après si on peut se passer sans attribuer null par défault
@@ -57,14 +65,10 @@ class Controller {
         // décortiquer le tableau avec les données
         extract($data);
         // pour démarrer le buffer de sortie
-        ob_start();
+        // ob_start();
         // pour bien écrire le nom du dossier
-        $fichierRep = ucfirst($fichier);
-        // $fichier = 
-        // $fichier = 'App\View\'
-        // include $fichier;
-        // $rendu = ob_get_clean();
-        return $rendu;
+        // $fichier = ucfirst($fichier);
+        require_once '/var/www/html/unit2/boutique/View/'.$fichier.'.php';
     }
 
     // les méthodes qui permettent de charger un model

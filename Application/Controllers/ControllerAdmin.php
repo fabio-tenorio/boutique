@@ -18,7 +18,7 @@ Use App\Application\Controller;
 
 class ControllerAdmin extends ControllerUser {
 
-    public function test()
+    public function index()
     {
         echo "Je suis ControllerAdmin ";
     }

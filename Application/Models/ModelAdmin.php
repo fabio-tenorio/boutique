@@ -12,7 +12,7 @@ class ModelAdmin extends Model {
     public function connect()
     {
         // $this->connectDb();
-        echo "suis modeluser";
+        echo "je suis modelAdmin";
     }
 }
 

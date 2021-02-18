@@ -10,20 +10,29 @@ si non, il affiche la page d'accueil (header) par défault
 
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
+Use App\View;
 
 class ControllerAccueil extends Controller {
 
     
     public function index()
     {
-        $this->load_model('ModelAccueil');
+        //je vérifie si il y a quelqun connecté
+        if (isset($_SESSION['login']))
+        {
+            //
+        }
+        else
+        {
+            $this->render('header');
+        }
+        // $this->render('accueil', [2, 3]);
     }
-    
-    public function view_accueil()
+
+    public function select_user()
     {
-        // echo "hello boy!";
-        $this->render('View\Accueil\accueil.php', [2, 3]);
-    }
+        
+    }    
 }
 
 /* 

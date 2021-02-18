@@ -23,6 +23,12 @@ class ControllerUser extends Controller {
         $this->bonne_affichage($all_users->get_all_users());
     }
 
+    public function columns_user($table)
+    {
+        $columns_names = new ModelUser;
+        $this->bonne_affichage($columns_names->columns_names($table));
+    }
+
     public function new_user($id)
     {
         $new_user = new ModelUser();

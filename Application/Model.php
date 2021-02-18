@@ -41,6 +41,22 @@ class Model
     public $id;
     public $msg;
     
+    // je récupère les colonnes d'une table informée par le Controller
+    public function columns_names($table)
+    {
+        $db_name = $this->db_name;
+        $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :table AND TABLE_SCHEMA = :db_name";
+        $stmt = $this->connect_db()->prepare($sql);
+        $stmt->bindValue(':table', $table, \PDO::PARAM_STR);
+        $stmt->bindValue(':db_name', $db_name, \PDO::PARAM_STR);
+        $stmt->execute();
+        $result = array();
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $result[] = $row['COLUMN_NAME'];
+        }
+        return $result;
+    }
+
     public function get_one($table, $id)
     {
         $sql = $this->connect_db()->prepare("SELECT * FROM $table WHERE id=$id");

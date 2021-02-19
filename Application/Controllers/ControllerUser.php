@@ -11,30 +11,60 @@ class ControllerUser extends Controller {
         echo "Je suis ControllerUser";
     }
 
-    public function user_exists($id)
-    {
-        $user = new ModelUser();
-        $this->bonne_affichage($user->get_one_user($id));
-    }
+// MÉTHODES LIÉES AUX MODELS
 
     public function all_users()
     {
         $all_users = new ModelUser();
-        $this->bonne_affichage($all_users->get_all_users());
+        return $this->all_users->get_all_users();
     }
 
-    public function new_user()
+    public function user_exists($id)
+    {
+        $user = new ModelUser();
+        return $this->user->get_one_user($id);
+    }
+
+    public function new_user($data)
     {
         $data = ['id_droit'=>'100', 'login'=>'toto', 'motpasse'=>'test', 'prenom'=>'toto', 'nom'=>'titi', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
         $new_user = new ModelUser();
-        $this->bonne_affichage($new_user->insert_user($data));
+        return $this->$new_user->insert_user($data);
     }
 
-    // public function connect_user()
-    // {
-    //     $user = new ModelUser();
-    //     var_dump($user);
-    // }
+    public function modify_user($data)
+    {
+        $data = ['id'=>14, 'id_droit'=>'200', 'login'=>'tata', 'motpasse'=>'testing', 'prenom'=>'tata', 'nom'=>'tutu', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
+        $id = $data['id'];
+        $update = new ModelUser();
+        return $this->$update->update_user($data, $id);
+    }
+
+    public function del_user($data)
+    {
+        $id = 14;
+        $supprime_user = new ModelUser();
+        return $this->supprime_user->delete_user($id);
+    }
+
+    // MÉTHODES LIÉES AUX VIEWS
+
+    public function render_connexion(array $data = []){
+        extract($data);
+
+        // On démarre le buffer de sortie
+        ob_start();
+
+        // On génère la vue
+        // $this->render('connexion.php')
+        // require_once(ROOT.'views/'.strtolower(get_class($this)).'/'.$fichier.'.php');
+
+        // On stocke le contenu dans $content
+        // $content = ob_get_clean();
+
+        // On fabrique le "template"
+        // require_once(ROOT.'views/layout/default.php');
+    }
 }
 
 ?>

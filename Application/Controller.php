@@ -60,16 +60,25 @@ abstract class Controller {
     }
         // les méthodes concernant le View
 
-    public function render(string $fichier, array $data=[])
-    {
-        // décortiquer le tableau avec les données
-        extract($data);
-        // pour démarrer le buffer de sortie
-        // ob_start();
-        // pour bien écrire le nom du dossier
-        // $fichier = ucfirst($fichier);
-        require_once '/var/www/html/unit2/boutique/View/'.$fichier.'.php';
-    }
+        public function render(string $fichier, array $data = [])
+        {
+            extract($data);
+    
+            // On démarre le buffer de sortie
+            ob_start();
+    
+            // On génère la vue
+            // require_once 'views/'.strtolower(get_class($this)).'/'.$fichier.'.php');
+
+            // On stocke le contenu dans $content
+            // $content = ob_get_clean();
+    
+            // On fabrique le "template"
+            // require_once(ROOT.'views/layout/default.php');
+            require_once 'View/header.php';
+            // define ('ROOT_HEADER_FOOTER', str_replace('index.php', 'Application'.DIRECTORY_SEPARATOR.'View'.DIRECTORY_SEPARATOR, $_SERVER['SCRIPT_FILENAME']));
+            // var_dump(ROOT_HEADER_FOOTER);
+        }
 
     // les méthodes qui permettent de charger un model
 

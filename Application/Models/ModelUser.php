@@ -28,7 +28,10 @@ class ModelUser extends Model {
         return $this->get_all('utilisateurs');
     }
 
-    //je récupère les données fournis par ControllerUser concernant le nouveau utilisateur
+    /*je récupère les données fournis par ControllerUser concernant le nouveau utilisateur
+    * je récupère aussi les noms des collones de la table utilisateur
+    */
+
     public function new_user_data($data)
     {
         $insert_values = [];
@@ -44,7 +47,8 @@ class ModelUser extends Model {
                 //si la clé correspond au nom d'une colonne
                 if ($column_names[$i]==$key)
                 {
-                    //je crée un nouveau tableau associatif avec les valeurs à insérer sur la bdd
+                    //si oui, j'ajoute $value à l'array insert_values
+                    //pour l'envoyer à la méthode insert_values
                     $insert_values[$key]=$value;
                 }
             }
@@ -59,29 +63,15 @@ class ModelUser extends Model {
         return $this->insert('utilisateurs', $data);
     }
     //je mets à jour les informations de l'utilisateur selon les données fournis par ControllerUser
-    public function update_user($tab)
+    public function update_user($data, $id)
     {
-        $this->_PDO->prepare("UPDATE 'table' SET 'nom-colonne' = ? WHERE 'id'=?");
-        $this->_PDO->execute(array($a, $b));
-        $this->_PDO->fetchAll(\PDO::FETCH_OBJ);
-        $msg = "Vos modifications ont bien été enregistrées";
+        return $this->update('utilisateurs', $data, $id);
     }
 
     //je supprime l'utilisateur selon le $id fourni par ControllerUser
     public function delete_user($id)
     {
-        $this->_PDO->prepare("DELETE FROM 'table' WHERE id_table=?");
-        $this->_PDO->bindParam(1, $a, \PDO::PARAM_INT);
-        $this->_PDO->execute();
-
-        $erreur = "La suppression de... a été pris en compte !<br>";
-
-        if(isset($msg))
-        {
-        echo '<font color="red">'.$msg."</font>";
-        unset($msg);
-        unset($_POST);
-        }
+        return $this->delete('utilisateurs', $id);
     }
 
     // public function select_user($id)

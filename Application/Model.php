@@ -37,22 +37,6 @@ abstract class Model
     public $id;
     public $msg;
     
-    // je récupère les colonnes d'une table informée par le Controller
-    public function columns_names($table)
-    {
-        $db_name = $this->db_name;
-        $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :table AND TABLE_SCHEMA = :db_name";
-        $stmt = $this->connect_db()->prepare($sql);
-        $stmt->bindValue(':table', $table, \PDO::PARAM_STR);
-        $stmt->bindValue(':db_name', $db_name, \PDO::PARAM_STR);
-        $stmt->execute();
-        $result = array();
-        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $result[] = $row['COLUMN_NAME'];
-        }
-        return $result;
-    }
-
     //je sélectionne une ligne dans une table selon l'id donnée
     public function get_one($table, $id)
     {
@@ -71,7 +55,24 @@ abstract class Model
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    /* méthode permettant d'insérer les infos sur un nouveau item dans une table donnée */
+    // d'abord, je récupère les colonnes d'une table informée par le Controller
+    public function columns_names($table)
+    {
+        $db_name = $this->db_name;
+        $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :table AND TABLE_SCHEMA = :db_name";
+        $stmt = $this->connect_db()->prepare($sql);
+        $stmt->bindValue(':table', $table, \PDO::PARAM_STR);
+        $stmt->bindValue(':db_name', $db_name, \PDO::PARAM_STR);
+        $stmt->execute();
+        $result = array();
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC))
+        {
+            $result[] = $row['COLUMN_NAME'];
+        }
+        return $result;
+    }
+
+    /* ensuite, j'insère les infos sur un nouveau item dans une table donnée */
     public function insert($table, $data)
     {
         $columns = "";
@@ -87,10 +88,44 @@ abstract class Model
         $result = $this->connect_db()->prepare($sql);
         return $result->execute();
     }
+
+    //je mets à jour les données spécifiées d'une ligne dans un tableau
+    public function update($table, $data, $id)
+    {
+        //je récupère les noms des colonnes de $table
+        $columns = $this->columns_names($table);
+        //je récupère la ligne à être modifiée
+        $ligne = $this->get_one($table, $id);
+        foreach ($data as $key => $new_value)
+        {
+            foreach ($ligne as $attribut => $value)
+            {
+                if ($attribut==$key)
+                {
+                    echo $value."<br/>";
+
+                    if ($new_value != $value)
+                    {
+                        echo 'new_value: '.$new_value;
+                        echo '<br/>';
+                        echo 'value: '.$value;
+                        echo '<br/>';
+                        $sql = "UPDATE $table SET $attribut = ' . $new_value . ' WHERE id=$id";
+                        $result = $this->connect_db()->prepare($sql);
+                        return $result->execute();
+                    }
+                }
+            }
+        }
+        // $msg = "Vos modifications ont bien été enregistrées";
+    }
     
-
-
-
+    //je supprime les infos d'une ligne donnée (par id) dans un tableau donnée
+    public function delete($table, $id)
+    {
+        $result = $this->connect_db()->prepare("DELETE FROM `$table` WHERE id=$id");
+        return $result->execute();
+    }
 }
 
 ?>

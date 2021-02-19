@@ -5,7 +5,7 @@ use App\Autoloader;
 use App\Application\Controller as Controller;
 use App\Application\Controllers\ControllerUser as ControllerUser;
 use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
-// use App\Model\Modelaccueil as Modelaccueil;
+use App\Model\Modelaccueil as Modelaccueil;
 
 Autoloader::register();
 

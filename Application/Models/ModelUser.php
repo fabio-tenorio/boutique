@@ -28,13 +28,36 @@ class ModelUser extends Model {
         return $this->get_all('utilisateurs');
     }
 
-    //je inscrit un utilisateur avec les données fournis par ControllerUser
-    public function insert_user($id)
+    //je récupère les données fournis par ControllerUser concernant le nouveau utilisateur
+    public function new_user_data($data)
     {
-        $tab_user = $this->get_one_user($id);
-        $this->insert($tab_user);
+        $insert_values = [];
+        // je crée un array avec les noms des colonnes
+        $column_names = $this->columns_names('utilisateurs');
+        // je parcours l'array associatif $data qui contient les données renseignés par ControllerUser
+        foreach ($data as $key => $value)
+        {
+            // je parcours aussi les noms des colonnes
+            for ($i=0;isset($column_names[$i]);$i++)
+            {
+                //afin de vérificer, pour chaque element de $data,
+                //si la clé correspond au nom d'une colonne
+                if ($column_names[$i]==$key)
+                {
+                    //je crée un nouveau tableau associatif avec les valeurs à insérer sur la bdd
+                    $insert_values[$key]=$value;
+                }
+            }
+        }
+        return $insert_values;
     }
 
+    //j'insère les infos d'un nouveau utilisateur dans la bdd
+    public function insert_user($data)
+    {
+        $data = $this->new_user_data($data);
+        return $this->insert('utilisateurs', $data);
+    }
     //je mets à jour les informations de l'utilisateur selon les données fournis par ControllerUser
     public function update_user($tab)
     {

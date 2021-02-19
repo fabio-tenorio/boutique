@@ -40,6 +40,7 @@ abstract class Model
     // je récupère les colonnes d'une table informée par le Controller
     public function columns_names($table)
     {
+        /*
         $db_name = $this->db_name;
         $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :table AND TABLE_SCHEMA = :db_name";
         $stmt = $this->connect_db()->prepare($sql);
@@ -49,8 +50,23 @@ abstract class Model
         $result = array();
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $result[] = $row['COLUMN_NAME'];
+            
+        }
+        return $result;*/
+
+        $db_name = $this->db_name;
+        $result = array();
+
+        $sql = $this->connect_db()->prepare("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :table AND TABLE_SCHEMA = :db_name");
+        $sql->bindValue(':table', $table . ':db_name', $db_name,  \PDO::PARAM_STR);
+        $sql->execute();
+
+        while ($row = $sql->fetch(\PDO::FETCH_ASSOC)) 
+        {
+            $result[] = $row['COLUMN_NAME']; 
         }
         return $result;
+
     }
 
     //je sélectionne une ligne dans une table selon l'id donnée
@@ -76,13 +92,16 @@ abstract class Model
     {
         $columns = "";
         $values = "";
+
         foreach ($data as $key => $value)
         {
             $columns = substr_replace($columns, " ".$key.", ", 0, 0);
             $values = substr_replace($values, "'".$value."', ", 0, 0);
         }
+
         $columns = substr($columns, 1, -2);
         $values = substr($values, 0, -2);
+        
         $sql = "INSERT INTO $table ($columns) VALUES ($values)";
         $result = $this->connect_db()->prepare($sql);
         return $result->execute();

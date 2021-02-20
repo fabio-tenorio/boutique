@@ -24,7 +24,7 @@ class ControllerAccueil extends Controller {
         }
         else
         {
-            $this->render('header');
+            $this->render('accueil');
         }
         // $this->render('accueil', [2, 3]);
     }

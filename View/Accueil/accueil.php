@@ -16,10 +16,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 
 <body>
     <section id="bgsection1">
-        <div id="logo">
-            <h1>sonia</h1>
-            <h2>boutique en ligne</h2>
-        </div>
+        
     </section>
     <section>
 

@@ -11,19 +11,49 @@ body {
     width: 100%;
 }
 
-header nav {
-    background-color: lightgray;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+header {
+    background-color: #DADEDF;
     width: 100%;
-    text-transform: uppercase;
-    font-weight: bold;
 }
 
-ul li a {
-    color: rgb(154, 18, 79);
+header nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+header nav a {
+    color: #BF00FF;
+}
+
+#leftlinks, #rightlinks {
+    display: flex;
+    flex-direction: row;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #BF00FF;
+    padding: 0 15px;
+    width: 100%;
+}
+
+#leftlinks {
+    align-self: left;
+}
+
+#leftlinks a {
+    padding: 0 35px;
+}
+
+#rightlinks {
+    align-self: center;
+    justify-content: right;
+}
+
+#rightlinks a {
+    padding: 0 35px;
+    align-self: center;
 }
 
 a:hover {
@@ -33,26 +63,34 @@ a:hover {
 
 #logo {
     font-family: 'Dr Sugiyama', cursive;
-    color: purple;
+    color: #BF00FF;
     display:flex;
     flex-direction: column;
-    align-items: center;
+    align-self: center;
     justify-content: space-around;
-    padding:100px 0;
-    /* position: absolute;
-    margin: 0 40%;
-    padding-top: 50px; */
+    padding: 50px 0 10px 0;
 }
 
 #logo h1 {
-    font-size: 18vh;
+    font-size: 8vh;
     line-height: 35%;
     text-transform: capitalize;
 }
 #logo h2 {
-    padding-top: 30px;
-    font-size: 7vh;
+    font-size: 3vh;
     text-transform: lowercase;
+}
+
+#formconnexion div {
+    margin: 0 15px;
+}
+
+#formconnexion input {
+    border: none;
+    border-bottom: 1px solid darkgray;
+    background-color: inherit;
+    max-width: 150px;
+    padding: 6px; 
 }
 
 #bgsection1 {
@@ -60,6 +98,7 @@ a:hover {
     background-size: cover;
     opacity: 0.2;
     width: 100%;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: center;

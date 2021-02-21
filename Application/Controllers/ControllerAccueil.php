@@ -32,7 +32,7 @@ class ControllerAccueil extends Controller {
     public function select_user()
     {
         
-    }    
+    }
 }
 
 /* 

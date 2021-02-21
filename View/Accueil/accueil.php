@@ -16,10 +16,30 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 
 <body>
     <section id="bgsection1">
-        
-    </section>
-    <section>
 
+    </section>
+    <section id="section2">
+        <div>
+            <h2>titre du produit</h2>
+            <img src="#" alt="image du produit">
+            <p>description du produit</p>
+            <p>prix du produit</p>
+            <a href="#">liens vers la page du produit</a>
+        </div>
+        <div>
+            <h2>titre du produit</h2>
+            <img src="#" alt="image du produit">
+            <p>description du produit</p>
+            <p>prix du produit</p>
+            <a href="#">liens vers la page du produit</a>
+        </div>
+        <div>
+            <h2>titre du produit</h2>
+            <img src="#" alt="image du produit">
+            <p>description du produit</p>
+            <p>prix du produit</p>
+            <a href="#">liens vers la page du produit</a>
+        </div>
     </section>
 </body>
 </html>

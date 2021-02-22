@@ -15,30 +15,57 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 ?>
 
 <body>
-    <section id="bgsection1">
-
+    <section id="section1">
+        <p></p>
     </section>
     <section id="section2">
+        <h2 class="h2">Nos produits</h2>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card produit-box">
+                    <img class="card-img-top" src="images/produit-vernis.png" alt="image du produit">
+                    <div class="card-body">
+                        <h5 class="card-title">Vernis rouge</h5>
+                        <p class="card-text">description du produit</p>
+                        <p>&#8364; 19,90</p>
+                        <a href="#" class="btn btn-primary">détails</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card produit-box">
+                    <img class="card-img-top" src="images/produit-vernis.png" alt="image du produit">
+                    <div class="card-body">
+                        <h5 class="card-title">Vernis rouge</h5>
+                        <p class="card-text">description du produit</p>
+                        <p>&#8364; 19,90</p>
+                        <a href="#" class="btn btn-primary">détails</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card produit-box">
+                    <img class="card-img-top" src="images/produit-vernis.png" alt="image du produit">
+                    <div class="card-body">
+                        <h5 class="card-title">Vernis rouge</h5>
+                        <p class="card-text">description du produit</p>
+                        <p>&#8364; 19,90</p>
+                        <a href="#" class="btn btn-primary">détails</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="section3">
+        <h2 class="h2">pour les pro</h2>
+    </section>
+    <section id="section4">
+        <h2 class="h2">le blog</h2>
         <div>
-            <h2>titre du produit</h2>
-            <img src="#" alt="image du produit">
-            <p>description du produit</p>
-            <p>prix du produit</p>
-            <a href="#">liens vers la page du produit</a>
+
         </div>
         <div>
-            <h2>titre du produit</h2>
-            <img src="#" alt="image du produit">
-            <p>description du produit</p>
-            <p>prix du produit</p>
-            <a href="#">liens vers la page du produit</a>
-        </div>
-        <div>
-            <h2>titre du produit</h2>
-            <img src="#" alt="image du produit">
-            <p>description du produit</p>
-            <p>prix du produit</p>
-            <a href="#">liens vers la page du produit</a>
+
         </div>
     </section>
 </body>

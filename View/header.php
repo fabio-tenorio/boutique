@@ -13,7 +13,7 @@ session_start();
     <h2>boutique en ligne</h2>
   </div>
   <div id="rightlinks">
-    <form action="#" method="POST" class="form-inline" id="formconnexion">
+    <!-- <form action="#" method="POST" class="form-inline" id="formconnexion">
       <div>
         <label for="login"></label>
         <input id="login" name="login" type="text" placeholder="votre pseudo" class="form-group mx-sm-1 mb-1">
@@ -23,7 +23,9 @@ session_start();
         <input id="motpasse" type="password" placeholder="votre mot de passe" class="form-group mx-sm-1 mb-1">
       </div>
       <button type="submit" class="btn btn-primary">connexion</button>
-    </form>
+    </form> -->
+    <a href="#">blog</a>
+    <a href="#">connexion</a>
     <a href="#">inscription</a>
   </div>
 </nav>

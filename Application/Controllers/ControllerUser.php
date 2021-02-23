@@ -49,6 +49,10 @@ class ControllerUser extends Controller {
 
     // MÉTHODES LIÉES AUX VIEWS
 
+    public function connexion() {
+        $this->render('userconnexion');
+    }
+
     public function render_connexion(array $data = []){
         extract($data);
 

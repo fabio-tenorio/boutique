@@ -25,7 +25,7 @@ session_start();
       <button type="submit" class="btn btn-primary">connexion</button>
     </form> -->
     <a href="#">blog</a>
-    <a href="#">connexion</a>
-    <a href="#">inscription</a>
+    <a href="ControllerUser/connexion">connexion</a>
+    <a href="ControllerUser/inscription">inscription</a>
   </div>
 </nav>

@@ -17,16 +17,20 @@ if ($params[0]!='')
 {
     $controller = ucfirst($params[0]);
     $MainController = 'App\\'.'Application\\'.$controller;
+    $OtherController = 'App\\'.'Application\\'.$controller;
     if (class_exists($MainController))
     {
        $controller = new $MainController;
     //    var_dump($controller);
     }
-    else
-    {
+    elseif (class_exists($OtherController))
+    { 
        $controller = 'App\\'.'Application\\'.'Controllers\\'.$controller;
        $controller = new $controller;
     //    var_dump($controller);
+    } else {
+        // page_error
+        ControllerAccueil::page_error();
     }
     // la syntaxe ci-dessous est équivalent à la condition if else ci-dessous
     // $action = isset($params[1]) ? $params[1] : http_response_code(404);
@@ -39,8 +43,9 @@ if ($params[0]!='')
         }
         else
         {
-            http_response_code(404);
-            echo "La page n'existe pas";
+            // http_response_code(404);
+            ControllerAccueil::page_error();
+            // echo "La page n'existe pas";
         }
     }
     elseif (isset($params[1]) && isset($params[2]))
@@ -54,7 +59,8 @@ if ($params[0]!='')
     {
         // http_response_code(404);
         //faisons une page 404 pour le projet?
-        $controller->index();
+        ControllerAccueil::page_error();
+        // $controller->index();
         // echo "La page n'existe pas";
     }
 }

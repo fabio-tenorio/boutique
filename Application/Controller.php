@@ -87,6 +87,12 @@ abstract class Controller {
             require_once 'View/template.php';
         }
 
+        static public function page_error() {
+            ob_start();
+            $page404 = 'View'.DIRECTORY_SEPARATOR.'page404.php';
+            require_once $page404;
+        }
+
     // les méthodes qui permettent de charger un model
 
     public function loadModel($model)

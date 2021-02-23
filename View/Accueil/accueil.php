@@ -16,7 +16,9 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 
 <body>
     <section id="section1">
-        <p></p>
+        <div id="bg-section1">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos vero voluptatibus modi possimus. Porro quas sunt, corrupti ratione praesentium exercitationem impedit repudiandae temporibus beatae reprehenderit eaque nam vero molestiae possimus.</p>
+        </div>        
     </section>
     <section id="section2">
         <h2 class="h2">Nos produits</h2>

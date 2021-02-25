@@ -3,30 +3,38 @@ require_once 'autoloader.php';
 
 use App\Autoloader;
 use App\Application\Controller as Controller;
+use App\Application\Controllers;
 use App\Application\Controllers\ControllerUser as ControllerUser;
 use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
-use App\Model\Modelaccueil as Modelaccueil;
+// use App\Model\Modelaccueil as Modelaccueil;
 
 Autoloader::register();
 
 // define('ROOT', str_replace('index.php','Application/',$_SERVER['SCRIPT_FILENAME']));
-// var_dump(WEBROOT);
+// var_dump(ROOT);
+ini_set('display_errors', 'on');
+error_reporting(E_ALL);
+define('ROOT', $_SERVER['REDIRECT_URL']);
+// echo("<pre>");
+// print_r($_SERVER);
+// echo("</pre>");die;
+
 $params = explode('/', $_GET['p']);
 
 if ($params[0]!='')
 {
     $controller = ucfirst($params[0]);
     $MainController = 'App\\'.'Application\\'.$controller;
-    $OtherController = 'App\\'.'Application\\'.$controller;
+    $OtherController = 'App\\'.'Application\\'.'Controllers\\'.$controller;
     if (class_exists($MainController))
     {
        $controller = new $MainController;
-    //    var_dump($controller);
     }
-    elseif (class_exists($OtherController))
+    if (class_exists($OtherController))
     { 
-       $controller = 'App\\'.'Application\\'.'Controllers\\'.$controller;
-       $controller = new $controller;
+       $controller = new $OtherController;
+    //    $controller->match($_GET);
+    //    var_dump($controller);die;
     //    var_dump($controller);
     } else {
         // page_error
@@ -41,6 +49,8 @@ if ($params[0]!='')
             $controller->$action();
             // var_dump($controller->$action());
         }
+        // var_dump(ROOT);$_SERVER['SCRIPT_FILENAME']));
+        // var_dump(ROOT);
         else
         {
             // http_response_code(404);

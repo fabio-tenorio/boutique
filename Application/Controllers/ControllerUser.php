@@ -6,6 +6,11 @@ Use App\Application\Models\ModelUser;
 
 class ControllerUser extends Controller {
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index()
     {
         echo "Je suis ControllerUser";
@@ -50,7 +55,7 @@ class ControllerUser extends Controller {
     // MÉTHODES LIÉES AUX VIEWS
 
     public function connexion() {
-        $this->render('userconnexion');
+        $this->render('connexion');
     }
 
     public function render_connexion(array $data = []){

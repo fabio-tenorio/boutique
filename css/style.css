@@ -156,6 +156,22 @@ a:hover {
     box-shadow: 2px 5px 15px 1px lightgray;
 }
 
+/* PAGE CONNEXION */
+
+#main_connexion {
+    margin: 20vh 40vh;
+}
+
+#main_connexion h1 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 15vh;
+}
+
+#formulaire_connexion {
+    padding: 10vh;
+}
+
 /* PAGE 404 */
 #body-404 {
     width: 100%;

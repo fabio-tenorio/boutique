@@ -33,9 +33,31 @@ use App\Autoloader;
 // Autoloader::register();
 
 abstract class Controller {
+    
+    public $path;
+
+    public function __construct()
+    {
+        $this->path = $_GET['p'];
+    }
     // public function index()
     // {
     //     echo 'Hello';
+    // }
+
+    // private $path;
+
+    // public function match($url)
+    // {
+    //     $url = trim($url, '/');
+    //     $path = preg_replace('#:([\w]+)#', '([^/]+)', $this->path);
+    //     $regex = "#^$path$#i";
+    //     if(!preg_match($regex, $url, $matches)){
+    //         return false;
+    //     }
+    //     array_shift($matches);
+    //     $this->matches = $matches;  // On sauvegarde les paramètre dans l'instance pour plus tard
+    //     return true;
     // }
 
     public function bonne_affichage($donnee)
@@ -74,7 +96,7 @@ abstract class Controller {
             $contentHeader = ob_get_clean();
             //ensuite le main
             ob_start();
-            $viewMain = 'View'.DIRECTORY_SEPARATOR.ucfirst($fichier).DIRECTORY_SEPARATOR.strtolower($fichier).'.php';
+            $viewMain = 'View'.DIRECTORY_SEPARATOR.strtolower($fichier).'.php';
             require_once $viewMain;
             $contentMain = ob_get_clean();
             //enfin, le footer

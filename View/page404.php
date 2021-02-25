@@ -21,7 +21,7 @@
             </div>
             <h3 class="h3">Désolé. La page recherchée n'existe pas</h3>
             <nav>
-                <a href="#">accueil</a>
+                <a href=p=accueil">accueil</a>
                 <a href="#">boutique en ligne</a>
             </nav>
         </div>

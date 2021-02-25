@@ -1,8 +1,9 @@
 <?php
 
 ?>
-
-<form>
+<main id="main_connexion">
+<h1>connexion</h1>
+<form id="formulaire_ connexion" action="" method="POST">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
@@ -48,3 +49,4 @@
   </div>
   <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
+</main>

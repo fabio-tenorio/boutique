@@ -1,8 +1,9 @@
 <?php
-
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelUser;
+
+var_dump($_POST);
 
 class ControllerUser extends Controller {
 
@@ -49,8 +50,10 @@ class ControllerUser extends Controller {
 
     // MÉTHODES LIÉES AUX VIEWS
 
-    public function connexion() {
+    public function connexion($data=null) {
         $this->render('connexion');
+        $data = $_POST;
+        var_dump($data);
     }
 
     public function render_connexion(array $data = []){

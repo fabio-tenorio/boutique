@@ -1,9 +1,9 @@
 <?php
-// var_dump($_GET);
+var_dump($_POST);
 ?>
-<main id="main_connexion">
+<!-- <main id="main_connexion"> -->
 <h1>connexion</h1>
-<form id="formulaire_ connexion" action="" method="GET">
+<form id="formulaire_connexion" action="<?php echo CONNEXION;?>" method="POST">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
@@ -49,4 +49,4 @@
   </div>
   <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
-</main>
+<!-- </main> -->

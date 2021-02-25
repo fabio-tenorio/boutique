@@ -162,13 +162,14 @@ a:hover {
     margin: 20vh 40vh;
 }
 
-#main_connexion h1 {
+/* #main_connexion h1 {
     text-align: center;
     width: 100%;
     margin-bottom: 15vh;
-}
+} */
 
 #formulaire_connexion {
+    border: 1px solid red;
     padding: 10vh;
 }
 

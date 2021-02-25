@@ -10,14 +10,13 @@ use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 
 Autoloader::register();
 
-// define('ROOT', str_replace('index.php','Application/',$_SERVER['SCRIPT_FILENAME']));
-// var_dump(ROOT);
 ini_set('display_errors', 'on');
 error_reporting(E_ALL);
-define('ROOT', $_SERVER['REQUEST_URI']);
+// define('ROOT', $_SERVER['REQUEST_URI']);
+
 require_once 'path.php';
 echo("<pre>");
-// print_r($_GET);
+print_r($_POST);
 echo("</pre>");
 
 $params = explode('/', $_GET['p']);

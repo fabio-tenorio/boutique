@@ -1,9 +1,9 @@
 <?php
-
+// var_dump($_GET);
 ?>
 <main id="main_connexion">
 <h1>connexion</h1>
-<form id="formulaire_ connexion" action="" method="POST">
+<form id="formulaire_ connexion" action="" method="GET">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>

@@ -6,11 +6,6 @@ Use App\Application\Models\ModelUser;
 
 class ControllerUser extends Controller {
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function index()
     {
         echo "Je suis ControllerUser";

@@ -14,10 +14,11 @@ Autoloader::register();
 // var_dump(ROOT);
 ini_set('display_errors', 'on');
 error_reporting(E_ALL);
-define('ROOT', $_SERVER['REDIRECT_URL']);
-// echo("<pre>");
-// print_r($_SERVER);
-// echo("</pre>");die;
+define('ROOT', $_SERVER['REQUEST_URI']);
+require_once 'path.php';
+echo("<pre>");
+// print_r($_GET);
+echo("</pre>");
 
 $params = explode('/', $_GET['p']);
 

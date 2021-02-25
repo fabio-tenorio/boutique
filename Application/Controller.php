@@ -34,12 +34,6 @@ use App\Autoloader;
 
 abstract class Controller {
     
-    public $path;
-
-    public function __construct()
-    {
-        $this->path = $_GET['p'];
-    }
     // public function index()
     // {
     //     echo 'Hello';

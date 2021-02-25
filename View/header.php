@@ -9,10 +9,10 @@ session_start();
     <a href="#">nos produits</a>
     <a href="#">prendre un RDV</a>
   </div>
-  <div id="logo">
+  <a href="<?php echo ACCUEIL;?>" id="logo">
     <h1>sonia</h1>
     <h2>boutique en ligne</h2>
-  </div>
+  </a>
   <div id="rightlinks">
     <!-- <form action="#" method="POST" class="form-inline" id="formconnexion">
       <div>
@@ -27,6 +27,6 @@ session_start();
     </form> -->
     <a href="#">blog</a>
     <a href="<?php echo CONNEXION;?>">connexion</a>
-    <a href="ControllerUser/inscription">inscription</a>
+    <a href="<?php echo INSCRIPTION;?>">inscription</a>
   </div>
 </nav>

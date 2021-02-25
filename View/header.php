@@ -26,7 +26,7 @@ session_start();
       <button type="submit" class="btn btn-primary">connexion</button>
     </form> -->
     <a href="#">blog</a>
-    <a href="http://localhost<?php echo ROOT."ControllerUser/connexion";?>">connexion</a>
+    <a href="<?php echo CONNEXION;?>">connexion</a>
     <a href="ControllerUser/inscription">inscription</a>
   </div>
 </nav>

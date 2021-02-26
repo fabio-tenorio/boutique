@@ -3,7 +3,7 @@ Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelUser;
 
-var_dump($_POST);
+// var_dump($_GET);
 
 class ControllerUser extends Controller {
 
@@ -50,10 +50,15 @@ class ControllerUser extends Controller {
 
     // MÉTHODES LIÉES AUX VIEWS
 
-    public function connexion($data=null) {
-        $this->render('connexion');
-        $data = $_POST;
+    public function connexion() {
+        $data = $_GET;
+        extract($data);
+        if ($data != null)
+        {
+            extract($data);
+        }
         var_dump($data);
+        $this->render('connexion');
     }
 
     public function render_connexion(array $data = []){

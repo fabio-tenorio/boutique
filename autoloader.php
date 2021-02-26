@@ -4,12 +4,29 @@ namespace App;
 
 class Autoloader
 {
-    static function register()
+    
+    public static function register()
     {
         spl_autoload_register([
             __CLASS__,
             'autoload'
         ]);
+        
+        // pour les controllers et leurs méthodes
+        $host  = $_SERVER['HTTP_HOST'];
+        // pour les fichiers des images et le css
+        $root = $_SERVER['DOCUMENT_ROOT'];
+        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $path = $host.$uri;
+        
+        define ('ACCUEIL', 'http://'.$path);
+        define ('CONNEXION', 'http://'.$path.'/'.'ControllerUser/connexion/');
+        // define ('HOST', 'http://'.$host.$uri);
+        // define ('ROOT', 'http://'.$root.$uri);
+        define ('CONTROLLER', 'http://'.$path.'/'.'Controller');
+        define('INSCRIPTION', 'http://'.$path.'/'.'ControllerUser/inscription');
+        define('PROFIL', 'http://'.$path.'/'.'ControllerUser/profil');
+    
     }
     static function autoload($class_name)
     {

@@ -14,13 +14,12 @@ ini_set('display_errors', 'on');
 error_reporting(E_ALL);
 // define('ROOT', $_SERVER['REQUEST_URI']);
 
-require_once 'path.php';
 echo("<pre>");
-print_r($_POST);
+print_r($_GET);
 echo("</pre>");
 
 $params = explode('/', $_GET['p']);
-
+var_dump($params);
 if ($params[0]!='')
 {
     $controller = ucfirst($params[0]);
@@ -63,6 +62,7 @@ if ($params[0]!='')
             // si la méthode accepte des paramètres
             $action = $params[1];
             $value = $params[2];
+            // var_dump($value);
             $controller->$action($value);
     }
     else

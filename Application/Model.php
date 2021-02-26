@@ -67,10 +67,9 @@ abstract class Model
         $stmt->bindValue(':db_name', $db_name, \PDO::PARAM_STR);
         $stmt->execute();
         $result = array();
-        // var_dump($result);die;
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC))
         {
-            $result[] = $row['COLUMN_NAME'];
+            $result[] = $row['column_name'];
         }
         return $result;
     }

@@ -15,10 +15,10 @@ body {
     /* align-items: center; */
     width: 100%;
     /* background: linear-gradient(180deg, rgba(107,31,60,1) 0%, rgba(136,75,98,1) 50%, rgba(166,120,138,1) 100%);  */
-    background: linear-gradient(180deg, rgba(129,20,83,1) 20%, rgba(121,9,121,1) 50%, rgba(195,131,77,1) 100%); 
+    background: linear-gradient(240deg, rgba(129,20,83,1) 20%, rgba(121,9,121,1) 50%, rgba(195,131,77,1) 100%); 
 }
 
-main {
+#main_accueil {
     margin: 0 80px;
     background-color: whitesmoke;
 }
@@ -171,18 +171,34 @@ a:hover {
 /* PAGE CONNEXION */
 
 #main_connexion {
-    margin: 20vh 40vh;
+    margin: 15vh 20vh;
+    /* padding: 5vh; */
+    border-radius: 10px;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
 }
 
-/* #main_connexion h1 {
+#main_connexion form {
+    padding: 10vh;
+}
+
+#main_connexion form h1 {
     text-align: center;
     width: 100%;
-    margin-bottom: 15vh;
-} */
+    margin-bottom: 7vh;
+}
 
-#formulaire_connexion {
-    border: 1px solid red;
-    padding: 10vh;
+#img-connexion {
+    background-image: url(../images/bg-cheveux.jpg);
+    background-size: cover;
+    height: inherit;
+    width: 65%;
+    border-radius: inherit;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    opacity: 0.5;
 }
 
 /* PAGE 404 */

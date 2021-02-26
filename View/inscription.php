@@ -24,12 +24,12 @@
         <input type="text" placeholder="votre prénom" name="prenom" id="prenom" required>
     </div>
     <div>
-        <label for="Nom"><b>Nom</b></label>
+        <label for="nom"><b>Nom</b></label>
         <input type="text" placeholder="votre nom" name="nom" id="nom" required>
     </div>
     <div>
-        <label for="email"><b>e-mail</b></label>
-        <input type="text" placeholder="votre courrier électronique" name="email" id="email" required>
+        <label for="mail"><b>e-mail</b></label>
+        <input type="text" placeholder="votre courrier électronique" name="mail" id="mail" required>
     </div>
     <div>
         <label for="telephone"><b>téléphone</b></label>

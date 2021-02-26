@@ -1,15 +1,15 @@
 <?php
-// var_dump($_GET);
+Namespace App\View;
+Use App\Application\Controller;
+Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
+
 ?>
 <!-- <main id="main_connexion"> -->
-<div>
-<div>
-  <img src="<?php var_dump(IMAGES)?>bg-produits.jpg" alt="bg">
+<div id="main_connexion">
+<div id="img-connexion">
 </div>
-<h1>connexion</h1>
 <form id="formulaire_connexion" action="<?php echo CONNEXION; ?>" method="GET">
-  <label for="test">testing</label>
-  <input type="text" name="test" placeholder="tester">
+  <h1>connexion</h1>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="email">Email</label>
@@ -56,5 +56,4 @@
   <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
 </div>
-
 <!-- </main> -->

@@ -3,8 +3,6 @@ Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelUser;
 
-// var_dump($_GET);
-
 class ControllerUser extends Controller {
 
     public function index()
@@ -56,7 +54,7 @@ class ControllerUser extends Controller {
         if (isset($_POST['login']))
         {
             $_POST['id_droit']=1;
-            var_dump($this->new_user($_POST));
+            $this->new_user($_POST);
         }
         $this->render('inscription');
     }

@@ -28,9 +28,10 @@ class ControllerUser extends Controller {
 
     public function new_user($data)
     {
-        $data = ['id_droit'=>'100', 'login'=>'toto', 'motpasse'=>'test', 'prenom'=>'toto', 'nom'=>'titi', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
+        // $data = ['id_droit'=>'100', 'login'=>'toto', 'motpasse'=>'test', 'prenom'=>'toto', 'nom'=>'titi', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
         $new_user = new ModelUser();
-        return $this->$new_user->insert_user($data);
+        // var_dump($data);die;
+        return $new_user->insert_user($data);
     }
 
     public function modify_user($data)
@@ -50,6 +51,16 @@ class ControllerUser extends Controller {
 
     // MÉTHODES LIÉES AUX VIEWS
 
+    public function inscription()
+    {
+        if (isset($_POST['login']))
+        {
+            $_POST['id_droit']=1;
+            var_dump($this->new_user($_POST));
+        }
+        $this->render('inscription');
+    }
+
     public function connexion() {
         $data = $_GET;
         extract($data);
@@ -57,7 +68,7 @@ class ControllerUser extends Controller {
         {
             extract($data);
         }
-        var_dump($data);
+        // var_dump($data);
         $this->render('connexion');
     }
 

@@ -2,6 +2,10 @@
 // var_dump($_GET);
 ?>
 <!-- <main id="main_connexion"> -->
+<div>
+<div>
+  <img src="<?php var_dump(IMAGES)?>bg-produits.jpg" alt="bg">
+</div>
 <h1>connexion</h1>
 <form id="formulaire_connexion" action="<?php echo CONNEXION; ?>" method="GET">
   <label for="test">testing</label>
@@ -51,4 +55,6 @@
   </div>
   <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
+</div>
+
 <!-- </main> -->

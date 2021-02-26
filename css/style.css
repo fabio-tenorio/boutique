@@ -156,6 +156,18 @@ a:hover {
     box-shadow: 2px 5px 15px 1px lightgray;
 }
 
+/* PAGE INSCRIPTION */
+
+#form_inscription {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#form_inscription div {
+    padding: 2vh 0;
+}
+
 /* PAGE CONNEXION */
 
 #main_connexion {

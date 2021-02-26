@@ -14,12 +14,12 @@ ini_set('display_errors', 'on');
 error_reporting(E_ALL);
 // define('ROOT', $_SERVER['REQUEST_URI']);
 
-echo("<pre>");
-print_r($_GET);
-echo("</pre>");
+// echo("<pre>");
+// print_r($_GET);
+// echo("</pre>");
 
 $params = explode('/', $_GET['p']);
-var_dump($params);
+// var_dump($params);
 if ($params[0]!='')
 {
     $controller = ucfirst($params[0]);

@@ -19,12 +19,14 @@ class Autoloader
         $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
         $path = $host.$uri;
         
+        define ('IMAGES', $root.$uri.'/'.'images/');
         define ('ACCUEIL', 'http://'.$path);
         define ('CONNEXION', 'http://'.$path.'/'.'ControllerUser/connexion/');
         // define ('HOST', 'http://'.$host.$uri);
         // define ('ROOT', 'http://'.$root.$uri);
         define ('CONTROLLER', 'http://'.$path.'/'.'Controller');
         define('INSCRIPTION', 'http://'.$path.'/'.'ControllerUser/inscription');
+        // define('NEWUSER', 'http://'.$path.'/'.'ControllerUser/new_user');
         define('PROFIL', 'http://'.$path.'/'.'ControllerUser/profil');
     
     }

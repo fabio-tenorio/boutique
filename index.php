@@ -1,6 +1,14 @@
 <?php
 require_once 'autoloader.php';
 
+
+/* SI CLASSE ROUTEUR
+Autoloader::start();
+$request = $_GET['r']; 
+$routeur= new Routeur($request);
+$routeur->renderControler();
+*/
+
 use App\Autoloader;
 use App\Application\Controller as Controller;
 use App\Application\Controllers\ControllerUser as ControllerUser;
@@ -8,6 +16,9 @@ use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 use App\Model\Modelaccueil as Modelaccueil;
 
 Autoloader::register();
+
+
+
 
 // define('ROOT', str_replace('index.php','Application/',$_SERVER['SCRIPT_FILENAME']));
 // var_dump(WEBROOT);

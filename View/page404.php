@@ -1,8 +1,3 @@
-<?php
-session_start();
-var_dump($_POST);
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,18 +10,21 @@ var_dump($_POST);
     <link href="https://fonts.googleapis.com/css2?family=Dr+Sugiyama&display=swap" rel="stylesheet"> 
     <!-- icones pour l'application -->
     <link rel="stylesheet" href="/unit2/boutique/css/font-awesome/css/font-awesome.min.css">
-    
-    <title>Sonia | boutique en ligne</title>
+    <title>boutique | page 404</title>
 </head>
-<body>
-    <header>
-        <?= $contentHeader ?>
-    </header>
-    <main>
-        <?= $contentMain ?>
-    </main>
-    <footer>
-        <?= $contentFooter ?>
-    </footer>
+<body id="body-404">
+    <div id="bg-404">
+        <div id="msg-404">
+            <div id="logo">
+                <h1>sonia</h1>
+                <h2>boutique en ligne</h2>
+            </div>
+            <h3 class="h3">Désolé. La page recherchée n'existe pas</h3>
+            <nav>
+                <a href=p=accueil">accueil</a>
+                <a href="#">boutique en ligne</a>
+            </nav>
+        </div>
+    </div>
 </body>
 </html>

@@ -58,13 +58,16 @@ abstract class Model
     // d'abord, je récupère les colonnes d'une table informée par le Controller
     public function columns_names($table)
     {
+        // on utilise la vue du schema d'information INFORMATION_SCHEMA
+        // sur les metadata de la base de données d'une table avec une requête select et des mots-clés SQL
         $db_name = $this->db_name;
-        $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = :table AND TABLE_SCHEMA = :db_name";
+        $sql = "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = :table AND TABLE_SCHEMA = :db_name";
         $stmt = $this->connect_db()->prepare($sql);
         $stmt->bindValue(':table', $table, \PDO::PARAM_STR);
         $stmt->bindValue(':db_name', $db_name, \PDO::PARAM_STR);
         $stmt->execute();
         $result = array();
+        // var_dump($result);die;
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC))
         {
             $result[] = $row['COLUMN_NAME'];

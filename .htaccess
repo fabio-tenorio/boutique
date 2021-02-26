@@ -2,10 +2,19 @@
 # PS: attention. L'environement type Linux presuppose que le fichier projet.conf soit modifié
 
 RewriteEngine On
+<<<<<<< HEAD
 #RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1
 #RewriteRule ^(.+)$ index.php?p=$1 [QSA,L]
 DirectoryIndex index.php
+=======
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php?p=$1 [QSA,L]
+# cette syntaxe ci-dessous ne permet l'ajout des en-tête avec la méthode GET
+RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1
+# DirectoryIndex index.php
+>>>>>>> c4948eb9753202e458b85c045a533682f81557f4
 
 # L'indexation d'annuaire permet aux visiteurs d'afficher une liste de fichiers au lieu
 # de la page Web réelle. Lorsque l'indexation des répertoires est activée, les visiteurs

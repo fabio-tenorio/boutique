@@ -11,33 +11,41 @@ $routeur->renderControler();
 
 use App\Autoloader;
 use App\Application\Controller as Controller;
+use App\Application\Controllers;
 use App\Application\Controllers\ControllerUser as ControllerUser;
 use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
-use App\Model\Modelaccueil as Modelaccueil;
+// use App\Model\Modelaccueil as Modelaccueil;
 
 Autoloader::register();
 
+ini_set('display_errors', 'on');
+error_reporting(E_ALL);
+// define('ROOT', $_SERVER['REQUEST_URI']);
 
+// echo("<pre>");
+// print_r($_GET);
+// echo("</pre>");
 
-
-// define('ROOT', str_replace('index.php','Application/',$_SERVER['SCRIPT_FILENAME']));
-// var_dump(WEBROOT);
 $params = explode('/', $_GET['p']);
-
+// var_dump($params);
 if ($params[0]!='')
 {
     $controller = ucfirst($params[0]);
     $MainController = 'App\\'.'Application\\'.$controller;
+    $OtherController = 'App\\'.'Application\\'.'Controllers\\'.$controller;
     if (class_exists($MainController))
     {
        $controller = new $MainController;
-    //    var_dump($controller);
     }
-    else
-    {
-       $controller = 'App\\'.'Application\\'.'Controllers\\'.$controller;
-       $controller = new $controller;
+    if (class_exists($OtherController))
+    { 
+       $controller = new $OtherController;
+    //    $controller->match($_GET);
+    //    var_dump($controller);die;
     //    var_dump($controller);
+    } else {
+        // page_error
+        ControllerAccueil::page_error();
     }
     // la syntaxe ci-dessous est équivalent à la condition if else ci-dessous
     // $action = isset($params[1]) ? $params[1] : http_response_code(404);
@@ -48,10 +56,13 @@ if ($params[0]!='')
             $controller->$action();
             // var_dump($controller->$action());
         }
+        // var_dump(ROOT);$_SERVER['SCRIPT_FILENAME']));
+        // var_dump(ROOT);
         else
         {
-            http_response_code(404);
-            echo "La page n'existe pas";
+            // http_response_code(404);
+            ControllerAccueil::page_error();
+            // echo "La page n'existe pas";
         }
     }
     elseif (isset($params[1]) && isset($params[2]))
@@ -59,13 +70,15 @@ if ($params[0]!='')
             // si la méthode accepte des paramètres
             $action = $params[1];
             $value = $params[2];
+            // var_dump($value);
             $controller->$action($value);
     }
     else
     {
         // http_response_code(404);
         //faisons une page 404 pour le projet?
-        $controller->index();
+        ControllerAccueil::page_error();
+        // $controller->index();
         // echo "La page n'existe pas";
     }
 }

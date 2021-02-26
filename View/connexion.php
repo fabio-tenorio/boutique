@@ -1,21 +1,28 @@
 <?php
-
+// var_dump($_GET);
 ?>
-
-<form>
+<!-- <main id="main_connexion"> -->
+<div>
+<div>
+  <img src="<?php var_dump(IMAGES)?>bg-produits.jpg" alt="bg">
+</div>
+<h1>connexion</h1>
+<form id="formulaire_connexion" action="<?php echo CONNEXION; ?>" method="GET">
+  <label for="test">testing</label>
+  <input type="text" name="test" placeholder="tester">
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" class="form-control" placeholder="Email">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+      <label for="motpasse">Password</label>
+      <input type="motpasse" class="form-control" id="motpasse" placeholder="Password">
     </div>
   </div>
   <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <label for="adresse">Address</label>
+    <input type="text" class="form-control" name="adresse" id="adresse" placeholder="1234 Main St">
   </div>
   <div class="form-group">
     <label for="inputAddress2">Address 2</label>
@@ -48,3 +55,6 @@
   </div>
   <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
+</div>
+
+<!-- </main> -->

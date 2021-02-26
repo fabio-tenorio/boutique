@@ -15,6 +15,8 @@ TODO <section>affichage des produits physiques en vente - soin et beauté</secti
 TODO <section>invitation à la réservation d'un créneau pour faire un rendez-vous</section>
  
 TODO partie utilisateur (UI) avec trois profils: non-membres, les membres, clients, modérateurs(salairiés + invités) et administrateurs
+TODO comprendre et resoudre le problème de recuperation des données gardées en $_GET and $_POST
+cette page contient une bonne piste: https://www.daniweb.com/programming/web-development/threads/261495/mvc-form-posting
 TODO page d'inscription
 TODO page de connexion
 TODO page de profil

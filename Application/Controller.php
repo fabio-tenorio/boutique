@@ -33,9 +33,25 @@ use App\Autoloader;
 // Autoloader::register();
 
 abstract class Controller {
+    
     // public function index()
     // {
     //     echo 'Hello';
+    // }
+
+    // private $path;
+
+    // public function match($url)
+    // {
+    //     $url = trim($url, '/');
+    //     $path = preg_replace('#:([\w]+)#', '([^/]+)', $this->path);
+    //     $regex = "#^$path$#i";
+    //     if(!preg_match($regex, $url, $matches)){
+    //         return false;
+    //     }
+    //     array_shift($matches);
+    //     $this->matches = $matches;  // On sauvegarde les paramètre dans l'instance pour plus tard
+    //     return true;
     // }
 
     public function bonne_affichage($donnee)
@@ -65,19 +81,32 @@ abstract class Controller {
             extract($data);
     
             // On démarre le buffer de sortie
-            ob_start();
-    
             // On génère la vue
-            // require_once 'views/'.strtolower(get_class($this)).'/'.$fichier.'.php');
 
-            // On stocke le contenu dans $content
-            // $content = ob_get_clean();
+            // d'abord le header
+            ob_start();
+            $viewHeader = 'View'.DIRECTORY_SEPARATOR.'header.php';
+            require_once $viewHeader;
+            $contentHeader = ob_get_clean();
+            //ensuite le main
+            ob_start();
+            $viewMain = 'View'.DIRECTORY_SEPARATOR.strtolower($fichier).'.php';
+            require_once $viewMain;
+            $contentMain = ob_get_clean();
+            //enfin, le footer
+            ob_start();
+            $viewFooter = 'View'.DIRECTORY_SEPARATOR.'footer.php';
+            require_once $viewFooter;
+            $contentFooter = ob_get_clean();
     
             // On fabrique le "template"
-            // require_once(ROOT.'views/layout/default.php');
-            require_once 'View/header.php';
-            // define ('ROOT_HEADER_FOOTER', str_replace('index.php', 'Application'.DIRECTORY_SEPARATOR.'View'.DIRECTORY_SEPARATOR, $_SERVER['SCRIPT_FILENAME']));
-            // var_dump(ROOT_HEADER_FOOTER);
+            require_once 'View/template.php';
+        }
+
+        static public function page_error() {
+            ob_start();
+            $page404 = 'View'.DIRECTORY_SEPARATOR.'page404.php';
+            require_once $page404;
         }
 
     // les méthodes qui permettent de charger un model

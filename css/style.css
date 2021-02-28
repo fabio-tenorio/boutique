@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     --prune: #811453;
+    font-family: 'Playfair Display', serif;
 }
 
 /*
@@ -38,13 +39,14 @@ header nav {
 
 header nav a {
     color: #BF00FF;
-}
+    }
 
 #leftlinks, #rightlinks {
     display: flex;
     flex-direction: row;
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 0.9em;
     color: #BF00FF;
     padding: 0 15px;
     width: 100%;

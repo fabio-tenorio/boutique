@@ -59,11 +59,16 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
                 </div>
             </div>
         </section>
-        <section id="section3">
-            <h2 class="h2">pour les pro</h2>
+        <section id="section_prestations">
+            <h2 class="h2">nos prestations</h2>
+            <div class="row">
+                <div>
+                    
+                </div>
+            </div>
         </section>
-        <section id="section4">
-            <h2 class="h2">le blog</h2>
+        <section id="section_blog">
+            <h2 class="h2">le blog de Sonia</h2>
             <div>
 
             </div>

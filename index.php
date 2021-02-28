@@ -15,7 +15,7 @@ error_reporting(E_ALL);
 // define('ROOT', $_SERVER['REQUEST_URI']);
 
 // echo("<pre>");
-// print_r($_GET);
+// print_r(CSS);
 // echo("</pre>");
 
 $params = explode('/', $_GET['p']);

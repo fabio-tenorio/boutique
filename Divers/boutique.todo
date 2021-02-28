@@ -53,5 +53,11 @@ TODO Gestion des catégories et des sous catégories de produits
 TODO Barre de recherche de produits
 TODO Validation du panier (simulation du paiement)
 TODO utiliser Stripe pour les procédures de payement avec carte bleue et paypal
+voici une librairie PHP qui peut être utile dans ce cas:
+Best PHP Ecommerce Libraries to Integrate with Web Apps
+Stripe-PHP
+Stripe is a popular e-payment platform used to conduct online transactions over the web. This package is specially made for PHP ecommerce applications to interact with the Stripe API. This library provides fast, efficient access to the Stripe API and makes the end-to-end connection secure between the platforms. The library includes a predefined set of API classes that are compatible with most of the Stripe versions.
+https://www.cloudways.com/blog/php-libraries/
+
 TODO Design contemporain et respectant la charte graphique de votre entreprise
 

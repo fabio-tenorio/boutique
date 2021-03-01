@@ -22,8 +22,8 @@
                         <input type="password" placeholder="votre mot de passe" name="motpasse" id="motpasse" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="confirmer_motpasse">Confirmez votre mot de passe</label>
-                        <input type="password" placeholder="réecrivez-le ici" name="confirmer_motpasse" id="confirmer_motpasse" required>
+                        <label for="confirmer_motpasse">Confirmation</label>
+                        <input type="password" placeholder="Confirmez votre mot de passe" name="confirmer_motpasse" id="confirmer_motpasse" required>
                     </div>
                 </div>
             </div>

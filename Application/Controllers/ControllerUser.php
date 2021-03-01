@@ -26,7 +26,10 @@ class ControllerUser extends Controller {
 
     public function new_user($data)
     {
-        // $data = ['id_droit'=>'100', 'login'=>'toto', 'motpasse'=>'test', 'prenom'=>'toto', 'nom'=>'titi', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
+        if (isset($data['motpasse']))
+        {
+            $data['motpasse']=password_hash($data["motpasse"], PASSWORD_DEFAULT);
+        }
         $new_user = new ModelUser();
         // var_dump($data);die;
         return $new_user->insert_user($data);

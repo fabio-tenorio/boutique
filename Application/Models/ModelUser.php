@@ -17,9 +17,12 @@ class ModelUser extends Model {
     }
 
     //je vérifie si il y a quelqun enregistré sur la bdd avec les données fournis par ControllerUser 
-    public function get_one_user($id)
+    public function get_one_user($login)
     {
-        return $this->get_one('utilisateurs', $id);
+        $stmt = $this->connect_db()->prepare("SELECT * FROM `utilisateurs` WHERE login=:login");
+        $stmt->execute([':login'=>$login]);
+        $user = $stmt->fetch(\PDO::FETCH_OBJ);
+        return $user;
     }
 
     //je sélectionne tous les utilisateurs de la bdd;

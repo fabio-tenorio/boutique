@@ -5,6 +5,65 @@ Use App\Application\Models\ModelUser;
 
 class ControllerUser extends Controller {
 
+    private $id;
+    private $id_droit;
+    private $prenom;
+    private $nom;
+    private $motpasse;
+    private $mail;
+    protected $login;
+    private $telephone;
+    private $dateanniversaire;
+    // il n'y a pas de colonne $adresse dans la table utilisateur;
+
+    public function __construct()
+    {
+        // if (is_object($this->user_exists($_POST['login'])))
+        // {
+            // $this->login = $_POST['login'];
+            // $this->prenom = $_POST['prenom'];
+            // $this->nom = $_POST['nom'];
+            // $this->motpasse = $_POST['motpasse'];
+            // $this->mail = $_POST['mail'];
+            // $this->telephone = $_POST['telephone'];
+            // $this->dateanniversaire = $_POST['dateanniversaire'];
+        // }
+        if (isset($_SESSION['id']))
+        {
+            $this->id = $_SESSION['id'];
+        }
+    }
+
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    public function mail()
+    {
+        return $this->mail;
+    }
+
+    public function login()
+    {
+        return $this->login;
+    }
+
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    public function getDateanniversaire()
+    {
+        return $this->dateanniversaire;
+    }
+
     public function index()
     {
         echo "Je suis ControllerUser";
@@ -18,10 +77,17 @@ class ControllerUser extends Controller {
         return $this->all_users->get_all_users();
     }
 
-    public function user_exists($id)
+    // je vérifie si il y a quelqun enregistré sur la bdd avec le login renseigné
+    public function user_exists($login)
     {
         $user = new ModelUser();
-        return $this->user->get_one_user($id);
+        return $user->get_one_user($login);
+    }
+
+    //vérifier si il y a quelqun déjà inscrit avec le même e-mail
+    public function verify_email($email)
+    {
+        $user = new ModelUser();
     }
 
     public function new_user($data)
@@ -63,14 +129,36 @@ class ControllerUser extends Controller {
     }
 
     public function connexion() {
+        //vérifier si les informations sont été renseignées
+        if (isset($_POST['login']))
+        {
+            // dans ce cas, vérifier les données renseignés
+            // d'abord, vérifier si le login est enregistré sur la bdd
+            $user = $this->user_exists($_POST['login']);
+            // ensuite, décripter le mot de passe
+            if (password_verify($_POST["motpasse"], $user->motpasse))
+            {
+                $_SESSION['user'] = $user;
+                $this->render('accueil');
+            } else
+            {
+                $this->render('connexion');
+            }
+        }
         $data = $_GET;
         extract($data);
         if ($data != null)
         {
             extract($data);
         }
-        // var_dump($data);
+        // sinon, afficher le form vide
         $this->render('connexion');
+    }
+
+    public function disconnect()
+    {
+        session_destroy();
+        $this->render('accueil');
     }
 
     public function render_connexion(array $data = []){

@@ -29,7 +29,7 @@ class Autoloader
         define('INSCRIPTION', 'http://'.$path.'/'.'ControllerUser/inscription');
         // define('NEWUSER', 'http://'.$path.'/'.'ControllerUser/new_user');
         define('PROFIL', 'http://'.$path.'/'.'ControllerUser/profil');
-    
+        define('BLOG', 'http://'.$path.'/'.'ControllerBlog/blog');
     }
     static function autoload($class_name)
     {

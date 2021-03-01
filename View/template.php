@@ -17,7 +17,7 @@ session_start();
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"> 
     <!-- icones pour l'application -->
-    <link rel="stylesheet" href="/<?php echo CSS?>font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo CSS?>font-awesome/css/font-awesome.min.css">
     
     <title>Sonia | boutique en ligne</title>
 </head>

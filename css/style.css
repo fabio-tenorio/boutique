@@ -47,6 +47,12 @@ header nav a {
     color: #BF00FF;
     }
 
+a:hover {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
 #leftlinks, #rightlinks {
     display: flex;
     flex-direction: row;
@@ -75,12 +81,37 @@ header nav a {
 #rightlinks a {
     padding: 0 35px;
     align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition-duration: 0.5s;
 }
 
-a:hover {
-    text-decoration: none;
-    color: inherit;
-}
+/* j'essaie de faire un menu déroulant */
+
+.dropdown_link {
+     visibility: hidden;
+     opacity: 0;
+     position: absolute;
+     transition: all 0.5s ease;
+     margin-top: 1rem;
+     left: 0;
+     display: none;
+   }
+   
+   ul li:hover > ul,
+   .dropdown_link:hover {
+     visibility: visible;
+     opacity: 1;
+     display: block;
+   }
+   
+   .dropdown_link li {
+     clear: both;
+     width: 100%;
+   }
+
+/* fin de l'essai */
 
 #logo {
     font-family: 'Dr Sugiyama', cursive;
@@ -129,7 +160,7 @@ a:hover {
 }
 
 #bg-section1 {
-    background-size: cover;
+    background-size: contain;
     height: inherit;
     background-color: rgba(255,255,255, 0.6);
     /* opacity: 0.3; */

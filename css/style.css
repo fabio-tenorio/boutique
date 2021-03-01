@@ -19,6 +19,12 @@ body {
     background: linear-gradient(240deg, rgba(129,20,83,1) 20%, rgba(121,9,121,1) 50%, rgba(195,131,77,1) 100%); 
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #main_accueil {
     margin: 0 80px;
     background-color: whitesmoke;
@@ -160,30 +166,49 @@ a:hover {
 
 /* PAGE INSCRIPTION */
 
-#form_inscription {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+#main_inscription {
+    margin: 5vh 20vh;
+    padding: 5vh;
+    border-radius: 10px;
+    background-color: lightgray;
+    max-width: 160vh;
 }
 
-#form_inscription div {
-    padding: 2vh 0;
+#form_inscription_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
+
+#main_inscription h1 {
+    text-align: center;
+}
+
+/*#form_inscription {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*#form_inscription div {*/
+/*    padding: 2vh 0;*/
+/*}*/
 
 /* PAGE CONNEXION */
 
 #main_connexion {
-    margin: 15vh 20vh;
-    /* padding: 5vh; */
+    margin: 15vh 5vh;
     border-radius: 10px;
     background-color: lightgray;
     display: flex;
-    flex-direction: row;
-    min-height: 100vh;
+    flex-direction: row-reverse;
+    min-height: 50vh;
+    min-width: 100vh;
 }
 
 #main_connexion form {
-    padding: 10vh;
+    padding: 5vh;
 }
 
 #main_connexion form h1 {
@@ -196,10 +221,10 @@ a:hover {
     background-image: url(../images/bg-cheveux.jpg);
     background-size: cover;
     height: inherit;
-    width: 65%;
+    width: 50%;
     border-radius: inherit;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
     opacity: 0.5;
 }
 

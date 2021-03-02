@@ -7,13 +7,13 @@ class ControllerUser extends Controller {
 
     private $id;
     private $id_droit;
-    private $prenom;
-    private $nom;
-    private $motpasse;
-    private $mail;
+    protected $prenom;
+    protected $nom;
+    protected $motpasse;
+    protected $mail;
     protected $login;
-    private $telephone;
-    private $dateanniversaire;
+    protected $telephone;
+    protected $dateanniversaire;
     // il n'y a pas de colonne $adresse dans la table utilisateur;
 
     public function __construct()
@@ -28,41 +28,41 @@ class ControllerUser extends Controller {
             // $this->telephone = $_POST['telephone'];
             // $this->dateanniversaire = $_POST['dateanniversaire'];
         // }
-        if (isset($_SESSION['id']))
+        if (isset($_SESSION['user']))
         {
             $this->id = $_SESSION['id'];
         }
     }
 
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
+    // public function getPrenom()
+    // {
+    //     return $this->prenom;
+    // }
 
-    public function getNom()
-    {
-        return $this->nom;
-    }
+    // public function getNom()
+    // {
+    //     return $this->nom;
+    // }
 
-    public function mail()
-    {
-        return $this->mail;
-    }
+    // public function getMail()
+    // {
+    //     return $this->mail;
+    // }
 
-    public function login()
-    {
-        return $this->login;
-    }
+    // public function getLogin()
+    // {
+    //     return $this->login;
+    // }
 
-    public function getTelephone()
-    {
-        return $this->telephone;
-    }
+    // public function getTelephone()
+    // {
+    //     return $this->telephone;
+    // }
 
-    public function getDateanniversaire()
-    {
-        return $this->dateanniversaire;
-    }
+    // public function getDateanniversaire()
+    // {
+    //     return $this->dateanniversaire;
+    // }
 
     public function index()
     {
@@ -101,9 +101,9 @@ class ControllerUser extends Controller {
         return $new_user->insert_user($data);
     }
 
-    public function modify_user($data)
+    public function profil($data)
     {
-        $data = ['id'=>14, 'id_droit'=>'200', 'login'=>'tata', 'motpasse'=>'testing', 'prenom'=>'tata', 'nom'=>'tutu', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
+        // $data = ['id'=>14, 'id_droit'=>'200', 'login'=>'tata', 'motpasse'=>'testing', 'prenom'=>'tata', 'nom'=>'tutu', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
         $id = $data['id'];
         $update = new ModelUser();
         return $this->$update->update_user($data, $id);

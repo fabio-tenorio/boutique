@@ -9,7 +9,7 @@ session_start();
     <a href="#">nos produits</a>
     <a href="#">prendre un RDV</a>
   </div>
-  <a href="<?php echo ACCUEIL;?>" id="logo">
+  <a href="http://<?php echo PATH;?>/ControllerAccueil/index" id="logo">
     <h1>sonia</h1>
     <h2>boutique en ligne</h2>
   </a>
@@ -17,12 +17,12 @@ session_start();
   if (isset($_SESSION['user']))
   {?>
     <div id="rightlinks">
-      <a href="<?php echo BLOG;?>">blog</a>
+    <a href="http://<?php echo PATH;?>/ControllerBlog/blog">blog</a>
       <a href="#" class="link">
         <span class="fa fa-user fa-lg"></span>
         <span><?php echo $_SESSION['user']->login; ?></span>
         <ul class="dropdown_link">
-          <li><a href="#">mon profil</a></li>
+          <li><a href="http://<?php echo PATH; ?>/ControllerUser/profil">mon profil</a></li>
           <li><a href="#">me deconnecter</a></li>
         </ul>
       </a>
@@ -31,9 +31,9 @@ session_start();
   <?php } else
   { ?>
     <div id="rightlinks">
-      <a href="<?php echo BLOG;?>">blog</a>
-      <a href="<?php echo CONNEXION;?>">connexion</a>
-      <a href="<?php echo INSCRIPTION;?>">inscription</a>
+      <a href="http://<?php echo PATH;?>/ControllerBlog/blog">blog</a>
+      <a href="http://<?php echo PATH;?>/ControllerUser/connexion">connexion</a>
+      <a href="http://<?php echo PATH;?>/ControllerUser/inscription">inscription</a>
     </div>
   <?php } ?>
 </nav>

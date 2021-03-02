@@ -56,10 +56,10 @@ if ($params[0]!='')
     }
     elseif (isset($params[1]) && isset($params[2]))
     {
-            // si la méthode accepte des paramètres
-            $action = $params[1];
-            $value = $params[2];
-            $controller->$action($value);
+        // si la méthode accepte des paramètres
+        $action = $params[1];
+        $value = $params[2];
+        $controller->$action($value);
     }
     else
     {

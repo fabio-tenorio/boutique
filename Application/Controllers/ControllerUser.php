@@ -3,9 +3,66 @@ Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelUser;
 
-// var_dump($_GET);
-
 class ControllerUser extends Controller {
+
+    private $id;
+    private $id_droit;
+    protected $prenom;
+    protected $nom;
+    protected $motpasse;
+    protected $mail;
+    protected $login;
+    protected $telephone;
+    protected $dateanniversaire;
+    // il n'y a pas de colonne $adresse dans la table utilisateur;
+
+    public function __construct()
+    {
+        // if (is_object($this->user_exists($_POST['login'])))
+        // {
+            // $this->login = $_POST['login'];
+            // $this->prenom = $_POST['prenom'];
+            // $this->nom = $_POST['nom'];
+            // $this->motpasse = $_POST['motpasse'];
+            // $this->mail = $_POST['mail'];
+            // $this->telephone = $_POST['telephone'];
+            // $this->dateanniversaire = $_POST['dateanniversaire'];
+        // }
+        if (isset($_SESSION['user']))
+        {
+            $this->id = $_SESSION['id'];
+        }
+    }
+
+    // public function getPrenom()
+    // {
+    //     return $this->prenom;
+    // }
+
+    // public function getNom()
+    // {
+    //     return $this->nom;
+    // }
+
+    // public function getMail()
+    // {
+    //     return $this->mail;
+    // }
+
+    // public function getLogin()
+    // {
+    //     return $this->login;
+    // }
+
+    // public function getTelephone()
+    // {
+    //     return $this->telephone;
+    // }
+
+    // public function getDateanniversaire()
+    // {
+    //     return $this->dateanniversaire;
+    // }
 
     public function index()
     {
@@ -20,23 +77,33 @@ class ControllerUser extends Controller {
         return $this->all_users->get_all_users();
     }
 
-    public function user_exists($id)
+    // je vérifie si il y a quelqun enregistré sur la bdd avec le login renseigné
+    public function user_exists($login)
     {
         $user = new ModelUser();
-        return $this->user->get_one_user($id);
+        return $user->get_one_user($login);
+    }
+
+    //vérifier si il y a quelqun déjà inscrit avec le même e-mail
+    public function verify_email($email)
+    {
+        $user = new ModelUser();
     }
 
     public function new_user($data)
     {
-        // $data = ['id_droit'=>'100', 'login'=>'toto', 'motpasse'=>'test', 'prenom'=>'toto', 'nom'=>'titi', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
+        if (isset($data['motpasse']))
+        {
+            $data['motpasse']=password_hash($data["motpasse"], PASSWORD_DEFAULT);
+        }
         $new_user = new ModelUser();
         // var_dump($data);die;
         return $new_user->insert_user($data);
     }
 
-    public function modify_user($data)
+    public function profil($data)
     {
-        $data = ['id'=>14, 'id_droit'=>'200', 'login'=>'tata', 'motpasse'=>'testing', 'prenom'=>'tata', 'nom'=>'tutu', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
+        // $data = ['id'=>14, 'id_droit'=>'200', 'login'=>'tata', 'motpasse'=>'testing', 'prenom'=>'tata', 'nom'=>'tutu', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
         $id = $data['id'];
         $update = new ModelUser();
         return $this->$update->update_user($data, $id);
@@ -56,20 +123,42 @@ class ControllerUser extends Controller {
         if (isset($_POST['login']))
         {
             $_POST['id_droit']=1;
-            var_dump($this->new_user($_POST));
+            $this->new_user($_POST);
         }
         $this->render('inscription');
     }
 
     public function connexion() {
+        //vérifier si les informations sont été renseignées
+        if (isset($_POST['login']))
+        {
+            // dans ce cas, vérifier les données renseignés
+            // d'abord, vérifier si le login est enregistré sur la bdd
+            $user = $this->user_exists($_POST['login']);
+            // ensuite, décripter le mot de passe
+            if (password_verify($_POST["motpasse"], $user->motpasse))
+            {
+                $_SESSION['user'] = $user;
+                $this->render('accueil');
+            } else
+            {
+                $this->render('connexion');
+            }
+        }
         $data = $_GET;
         extract($data);
         if ($data != null)
         {
             extract($data);
         }
-        // var_dump($data);
+        // sinon, afficher le form vide
         $this->render('connexion');
+    }
+
+    public function disconnect()
+    {
+        session_destroy();
+        $this->render('accueil');
     }
 
     public function render_connexion(array $data = []){

@@ -23,7 +23,7 @@ error_reporting(E_ALL);
 // define('ROOT', $_SERVER['REQUEST_URI']);
 
 // echo("<pre>");
-// print_r($_GET);
+// print_r(CSS);
 // echo("</pre>");
 
 $params = explode('/', $_GET['p']);
@@ -53,33 +53,26 @@ if ($params[0]!='')
     {
         $action = $params[1];
         if (method_exists($controller, $action)) {
+            //vérifie si la méthode a une visibilité publique
             $controller->$action();
-            // var_dump($controller->$action());
         }
-        // var_dump(ROOT);$_SERVER['SCRIPT_FILENAME']));
-        // var_dump(ROOT);
         else
         {
             // http_response_code(404);
             ControllerAccueil::page_error();
-            // echo "La page n'existe pas";
         }
     }
     elseif (isset($params[1]) && isset($params[2]))
     {
-            // si la méthode accepte des paramètres
-            $action = $params[1];
-            $value = $params[2];
-            // var_dump($value);
-            $controller->$action($value);
+        // si la méthode accepte des paramètres
+        $action = $params[1];
+        $value = $params[2];
+        $controller->$action($value);
     }
     else
     {
         // http_response_code(404);
-        //faisons une page 404 pour le projet?
         ControllerAccueil::page_error();
-        // $controller->index();
-        // echo "La page n'existe pas";
     }
 }
 else

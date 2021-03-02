@@ -28,8 +28,6 @@ abstract class Model
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
     }
-    //le choix des variables plutôt que des constants (DEFINE) a été fait pour raison de sécurité
-    // vu que les constants restent disponibles globalement
        
     // des variables utiles pour la construction des templates
     // déplacer vers l'intérieur d'une méthode?
@@ -40,8 +38,8 @@ abstract class Model
     //je sélectionne une ligne dans une table selon l'id donnée
     public function get_one($table, $id)
     {
-        $sql = $this->connect_db()->prepare("SELECT * FROM $table WHERE id=$id");
-        $sql->execute();
+        $sql = $this->connect_db()->prepare("SELECT * FROM $table WHERE id=:id");
+        $sql->execute([':id'=>$id]);
         return $sql->fetch(\PDO::FETCH_OBJ);
     }
     
@@ -50,8 +48,8 @@ abstract class Model
      */
     public function get_all($table)
     {
-        $sql = $this->connect_db()->prepare("SELECT * FROM $table");
-        $sql->execute();
+        $sql = $this->connect_db()->prepare("SELECT * FROM :table");
+        $sql->execute([':table'=>$table]);
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -67,10 +65,9 @@ abstract class Model
         $stmt->bindValue(':db_name', $db_name, \PDO::PARAM_STR);
         $stmt->execute();
         $result = array();
-        // var_dump($result);die;
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC))
         {
-            $result[] = $row['COLUMN_NAME'];
+            $result[] = $row['column_name'];
         }
         return $result;
     }

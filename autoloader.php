@@ -17,18 +17,20 @@ class Autoloader
         // pour les fichiers des images et le css
         $root = $_SERVER['DOCUMENT_ROOT'];
         $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-        $path = $host.$uri;
+        // $path = $host.$uri; 
+        define ('PATH', $host.$uri);
+        define ('IMAGES', str_replace("boutique/index.php", "boutique/images/", $_SERVER['PHP_SELF']));
+        define ('CSS', str_replace("boutique/index.php", "boutique/css/",$_SERVER['PHP_SELF']));
         
-        define ('IMAGES', $root.$uri.'/'.'images/');
-        define ('ACCUEIL', 'http://'.$path);
-        define ('CONNEXION', 'http://'.$path.'/'.'ControllerUser/connexion/');
-        // define ('HOST', 'http://'.$host.$uri);
-        // define ('ROOT', 'http://'.$root.$uri);
-        define ('CONTROLLER', 'http://'.$path.'/'.'Controller');
-        define('INSCRIPTION', 'http://'.$path.'/'.'ControllerUser/inscription');
+        // define ('ACCUEIL', 'http://'.$path);
+        // define ('CONNEXION', 'http://'.$path.'/'.'ControllerUser/connexion/');
+        // // define ('HOST', 'http://'.$host.$uri);
+        // // define ('ROOT', $root.$uri);
+        // define ('CONTROLLER', 'http://'.$path.'/'.'Controller');
+        // define('INSCRIPTION', 'http://'.$path.'/'.'ControllerUser/inscription');
         // define('NEWUSER', 'http://'.$path.'/'.'ControllerUser/new_user');
-        define('PROFIL', 'http://'.$path.'/'.'ControllerUser/profil');
-    
+        // define('PROFIL', 'http://'.$path.'/'.'ControllerUser/profil');
+        // define('BLOG', 'http://'.$path.'/'.'ControllerBlog/blog');
     }
     static function autoload($class_name)
     {

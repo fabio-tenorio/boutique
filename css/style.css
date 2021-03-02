@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     --prune: #811453;
+    font-family: 'Playfair Display', serif;
 }
 
 /*
@@ -15,10 +16,16 @@ body {
     /* align-items: center; */
     width: 100%;
     /* background: linear-gradient(180deg, rgba(107,31,60,1) 0%, rgba(136,75,98,1) 50%, rgba(166,120,138,1) 100%);  */
-    background: linear-gradient(180deg, rgba(129,20,83,1) 20%, rgba(121,9,121,1) 50%, rgba(195,131,77,1) 100%); 
+    background: linear-gradient(240deg, rgba(129,20,83,1) 20%, rgba(121,9,121,1) 50%, rgba(195,131,77,1) 100%); 
 }
 
 main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main_accueil {
     margin: 0 80px;
     background-color: whitesmoke;
 }
@@ -38,6 +45,12 @@ header nav {
 
 header nav a {
     color: #BF00FF;
+    }
+
+a:hover {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 }
 
 #leftlinks, #rightlinks {
@@ -45,6 +58,7 @@ header nav a {
     flex-direction: row;
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 0.9em;
     color: #BF00FF;
     padding: 0 15px;
     width: 100%;
@@ -67,12 +81,36 @@ header nav a {
 #rightlinks a {
     padding: 0 35px;
     align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition-duration: 0.5s;
 }
 
-a:hover {
-    text-decoration: none;
-    color: inherit;
+/* j'essaie de faire un menu déroulant */
+
+.dropdown_link {
+     /* visibility: hidden; */
+     opacity: 0;
+     position: absolute;
+     transition: all 0.5s ease;
+     margin-top: 1rem;
+     left: 0;
+     /* display: none; */
 }
+   
+link:hover > .dropdown_link {
+     visibility: visible;
+     opacity: 1;
+     display: block;
+}
+   
+.dropdown_link li {
+     clear: both;
+     width: 100%;
+}
+
+/* fin de l'essai */
 
 #logo {
     font-family: 'Dr Sugiyama', cursive;
@@ -121,7 +159,7 @@ a:hover {
 }
 
 #bg-section1 {
-    background-size: cover;
+    background-size: contain;
     height: inherit;
     background-color: rgba(255,255,255, 0.6);
     /* opacity: 0.3; */
@@ -135,6 +173,18 @@ a:hover {
     font-size: 5vh;
 }
 
+.section_title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    color: var(--prune);
+}
+
+#section_prestations {
+    margin: 5vh 0;
+}
+
 #section2 {
     padding: 80px;
     display: flex;
@@ -142,13 +192,6 @@ a:hover {
     flex-wrap: wrap;
 }
 
-#section2 h2 {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 60px;
-    text-transform: uppercase;
-    color: var(--prune);
-}
 .produit-box {
     margin: 20px 50px;
     border-radius: 8px;
@@ -158,31 +201,66 @@ a:hover {
 
 /* PAGE INSCRIPTION */
 
-#form_inscription {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+#main_inscription {
+    margin: 5vh 20vh;
+    padding: 5vh;
+    border-radius: 10px;
+    background-color: lightgray;
+    max-width: 160vh;
 }
 
-#form_inscription div {
-    padding: 2vh 0;
+#form_inscription_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
+
+#main_inscription h1 {
+    text-align: center;
+}
+
+/*#form_inscription {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*#form_inscription div {*/
+/*    padding: 2vh 0;*/
+/*}*/
 
 /* PAGE CONNEXION */
 
 #main_connexion {
-    margin: 20vh 40vh;
+    margin: 15vh 5vh;
+    border-radius: 10px;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: row-reverse;
+    min-height: 50vh;
+    min-width: 100vh;
 }
 
-/* #main_connexion h1 {
+#main_connexion form {
+    padding: 5vh;
+}
+
+#main_connexion form h1 {
     text-align: center;
     width: 100%;
-    margin-bottom: 15vh;
-} */
+    margin-bottom: 7vh;
+}
 
-#formulaire_connexion {
-    border: 1px solid red;
-    padding: 10vh;
+#img-connexion {
+    background-image: url(../images/bg-cheveux.jpg);
+    background-size: cover;
+    height: inherit;
+    width: 50%;
+    border-radius: inherit;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    opacity: 0.5;
 }
 
 /* PAGE 404 */

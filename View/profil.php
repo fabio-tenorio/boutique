@@ -1,10 +1,10 @@
 <?php
 
 ?>
-<div id="main_inscription">
-    <form id="form_inscription" action="<?php echo INSCRIPTION; ?>" method="POST">
-        <div class="container" id="form_inscription_container">
-            <h1>inscription</h1>
+<div id="main_profil">
+    <form id="form_profil" action="<?php echo PROFIL; ?>" method="POST">
+        <div class="container" id="form_profil_container">
+            <h1>profil</h1>
             <!-- <p>Please fill in this form to create an account.</p> -->
             <hr>
             <div class="col-md-6">

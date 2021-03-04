@@ -102,14 +102,8 @@ abstract class Model
             {
                 if ($attribut==$key)
                 {
-                    echo $value."<br/>";
-
                     if ($new_value != $value)
                     {
-                        echo 'new_value: '.$new_value;
-                        echo '<br/>';
-                        echo 'value: '.$value;
-                        echo '<br/>';
                         $sql = "UPDATE $table SET $attribut =:new_value WHERE id=:id";
                         $result = $this->connect_db()->prepare($sql);
                         return $result->execute([':new_value'=>$new_value, ':id'=>$id]);

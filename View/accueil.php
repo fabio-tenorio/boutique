@@ -25,7 +25,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
         <div class="row">
             <div class="col-sm-3">
                 <div class="card produit-box">
-                    <img class="card-img-top" src="images/prestation1.jpeg" alt="image du produit">
+                    <img class="card-img-top" src="<?php echo IMAGES; ?>prestation1.jpeg" alt="image du produit">
                     <div class="card-body">
                         <h5 class="card-title">Beauté des mains</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
@@ -58,7 +58,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
             </div>
             <div class="col-sm-3">
                 <div class="card produit-box">
-                    <img class="card-img-top" src="images/prestation4.jpg" alt="image du produit">
+                    <img class="card-img-top" src="<?php echo IMAGES; ?>prestation4.jpg" alt="image du produit">
                     <div class="card-body">
                         <h5 class="card-title">Massage des pieds</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
@@ -74,7 +74,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
         <div class="row">
             <div class="col-sm-4">
                 <div class="card produit-box">
-                    <img class="card-img-top" src="images/produit-vernis.png" alt="image du produit">
+                    <img class="card-img-top" src="<?php echo IMAGES; ?>produit-vernis.png" alt="image du produit">
                     <div class="card-body">
                         <h5 class="card-title">Vernis rouge</h5>
                         <p class="card-text">description du produit</p>
@@ -85,7 +85,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
             </div>
             <div class="col-sm-4">
                 <div class="card produit-box">
-                    <img class="card-img-top" src="images/produit-vernis.png" alt="image du produit">
+                    <img class="card-img-top" src="<?php echo IMAGES; ?>produit-vernis.png" alt="image du produit">
                     <div class="card-body">
                         <h5 class="card-title">Vernis rouge</h5>
                         <p class="card-text">description du produit</p>
@@ -96,7 +96,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
             </div>
             <div class="col-sm-4">
                 <div class="card produit-box">
-                    <img class="card-img-top" src="images/produit-vernis.png" alt="image du produit">
+                    <img class="card-img-top" src="<?php echo IMAGES; ?>produit-vernis.png" alt="image du produit">
                     <div class="card-body">
                         <h5 class="card-title">Vernis rouge</h5>
                         <p class="card-text">description du produit</p>

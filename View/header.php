@@ -5,8 +5,8 @@
 <nav>
   <div id="leftlinks">
     <a href="#">nos prestations</a>
-    <a href="#">nos produits</a>
-    <a href="#">prendre un RDV</a>
+    <a href="#">produits</a>
+    <a href="#">prendre RDV</a>
   </div>
   <a href="http://<?php echo PATH;?>/ControllerUser/index" id="logo">
     <h1>sonia</h1>

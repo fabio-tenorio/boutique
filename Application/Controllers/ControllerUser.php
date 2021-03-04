@@ -74,7 +74,7 @@ class ControllerUser extends Controller {
     public function all_users()
     {
         $all_users = new ModelUser();
-        return $this->all_users->get_all_users();
+        return $all_users->get_all_users();
     }
 
     // je vérifie si il y a quelqun enregistré sur la bdd avec le login renseigné
@@ -97,7 +97,6 @@ class ControllerUser extends Controller {
             $data['motpasse']=password_hash($data["motpasse"], PASSWORD_DEFAULT);
         }
         $new_user = new ModelUser();
-        // var_dump($data);die;
         return $new_user->insert_user($data);
     }
 
@@ -106,7 +105,7 @@ class ControllerUser extends Controller {
         // $data = ['id'=>14, 'id_droit'=>'200', 'login'=>'tata', 'motpasse'=>'testing', 'prenom'=>'tata', 'nom'=>'tutu', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
         $id = $data['id'];
         $update = new ModelUser();
-        return $this->$update->update_user($data, $id);
+        return $update->update_user($data, $id);
     }
 
     public function del_user($data)

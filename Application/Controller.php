@@ -27,6 +27,7 @@ use App\Application\Model as Model;
 use App\Application\Models;
 // use App\View\Accueil;
 use App\Autoloader;
+use ArrayObject;
 
 // require_once 'autoloader.php';
 
@@ -76,9 +77,9 @@ abstract class Controller {
     }
         // les méthodes concernant le View
 
-        public function render(string $fichier, array $data = [])
+        public function render(string $fichier, $data = null)
         {
-            extract($data);
+            // var_dump($data);
     
             // On démarre le buffer de sortie
             // On génère la vue

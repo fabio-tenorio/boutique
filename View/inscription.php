@@ -2,7 +2,7 @@
 
 ?>
 <div id="main_inscription">
-    <form id="form_inscription" action="<?php echo INSCRIPTION; ?>" method="POST">
+    <form id="form_inscription" action="http://<?php echo PATH; ?>/ControllerUser/inscription" method="POST">
         <div class="container" id="form_inscription_container">
             <h1>inscription</h1>
             <!-- <p>Please fill in this form to create an account.</p> -->

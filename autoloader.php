@@ -16,7 +16,7 @@ class Autoloader
         $host  = $_SERVER['HTTP_HOST'];
         // pour les fichiers des images et le css
         $root = $_SERVER['DOCUMENT_ROOT'];
-        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
         // $path = $host.$uri; 
         define ('PATH', $host.$uri);
         define ('IMAGES', str_replace("boutique/index.php", "boutique/images/", $_SERVER['PHP_SELF']));

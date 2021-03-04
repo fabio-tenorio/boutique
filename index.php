@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once 'autoloader.php';
 
 use App\Autoloader;
@@ -37,7 +39,7 @@ if ($params[0]!='')
     //    var_dump($controller);
     } else {
         // page_error
-        ControllerAccueil::page_error();
+        ControllerUser::page_error();
     }
     // la syntaxe ci-dessous est équivalent à la condition if else ci-dessous
     // $action = isset($params[1]) ? $params[1] : http_response_code(404);
@@ -51,7 +53,7 @@ if ($params[0]!='')
         else
         {
             // http_response_code(404);
-            ControllerAccueil::page_error();
+            ControllerUser::page_error();
         }
     }
     elseif (isset($params[1]) && isset($params[2]))
@@ -69,7 +71,7 @@ if ($params[0]!='')
 }
 else
 {
-    $controller = new ControllerAccueil;
+    $controller = new ControllerUser;
     $controller->index();
 }
 

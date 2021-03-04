@@ -15,19 +15,6 @@ Use App\View;
 class ControllerAccueil extends Controller {
 
     
-    public function index()
-    {
-        //je vérifie si il y a quelqun connecté
-        if (isset($_SESSION['login']))
-        {
-            //
-        }
-        else
-        {
-            $this->render('accueil');
-        }
-        // $this->render('accueil', [2, 3]);
-    }
 
     public function select_user()
     {

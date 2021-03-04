@@ -1,5 +1,4 @@
 <?
-session_start();
 
 ?>
 
@@ -9,7 +8,7 @@ session_start();
     <a href="#">nos produits</a>
     <a href="#">prendre un RDV</a>
   </div>
-  <a href="http://<?php echo PATH;?>/ControllerAccueil/index" id="logo">
+  <a href="http://<?php echo PATH;?>/ControllerUser/index" id="logo">
     <h1>sonia</h1>
     <h2>boutique en ligne</h2>
   </a>
@@ -23,7 +22,7 @@ session_start();
         <span><?php echo $_SESSION['user']->login; ?></span>
         <ul class="dropdown_link">
           <li><a href="http://<?php echo PATH; ?>/ControllerUser/profil">mon profil</a></li>
-          <li><a href="#">me deconnecter</a></li>
+          <li><a href="http://<?php echo PATH; ?>/ControllerUser/disconnect">me deconnecter</a></li>
         </ul>
       </a>
       <a href="#"><span class="fa fa-shopping-bag fa-lg">panier</span></a>

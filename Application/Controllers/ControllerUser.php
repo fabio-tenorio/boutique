@@ -30,7 +30,21 @@ class ControllerUser extends Controller {
         // }
         if (isset($_SESSION['user']))
         {
-            $this->id = $_SESSION['id'];
+            $this->id = $_SESSION['user']->id;
+            $this->login = $_SESSION['user']->login;
+        }
+    }
+
+    public function index()
+    {
+        //je vérifie si il y a quelqun connecté
+        if (isset($_SESSION['user']))
+        {
+            $this->render('accueil');
+        }
+        else
+        {
+            $this->render('accueil');
         }
     }
 
@@ -64,11 +78,6 @@ class ControllerUser extends Controller {
     //     return $this->dateanniversaire;
     // }
 
-    public function index()
-    {
-        echo "Je suis ControllerUser";
-    }
-
 // MÉTHODES LIÉES AUX MODELS
 
     public function all_users()
@@ -98,14 +107,6 @@ class ControllerUser extends Controller {
         }
         $new_user = new ModelUser();
         return $new_user->insert_user($data);
-    }
-
-    public function profil($data)
-    {
-        // $data = ['id'=>14, 'id_droit'=>'200', 'login'=>'tata', 'motpasse'=>'testing', 'prenom'=>'tata', 'nom'=>'tutu', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
-        $id = $data['id'];
-        $update = new ModelUser();
-        return $update->update_user($data, $id);
     }
 
     public function del_user($data)
@@ -138,7 +139,7 @@ class ControllerUser extends Controller {
             if (password_verify($_POST["motpasse"], $user->motpasse))
             {
                 $_SESSION['user'] = $user;
-                $this->render('accueil');
+                $this->render('accueil', $_SESSION['user']);
             } else
             {
                 $this->render('connexion');
@@ -154,10 +155,23 @@ class ControllerUser extends Controller {
         $this->render('connexion');
     }
 
+    public function profil()
+    {
+        // $data
+        // $data = ['id'=>14, 'id_droit'=>'200', 'login'=>'tata', 'motpasse'=>'testing', 'prenom'=>'tata', 'nom'=>'tutu', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
+        if (isset($_SESSION))
+        {
+            $data = new ModelUser();
+            $data = $data->get_one('utilisateurs', $_SESSION['user']->id);
+            $this->render('profil', $data);
+        }
+    }
+
     public function disconnect()
     {
+        $url = "http://".PATH."/ControllerUser/index";
         session_destroy();
-        $this->render('accueil');
+        header("Refresh:0,url=$url");
     }
 
     public function render_connexion(array $data = []){

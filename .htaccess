@@ -1,17 +1,7 @@
-# ce fichier apache modifie les fonctionnement par défault de la config apache originale
-# PS: attention. L'environement type Linux presuppose que le fichier projet.conf soit modifié
-
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)$ index.php?p=$1 [QSA,L]
-# cette syntaxe ci-dessous ne permet l'ajout des en-tête avec la méthode GET
 RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1
-# DirectoryIndex index.php
 
-# L'indexation d'annuaire permet aux visiteurs d'afficher une liste de fichiers au lieu
-# de la page Web réelle. Lorsque l'indexation des répertoires est activée, les visiteurs
-# peuvent regarder dans n'importe quel répertoire qui ne contient pas de fichier index.html
-# (ou index.php, etc.) et parcourir le contenu du répertoire. Ce n'est probablement pas le
-# comportement que vous souhaitez généralement, surtout si ledit répertoire contient quelque
-# chose comme des fichiers de configuration de script qui pourraient poser un risque de sécurité.
+# DirectoryIndex index.php

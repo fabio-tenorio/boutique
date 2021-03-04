@@ -15,7 +15,7 @@
 <body id="body-404">
     <div id="bg-404">
         <div id="msg-404">
-            <a href="<?php ACCUEIL;?>" id="logo">
+            <a href="http://<?= PATH;?>/ControllerUser/index" id="logo">
                 <h1>sonia</h1>
                 <h2>boutique en ligne</h2>
             </a>

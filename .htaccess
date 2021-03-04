@@ -1,7 +1,18 @@
 RewriteEngine On
+<<<<<<< HEAD
+#RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1
+#RewriteRule ^(.+)$ index.php?p=$1 [QSA,L]
+DirectoryIndex index.php
+=======
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)$ index.php?p=$1 [QSA,L]
 RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1
+<<<<<<< HEAD
+# DirectoryIndex index.php
+>>>>>>> c4948eb9753202e458b85c045a533682f81557f4
+=======
+>>>>>>> 88b1cc5a1ec756a75308dc63ad8b86fc1be0ee55
 
 # DirectoryIndex index.php

@@ -3,6 +3,14 @@ session_start();
 
 require_once 'autoloader.php';
 
+
+/* SI CLASSE ROUTEUR
+Autoloader::start();
+$request = $_GET['r']; 
+$routeur= new Routeur($request);
+$routeur->renderControler();
+*/
+
 use App\Autoloader;
 // on en a besoin afin d'afficher la page 404
 use App\Application\Controllers\ControllerUser as ControllerUser;

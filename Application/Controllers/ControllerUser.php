@@ -18,70 +18,38 @@ class ControllerUser extends Controller {
 
     public function __construct()
     {
-        // if (is_object($this->user_exists($_POST['login'])))
-        // {
-            // $this->login = $_POST['login'];
-            // $this->prenom = $_POST['prenom'];
-            // $this->nom = $_POST['nom'];
-            // $this->motpasse = $_POST['motpasse'];
-            // $this->mail = $_POST['mail'];
-            // $this->telephone = $_POST['telephone'];
-            // $this->dateanniversaire = $_POST['dateanniversaire'];
-        // }
+        $this->user = new ModelUser();
         if (isset($_SESSION['user']))
         {
-            $this->id = $_SESSION['id'];
+            $this->id = $_SESSION['user']->id;
+            $this->login = $_SESSION['user']->login;
         }
     }
 
-    // public function getPrenom()
-    // {
-    //     return $this->prenom;
-    // }
-
-    // public function getNom()
-    // {
-    //     return $this->nom;
-    // }
-
-    // public function getMail()
-    // {
-    //     return $this->mail;
-    // }
-
-    // public function getLogin()
-    // {
-    //     return $this->login;
-    // }
-
-    // public function getTelephone()
-    // {
-    //     return $this->telephone;
-    // }
-
-    // public function getDateanniversaire()
-    // {
-    //     return $this->dateanniversaire;
-    // }
-
     public function index()
     {
-        echo "Je suis ControllerUser";
+        //je vérifie si il y a quelqun connecté
+        if (isset($_SESSION['user']))
+        {
+            $this->render('accueil', $_SESSION['user']);
+        }
+        else
+        {
+            $this->render('accueil');
+        }
     }
 
 // MÉTHODES LIÉES AUX MODELS
 
     public function all_users()
     {
-        $all_users = new ModelUser();
-        return $this->all_users->get_all_users();
+        return $this->user->get_all_users();
     }
 
     // je vérifie si il y a quelqun enregistré sur la bdd avec le login renseigné
     public function user_exists($login)
     {
-        $user = new ModelUser();
-        return $user->get_one_user($login);
+        return $this->user->get_one_user($login);
     }
 
     //vérifier si il y a quelqun déjà inscrit avec le même e-mail
@@ -96,24 +64,14 @@ class ControllerUser extends Controller {
         {
             $data['motpasse']=password_hash($data["motpasse"], PASSWORD_DEFAULT);
         }
-        $new_user = new ModelUser();
-        // var_dump($data);die;
-        return $new_user->insert_user($data);
+        return $this->user->insert_user($data);
     }
 
-    public function profil($data)
+    public function del_user($id)
     {
-        // $data = ['id'=>14, 'id_droit'=>'200', 'login'=>'tata', 'motpasse'=>'testing', 'prenom'=>'tata', 'nom'=>'tutu', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
-        $id = $data['id'];
-        $update = new ModelUser();
-        return $this->$update->update_user($data, $id);
-    }
-
-    public function del_user($data)
-    {
-        $id = 14;
-        $supprime_user = new ModelUser();
-        return $this->supprime_user->delete_user($id);
+        // $id = 14;
+        // $supprime_user = new ModelUser();
+        return $this->user->delete_user($id);
     }
 
     // MÉTHODES LIÉES AUX VIEWS
@@ -139,7 +97,7 @@ class ControllerUser extends Controller {
             if (password_verify($_POST["motpasse"], $user->motpasse))
             {
                 $_SESSION['user'] = $user;
-                $this->render('accueil');
+                $this->render('accueil', $_SESSION['user']);
             } else
             {
                 $this->render('connexion');
@@ -155,27 +113,23 @@ class ControllerUser extends Controller {
         $this->render('connexion');
     }
 
-    public function disconnect()
+    public function profil()
     {
-        session_destroy();
-        $this->render('accueil');
+        // $data
+        // $data = ['id'=>14, 'id_droit'=>'200', 'login'=>'tata', 'motpasse'=>'testing', 'prenom'=>'tata', 'nom'=>'tutu', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
+        if (isset($_SESSION))
+        {
+            $data = $this->user;
+            $data = $data->get_one('utilisateurs', $_SESSION['user']->id);
+            $this->render('profil', $data);
+        }
     }
 
-    public function render_connexion(array $data = []){
-        extract($data);
-
-        // On démarre le buffer de sortie
-        ob_start();
-
-        // On génère la vue
-        // $this->render('connexion.php')
-        // require_once(ROOT.'views/'.strtolower(get_class($this)).'/'.$fichier.'.php');
-
-        // On stocke le contenu dans $content
-        // $content = ob_get_clean();
-
-        // On fabrique le "template"
-        // require_once(ROOT.'views/layout/default.php');
+    public function disconnect()
+    {
+        $url = "http://".PATH."/ControllerUser/index";
+        session_destroy();
+        header("Refresh:0,url=$url");
     }
 }
 

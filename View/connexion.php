@@ -8,7 +8,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 <div id="main_connexion">
 <div id="img-connexion">
 </div>
-<form action="<?php echo CONNEXION; ?>" method="POST">
+<form action="http://<?php echo PATH; ?>/ControllerUser/connexion" method="POST">
   <h1>connexion</h1>
   <div class="form">
     <div class="form-group row">

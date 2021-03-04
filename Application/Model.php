@@ -113,9 +113,9 @@ abstract class Model
                         echo '<br/>';
                         echo 'value: '.$value;
                         echo '<br/>';
-                        $sql = "UPDATE $table SET $attribut = ' . $new_value . ' WHERE id=$id";
+                        $sql = "UPDATE $table SET $attribut =:new_value WHERE id=:id";
                         $result = $this->connect_db()->prepare($sql);
-                        return $result->execute();
+                        return $result->execute([':new_value'=>$new_value, ':id'=>$id]);
                     }
                 }
             }

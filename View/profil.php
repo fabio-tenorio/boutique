@@ -1,6 +1,3 @@
-<?php
-
-?>
 <div id="main_profil">
     <form id="form_profil" action="http://<?php echo PATH; ?>/ControllerUser/profil/" method="POST">
         <div class="container" id="form_profil_container">

@@ -1,12 +1,5 @@
 <?php
 /*
-
-UN CONTROLER GÉNÉRAL QUI PERMET L'ACCÈS À DES DONNÉES DIFFÉRENTES
-
-EXCLUSIVEMENT DU PHP. Récupère les fichiers models. 
-C'est ici que sont paramétrées des classes et les différentes fonctions avec 
-les CONDITIONS pour le contrôle des droits et accès
-
 Gestion de certaines erreurs
 
 Récupérer les titres et l'accès aux pages
@@ -35,26 +28,6 @@ use ArrayObject;
 
 abstract class Controller {
     
-    // public function index()
-    // {
-    //     echo 'Hello';
-    // }
-
-    // private $path;
-
-    // public function match($url)
-    // {
-    //     $url = trim($url, '/');
-    //     $path = preg_replace('#:([\w]+)#', '([^/]+)', $this->path);
-    //     $regex = "#^$path$#i";
-    //     if(!preg_match($regex, $url, $matches)){
-    //         return false;
-    //     }
-    //     array_shift($matches);
-    //     $this->matches = $matches;  // On sauvegarde les paramètre dans l'instance pour plus tard
-    //     return true;
-    // }
-
     public function bonne_affichage($donnee)
     {
         echo("<pre>");
@@ -79,11 +52,6 @@ abstract class Controller {
 
         public function render(string $fichier, $data = null)
         {
-            // var_dump($data);
-    
-            // On démarre le buffer de sortie
-            // On génère la vue
-
             // d'abord le header
             ob_start();
             $viewHeader = 'View'.DIRECTORY_SEPARATOR.'header.php';

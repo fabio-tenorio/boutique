@@ -1,9 +1,3 @@
-<?php
-Namespace App\View;
-Use App\Application\Controller;
-Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
-
-?>
 <div id="main_connexion">
   <div id="img-connexion">
   </div>

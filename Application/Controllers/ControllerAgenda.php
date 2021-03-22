@@ -251,6 +251,12 @@ class ControllerAgenda extends Controller {
         $data = $this->affichageTableau(8, 7);
         $this->render('agenda', $data);
     }
+
+    public function form_view()
+    {
+        $data = $_GET;
+        $this->render('agendaform', $data);
+    }
 }
 
 

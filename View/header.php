@@ -1,20 +1,16 @@
-<?
-
-?>
-
 <nav>
-  <div id="leftlinks">
-    <a href="#">nos prestations</a>
-    <a href="#">produits</a>
-    <a href="http://<?php echo PATH;?>/ControllerAgenda/index">prendre RDV</a>
-  </div>
-  <a href="http://<?php echo PATH;?>/ControllerUser/index" id="logo">
-    <h1>sonia</h1>
-    <h2>boutique en ligne</h2>
-  </a>
   <?php
   if (isset($_SESSION['user']))
   {?>
+    <div id="leftlinks">
+      <a href="#">nos prestations</a>
+      <a href="#">produits</a>
+      <a href="http://<?php echo PATH;?>/ControllerAgenda/index">prendre RDV</a>
+    </div>
+    <a href="http://<?php echo PATH;?>/ControllerUser/index" id="logo">
+      <h1>sonia</h1>
+      <h2>boutique en ligne</h2>
+    </a>
     <div id="rightlinks">
     <a href="http://<?php echo PATH;?>/ControllerBlog/blog">blog</a>
       <a href="#" class="link">
@@ -29,6 +25,15 @@
     </div>
   <?php } else
   { ?>
+    <div id="leftlinks">
+      <a href="#">nos prestations</a>
+      <a href="#">produits</a>
+      <a href="http://<?php echo PATH;?>/ControllerUser/connexion">prendre RDV<br>(reservé aux membres)</a>
+    </div>
+    <a href="http://<?php echo PATH;?>/ControllerUser/index" id="logo">
+      <h1>sonia</h1>
+      <h2>boutique en ligne</h2>
+    </a>
     <div id="rightlinks">
       <a href="http://<?php echo PATH;?>/ControllerBlog/blog">blog</a>
       <a href="http://<?php echo PATH;?>/ControllerUser/connexion">connexion</a>

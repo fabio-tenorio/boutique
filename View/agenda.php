@@ -18,7 +18,7 @@ En cliquant sur le jour, renvoi vers page agenda journée
     $mois = $jour->format('n');
     // le lundi (jour 01) de la semaine courante
     $lundi = $jour->format('d');
-    $vendredi = $lundi+5;
+    $dimanche = $lundi+7;
     
     ?>
     
@@ -27,37 +27,48 @@ En cliquant sur le jour, renvoi vers page agenda journée
     <thead>
         <th></th>
     <?php
-    $joursenlettres = [1=>'lundi', 2=>'mardi', 3=>'mercredi', 4=>'jeudi', 5=>'vendredi'];
+    $joursenlettres = [1=>'lundi', 2=>'mardi', 3=>'mercredi', 4=>'jeudi', 5=>'vendredi', 6=>'samedi', 7=>'dimanche'];
     $lejour = intval($lundi);
-    while ($lejour < $vendredi)
+    foreach($joursenlettres as $jourdelasemaine)
     {
         echo "<th scope=\"col\">";
-        echo $joursenlettres[$lejour];
+        echo $jourdelasemaine;
         echo "</th>";
-        $lejour++;
     }
     ?>
     </thead>
 
     <?php
-    for ($heure = 8; $heure<19; $heure++)
+    for ($heure = 8; $heure<21; $heure++)
     {
         echo("<tr>");
         echo("<th scope=\"col\">".$heure."h</th>");
-        for ($creneau=$lundi;$creneau<$vendredi;$creneau++)
+        for ($creneau=$lundi;$creneau<$dimanche;$creneau++)
         {
-            if ($heure > 7 && $heure < 13 || $heure > 13 && $heure < 19)
-            {
-                echo("<td>");
-                echo "créneau";
-                echo("</td>");
-            }
-            else
-            {
-                echo("<td>");
-                echo "pause déjeuner";
-                echo("</td>");            
-            }
+            echo("<td>");
+            echo ('<a href="http://');
+            echo PATH;
+            echo ("/ControllerAgenda/form_view");
+            echo ("?");
+            echo $heure."heures";
+            echo $creneau."/";
+            echo $mois."/";
+            echo $an;
+            echo ('">reserver ce créneau</a>');
+            echo("</td>");
+            // si souhait de prevoir une pause
+            // if ($heure > 7 && $heure < 13 || $heure > 13 && $heure < 21)
+            // {
+            //     echo("<td>");
+            //     echo "créneau";
+            //     echo("</td>");
+            // }
+            // else
+            // {
+            //     echo("<td>");
+            //     echo "";
+            //     echo("</td>");            
+            // }
         }
     }
 

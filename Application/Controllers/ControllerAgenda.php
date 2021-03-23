@@ -10,27 +10,54 @@ Use App\Application\Models\ModelAgenda;
 
 class ControllerAgenda extends Controller {
 
+    public $creneau;
+
+    protected function setCreneau (string $creneau) {
+        if ($creneau[0]==="8" || $creneau[0]==="9" ) {
+            $this->creneau = "0".$creneau;
+        } else {
+            $this->creneau = $creneau;
+        }
+        return $this->creneau;
+    }
+
+    protected function explodeCreneau ($creneau) {
+        if ($this->creneau !== null) {
+            
+            return $creneau;
+        } else {
+            return false;
+        }
+    }
+
     public function __construct()
     {
-        $agenda = new ModelAgenda;
-    }
-
-    // vai no ControlllerAgenda (méthode de view)
-    public function affichageTableau($row, $col)
-    {
-        for ($i=0;$i<$row;$i++)
+        $this->agenda = new ModelAgenda;
+        
+        // les infos pour remplir le créneau
+        
+        $this->jour = new \DateTime();
+        $this->an = $this->jour->format('Y');
+        $this->semaine = $this->jour->format('W');
+        $this->mois = $this->jour->setISODate($this->an, $this->semaine);
+        // le nombre du mois courant
+        $this->mois = $this->jour->format('m');
+        // le lundi (jour 01) de la semaine courante
+        $this->lundi = $this->jour->format('d');
+        $this->dimanche = $this->lundi+7;
+        // $this->all_agenda_data = [$this->jour, $this->an, $this->semaine, $this->mois, $this->lundi, $this->dimanche];
+        
+        if (isset($_GET))
         {
-            $dayNum=$col+5;
-            for ($j=$col;$j<$dayNum;$j++)
-            {
-            $tableau[$i][$j]="test";
-            }
+            // end($_GET);
+            // $key = key($_GET);
+            // $date = explode('heures', $key);
+            // $this->date = $date[1];
         }
-        return $tableau;
     }
 
-    //méthode pour récuperer les chiffres correspondant aux heures dans un string datetime SQL
-    // vai no ControlllerAgenda
+    // LA GESTION DES DONNÉES
+
     public function pickHour($string)
     {
         if (is_string($string)) {
@@ -42,7 +69,6 @@ class ControllerAgenda extends Controller {
     }
 
     //méthode pour récuperer les chiffres correspondant aux jours dans un string datetime SQL
-    // vai no ControlllerAgenda
     public function pickDay($string)
     {
         return $string[8].$string[9];
@@ -220,42 +246,75 @@ class ControllerAgenda extends Controller {
     //         }
     //     }
     // }
-    //    cette méthode retourne le numéro des jours de la semaine en cours
-    // vai no ControllerAgenda
-     public function week()
-     {
-         $datetime=new \DateTime;
-         return $datetime->format('D');
-     }
 
-    // afin de contrôler si une réservation peut être faite, il faut:
-    // savoir si il y a d'autres réservations déjà enrégistrées pour le même jour. True si il y en a, false si il y en a pas
-    // vai no ControllerAgenda
-    public function dayCheck($day)
+    //    cette méthode retourne le numéro des jours de la semaine en cours
+    public function week()
     {
-        
-        if ($this->day==$day)
+        $datetime=new \DateTime;
+        return $datetime->format('D');
+    }
+
+   // afin de contrôler si une réservation peut être faite, il faut:
+   // savoir si il y a d'autres réservations déjà enrégistrées pour le même jour. True si il y en a, false si il y en a pas
+   public function dayCheck($day)
+   {
+       
+       if ($this->day==$day)
+       {
+           
+           return TRUE;
+       }
+       else
+       {
+           return FALSE;
+       }
+   }
+
+   // LES REQUÊTES
+   public function reserverCreneau()
+   {
+       if (isset($_POST['reserver']) && isset($_SESSION))
+       {
+           $date = explode ('/', $_SESSION['datedebut']);
+           $date = $date[2]."-".$date[1]."-".$date[0]." ".$_POST['heuredebut'];
+           $_POST['datedebut']=$date;
+           $_POST['id_utilisateur']=$_SESSION["user"]->id;
+       }
+       $this->agenda->reserver($_POST);
+       $this->index();
+   }
+   public function all_reservations () {
+       return $this->agenda->get_all('reservation');
+   }
+
+    // LES VIEWS
+
+    public function affichageTableau($row, $col)
+    {
+        for ($i=0;$i<$row;$i++)
         {
-            
-            return TRUE;
+            $dayNum=$col+5;
+            for ($j=$col;$j<$dayNum;$j++)
+            {
+            $tableau[$i][$j]="test";
+            }
         }
-        else
-        {
-            return FALSE;
-        }
+        return $tableau;
     }
 
     public function index()
     {
-        // echo "Je suis ControllerAgenda";
-        $data = $this->affichageTableau(8, 7);
-        $this->render('agenda', $data);
+        $this->allResa = $this->all_reservations();
+        $this->render('agenda', $this->allResa);
     }
 
-    public function form_view()
-    {
-        $data = $_GET;
-        $this->render('agendaform', $data);
+    public function formResaView($data)
+    {   
+        $this->setCreneau($data);
+        $data = explode('h', $this->creneau);
+        $data[1] = str_replace(".", "/", $data[1]);
+        $this->creneau = $data;
+        $this->render('agendaform', $this->creneau);
     }
 }
 

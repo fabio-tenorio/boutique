@@ -1,34 +1,17 @@
 <?php
-
 /*
-Affiche un agenda sur le mois courant, en cliquant sur un jour, on visualise les créneaux disponibles
+Affiche un agenda hebdomadaire sur le mois courant. En cliquant sur un jour, on visualise les créneaux disponibles
 En cliquant sur le jour, renvoi vers page agenda journée
 */
-
 ?>
-
 <h2>Planning</h2>
-<table class="table table-bordered table-hover table-light">
-    <?php
-    $jour = new \DateTime();
-    $an = $jour->format('Y');
-    $semaine = $jour->format('W');
-    $mois = $jour->setISODate($an, $semaine);
-    // le nombre du mois courant
-    $mois = $jour->format('n');
-    // le lundi (jour 01) de la semaine courante
-    $lundi = $jour->format('d');
-    $dimanche = $lundi+7;
-    
-    ?>
-    
-    <span><</span><?= $jour->format('M-w') ?><span>></span>
-
+<table class="table table-bordered table-hover table-light">    
+    <span><</span><?= "Semaine ".$this->semaine." de l'année ".$this->an."<br>"."du lundi ".$this->lundi."/".$this->mois." au dimanche ".$this->dimanche."/".$this->mois; ?><span>></span>
     <thead>
         <th></th>
     <?php
-    $joursenlettres = [1=>'lundi', 2=>'mardi', 3=>'mercredi', 4=>'jeudi', 5=>'vendredi', 6=>'samedi', 7=>'dimanche'];
-    $lejour = intval($lundi);
+    $joursenlettres = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+    // $lejour = intval($this->lundi);
     foreach($joursenlettres as $jourdelasemaine)
     {
         echo "<th scope=\"col\">";
@@ -39,38 +22,43 @@ En cliquant sur le jour, renvoi vers page agenda journée
     </thead>
 
     <?php
-    for ($heure = 8; $heure<21; $heure++)
-    {
+    for ($heure = 8; $heure<21; $heure++) {
         echo("<tr>");
         echo("<th scope=\"col\">".$heure."h</th>");
-        for ($creneau=$lundi;$creneau<$dimanche;$creneau++)
-        {
+        echo ("<tr>");
+        for ($jour=$this->lundi;$jour<$this->dimanche;$jour++) {
             echo("<td>");
-            echo ('<a href="http://');
-            echo PATH;
-            echo ("/ControllerAgenda/form_view");
-            echo ("?");
-            echo $heure."heures";
-            echo $creneau."/";
-            echo $mois."/";
-            echo $an;
-            echo ('">reserver ce créneau</a>');
-            echo("</td>");
-            // si souhait de prevoir une pause
-            // if ($heure > 7 && $heure < 13 || $heure > 13 && $heure < 21)
-            // {
-            //     echo("<td>");
-            //     echo "créneau";
-            //     echo("</td>");
-            // }
-            // else
-            // {
-            //     echo("<td>");
-            //     echo "";
-            //     echo("</td>");            
-            // }
+            // $creneau = new Datetime($this->an."-".$this->mois."-".$jour);
+            foreach ($this->allResa as $objects) {
+                foreach ($objects as $propertyName => $property) {
+                    if ($propertyName=='id') {
+                        $datetime = explode(" ", $property);
+                        var_dump($datetime);
+                        echo ('</td>');
+                        // if ($datetime[0] == $creneau->format('YY'."-".'mm'."-".'dd')) {
+                        //     echo $datetime[0];
+                        //     echo('</td>');
+                        // }
+                    }
+                    
+                }
+            }
         }
+        echo('<a href="http://');
+        echo PATH;
+        echo("/ControllerAgenda/formResaView/");
+        echo $creneau;
+        // echo $this->setCreneau($creneau);
+        echo('">reserver ce créneau</a>');
+        echo('</td>');
+        echo ('</tr>');
     }
-
+            // echo('<a href="http://');
+            // echo PATH;
+            // echo("/ControllerAgenda/formResaView/");
+            // echo $creneau;
+            // // echo $this->setCreneau($creneau);
+            // echo('">reserver ce créneau</a>';
+            // echo("</td>");
 ?>
 </table>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : jeu. 04 mars 2021 à 16:47
+-- Généré le : mar. 23 mars 2021 à 08:49
 -- Version du serveur :  5.7.30
 -- Version de PHP : 7.4.9
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `boutique`
 --
-CREATE DATABASE IF NOT EXISTS `boutique` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `boutique`;
 
 -- --------------------------------------------------------
 
@@ -28,6 +26,7 @@ USE `boutique`;
 -- Structure de la table `article`
 --
 
+DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(11) NOT NULL,
   `id_theme` int(11) NOT NULL,
@@ -53,6 +52,7 @@ INSERT INTO `article` (`id`, `id_theme`, `id_utilisateur`, `titrearticle`, `arti
 -- Structure de la table `categorie`
 --
 
+DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE `categorie` (
   `id` int(11) NOT NULL,
   `nom` varchar(25) NOT NULL
@@ -76,6 +76,7 @@ INSERT INTO `categorie` (`id`, `nom`) VALUES
 -- Structure de la table `client`
 --
 
+DROP TABLE IF EXISTS `client`;
 CREATE TABLE `client` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -101,6 +102,7 @@ INSERT INTO `client` (`id`, `id_utilisateur`, `nomtitulaireCB`, `numeroCB`, `val
 -- Structure de la table `commande`
 --
 
+DROP TABLE IF EXISTS `commande`;
 CREATE TABLE `commande` (
   `id` int(11) NOT NULL,
   `id_client` int(11) NOT NULL,
@@ -116,6 +118,7 @@ CREATE TABLE `commande` (
 -- Structure de la table `droit`
 --
 
+DROP TABLE IF EXISTS `droit`;
 CREATE TABLE `droit` (
   `id` int(11) NOT NULL,
   `nom` varchar(25) NOT NULL
@@ -137,6 +140,7 @@ INSERT INTO `droit` (`id`, `nom`) VALUES
 -- Structure de la table `fournisseur`
 --
 
+DROP TABLE IF EXISTS `fournisseur`;
 CREATE TABLE `fournisseur` (
   `id` int(11) NOT NULL,
   `nomfournisseur` varchar(255) NOT NULL,
@@ -168,6 +172,7 @@ INSERT INTO `fournisseur` (`id`, `nomfournisseur`, `codepostale`, `statut`) VALU
 -- Structure de la table `message`
 --
 
+DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -183,6 +188,7 @@ CREATE TABLE `message` (
 -- Structure de la table `panier`
 --
 
+DROP TABLE IF EXISTS `panier`;
 CREATE TABLE `panier` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -196,6 +202,7 @@ CREATE TABLE `panier` (
 -- Structure de la table `panierhistoriqueadmin`
 --
 
+DROP TABLE IF EXISTS `panierhistoriqueadmin`;
 CREATE TABLE `panierhistoriqueadmin` (
   `aaa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -206,6 +213,7 @@ CREATE TABLE `panierhistoriqueadmin` (
 -- Structure de la table `produit`
 --
 
+DROP TABLE IF EXISTS `produit`;
 CREATE TABLE `produit` (
   `id` int(11) NOT NULL,
   `reference` varchar(55) NOT NULL,
@@ -251,6 +259,7 @@ INSERT INTO `produit` (`id`, `reference`, `titreproduit`, `produit`, `avis`, `pr
 -- Structure de la table `reponse`
 --
 
+DROP TABLE IF EXISTS `reponse`;
 CREATE TABLE `reponse` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -267,6 +276,7 @@ CREATE TABLE `reponse` (
 -- Structure de la table `reservation`
 --
 
+DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -288,6 +298,7 @@ CREATE TABLE `reservation` (
 -- Structure de la table `theme`
 --
 
+DROP TABLE IF EXISTS `theme`;
 CREATE TABLE `theme` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
@@ -315,6 +326,7 @@ INSERT INTO `theme` (`id`, `id_droit`, `visibilitetheme`, `titretheme`, `descrip
 -- Structure de la table `utilisateurs`
 --
 
+DROP TABLE IF EXISTS `utilisateurs`;
 CREATE TABLE `utilisateurs` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,

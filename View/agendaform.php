@@ -1,25 +1,23 @@
 <!-- Formulaire de saisie d'une réservation en filtrant ou non un intervenant -->
 
 <h2>reservez votre soin</h2>
-<h3>le <?php
-    end($_GET);
-    $key = key($_GET);
-    $date = explode('heures', $key);
-    echo($date[1]);
-    ?></h3>
-<form class="form" method="POST" action="reservation-form.php">
-    <select class="form-select" aria-label="Default select example">
+<h3>pour le <?php
+    $_SESSION['datedebut'] = $this->creneau[1];
+    echo $_SESSION['datedebut'];
+    ?>
+    </h3>
+<form class="form" method="POST" action="http://<?php echo PATH;?>/ControllerAgenda/reserverCreneau">
+    <select class="form-select" name="titrereservation" aria-label="Default select example">
         <option selected>Nos prestations</option>
-        <option value="1">Soin complet</option>
-        <option value="2">Soin des mains</option>
-        <option value="3">Soin des pieds</option>
-        <option value="4">Pose d'ongles</option>
-        <option value="5">Maquillage</option>
-        <option value="6">Fete des meres</option>
-        <option value="8">Nouvelle annee</option>
-        <option value="9">Soin ete</option>
-        <option value="10">Soin rentree</option>
-
+        <option value="soin complet">Soin complet</option>
+        <option value="soin des mains">Soin des mains</option>
+        <option value="soin des pieds">Soin des pieds</option>
+        <option value="pose d'ongles">Pose d'ongles</option>
+        <option value="maquillage">Maquillage</option>
+        <option value="fete des meres">Fete des meres</option>
+        <option value="nouvelle annee">Nouvelle annee</option>
+        <option value="soin ete">Soin ete</option>
+        <option value="soin rentree">Soin rentree</option>
     </select>
     <!-- <div class="form-group">
         <label for="titre">titre</label>
@@ -27,11 +25,11 @@
     </div> -->
     <!-- <div class="form-group">
         <label for="datedebut">la date de début</label>
-        <input class="form-control" type="date" name="datedebut" required/>
+        <input class="form-control" type="date" name="datedebut" placeholder="" required/>
     </div> -->
     <div class="form-group">
-        <label for="heuredebut">l'heure du RDV</label>
-        <input class="form-control" type="time" name="heuredebut" value="<?=$date[0]?>:00" placeholder="<?=$date[0]?>" inactive/>
+        <label for="heuredebut">l'horaire du RDV</label>
+        <input class="form-control" type="time" name="heuredebut" value="<?=$this->creneau[0]?>:00" placeholder="<?=$date[0]?>" inactive/>
     </div>
     <!-- <div class="form-group">
     <label for="datefin">la date de fin</label>

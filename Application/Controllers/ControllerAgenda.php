@@ -44,7 +44,7 @@ class ControllerAgenda extends Controller {
         $this->mois = $this->jour->format('m');
         // le lundi (jour 01) de la semaine courante
         $this->lundi = $this->jour->format('d');
-        $this->dimanche = $this->lundi+7;
+        $this->dimanche = $this->lundi+6;
         // $this->all_agenda_data = [$this->jour, $this->an, $this->semaine, $this->mois, $this->lundi, $this->dimanche];
         
         if (isset($_GET))

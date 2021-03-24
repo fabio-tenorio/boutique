@@ -26,49 +26,33 @@ En cliquant sur le jour, renvoi vers page agenda journée
     <?php
     for ($heure = 8; $heure<21; $heure++) {
         echo("<tr>");
-        echo("<th scope=\"col\">".$heure."h</th>");
+        echo("<th scope=\"row\">".$heure."h</th>");
         for ($jour=$this->lundi;$jour<$this->dimanche;$jour++) {
-            echo("<td>");
+            // echo("<td>");
             // $creneau = new Datetime($this->an."-".$this->mois."-".$jour);
             foreach ($this->allResa as $objects) {
                 foreach ($objects as $propertyName => $property) {
-                    if ($propertyName=='id') {
-                        // echo ('<td>');
-                        $datetime = explode(" ", $property);
-                        var_dump($datetime);
-                        // echo ('</td>');
-                        // if ($datetime[0] == $creneau->format('YY'."-".'mm'."-".'dd')) {
-                        //     echo $datetime[0];
-                        echo('</td>');
-                        // }
-                    } else {
-                        // echo ('<td>');
-                        echo('<a href="http://');
-                        echo PATH;
-                        echo("/ControllerAgenda/formResaView/");
-                        echo $creneau;
-                        // echo $this->setCreneau($creneau);
-                        echo('">reserver ce créneau</a>');
-                        echo('</td>');
-                    }
+                    if ($propertyName=='datedebut') {
+                        $datetimeResa = explode(" ", $property);
+                        $dateResa = explode("-", $datetimeResa[0]);
+                        if ($dateResa[0]==$this->an && $dateResa[1]==$this->mois && $dateResa[2]==$jour) {
+                            echo ('<td>');
+                            var_dump($dateResa);
+                            echo('</td>');
+                        } else {
+                            echo ('<td>');
+                            echo('<a href="http://');
+                            echo PATH;
+                            echo("/ControllerAgenda/formResaView/");
+                            echo $creneau;
+                            echo('">reserver ce créneau</a>');
+                            echo('</td>');
+                        }
+                    } 
                 }
             }
         }
-        // echo('<a href="http://');
-        // echo PATH;
-        // echo("/ControllerAgenda/formResaView/");
-        // echo $creneau;
-        // // echo $this->setCreneau($creneau);
-        // echo('">reserver ce créneau</a>');
-        // echo('</td>');
         echo ('</tr>');
     }
-            // echo('<a href="http://');
-            // echo PATH;
-            // echo("/ControllerAgenda/formResaView/");
-            // echo $creneau;
-            // // echo $this->setCreneau($creneau);
-            // echo('">reserver ce créneau</a>';
-            // echo("</td>");
 ?>
 </table>

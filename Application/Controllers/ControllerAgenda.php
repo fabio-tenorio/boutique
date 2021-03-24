@@ -12,24 +12,6 @@ class ControllerAgenda extends Controller {
 
     public $creneau;
 
-    protected function setCreneau (string $creneau) {
-        if ($creneau[0]==="8" || $creneau[0]==="9" ) {
-            $this->creneau = "0".$creneau;
-        } else {
-            $this->creneau = $creneau;
-        }
-        return $this->creneau;
-    }
-
-    protected function explodeCreneau ($creneau) {
-        if ($this->creneau !== null) {
-            
-            return $creneau;
-        } else {
-            return false;
-        }
-    }
-
     public function __construct()
     {
         $this->agenda = new ModelAgenda;
@@ -271,18 +253,18 @@ class ControllerAgenda extends Controller {
    }
 
    // LES REQUÊTES
-   public function reserverCreneau()
+   public function reserverCreneau($creneau)
    {
-       if (isset($_POST['reserver']) && isset($_SESSION))
-       {
-           $date = explode ('/', $_SESSION['datedebut']);
-           $date = $date[2]."-".$date[1]."-".$date[0]." ".$_POST['heuredebut'];
-           $_POST['datedebut']=$date;
-           $_POST['id_utilisateur']=$_SESSION["user"]->id;
-       }
-       $this->agenda->reserver($_POST);
-       $this->index();
+    $data = [];
+    if (isset($_POST['reserver']) && isset($_SESSION)) {
+        $data['id_utilisateur']=$_SESSION["user"]->id;
+        $data['titrereservation']=$_POST['titrereservation'];
+        $data['datedebut']=$creneau;
+    }
+    $this->agenda->reserver($data);
+    $this->index();
    }
+
    public function all_reservations () {
        return $this->agenda->get_all('reservation');
    }
@@ -310,9 +292,6 @@ class ControllerAgenda extends Controller {
 
     public function formResaView($data)
     {   
-        $this->setCreneau($data);
-        $data = explode('h', $this->creneau);
-        $data[1] = str_replace(".", "/", $data[1]);
         $this->creneau = $data;
         $this->render('agendaform', $this->creneau);
     }

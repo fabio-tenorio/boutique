@@ -43,7 +43,11 @@ En cliquant sur le jour, renvoi vers page agenda journée
             echo("<th class=\"agenda-heure\" scope=\"row\">".$heure."h</th>");
             for ($jour=$this->lundi;$jour<=$this->dimanche;$jour++) {
                 echo('<td>');
-                $creneau = $this->an."-".$this->mois."-".$jour." ".$heure.":00:00";
+                if ($heure===8 || $heure===9) {
+                    $creneau = $this->an."-".$this->mois."-".$jour." 0".$heure.":00:00";    
+                } else {
+                    $creneau = $this->an."-".$this->mois."-".$jour." ".$heure.":00:00";
+                }
                 $creneauVide = true;
                 foreach ($this->allResa as $objects) {
                     foreach ($objects as $propertyName => $property) {

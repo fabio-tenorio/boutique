@@ -3,13 +3,11 @@
 * {
     margin: 0;
     padding: 0;
-    --prune: #811453;
+    --bluemondrian: #225095;
+    --yellowmondrian: #FAC901;
+    --redmondrian: #dd0100;
     font-family: 'Playfair Display', serif;
 }
-
-/*
-*/
-
 
 body {
     display: flex;
@@ -18,7 +16,7 @@ body {
     /* align-items: center; */
     width: 100%;
     /* background: linear-gradient(180deg, rgba(107,31,60,1) 0%, rgba(136,75,98,1) 50%, rgba(166,120,138,1) 100%);  */
-    background: linear-gradient(240deg, rgba(129,20,83,1) 20%, rgba(121,9,121,1) 50%, rgba(195,131,77,1) 100%); 
+    /* background: linear-gradient(240deg, rgba(129,20,83,1) 20%, rgba(121,9,121,1) 50%, rgba(195,131,77,1) 100%);  */
 }
 
 main {
@@ -33,8 +31,10 @@ main {
 }
 
 header {
-    background-color: #DADEDF;
+    background-color: #FFFFFF;
     width: 100%;
+    border-bottom: 1px solid whitesmoke;
+    box-shadow: 1px 2px 3px #f1f1f1f1;
 }
 
 header nav {
@@ -48,8 +48,7 @@ header nav {
 header nav a {
     text-transform: uppercase;
     font-weight: bold;
-    color: #BF00FF;
-    font-size: 0.9em;
+    font-size: 0.8rem;
     }
 
 a:hover {
@@ -77,6 +76,7 @@ a:hover {
     flex-direction: column;
     align-items: center;
     transition-duration: 0.5s;
+    color: var(--redmondrian);
 }
 
 #rightlinks {
@@ -91,6 +91,7 @@ a:hover {
     flex-direction: column;
     align-items: center;
     transition-duration: 0.5s;
+    color: var(--redmondrian);
 }
 
 /* j'essaie de faire un menu déroulant */
@@ -110,7 +111,6 @@ link:hover > .dropdown_link {
 
 #logo {
     font-family: 'Dr Sugiyama', cursive;
-    color: #BF00FF;
     display:flex;
     flex-direction: column;
     align-self: center;
@@ -119,13 +119,15 @@ link:hover > .dropdown_link {
 }
 
 #logo h1 {
-    font-size: 8vh;
+    font-size: 7vh;
     line-height: 35%;
     text-transform: capitalize;
+    color: var(--bluemondrian);
 }
 #logo h2 {
-    font-size: 3vh;
+    font-size: 3.8vh;
     text-transform: lowercase;
+    color: var(--yellowmondrian);
 }
 
 /* #formconnexion div {
@@ -263,7 +265,7 @@ link:hover > .dropdown_link {
 }
 
 #bg-404 {
-    background-image: url(../images/bg404.jpg);
+    background-image: url(../images/mondrianbg.jpg);
     background-size: cover;
     margin: 5vh;
     height: 90vh;
@@ -274,7 +276,7 @@ link:hover > .dropdown_link {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: rgba(255,255,255, 0.6);
+    background-color: rgba(255,255,255, 0.8);
     height: inherit;
 }
 
@@ -287,15 +289,22 @@ link:hover > .dropdown_link {
     justify-content: space-evenly;
 }
 
-/* .agenda {
-
-} */
-
 .agenda-heure {
     width: 30px;
 }
 
 td {
-    width: 10px;
-    height: 50px;
+    min-width: 200px;
+    height: 100px;
+}
+
+/* PRODUITFICHE */
+
+.produitstars {
+    display: flex;
+    list-style: none;
+}
+
+.produitstars li {
+    padding: 0 5px;
 }

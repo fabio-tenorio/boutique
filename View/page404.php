@@ -19,8 +19,8 @@
     <div id="bg-404">
         <div id="msg-404">
             <a href="http://<?= PATH;?>/ControllerUser/index" id="logo">
-                <h1>sonia</h1>
-                <h2>boutique en ligne</h2>
+            <h1>mondrian</h1>
+            <h2>votre sallon en ligne</h2>
             </a>
             <h3 class="h3">Désolé. La page recherchée n'existe pas</h3>
             <nav>

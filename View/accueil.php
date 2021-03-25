@@ -26,7 +26,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
                         <h5 class="card-title">Beauté des mains</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         <p>19,90 &#8364;</p>
-                        <a href="#" class="btn btn-primary">détails</a>
+                        <a href="http://<?= PATH;?>/ControllerProduits/produitfiche" class="btn btn-primary col-12 mx-auto">détails</a>
                     </div>
                 </div>
             </div>

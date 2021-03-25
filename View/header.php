@@ -3,13 +3,13 @@
   if (isset($_SESSION['user']))
   {?>
     <div id="leftlinks">
-      <a href="#">nos prestations</a>
-      <a href="#">produits</a>
+      <a href="#">prestations</a>
+      <a href="http://<?php echo PATH; ?>/ControllerProduits/index">produits</a>
       <a href="http://<?php echo PATH;?>/ControllerAgenda/index">prendre RDV</a>
     </div>
     <a href="http://<?php echo PATH;?>/ControllerUser/index" id="logo">
-      <h1>sonia</h1>
-      <h2>boutique en ligne</h2>
+      <h1>mondrian</h1>
+      <h2>votre sallon en ligne</h2>
     </a>
     <div id="rightlinks">
     <a href="http://<?php echo PATH;?>/ControllerBlog/blog">blog</a>
@@ -26,13 +26,13 @@
   <?php } else
   { ?>
     <div id="leftlinks">
-      <a href="#">nos prestations</a>
-      <a href="#">produits</a>
-      <a href="http://<?php echo PATH;?>/ControllerUser/connexion">prendre RDV<br>(reservé aux membres)</a>
+      <a href="#">prestations</a>
+      <a href="http://<?php echo PATH; ?>/ControllerProduits/index">produits</a>
+      <a href="http://<?php echo PATH;?>/ControllerUser/connexion">prendre RDV</br>(reservé aux membres)</a>
     </div>
     <a href="http://<?php echo PATH;?>/ControllerUser/index" id="logo">
-      <h1>sonia</h1>
-      <h2>boutique en ligne</h2>
+      <h1>mondrian</h1>
+      <h2>votre sallon en ligne</h2>
     </a>
     <div id="rightlinks">
       <a href="http://<?php echo PATH;?>/ControllerBlog/blog">blog</a>

@@ -1,7 +1,7 @@
 <!-- Formulaire de saisie d'une réservation en filtrant ou non un intervenant -->
-
-<h2 class="text-white">reservez votre soin</h2>
-<h3 class="text-white">pour le
+<div class="container my-5">
+<h2 class="text-dark text-center">reservez votre soin</h2>
+<h3 class="text-dark text-center">pour le
 <?php
 $creneau = explode(" ", $this->creneau);
 $dateCreneau = explode("-", $creneau[0]);
@@ -22,8 +22,9 @@ echo $dateCreneau[2].'/'.$dateCreneau[1].'/'.$dateCreneau[0];
         <option value="soin rentree">Soin rentree</option>
     </select>
     <div class="form-group">
-        <label class="text-white" for="heuredebut">l'horaire du RDV</label>
+        <label class="text-dark" for="heuredebut">l'horaire du RDV</label>
         <input class="form-control" type="time" name="heuredebut" value="<?=$creneau[1]?>" inactive/>
     </div>
-    <input class="btn btn-primary" type="submit" name="reserver" value="reserver" />
+    <input class="btn btn-primary col-12 auto" type="submit" name="reserver" value="reserver" />
 </form>
+</div>

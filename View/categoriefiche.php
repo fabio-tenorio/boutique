@@ -10,3 +10,5 @@ Ce sont la même vue, avec des contenus différents qui s'affiche
 3. Catégorie matériels
 
 */
+?>
+

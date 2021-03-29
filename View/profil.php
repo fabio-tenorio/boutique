@@ -8,19 +8,19 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="prenom">Prénom</label>
-                        <input type="text" placeholder="<?= $data->prenom ?>" name="prenom" id="prenom" required>
+                        <input type="text" placeholder="<?= $data->prenom ?>" name="prenom" id="prenom">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="nom">Nom</label>
-                        <input type="text" placeholder="<?= $data->nom ?>" name="nom" id="nom" required>
+                        <input type="text" placeholder="<?= $data->nom ?>" name="nom" id="nom">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="motpasse">Mot de passe</label>
-                        <input type="password" placeholder="votre mot de passe" name="motpasse" id="motpasse" required>
+                        <input type="password" placeholder="votre mot de passe" name="motpasse" id="motpasse">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="confirmer_motpasse">Confirmation</label>
-                        <input type="password" placeholder="Confirmez votre mot de passe" name="confirmer_motpasse" id="confirmer_motpasse" required>
+                        <input type="password" placeholder="Confirmez votre mot de passe" name="confirmer_motpasse" id="confirmer_motpasse">
                     </div>
                 </div>
             </div>
@@ -28,15 +28,15 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="mail">e-mail</label>
-                        <input type="text" placeholder="<?= $data->mail ?>" name="mail" id="mail" required>
+                        <input type="text" placeholder="<?= $data->mail ?>" name="mail" id="mail">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="login">votre pseudo</label>
-                        <input type="text" placeholder="<?= $data->login ?>" name="login" id="login" required>
+                        <label for="login">votre login</label>
+                        <input type="text" placeholder="<?= $data->login ?>" name="login" id="login">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="telephone">téléphone</label>
-                        <input type="tel" placeholder="<?= $data->telephone ?>" name="telephone" id="telephone" required>
+                        <input type="tel" placeholder="<?= $data->telephone ?>" name="telephone" id="telephone">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="dateanniversaire">date de naissance</label>

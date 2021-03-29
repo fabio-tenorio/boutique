@@ -1,3 +1,5 @@
+<br> <?php echo "<font color=\"red\">".$this->message."</font>";?>
+
 <div id="main_connexion">
   <div id="img-connexion">
   </div>

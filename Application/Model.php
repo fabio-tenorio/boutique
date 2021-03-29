@@ -48,8 +48,9 @@ abstract class Model
      */
     public function get_all($table)
     {
-        $sql = $this->connect_db()->prepare("SELECT * FROM :table");
-        $sql->execute([':table'=>$table]);
+        $sql = $this->connect_db()->prepare("SELECT * FROM $table");
+        // $sql->bindParam(':table', $table);
+        $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_OBJ);
     }
 

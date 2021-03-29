@@ -10,7 +10,19 @@ class ControllerProduits extends Controller {
 
     public function index()
     {
-        echo "Je suis ControllerUSer";
+        //je vérifie si il y a quelqun connecté
+        if (isset($_SESSION['user']))
+        {
+            $this->render('categoriefiche', $_SESSION['user']);
+        }
+        else
+        {
+            $this->render('categoriefiche');
+        }
+    }
+
+    public function produitfiche() {
+        $this->render('produitfiche');
     }
 }
 

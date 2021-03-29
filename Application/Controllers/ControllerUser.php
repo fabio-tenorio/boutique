@@ -47,9 +47,9 @@ class ControllerUser extends Controller {
     }
 
     // je vérifie si il y a quelqun enregistré sur la bdd avec le login renseigné
-    public function user_exists($login)
+    public function user_exists($login, $mail=null)
     {
-        return $this->user->get_one_user($login);
+        return $this->user->get_one_user($login, $mail);
     }
 
     //vérifier si il y a quelqun déjà inscrit avec le même e-mail
@@ -85,67 +85,141 @@ class ControllerUser extends Controller {
     {
         if (isset($_POST['login']))
         {
-            $_POST['id_droit']=1;
-            $this->new_user($_POST);
-            $this->render('connexion');
+            if (!empty($_POST['login']) AND !empty($_POST['mail']) AND !empty($_POST['motpasse']) 
+            AND !empty($_POST['confirmer_motpasse']) 
+            AND !empty($_POST['prenom']) AND !empty($_POST['nom']) 
+            AND !empty($_POST['telephone']) AND !empty($_POST['dateanniversaire']))
+            { 
+                $user = $this->user_exists($_POST['login'], $_POST['mail']);
+                // $user génère un objet, si pas d'objet, renvoi d'un booléen : false
+                if ($user===false)
+                {
+                    $login = htmlspecialchars($_POST['login']);
+                    $password = sha1($_POST['motpasse']);
+                    $password2 = sha1($_POST['confirmer_motpasse']);
+
+                    $loginlength = strlen($login);
+            
+                    if ($loginlength <= 255)
+                    {
+                        $user = $this->user_exists($_POST['login'], $_POST['mail']);
+                            
+                            if($user == 0) 
+                            { 
+                               if($password == $password2)
+                               {
+                                    $_POST['id_droit']=1;
+                                    $this->new_user($_POST);
+                                    $this->message = "Votre compte a bien été créé !";
+                                    $this->render('connexion', $this->message);
+                                }   
+                            } 
+                            else 
+                            {
+                                $this->message = 'Vos mots de passes ne correspondent pas';
+                                return $this->render('inscription', $this->message);
+                            }
+                    }
+                    else 
+                    {
+                        $this->message = 'Votre nom ne doit pas dépasser 55 cractères';
+                        return $this->render('inscription', $this->message);
+                    }
+                }   
+                else 
+                {
+                    $this->message = 'Le mail existe déjà';
+                    return $this->render('connexion', $this->message); 
+                }
+            }
+            else 
+            {
+                $this->message = 'Vous devez renseigner tous les champs';
+                return $this->render('inscription', $this->message); 
+            }  
         }
-        $this->render('inscription');
+        else 
+        {
+            $this->message = '';
+            return $this->render('inscription', $this->message); 
+        }   
+        $this->render('inscription'); 
     }
 
-    public function connexion() {
-        //vérifier si les informations ont été renseignées
+    public function connexion() 
+    {
         if (isset($_POST['login']))
         {
-            // dans ce cas, vérifier les données renseignés
-            // d'abord, vérifier si le login est enregistré sur la bdd
-            $user = $this->user_exists($_POST['login']);
-            // ensuite, décripter le mot de passe
-            if (is_object($user))
+            if (!empty($_POST['login']) OR ($_POST['motpasse']))
             {
-                if (password_verify($_POST["motpasse"], $user->motpasse))
+                if (isset($_POST['login']) AND isset($_POST['motpasse']))
                 {
-                    $_SESSION['user'] = $user;
-                    $this->render('accueil', $_SESSION['user']);
-                }
-                else
-                {
-                    //mot de passe renseigné ne correspond pas
+                    $user = $this->user_exists($_POST['login']);
+                    if (is_object($user))
+                    {
+                        if (password_verify($_POST["motpasse"], $user->motpasse))
+                        {
+                            $_SESSION['user'] = $user;
+                            $this->render('accueil', $_SESSION['user']);
+                        }
+                        else
+                        {
+                            $this->message = 'Erreur de mot de passe';
+                            return $this->render('connexion', $this->message); 
+                        }
+                    }
+                    else 
+                    {
+                        $this->message = 'Erreur de login';
+                        return $this->render('connexion', $this->message); 
+                    } 
                 }
             }
-            else
+            else 
             {
-                $this->render('connexion');
-            }
-        }
-        else
+                $this->message = 'Vous devez renseigner tous les champs';
+                return $this->render('connexion', $this->message); 
+            } 
+        }  
+        else 
         {
-            $this->render('connexion');
-        }
+            $this->message = '';
+            return $this->render('connexion', $this->message); 
+        }  
     }
 
     public function profil()
     {
-        // $data
-        // $data = ['id'=>14, 'id_droit'=>'200', 'login'=>'tata', 'motpasse'=>'testing', 'prenom'=>'tata', 'nom'=>'tutu', 'mail'=>'titi@toto', 'telephone'=>'123456', 'dateanniversaire'=>'1978-09-12 08:00:20', 'dateinscription'=>'1978-09-12 08:00:20'];
         if (isset($_SESSION))
         {
             $data = $this->user;
             $data = $data->get_one('utilisateurs', $_SESSION['user']->id);
             $this->render('profil', $data);
         }
+
         if (isset($_POST))
         {
-            // var_dump($_POST);
+
+
+
+
+
             $this->update_profil($_POST);
         }
-    }
+
+
+
+
+    } 
 
     public function disconnect()
     {
         $url = "http://".PATH."/ControllerUser/index";
         session_destroy();
         header("Refresh:0,url=$url");
-    }
+    }     
+        
 }
 
+    
 ?>

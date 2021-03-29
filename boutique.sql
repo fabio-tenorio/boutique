@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 4.6.6deb5ubuntu0.5
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le : jeu. 04 mars 2021 à 16:47
--- Version du serveur :  5.7.30
--- Version de PHP : 7.4.9
+-- Client :  localhost:3306
+-- Généré le :  Jeu 25 Mars 2021 à 23:23
+-- Version du serveur :  5.7.33-0ubuntu0.18.04.1
+-- Version de PHP :  7.2.24-0ubuntu0.18.04.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `boutique`
+-- Base de données :  `boutique`
 --
 CREATE DATABASE IF NOT EXISTS `boutique` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `boutique`;
@@ -41,7 +41,7 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `article`
+-- Contenu de la table `article`
 --
 
 INSERT INTO `article` (`id`, `id_theme`, `id_utilisateur`, `titrearticle`, `article`, `datearticle`, `id_produit`, `id_reservation`, `id_fournisseur`) VALUES
@@ -59,7 +59,7 @@ CREATE TABLE `categorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `categorie`
+-- Contenu de la table `categorie`
 --
 
 INSERT INTO `categorie` (`id`, `nom`) VALUES
@@ -89,7 +89,7 @@ CREATE TABLE `client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `client`
+-- Contenu de la table `client`
 --
 
 INSERT INTO `client` (`id`, `id_utilisateur`, `nomtitulaireCB`, `numeroCB`, `validiteCB`, `code3chiffresCB`, `adresselivraison`, `id_panier`, `id_commande`) VALUES
@@ -113,6 +113,46 @@ CREATE TABLE `commande` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `commande-client`
+--
+
+CREATE TABLE `commande-client` (
+  `id` int(11) NOT NULL,
+  `id_droit` int(11) NOT NULL,
+  `id_panier` int(11) NOT NULL,
+  `id_produit` int(11) NOT NULL,
+  `id_utilisateur` int(11) NOT NULL,
+  `nomtitulairecb` varchar(255) NOT NULL,
+  `numerocb` int(25) NOT NULL,
+  `validitecb` date NOT NULL,
+  `code3chifcb` int(11) NOT NULL,
+  `adresselivraison` varchar(255) NOT NULL,
+  `fraisexpedition` decimal(4,2) NOT NULL,
+  `datecom` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `conversation`
+--
+
+CREATE TABLE `conversation` (
+  `id` int(11) NOT NULL,
+  `id_droit` int(11) NOT NULL,
+  `id_categorie` int(11) NOT NULL,
+  `id_utilisateur` int(11) NOT NULL,
+  `id_produit` int(11) NOT NULL,
+  `id_reservation` int(11) NOT NULL,
+  `typeconv` varchar(255) NOT NULL,
+  `titreconv` varchar(255) NOT NULL,
+  `descriptifconv` text NOT NULL,
+  `dateconv` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `droit`
 --
 
@@ -122,7 +162,7 @@ CREATE TABLE `droit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `droit`
+-- Contenu de la table `droit`
 --
 
 INSERT INTO `droit` (`id`, `nom`) VALUES
@@ -145,7 +185,7 @@ CREATE TABLE `fournisseur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `fournisseur`
+-- Contenu de la table `fournisseur`
 --
 
 INSERT INTO `fournisseur` (`id`, `nomfournisseur`, `codepostale`, `statut`) VALUES
@@ -220,7 +260,7 @@ CREATE TABLE `produit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `produit`
+-- Contenu de la table `produit`
 --
 
 INSERT INTO `produit` (`id`, `reference`, `titreproduit`, `produit`, `avis`, `prix`, `disponibilite`, `dateproduit`, `id_categorie`, `id_fournisseur`) VALUES
@@ -264,6 +304,21 @@ CREATE TABLE `reponse` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `reponsemes`
+--
+
+CREATE TABLE `reponsemes` (
+  `id` int(11) NOT NULL,
+  `id_droit` int(11) NOT NULL,
+  `id_utilisateur` int(11) NOT NULL,
+  `id_message` int(11) NOT NULL,
+  `descritptifrep` text NOT NULL,
+  `daterep` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `reservation`
 --
 
@@ -271,16 +326,29 @@ CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
   `titrereservation` varchar(255) NOT NULL,
-  `reservation` text NOT NULL,
-  `typeevenement` varchar(255) NOT NULL,
-  `intervenant` varchar(55) NOT NULL,
+  `typeevenement` varchar(255) DEFAULT NULL,
+  `intervenant` varchar(55) DEFAULT NULL,
   `datedebut` datetime NOT NULL,
-  `datefin` datetime NOT NULL,
-  `heuredebut` datetime NOT NULL,
-  `heurefin` datetime NOT NULL,
-  `id_produit` int(11) NOT NULL,
-  `id_fournisseur` int(11) NOT NULL
+  `datefin` datetime DEFAULT NULL,
+  `heuredebut` datetime DEFAULT NULL,
+  `heurefin` datetime DEFAULT NULL,
+  `id_produit` int(11) DEFAULT NULL,
+  `id_fournisseur` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `reservation`
+--
+
+INSERT INTO `reservation` (`id`, `id_utilisateur`, `titrereservation`, `typeevenement`, `intervenant`, `datedebut`, `datefin`, `heuredebut`, `heurefin`, `id_produit`, `id_fournisseur`) VALUES
+(1, 15, 'maquillage', NULL, NULL, '2021-03-25 12:00:00', NULL, NULL, NULL, NULL, NULL),
+(2, 15, 'soin des mains', NULL, NULL, '2021-03-24 11:00:00', NULL, NULL, NULL, NULL, NULL),
+(3, 15, 'maquillage', NULL, NULL, '2021-03-25 08:00:00', NULL, NULL, NULL, NULL, NULL),
+(5, 15, 'soin complet', NULL, NULL, '2021-03-26 09:00:00', NULL, NULL, NULL, NULL, NULL),
+(7, 15, 'fete des meres', NULL, NULL, '2021-03-26 12:00:00', NULL, NULL, NULL, NULL, NULL),
+(9, 15, 'soin rentree', NULL, NULL, '2021-03-27 16:00:00', NULL, NULL, NULL, NULL, NULL),
+(10, 15, 'pose d\'ongles', NULL, NULL, '2021-03-28 13:00:00', NULL, NULL, NULL, NULL, NULL),
+(11, 17, 'soin complet', NULL, NULL, '2021-03-27 10:00:00', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -299,7 +367,7 @@ CREATE TABLE `theme` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `theme`
+-- Contenu de la table `theme`
 --
 
 INSERT INTO `theme` (`id`, `id_droit`, `visibilitetheme`, `titretheme`, `descriptiftheme`, `datetheme`, `id_utilisateur`) VALUES
@@ -319,36 +387,27 @@ CREATE TABLE `utilisateurs` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
   `login` varchar(55) NOT NULL,
-  `motpasse` varchar(55) NOT NULL,
+  `motpasse` varchar(255) NOT NULL,
   `prenom` varchar(55) NOT NULL,
   `nom` varchar(55) NOT NULL,
   `mail` varchar(55) NOT NULL,
   `telephone` varchar(25) NOT NULL,
-  `datenaissance` date NOT NULL,
-  `dateinscription` date NOT NULL
+  `datenaissance` date DEFAULT NULL,
+  `dateinscription` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `utilisateurs`
+-- Contenu de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id`, `id_droit`, `login`, `motpasse`, `prenom`, `nom`, `mail`, `telephone`, `datenaissance`, `dateinscription`) VALUES
-(1, 1, 'fabio', 'fabio', 'fabio', 'tenario', 'tenario@orange.fr', '0100000001', '2021-02-01', '2020-12-06'),
-(2, 200, 'admin', 'admin', 'admin', 'admin', 'admin@orange.fr', '0100000002', '2021-02-02', '2020-01-05'),
-(3, 100, 'moderateur', 'moderateur', 'moderateur', 'moderateur', 'moderateur@orange.fr', '0100000003', '2021-02-03', '2021-02-18'),
-(4, 10, 'oli', 'oli', 'oli', 'oli', 'oli@orange.fr', '0100000004', '2021-02-04', '2021-02-18'),
-(5, 1, 'membre', 'membre', 'membre', 'membre', 'membre@orange.fr', '0100000005', '2020-07-12', '2021-02-18'),
-(6, 10, 'client', 'client', 'client', 'client', 'client@orange.fr', '1100000002', '2021-02-06', '2020-10-11'),
-(7, 10, 'client1', 'client1', 'client1', 'client1', 'client1@gmail.fr', '0300000002', '2021-02-07', '2021-02-18'),
-(8, 1, 'membre1', 'membre1', 'membre1', 'membre1', 'membre1', '3100000002', '2021-06-14', '2020-10-11'),
-(9, 100, 'salarie', 'salarie', 'salarie', 'salarie', 'salarie@orange.fr', '0400000002', '2021-02-09', '2021-02-18'),
-(10, 100, 'intervenantext1', 'intervenantext1', 'intervenantext1', 'intervenantext1', 'interveantext1@orange.fr', '0200000012', '2021-02-10', '2021-02-18'),
-(11, 100, 'intervenantext', 'intervenantext', 'intervenantext', 'intervenantext', 'interveantext@orange.fr', '0200000002', '2021-02-10', '2021-02-18'),
-(12, 10, 'client2', 'client2', 'client2', 'client2', 'client2@orange.fr', '1400000002', '2021-03-01', '2021-03-04'),
-(13, 10, 'client3', 'client3', 'client3', 'client3', 'client3@gmail.com', '1100000009', '2021-03-01', '2021-03-14');
+(14, 1, 'client_quatre', '$2y$10$jl3j8MCwwB3AehgZhKelZu4u9pbfcAUyFu7MQEoNis9XPBDgCXDjm', 'client', 'quatre', 'clientquatre@boutique.fr', '6666666666', NULL, NULL),
+(15, 1, 'iris', '$2y$10$7QpMA8i4bSTN67oZZY294OEDtcpDcOsv8z/sGMzXjCOiKobM5bxKe', 'iris', 'abrescia', 'iris@boutique.fr', '123456', NULL, NULL),
+(16, 1, 'fabio', '$2y$10$n8r18D/1tsMquItpQbrPNuRpX8oiaFIyAv1FrOpDihk7F.DbXHcLy', 'Fabio', 'Tenorio', 'fabio@boutique.fr', '123456789', NULL, NULL),
+(17, 200, 'admin', '$2y$10$I/AsLWR5YWhiOWraKaWzEuhNrZVrABgsYgnTK03zZJ6VqgkLyL/FG', 'admin', 'admin', 'admin@boutique.fr', '123456789', NULL, NULL);
 
 --
--- Index pour les tables déchargées
+-- Index pour les tables exportées
 --
 
 --
@@ -374,6 +433,18 @@ ALTER TABLE `client`
 --
 ALTER TABLE `commande`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `commande-client`
+--
+ALTER TABLE `commande-client`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Index pour la table `conversation`
+--
+ALTER TABLE `conversation`
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Index pour la table `droit`
@@ -418,6 +489,12 @@ ALTER TABLE `reponse`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
+-- Index pour la table `reponsemes`
+--
+ALTER TABLE `reponsemes`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- Index pour la table `reservation`
 --
 ALTER TABLE `reservation`
@@ -436,7 +513,7 @@ ALTER TABLE `utilisateurs`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
@@ -444,67 +521,71 @@ ALTER TABLE `utilisateurs`
 --
 ALTER TABLE `article`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+--
+-- AUTO_INCREMENT pour la table `commande-client`
+--
+ALTER TABLE `commande-client`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `conversation`
+--
+ALTER TABLE `conversation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `droit`
 --
 ALTER TABLE `droit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
-
 --
 -- AUTO_INCREMENT pour la table `fournisseur`
 --
 ALTER TABLE `fournisseur`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
 --
 -- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT pour la table `panier`
 --
 ALTER TABLE `panier`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
 -- AUTO_INCREMENT pour la table `reponse`
 --
 ALTER TABLE `reponse`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+--
+-- AUTO_INCREMENT pour la table `reponsemes`
+--
+ALTER TABLE `reponsemes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT pour la table `theme`
 --
 ALTER TABLE `theme`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

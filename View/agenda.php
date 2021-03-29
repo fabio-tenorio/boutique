@@ -13,7 +13,7 @@ En cliquant sur le jour, renvoi vers page agenda journée
         </svg>
     </a>
     <h3 class="text-dark">
-        <?= "Semaine ".$this->semaine." de l'année ".$this->an."<br>"."du lundi ".$this->lundi."/".$this->mois." au dimanche ".$this->dimanche."/".$this->mois; ?>
+        <?= "Semaine ".$this->semaine." de l'année ".$this->an."<br>"."du lundi ".$this->lundi."/".$this->mois." au dimanche ".$this->dimanche->format('d')."/".$this->dimanche->format('d'); ?>
     </h3>
     <a href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
@@ -31,37 +31,44 @@ En cliquant sur le jour, renvoi vers page agenda journée
         // $lejour = intval($this->lundi);
         foreach($joursenlettres as $jourdelasemaine)
         {
-            echo ("<th scope=\"col\">");
+            echo '<th class="creneau-jours" scope="col">';
             echo $jourdelasemaine;
-            echo ("</th>");
+            echo '</th>';
         }
         ?>
             </tr>
         </thead>
 
         <?php
-        for ($heure = 8; $heure<20; $heure++) {
+        for ($heure = 8; $heure<20; $heure++)
+        {
             echo'<tr>';
             echo'<th class="agenda-heure" scope="row">'.$heure.'h</th>';
-            for ($jour=$this->lundi;$jour<=$this->dimanche;$jour++) {
-                if ($heure===8 || $heure===9) {
-                    $creneau = $this->an."-".$this->mois."-".$jour." 0".$heure.":00:00";    
+            for ($jour=0;$jour<7;$jour++)
+            {
+                if ($heure==8 || $heure==9) {
+                    $dateformat = $this->an."-".$this->mois."-".$this->jour->format('d')." 0".$heure.":00:00";
                 } else {
-                    $creneau = $this->an."-".$this->mois."-".$jour." ".$heure.":00:00";
+                    $dateformat = $this->an."-".$this->mois."-".$this->jour->format('d')." ".$heure.":00:00";
                 }
+                $creneau = new \DateTime($dateformat);
+                $interval = 'P'.$jour.'D';
+                $creneau = $creneau->add(new \DateInterval($interval));
                 $creneauVide = true;
                 foreach ($this->allResa as $objects) {
                     foreach ($objects as $propertyName => $property) {
                         if ($propertyName=='datedebut') {
-                            if ($property===$creneau) {
-                                echo '<td class="text-center">';
+                            $property = explode (' ', $property);
+                            $property[1] = explode (':', $property[1]);
+                            if ($property[0]==$creneau->format('Y-m-d') && $property[1][0]==$creneau->format('h')) {
+                                echo '<td class="text-center td-creneau-rempli">';
                                 echo "<h4>".$objects->titrereservation."</h4>";
                                 if ($objects->id_utilisateur===$_SESSION['user']->id) {
-                                    echo('<a class="btn btn-warning" href="http://');
+                                    echo('<a class="btn btn-warning col-12" href="http://');
                                     echo PATH;
-                                    echo("/ControllerAgenda/formResaView/");
-                                    echo $creneau;
-                                    echo('">annuler la réservation</a>');
+                                    echo("/ControllerAgenda/SupprimeResaView/");
+                                    echo $objects->id;
+                                    echo('">annuler</a>');
                                 }
                                 $creneauVide = false;
                             }
@@ -69,11 +76,11 @@ En cliquant sur le jour, renvoi vers page agenda journée
                     }
                 }
                 if ($creneauVide === true) {
-                    echo '<td class="text-center">';
+                    echo '<td class="text-center td-creneau-vide my-auto">';
                     echo('<a href="http://');
                     echo PATH;
                     echo("/ControllerAgenda/formResaView/");
-                    echo $creneau;
+                    echo $creneau->format('Y-m-d h:00:00');
                     echo('">reserver ce créneau</a>');
                 }
                 echo('</td>');

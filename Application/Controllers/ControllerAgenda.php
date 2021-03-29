@@ -26,16 +26,8 @@ class ControllerAgenda extends Controller {
         $this->mois = $this->jour->format('m');
         // le lundi (jour 01) de la semaine courante
         $this->lundi = $this->jour->format('d');
-        $this->dimanche = $this->lundi+6;
-        // $this->all_agenda_data = [$this->jour, $this->an, $this->semaine, $this->mois, $this->lundi, $this->dimanche];
-        
-        if (isset($_GET))
-        {
-            // end($_GET);
-            // $key = key($_GET);
-            // $date = explode('heures', $key);
-            // $this->date = $date[1];
-        }
+        $this->dimanche = new \DateTime();
+        $this->dimanche = $this->dimanche->add(new \DateInterval('P6D'));
     }
 
     // LA GESTION DES DONNÉES
@@ -236,6 +228,7 @@ class ControllerAgenda extends Controller {
         return $datetime->format('D');
     }
 
+
    // afin de contrôler si une réservation peut être faite, il faut:
    // savoir si il y a d'autres réservations déjà enrégistrées pour le même jour. True si il y en a, false si il y en a pas
    public function dayCheck($day)
@@ -269,6 +262,15 @@ class ControllerAgenda extends Controller {
        return $this->agenda->get_all('reservation');
    }
 
+   public function one_reservation($id) {
+        return $this->agenda->get_one('reservation', $id);
+   }
+
+   public function supprimer_reservation($id) {
+       $this->agenda->delete('reservation', $id);
+       $this->index();
+   }
+
     // LES VIEWS
 
     public function affichageTableau($row, $col)
@@ -295,6 +297,13 @@ class ControllerAgenda extends Controller {
         $this->creneau = $data;
         $this->render('agendaform', $this->creneau);
     }
+
+    public function supprimeResaView($id)
+    {
+        $this->creneau = $this->one_reservation($id);
+        $this->render('agendasupprime', $this->creneau);
+    }
+
 }
 
 

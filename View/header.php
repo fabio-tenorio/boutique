@@ -12,7 +12,7 @@
       <h2>votre sallon en ligne</h2>
     </a>
     <div id="rightlinks">
-    <a href="http://<?php echo PATH;?>/ControllerBlog/blog">blog</a>
+    <!-- <a href="http://<?php echo PATH;?>/ControllerBlog/blog">blog</a> -->
       <a href="#" class="link">
         <span class="fa fa-user fa-lg"></span>
         <span><?php echo $_SESSION['user']->login; ?></span>
@@ -21,7 +21,7 @@
           <li><a href="http://<?php echo PATH; ?>/ControllerUser/disconnect">me deconnecter</a></li>
         </ul>
       </a>
-      <a href="#"><span class="fa fa-shopping-bag fa-lg">panier</span></a>
+      <a href="#"><span class="header-icon fa fa-shopping-bag fa-lg">panier</span></a>
     </div>
   <?php } else
   { ?>
@@ -35,7 +35,7 @@
       <h2>votre sallon en ligne</h2>
     </a>
     <div id="rightlinks">
-      <a href="http://<?php echo PATH;?>/ControllerBlog/blog">blog</a>
+      <!-- <a href="http://<?php echo PATH;?>/ControllerBlog/blog">blog</a> -->
       <a href="http://<?php echo PATH;?>/ControllerUser/connexion">connexion</a>
       <a href="http://<?php echo PATH;?>/ControllerUser/inscription">inscription</a>
     </div>

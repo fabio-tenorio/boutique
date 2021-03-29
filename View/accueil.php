@@ -21,7 +21,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
         <div class="row">
             <div class="col-sm-3">
                 <div class="card produit-box">
-                    <img class="card-img-top" src="<?php echo IMAGES; ?>prestation1.jpeg" alt="image du produit">
+                    <img class="card-img-top produit-img" src="<?php echo IMAGES; ?>prestation1.jpeg" alt="image du produit">
                     <div class="card-body">
                         <h5 class="card-title">Beauté des mains</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
@@ -32,34 +32,34 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
             </div>
             <div class="col-sm-3">
                 <div class="card produit-box">
-                    <img class="card-img-top" src="<?php echo IMAGES; ?>prestation2.jpg" alt="image du produit">
+                    <img class="card-img-top produit-img" src="<?php echo IMAGES; ?>prestation2.jpg" alt="image du produit">
                     <div class="card-body">
                         <h5 class="card-title">Beauté des pieds</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         <p>19,90 &#8364;</p>
-                        <a href="#" class="btn btn-primary">détails</a>
+                        <a href="#" class="btn btn-primary col-12 mx-auto">détails</a>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="card produit-box">
-                    <img class="card-img-top" src="<?php echo IMAGES; ?>prestation3.jpg" alt="image du produit">
+                    <img class="card-img-top produit-img" src="<?php echo IMAGES; ?>prestation3.jpg" alt="image du produit">
                     <div class="card-body">
                         <h5 class="card-title">Vernis semi-permanent ou classique</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         <p>19,90 &#8364;</p>
-                        <a href="#" class="btn btn-primary">détails</a>
+                        <a href="#" class="btn btn-primary col-12 mx-auto">détails</a>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="card produit-box">
-                    <img class="card-img-top" src="<?php echo IMAGES; ?>prestation4.jpg" alt="image du produit">
+                    <img class="card-img-top produit-img" src="<?php echo IMAGES; ?>prestation4.jpg" alt="image du produit">
                     <div class="card-body">
                         <h5 class="card-title">Massage des pieds</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         <p>19,90 &#8364;</p>
-                        <a href="#" class="btn btn-primary">détails</a>
+                        <a href="#" class="btn btn-primary col-12 mx-auto">détails</a>
                     </div>
                 </div>
             </div>
@@ -101,15 +101,6 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section id="section_blog">
-        <h2 class="h2">le blog de Sonia</h2>
-        <div>
-
-        </div>
-        <div>
-
         </div>
     </section>
 </div>

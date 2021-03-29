@@ -151,8 +151,8 @@ link:hover > .dropdown_link {
 
 #section1 {
     width: 100%;
-    height: 80vh;
-    background-image: url('../images/bg-vernis.jpg');
+    height: 150vh;
+    background-image: url('../images/salonbg.jpg');
     /* opacity: 0.5; */
 }
 
@@ -191,10 +191,20 @@ link:hover > .dropdown_link {
 }
 
 .produit-box {
-    margin: 20px 50px;
+    margin: 20px 35px;
     border-radius: 8px;
     -webkit-box-shadow: 2px 5px 15px 1px lightgray; 
     box-shadow: 2px 5px 15px 1px lightgray;
+}
+
+.produit-box:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    margin: 25px 38px;
+}
+
+.produit-img {
+    height: 150px;
 }
 
 /* PAGE INSCRIPTION */
@@ -293,9 +303,39 @@ link:hover > .dropdown_link {
     width: 30px;
 }
 
-td {
-    min-width: 200px;
-    height: 100px;
+/* .creneau-jours {
+    font-size: .8rem;
+    max-width: 1fr;
+}
+
+.td-creneau-vide {
+    padding: 0;
+    font-size: .6rem;
+} */
+
+.td-creneau-vide a {
+    padding: 15px 10px;
+    font-size: .8rem;
+    color: whitesmoke;
+}
+
+.td-creneau-vide a:hover {
+    color: var(--bluemondrian);
+    font-weight: bold;
+}
+
+.td-creneau-rempli a {
+    font-size: .8rem;
+}
+
+.td-creneau-rempli h4 {
+    font-size: .8rem;
+}
+
+.agenda-supprime-box {
+    border: 1px solid gray;
+    padding: 20vh;
+    margin: 10vh 0;
 }
 
 /* PRODUITFICHE */

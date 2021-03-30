@@ -13,7 +13,7 @@ En cliquant sur le jour, renvoi vers page agenda journée
         </svg>
     </a>
     <h3 class="text-dark">
-        <?= "Semaine ".$this->semaine." de l'année ".$this->an."<br>"."du lundi ".$this->lundi."/".$this->mois." au dimanche ".$this->dimanche->format('d')."/".$this->dimanche->format('d'); ?>
+        <?= "Semaine ".$this->semaine." de l'année ".$this->an."<br>"."du lundi ".$this->lundi."/".$this->mois." au dimanche ".$this->dimanche->format('d')."/".$this->dimanche->format('m'); ?>
     </h3>
     <a href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
@@ -31,7 +31,7 @@ En cliquant sur le jour, renvoi vers page agenda journée
         // $lejour = intval($this->lundi);
         foreach($joursenlettres as $jourdelasemaine)
         {
-            echo '<th class="creneau-jours" scope="col">';
+            echo '<th class="creneau-jours text-center" scope="col">';
             echo $jourdelasemaine;
             echo '</th>';
         }
@@ -80,7 +80,7 @@ En cliquant sur le jour, renvoi vers page agenda journée
                     echo('<a href="http://');
                     echo PATH;
                     echo("/ControllerAgenda/formResaView/");
-                    echo $creneau->format('Y-m-d h:00:00');
+                    echo $creneau->format('Y-m-d H:00:00');
                     echo('">reserver ce créneau</a>');
                 }
                 echo('</td>');

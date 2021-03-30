@@ -52,7 +52,6 @@ class ControllerAgenda extends Controller {
         $date = explode(' ', $data['datedebut']);
         if ($date[0] < $now->format('Y-m-d'))
         {
-            var_dump("c'est passé");
             return false;
         }
         else if ($now->format('Y-m-d') == $date[0])
@@ -124,13 +123,11 @@ class ControllerAgenda extends Controller {
             else
             {
                 $this->message = 'Cet horaire est déjà réservé';
-                $this->render('agenda', $this->message);
             }
         }
         else
         {
             $this->message = "Ce n'est plus possible de faire cette réservation";
-            $this->render('agenda', $this->message);
         }
     }
     
@@ -154,6 +151,9 @@ class ControllerAgenda extends Controller {
         if ($this->checkAll($data)===true)
         {
             $this->agenda->reserver($data);
+            $this->index();
+        } else
+        {
             $this->index();
         }
    }

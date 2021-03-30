@@ -106,7 +106,7 @@ abstract class Model
             {
                 if ($attribut==$key)
                 {
-                    if ($new_value != $value)
+                    if ($new_value != $value AND $new_value != '')
                     {
                         $sql = "UPDATE $table SET $attribut =:new_value WHERE id=:id";
                         $result = $this->connect_db()->prepare($sql);

@@ -1,4 +1,7 @@
 <div id="main_profil">
+
+<br> <?php echo "<font color=\"red\">".$this->message."</font>";?>
+
     <form id="form_profil" action="http://<?php echo PATH; ?>/ControllerUser/profil/" method="POST">
         <div class="container" id="form_profil_container">
             <h1>profil</h1>
@@ -45,12 +48,26 @@
                 </div>
             </div>
             <hr>
-
             <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-            <button type="submit" name="profil" class="btn btn-primary">m'inscrire</button>
+            <button type="submit" name="modifier" class="btn btn-primary">Modifier</button>
+            <button type="submit" name="supprimer" class="btn btn-primary" value='true'>Supprimer</button>
             <div class="container signin">
                 <p>Already have an account? <a href="#">Sign in</a>.</p>
             </div>
         </div>
     </form>
+<?php
+if (isset($_POST['supprimer']) AND $_POST['supprimer']==true) 
+{ ?>
+    <form id="form_profil" action="http://<?php echo PATH; ?>/ControllerUser/del_user/" method="POST">
+        <div class="container" id="form_profil_container">
+            <button type="submit" name="confirmer" class="btn btn-primary">Confirmer</button> 
+            <p>Souhaitez-vous confirmer la suppresion de votre compte?</p>
+            <button type="submit" name="annuler" class="btn btn-primary">Annuler</button>
+        <div class="container signin">
+    </form>
+<?php }
+?>    
 </div>
+
+

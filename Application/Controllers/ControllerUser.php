@@ -23,6 +23,7 @@ class ControllerUser extends Controller {
         {
             $this->id = $_SESSION['user']->id;
             $this->login = $_SESSION['user']->login;
+            $this->message = '';
         }
     }
 
@@ -74,10 +75,24 @@ class ControllerUser extends Controller {
 
     public function del_user($id)
     {
-        // $id = 14;
-        // $supprime_user = new ModelUser();
-        return $this->user->delete_user($this->id);
+        if (isset($_POST['supprimer']))
+        {
+            /*$this->message = 'Souhaitez-vous confirmer la suppresion de votre compte?';
+            $this->render('profil', $this->message);*/
+        }
+            if(isset($_POST['annuler']) AND !isset($_POST['confirmer']))
+            {
+                $this->message = 'Votre avez annulé la suppresion de votre compte';
+                $this->render('profil', $this->message);
+            }
+            if(isset($_POST['confirmer']) AND !isset($_POST['annuler']))
+            {
+                $this->message = 'Votre compte a bien été supprimé';
+                $this->render('profil', $this->message);
+                $this->user->delete_user($this->id);
+            }
     }
+            
 
     // MÉTHODES LIÉES AUX VIEWS
 
@@ -95,19 +110,19 @@ class ControllerUser extends Controller {
                 if ($user===false)
                 {
                     $login = htmlspecialchars($_POST['login']);
-                    $password = sha1($_POST['motpasse']);
-                    $password2 = sha1($_POST['confirmer_motpasse']);
-
+                    /*$password = sha1($_POST['motpasse']);
+                    $password2 = sha1($_POST['confirmer_motpasse']);*/
                     $loginlength = strlen($login);
             
-                    if ($loginlength <= 255)
+                    if ($loginlength <= 55)
                     {
                         $user = $this->user_exists($_POST['login'], $_POST['mail']);
                             
                             if($user == 0) 
                             { 
-                               if($password == $password2)
+                               if($_POST['motpasse'] ==$_POST['confirmer_motpasse'])
                                {
+                                    $password = password_hash($_POST['motpasse'], PASSWORD_DEFAULT);
                                     $_POST['id_droit']=1;
                                     $this->new_user($_POST);
                                     $this->message = "Votre compte a bien été créé !";
@@ -122,7 +137,7 @@ class ControllerUser extends Controller {
                     }
                     else 
                     {
-                        $this->message = 'Votre nom ne doit pas dépasser 55 cractères';
+                        $this->message = 'Votre login ne doit pas dépasser 55 cractères';
                         return $this->render('inscription', $this->message);
                     }
                 }   

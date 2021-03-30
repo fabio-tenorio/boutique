@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <br> <?php echo "<font color=\"red\">".$this->message."</font>";?>
 
 <div id="main_inscription">

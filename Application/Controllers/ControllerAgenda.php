@@ -7,6 +7,7 @@
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelAgenda;
+use DateTime;
 
 class ControllerAgenda extends Controller {
 
@@ -28,6 +29,7 @@ class ControllerAgenda extends Controller {
         $this->lundi = $this->jour->format('d');
         $this->dimanche = new \DateTime();
         $this->dimanche = $this->dimanche->add(new \DateInterval('P6D'));
+        $this->message = '';
     }
 
     // LA GESTION DES DONNÉES
@@ -42,220 +44,118 @@ class ControllerAgenda extends Controller {
         }
     }
 
-    //méthode pour récuperer les chiffres correspondant aux jours dans un string datetime SQL
-    public function pickDay($string)
-    {
-        return $string[8].$string[9];
-    }
-
-    //méthode pour controler si il y a des incohérences de saisie dans le formulaire rempli
-    // vai no ControlllerAgenda
-    public function checkSaisie($tab)
-    {
-        if ($this->datedebut==$this->datefin)
-            {
-                if ($this->heuredebut<$this->heurefin)
-                {
-                    if ($this->heuredebut>=$this->debutcreneau)
-                    {
-                        if ($this->heuredebut<=$this->fincreneau)
-                        {
-                            if ($this->heurefin>=$this->minfinresa)
-                            {
-                                if ($this->heurefin<=$this->maxfinresa)
-                                {
-                                    return TRUE;
-                                } else
-                                {
-                                    $erreur = "l'heure de fin de réservation jusqu'à 18h";
-                                    return $erreur;
-                                }
-                            } else
-                            {
-                                $erreur= "l'heure minimum de fin de réservation commence à 9h";
-                                return $erreur;
-                            }
-                        } else
-                        {
-                            $erreur = "la salle n'est pas disponible à cette heure du soir";
-                            return $erreur;
-                        }
-                    } else
-                    {
-                        $erreur = "la salle n'est pas disponible à cette heure du matin";
-                        return $erreur;
-                    }
-                } else
-                {
-                    $erreur = "l'heure de fin ne peut pas être inférieure à l'heure de début de la réservation";
-                    return $erreur;
-                }
-            } else
-            {
-                $erreur="la date de début doit être égale à la date de fin de la réservation";
-                return $erreur;
-            }   
-    }
-
     // méthode pour controler si les donnés de la réservation sont cohérents avec le jour et l'heure au moment de la réservation
-    // vai no ControlllerAgenda
-    public function checkNow()
-    {
-        if ($this->datedebut<$this->moment)
-        {
-            $erreur = "c'est trop tard pour faire cette réservation";
-            return $erreur;
-        }
 
-        if ($this->heuredebut>$this->hournow)
+    public function checkMoment($data)
+    {
+        $now = new DateTime();
+        $date = explode(' ', $data['datedebut']);
+        if ($date[0] < $now->format('Y-m-d'))
         {
-            return TRUE;
-        } else
+            var_dump("c'est passé");
+            return false;
+        }
+        else if ($now->format('Y-m-d') == $date[0])
         {
-            if ($this->datedebut>$this->moment)
+            if ($now->format('H:00:00') < $date[1])
             {
-                return TRUE;
-            } else
-            {
-                $erreur = "c'est trop tard pour faire cette réservation";
-                return $erreur;
+                return true;
             }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return true;
         }
     }
 
-    // méthode pour controler si le formulaire de réservation a été complétement rempli
-    // vai no ControlllerAgenda
-    public function checkRemplissage($tab)
+    public function checkConflict($data)
     {
-        if (isset($tab['reserver']) && $tab['reserver']=='reserver')
-        {
-            if(empty($tab['titre']));
-            {
-                $erreur = "Vous devez renseigner un titre";
-                return $erreur;
-            } 
-        
-            if(empty($tab['description']))
-            {
-                $erreur = "Vous devez renseigner une description";
-                return $erreur;
-            } 
-        
-            if(empty($tab['datedebut']))
-            {
-                $erreur = "Vous devez renseigner une date de début";
-                return $erreur;
-            } 
-        
-            if(empty($tab['heuredebut']))
-            {
-                $erreur = "Vous devez renseigner une heure de début";
-                return $erreur;
-            } 
-        
-            if(empty($tab['datefin']))
-            {
-                $erreur = "Vous devez renseigner une date de fin";
-                return $erreur;
-            } 
-        
-            if(empty($tab['heurefin']))
-            {
-                $erreur = "Vous devez renseigner une heure de fin";
-                // header('location:')
-                return $erreur;
+        $allResa = $this->all_reservations();
+        $check = true;
+        $cetteResa = explode (' ', $data['datedebut']);
+        // var_dump($allResa);
+        foreach($allResa as $value) {
+            foreach($value as $key => $property) {
+                if ($key=='datedebut')
+                {
+                    $autreResa = explode(' ', $property);
+                    if ($cetteResa[0] == $autreResa[0])
+                    {
+                        if ($cetteResa[1] == $autreResa[1])
+                        {
+                            $check = false;
+                        }
+                        else
+                        {
+                            $check = true;
+                        }
+                    }
+                    else
+                    {
+                        $check = true;
+                    }
+                }
             }
-        } else
+        }
+        if ($check === true)
         {
-          return TRUE;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
-// méthode qui regroupe tous les contrôles sur le formulaire
-// il faut utiliser le triple égal pour que tous les contrôles marchent bien
-// vai no ControllerAgenda
-    // public function checkAll($tab)
-    // {
-    //     if ($this->checkRemplissage($tab)===TRUE)
-    //     {
-    //         if ($this->checkSaisie($tab)===TRUE)
-    //         {
-    //             if ($this->checkNow($tab)===TRUE)
-    //             {
-    //                 if ($this->controleHeures($this->completedebut, $this->completefin)===TRUE)
-    //                 {
-    //                     return TRUE;
-    //                 } else
-    //                 {
-    //                     return FALSE;
-    //                 }
-                    
-    //             } else
-    //             {
-    //                 return FALSE;
-    //             }
-    //         } else
-    //         {
-    //             return FALSE;
-    //         }
-    //     } else
-    //     {
-    //         return FALSE;
-    //     }
-    // }
+    // méthode qui regroupe tous les contrôles sur le formulaire
+    // il faut utiliser le triple égal pour que tous les contrôles marchent bien
+    // vai no ControllerAgenda
+    public function checkAll($data)
+    {
+        if ($this->checkMoment($data)===true)
+        {
+            if ($this->checkConflict($data)===true) {
+                return true;
+            }
+            else
+            {
+                $this->message = 'Cet horaire est déjà réservé';
+                $this->render('agenda', $this->message);
+            }
+        }
+        else
+        {
+            $this->message = "Ce n'est plus possible de faire cette réservation";
+            $this->render('agenda', $this->message);
+        }
+    }
     
-    //méthode pour calculer l'intervale des heures entre la date de début et la date de fin d'un événement
-    // public function calcInterval($dateDebut, $hourDebut, $dateFin, $hourFin)
-    // {
-    //     if ($dateDebut==$dateFin)
-    //     {
-    //         $interval = 18-$hourDebut;
-    //         return $interval;
-    //     } else
-    //     {
-    //         if ($dateDebut<$dateFin)
-    //         {
-    //             $interval = $hourFin-8;
-    //             return $interval;
-    //         }
-    //     }
-    // }
-
-    //    cette méthode retourne le numéro des jours de la semaine en cours
-    public function week()
-    {
-        $datetime=new \DateTime;
-        return $datetime->format('D');
-    }
-
-
-   // afin de contrôler si une réservation peut être faite, il faut:
-   // savoir si il y a d'autres réservations déjà enrégistrées pour le même jour. True si il y en a, false si il y en a pas
-   public function dayCheck($day)
-   {
-       
-       if ($this->day==$day)
-       {
-           
-           return TRUE;
-       }
-       else
-       {
-           return FALSE;
-       }
-   }
+    // cette méthode retourne le numéro des jours de la semaine en cours
+//    public function week()
+//    {
+//       $datetime=new \DateTime;
+//       return $datetime->format('D');
+//    }
 
    // LES REQUÊTES
    public function reserverCreneau($creneau)
    {
+    // condition pour vérifier si les contrôles retournent true
     $data = [];
-    if (isset($_POST['reserver']) && isset($_SESSION)) {
-        $data['id_utilisateur']=$_SESSION["user"]->id;
-        $data['titrereservation']=$_POST['titrereservation'];
-        $data['datedebut']=$creneau;
-    }
-    $this->agenda->reserver($data);
-    $this->index();
+        if (isset($_POST['reserver']) && isset($_SESSION)) {
+            $data['id_utilisateur']=$_SESSION["user"]->id;
+            $data['titrereservation']=$_POST['titrereservation'];
+            $data['datedebut']=$creneau;
+        }
+        if ($this->checkAll($data)===true)
+        {
+            $this->agenda->reserver($data);
+            $this->index();
+        }
    }
 
    public function all_reservations () {

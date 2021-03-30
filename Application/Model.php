@@ -78,13 +78,16 @@ abstract class Model
     {
         $columns = "";
         $values = "";
+
         foreach ($data as $key => $value)
         {
             $columns = substr_replace($columns, " ".$key.", ", 0, 0);
             $values = substr_replace($values, "'".$value."', ", 0, 0);
         }
+
         $columns = substr($columns, 1, -2);
         $values = substr($values, 0, -2);
+        
         $sql = "INSERT INTO $table ($columns) VALUES ($values)";
         $result = $this->connect_db()->prepare($sql);
         return $result->execute();
@@ -103,7 +106,7 @@ abstract class Model
             {
                 if ($attribut==$key)
                 {
-                    if ($new_value != $value)
+                    if ($new_value != $value AND $new_value != '')
                     {
                         $sql = "UPDATE $table SET $attribut =:new_value WHERE id=:id";
                         $result = $this->connect_db()->prepare($sql);

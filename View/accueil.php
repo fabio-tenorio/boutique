@@ -11,10 +11,98 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 ?>
 
 <div id="main_accueil">
-    <section id="section1">
-        <div id="bg-section1">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos vero voluptatibus modi possimus. Porro quas sunt, corrupti ratione praesentium exercitationem impedit repudiandae temporibus beatae reprehenderit eaque nam vero molestiae possimus.</p>
-        </div>        
+    <section class="carousel" aria-label="Gallery">
+        <ol class="carousel__viewport">
+            <li id="carousel__slide1"
+                tabindex="0"
+                class="carousel__slide">
+                <div class="carousel__snapper">
+                    <div class="container mt-5 carousel__text__slide">
+                        <h2 class="text-center">Semaine Fête des Mères</h2>
+                        <h3 class="text-center">Laissez-vous tenter par une cure ou un soin dans notre centre</h3>
+                        <p class="text-center">Du 24/05 au 04/06</p>
+                    </div>
+                    <a href="#carousel__slide4"
+                    class="carousel__prev">Go to last slide</a>
+                    <a href="#carousel__slide2"
+                    class="carousel__next">Go to next slide</a>
+                </div>
+            </li>
+            <li id="carousel__slide2"
+                tabindex="0"
+                class="carousel__slide">
+            <div class="carousel__snapper">
+            <div class="carousel__snapper">
+                    <div class="container mt-5 carousel__text__slide">
+                        <h2 class="text-center">Soins mains et pieds</h2>
+                        <h3 class="text-center">Découvrez nos nouvelles prestations</h3>
+                    </div>
+                    <a href="#carousel__slide4"
+                    class="carousel__prev">Go to last slide</a>
+                    <a href="#carousel__slide2"
+                    class="carousel__next">Go to next slide</a>
+                </div>
+            </div>
+            <a href="#carousel__slide1"
+                class="carousel__prev">Go to previous slide</a>
+            <a href="#carousel__slide3"
+                class="carousel__next">Go to next slide</a>
+            </li>
+            <li id="carousel__slide3"
+                tabindex="0"
+                class="carousel__slide">
+            <div class="carousel__snapper">
+            <div class="carousel__snapper">
+                    <div class="container mt-5 carousel__text__slide">
+                        <h2 class="text-center">Journées Fête des Mères</h2>
+                        <h3 class="text-center">Laissez-vous tenter par une cure ou un soin dans notre centre</h3>
+                    </div>
+                    <a href="#carousel__slide4"
+                    class="carousel__prev">Go to last slide</a>
+                    <a href="#carousel__slide2"
+                    class="carousel__next">Go to next slide</a>
+                </div>
+            </div>
+            <a href="#carousel__slide2"
+                class="carousel__prev">Go to previous slide</a>
+            <a href="#carousel__slide4"
+                class="carousel__next">Go to next slide</a>
+            </li>
+            <li id="carousel__slide4"
+                tabindex="0"
+                class="carousel__slide">
+            <div class="carousel__snapper">
+                <div class="container mt-5 carousel__text__slide">
+                    <h2 class="text-center">Soins mains et pieds</h2>
+                    <h3 class="text-center">Découvrez nos nouvelles prestations</h3>
+                </div>
+            </div>
+            <a href="#carousel__slide3"
+                class="carousel__prev">Go to previous slide</a>
+            <a href="#carousel__slide1"
+                class="carousel__next">Go to first slide</a>
+            </li>
+        </ol>
+        <aside class="carousel__navigation">
+            <ol class="carousel__navigation-list">
+                <li class="carousel__navigation-item">
+                    <a href="#carousel__slide1"
+                    class="carousel__navigation-button">Go to slide 1</a>
+                </li>
+                <li class="carousel__navigation-item">
+                    <a href="#carousel__slide2"
+                    class="carousel__navigation-button">Go to slide 2</a>
+                </li>
+                <li class="carousel__navigation-item">
+                    <a href="#carousel__slide3"
+                    class="carousel__navigation-button">Go to slide 3</a>
+                </li>
+                <li class="carousel__navigation-item">
+                    <a href="#carousel__slide4"
+                    class="carousel__navigation-button">Go to slide 4</a>
+                </li>
+            </ol>
+        </aside>
     </section>
     <section id="section_prestations">
         <h2 class="h2 section_title">nos prestations</h2>
@@ -75,7 +163,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
                         <h5 class="card-title">Vernis rouge</h5>
                         <p class="card-text">description du produit</p>
                         <p>19,90 &#8364;</p>
-                        <a href="#" class="btn btn-primary">détails</a>
+                        <a href="#" class="btn btn-primary col-12 mx-auto">détails</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +174,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
                         <h5 class="card-title">Vernis rouge</h5>
                         <p class="card-text">description du produit</p>
                         <p>19,90 &#8364;</p>
-                        <a href="#" class="btn btn-primary">détails</a>
+                        <a href="#" class="btn btn-primary col-12 mx-auto">détails</a>
                     </div>
                 </div>
             </div>
@@ -97,7 +185,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
                         <h5 class="card-title">Vernis rouge</h5>
                         <p class="card-text">description du produit</p>
                         <p>19,90 &#8364;</p>
-                        <a href="#" class="btn btn-primary">détails</a>
+                        <a href="#" class="btn btn-primary col-12 mx-auto">détails</a>
                     </div>
                 </div>
             </div>

@@ -232,7 +232,12 @@ class ControllerUser extends Controller {
         $url = "http://".PATH."/ControllerUser/index";
         session_destroy();
         header("Refresh:0,url=$url");
-    }     
+    }
+
+    public function admin($data=null)
+    {
+        $this->render('administrateur', $data);
+    }
         
 }
 

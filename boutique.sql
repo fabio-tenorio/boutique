@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Mar 30 Mars 2021 à 17:18
+-- Généré le :  Jeu 01 Avril 2021 à 13:46
 -- Version du serveur :  5.7.33-0ubuntu0.18.04.1
 -- Version de PHP :  7.2.24-0ubuntu0.18.04.7
 
@@ -46,6 +46,19 @@ CREATE TABLE `article` (
 
 INSERT INTO `article` (`id`, `id_theme`, `id_utilisateur`, `titrearticle`, `article`, `datearticle`, `id_produit`, `id_reservation`, `id_fournisseur`) VALUES
 (1, 1, 2, 'Nouveauté sèche cheveu Babyliss', 'Blablabla', '2021-03-04', 0, 0, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `avis`
+--
+
+CREATE TABLE `avis` (
+  `id` int(11) NOT NULL,
+  `avis` varchar(255) DEFAULT NULL,
+  `id_utitilisateur` int(11) DEFAULT NULL,
+  `id_produit` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -251,39 +264,39 @@ CREATE TABLE `produit` (
   `reference` varchar(55) NOT NULL,
   `titreproduit` varchar(255) NOT NULL,
   `produit` text NOT NULL,
-  `avis` varchar(255) NOT NULL,
+  `stock` int(25) DEFAULT NULL,
   `prix` decimal(6,2) NOT NULL,
-  `disponibilite` datetime NOT NULL,
   `dateproduit` datetime NOT NULL,
   `id_categorie` int(11) NOT NULL,
-  `id_fournisseur` int(11) NOT NULL
+  `id_fournisseur` int(11) NOT NULL,
+  `id_avis` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `produit`
 --
 
-INSERT INTO `produit` (`id`, `reference`, `titreproduit`, `produit`, `avis`, `prix`, `disponibilite`, `dateproduit`, `id_categorie`, `id_fournisseur`) VALUES
-(1, '100', 'crememain', 'Le panier affichera le stock réel à partir de la somme des produits avec le même id catégorie du pdt', '', '19.50', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(2, '200', 'vernirouge', 'merveilleux', '', '15.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(3, '300', 'vernirose', 'splendide', '', '12.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(4, '100', 'crememain', '200 ml', '', '19.50', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(5, '100', 'crememain', '200 ml', '', '19.50', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(6, '100', 'crememain', '200 ml', '', '19.50', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(7, '100', 'crememain', '200 ml', '', '19.50', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(8, '200', 'vernirouge', 'merveilleux', '', '15.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(9, '200', 'vernirouge', 'merveilleux', '', '15.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(10, '1000', 'sechecheveux', 'extra', '', '150.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(11, '1000', 'sechecheveux', 'extra', '', '150.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(12, '1001', 'coupeongle', 'dangereux', '', '25.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(13, '1002', 'rasoir', 'yes', '', '69.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(14, '1003', 'tondeuse', 'tendance', '', '99.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(15, '1002', 'rasoir', 'yes', '', '69.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(16, '1002', 'rasoir', 'yes', '', '69.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 0, 0),
-(17, '1', 'soinfetedesmeres', 'une merveille', '', '50.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 1, 1),
-(18, '2', 'lissagebresilien', 'pile poils', '', '75.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 1, 1),
-(19, '3', 'manucure', 'bien', '', '45.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 1, 1),
-(20, '4', 'taouageephemere', 'jusqu\'au bout des ongles', '', '15.00', '2021-03-02 00:00:00', '2021-03-02 00:00:00', 1, 1);
+INSERT INTO `produit` (`id`, `reference`, `titreproduit`, `produit`, `stock`, `prix`, `dateproduit`, `id_categorie`, `id_fournisseur`, `id_avis`) VALUES
+(1, '100', 'crememain', 'Le panier affichera le stock réel à partir de la somme des produits avec le même id catégorie du pdt', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL),
+(2, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL),
+(3, '300', 'vernirose', 'splendide', NULL, '12.00', '2021-03-02 00:00:00', 0, 0, NULL),
+(4, '100', 'crememain', '200 ml', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL),
+(5, '100', 'crememain', '200 ml', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL),
+(6, '100', 'crememain', '200 ml', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL),
+(7, '100', 'crememain', '200 ml', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL),
+(8, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL),
+(9, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL),
+(10, '1000', 'sechecheveux', 'extra', NULL, '150.00', '2021-03-02 00:00:00', 0, 0, NULL),
+(11, '1000', 'sechecheveux', 'extra', NULL, '150.00', '2021-03-02 00:00:00', 0, 0, NULL),
+(12, '1001', 'coupeongle', 'dangereux', NULL, '25.00', '2021-03-02 00:00:00', 0, 0, NULL),
+(13, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL),
+(14, '1003', 'tondeuse', 'tendance', NULL, '99.00', '2021-03-02 00:00:00', 0, 0, NULL),
+(15, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL),
+(16, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL),
+(17, '1', 'soinfetedesmeres', 'une merveille', NULL, '50.00', '2021-03-02 00:00:00', 1, 1, NULL),
+(18, '2', 'lissagebresilien', 'pile poils', NULL, '75.00', '2021-03-02 00:00:00', 1, 1, NULL),
+(19, '3', 'manucure', 'bien', NULL, '45.00', '2021-03-02 00:00:00', 1, 1, NULL),
+(20, '4', 'taouageephemere', 'jusqu\'au bout des ongles', NULL, '15.00', '2021-03-02 00:00:00', 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -358,7 +371,14 @@ INSERT INTO `reservation` (`id`, `id_utilisateur`, `titrereservation`, `typeeven
 (35, 15, 'pose d\'ongles', NULL, NULL, '2021-04-01 17:00:00', NULL, NULL, NULL, NULL, NULL),
 (36, 15, 'maquillage', NULL, NULL, '2021-04-01 10:00:00', NULL, NULL, NULL, NULL, NULL),
 (37, 15, 'maquillage', NULL, NULL, '2021-04-01 12:00:00', NULL, NULL, NULL, NULL, NULL),
-(38, 15, 'nouvelle annee', NULL, NULL, '2021-04-03 11:00:00', NULL, NULL, NULL, NULL, NULL);
+(38, 15, 'nouvelle annee', NULL, NULL, '2021-04-03 11:00:00', NULL, NULL, NULL, NULL, NULL),
+(39, 15, 'maquillage', NULL, NULL, '2021-04-03 14:00:00', NULL, NULL, NULL, NULL, NULL),
+(40, 15, 'pose d\'ongles', NULL, NULL, '2021-04-03 15:00:00', NULL, NULL, NULL, NULL, NULL),
+(41, 15, 'fete des meres', NULL, NULL, '2021-03-30 19:00:00', NULL, NULL, NULL, NULL, NULL),
+(42, 16, 'pose d\'ongles', NULL, NULL, '2021-04-02 13:00:00', NULL, NULL, NULL, NULL, NULL),
+(43, 16, 'maquillage', NULL, NULL, '2021-04-03 14:00:00', NULL, NULL, NULL, NULL, NULL),
+(44, 16, 'pose d\'ongles', NULL, NULL, '2021-04-04 15:00:00', NULL, NULL, NULL, NULL, NULL),
+(45, 16, 'pose d\'ongles', NULL, NULL, '2021-04-03 13:00:00', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -412,7 +432,7 @@ CREATE TABLE `utilisateurs` (
 
 INSERT INTO `utilisateurs` (`id`, `id_droit`, `login`, `motpasse`, `prenom`, `nom`, `mail`, `telephone`, `datenaissance`, `dateinscription`) VALUES
 (14, 1, 'client_quatre', '$2y$10$jl3j8MCwwB3AehgZhKelZu4u9pbfcAUyFu7MQEoNis9XPBDgCXDjm', 'client', 'quatre', 'clientquatre@boutique.fr', '6666666666', NULL, NULL),
-(15, 1, 'iris', '$2y$10$7QpMA8i4bSTN67oZZY294OEDtcpDcOsv8z/sGMzXjCOiKobM5bxKe', 'irisinha', 'abrescia', 'iris@boutique.fr', '123456', NULL, NULL),
+(15, 1, 'iris', 'UkbNhHwApyRhB0KP', 'iris', 'debian-sys-maint', 'iris@boutique.fr', '45647879', NULL, NULL),
 (16, 1, 'fabio', '$2y$10$n8r18D/1tsMquItpQbrPNuRpX8oiaFIyAv1FrOpDihk7F.DbXHcLy', 'Fabio', 'Tenorio', 'fabio@boutique.fr', '123456789', NULL, NULL),
 (17, 200, 'admin', '$2y$10$I/AsLWR5YWhiOWraKaWzEuhNrZVrABgsYgnTK03zZJ6VqgkLyL/FG', 'admin', 'admin', 'admin@boutique.fr', '123456789', NULL, NULL);
 
@@ -425,6 +445,12 @@ INSERT INTO `utilisateurs` (`id`, `id_droit`, `login`, `motpasse`, `prenom`, `no
 --
 ALTER TABLE `article`
   ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Index pour la table `avis`
+--
+ALTER TABLE `avis`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `categorie`
@@ -532,6 +558,11 @@ ALTER TABLE `utilisateurs`
 ALTER TABLE `article`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT pour la table `avis`
+--
+ALTER TABLE `avis`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
@@ -585,7 +616,7 @@ ALTER TABLE `reponsemes`
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT pour la table `theme`
 --

@@ -6,6 +6,7 @@ En cliquant sur le jour, renvoi vers page agenda journée
 ?>
 
 <h2 class="my-4 text-dark text-center">Planning</h2>
+<?php echo $this->message ?>
 <div class="agenda-pages my-2">
     <a href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">

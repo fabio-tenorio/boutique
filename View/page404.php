@@ -23,9 +23,9 @@
             <h2>votre sallon en ligne</h2>
             </a>
             <h3 class="h3">Désolé. La page recherchée n'existe pas</h3>
-            <nav>
-                <a href="#">accueil</a>
-                <a href="#">boutique en ligne</a>
+            <nav id="links-404">
+                <a href="http://<?= PATH;?>/ControllerUser/index">accueil</a>
+                <a href="http://<?= PATH;?>/ControllerProduits/index">boutique</a>
             </nav>
         </div>
     </div>

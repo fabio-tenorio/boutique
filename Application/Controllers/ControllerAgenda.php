@@ -74,9 +74,9 @@ class ControllerAgenda extends Controller {
     public function checkConflict($data)
     {
         $allResa = $this->all_reservations();
-        $check = true;
         $cetteResa = explode (' ', $data['datedebut']);
         // var_dump($allResa);
+        $check = true;
         foreach($allResa as $value) {
             foreach($value as $key => $property) {
                 if ($key=='datedebut')
@@ -122,27 +122,27 @@ class ControllerAgenda extends Controller {
             }
             else
             {
-                $this->message = 'Cet horaire est déjà réservé';
+                return $this->message = 'Cet horaire est déjà réservé';
             }
         }
         else
         {
-            $this->message = "Ce n'est plus possible de faire cette réservation";
+            return $this->message = "Ce n'est plus possible de faire cette réservation";
         }
     }
     
-    // cette méthode retourne le numéro des jours de la semaine en cours
-//    public function week()
-//    {
-//       $datetime=new \DateTime;
-//       return $datetime->format('D');
-//    }
+  //  cette méthode retourne le numéro des jours de la semaine en cours
+   public function week()
+   {
+      $datetime=new \DateTime;
+      return $datetime->format('D');
+   }
 
    // LES REQUÊTES
    public function reserverCreneau($creneau)
    {
     // condition pour vérifier si les contrôles retournent true
-    $data = [];
+        $data = [];
         if (isset($_POST['reserver']) && isset($_SESSION)) {
             $data['id_utilisateur']=$_SESSION["user"]->id;
             $data['titrereservation']=$_POST['titrereservation'];

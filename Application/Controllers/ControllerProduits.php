@@ -13,11 +13,11 @@ class ControllerProduits extends Controller {
         //je vérifie si il y a quelqun connecté
         if (isset($_SESSION['user']))
         {
-            $this->render('categoriefiche', $_SESSION['user']);
+            $this->render('produits', $_SESSION['user']);
         }
         else
         {
-            $this->render('categoriefiche');
+            $this->render('produits');
         }
     }
 

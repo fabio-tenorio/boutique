@@ -12,7 +12,20 @@
       <h2>votre sallon en ligne</h2>
     </a>
     <div id="rightlinks">
-    <!-- <a href="http://<?php echo PATH;?>/ControllerBlog/blog">blog</a> -->
+    <!-- <a href="http://<?= PATH;?>/ControllerBlog/blog">blog</a> -->
+    
+    <div class="dropdown">
+      <button class="dropbtn">
+        <span class="fa fa-user fa-lg"></span>
+        <span class="mx-3"><?php echo $_SESSION['user']->login; ?></span>
+      </button>
+      <div class="dropdown-content">
+        <a href="http://<?php echo PATH; ?>/ControllerUser/profil">mon profil</a>
+        <a href="http://<?php echo PATH; ?>/ControllerUser/admin">tableau de bord</a>
+        <a href="http://<?php echo PATH; ?>/ControllerUser/disconnect">me deconnecter</a>
+      </div>
+    </div>
+
       <a href="#" class="link">
         <span class="fa fa-user fa-lg"></span>
         <span><?php echo $_SESSION['user']->login; ?></span>

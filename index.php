@@ -3,14 +3,6 @@ session_start();
 
 require_once 'autoloader.php';
 
-
-/* SI CLASSE ROUTEUR
-Autoloader::start();
-$request = $_GET['r']; 
-$routeur= new Routeur($request);
-$routeur->renderControler();
-*/
-
 use App\Autoloader;
 // on en a besoin afin d'afficher la page 404
 use App\Application\Controllers\ControllerUser as ControllerUser;
@@ -20,56 +12,60 @@ Autoloader::register();
 ini_set('display_errors', 'on');
 error_reporting(E_ALL);
 
-$params = explode('/', $_GET['p']);
-
-if ($params[0]!='')
-{
-    $controller = ucfirst($params[0]);
-    $MainController = 'App\\'.'Application\\'.$controller;
-    $OtherController = 'App\\'.'Application\\'.'Controllers\\'.$controller;
-    if (class_exists($MainController))
-    {
-       $controller = new $MainController;
-    }
-    if (class_exists($OtherController))
-    { 
-       $controller = new $OtherController;
-    
-    } else
-    {
-        ControllerUser::page_error();
-    }
-    // la syntaxe ci-dessous est équivalent à la condition if else ci-dessous
-    // $action = isset($params[1]) ? $params[1] : http_response_code(404);
-    if (isset($params[1]) && !isset($params[2]))
-    {
-        $action = $params[1];
-        if (method_exists($controller, $action))
-        {
-            //vérifie si la méthode a une visibilité publique
-            $controller->$action();
-        }
-        else
-        {
-            ControllerUser::page_error();
-        }
-    }
-    elseif (isset($params[1]) && isset($params[2]))
-    {
-        // si la méthode accepte des paramètres
-        $action = $params[1];
-        $value = $params[2];
-        $controller->$action($value);
-    }
-    else
-    {
-        ControllerUser::page_error();
-    }
-}
-else
-{
-    $controller = new ControllerUser;
-    $controller->index();
+if (isset($_GET['p'])) {
+    $params = explode('/', $_GET['p']);
+} else {
+    $_GET['p'] = '';
+    $params = explode('/', $_GET['p']);
 }
 
+foreach($params as $key=>$value) {
+    if (count($params) < 2) {
+        if ($value!='') {
+            $controller = ucfirst($value);
+            $MainController = 'App\\'.'Application\\'.$controller;
+            $OtherController = 'App\\'.'Application\\'.'Controllers\\'.$controller;
+            if (class_exists($MainController)) {
+                $controller = new $MainController;
+            } else if (class_exists($OtherController)) {
+                $controller = new $OtherController;
+            } else {
+                ControllerUser::page_error();
+            }
+        } else {
+            $controller = new ControllerUser;
+            $controller->index();
+        }
+    } else {
+        $controller = ucfirst($value);
+        $MainController = 'App\\'.'Application\\'.$controller;
+        $OtherController = 'App\\'.'Application\\'.'Controllers\\'.$controller;
+        $action = $params[1];
+        $arguments = [];
+        foreach ($params as $key => $value) {
+            if ($key > 1) {
+                $arguments[] = $value;
+            }
+        }
+        if (class_exists($MainController)) {
+            $controller = new $MainController;
+            if (method_exists($controller, $action)) {
+                // $arguments = new ReflectionMethod($controller, $action);
+                // $arguments = $arguments->getParameters();
+                $controller->$action(...$arguments);
+            } else {
+                ControllerUser::page_error();   
+            }
+        } elseif (class_exists($OtherController)) {
+            $controller = new $OtherController;
+            if (method_exists($controller, $action)) {
+                // $arguments = new ReflectionMethod($controller, $action);
+                // $arguments = $arguments->getParameters();
+                $controller->$action(...$arguments);
+            } else {
+                ControllerUser::page_error();
+            }
+        }       
+    }
+}
 ?>

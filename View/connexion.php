@@ -1,5 +1,8 @@
-<br> <?php echo "<font color=\"red\">".$this->message."</font>";?>
-
+<?php
+if ($this->message!=null) {
+    echo '<span class="btn btn-danger mt-5">'.$this->message.'</span>';
+}
+?>
 <div id="main_connexion">
   <div id="img-connexion">
   </div>

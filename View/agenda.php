@@ -3,10 +3,10 @@
 Affiche un agenda hebdomadaire sur le mois courant. En cliquant sur un jour, on visualise les créneaux disponibles
 En cliquant sur le jour, renvoi vers page agenda journée
 */
+$this->setLundi($this->jour);
 ?>
 
 <h2 class="my-4 text-dark text-center">Planning</h2>
-<?php echo $this->message ?>
 <div class="agenda-pages my-2">
     <a href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
@@ -14,7 +14,7 @@ En cliquant sur le jour, renvoi vers page agenda journée
         </svg>
     </a>
     <h3 class="text-dark">
-        <?= "Semaine ".$this->semaine." de l'année ".$this->an."<br>"."du lundi ".$this->lundi."/".$this->mois." au dimanche ".$this->dimanche->format('d')."/".$this->dimanche->format('m'); ?>
+        <?= "Semaine ".$this->semaine." de l'année ".$this->an."<br>"."du lundi ".$this->lundi->format('d')."/".$this->mois." au dimanche ".$this->dimanche->format('d')."/".$this->dimanche->format('m'); ?>
     </h3>
     <a href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
@@ -22,6 +22,8 @@ En cliquant sur le jour, renvoi vers page agenda journée
         </svg>
     </a>
 </div>
+<?php if ($this->message!='') {
+    echo '<span class="btn btn-danger">'.$this->message.'</span>';}; ?>
 <div>
     <table class="agenda table table-bordered table-hover table-light my-4 mx-3">
         <thead class="thead-dark">
@@ -33,7 +35,10 @@ En cliquant sur le jour, renvoi vers page agenda journée
         foreach($joursenlettres as $jourdelasemaine)
         {
             echo '<th class="creneau-jours text-center" scope="col">';
-            echo $jourdelasemaine;
+            echo '<div><p>'.$jourdelasemaine.'</p>';
+            var_dump($this->lundi);
+            // var_dump($this->jour->modify('last monday'));
+            echo '<p>'.'</p></div>';
             echo '</th>';
         }
         ?>
@@ -48,9 +53,9 @@ En cliquant sur le jour, renvoi vers page agenda journée
             for ($jour=0;$jour<7;$jour++)
             {
                 if ($heure==8 || $heure==9) {
-                    $dateformat = $this->an."-".$this->mois."-".$this->jour->format('d')." 0".$heure.":00:00";
+                    $dateformat = $this->an."-".$this->mois."-".$this->lundi->format('d')." 0".$heure.":00:00";
                 } else {
-                    $dateformat = $this->an."-".$this->mois."-".$this->jour->format('d')." ".$heure.":00:00";
+                    $dateformat = $this->an."-".$this->mois."-".$this->lundi->format('d')." ".$heure.":00:00";
                 }
                 $creneau = new \DateTime($dateformat);
                 $interval = 'P'.$jour.'D';
@@ -81,7 +86,9 @@ En cliquant sur le jour, renvoi vers page agenda journée
                     echo('<a href="http://');
                     echo PATH;
                     echo("/ControllerAgenda/formResaView/");
-                    echo $creneau->format('Y-m-d H:00:00');
+                    echo $creneau->format('Y-m-d');
+                    echo '/';
+                    echo $creneau->format('H:00:00');
                     echo('">reserver ce créneau</a>');
                 }
                 echo('</td>');

@@ -13,31 +13,20 @@
     </a>
     <div id="rightlinks">
     <!-- <a href="http://<?= PATH;?>/ControllerBlog/blog">blog</a> -->
-    
     <div class="dropdown">
       <button class="dropbtn">
-        <span class="fa fa-user fa-lg"></span>
-        <span class="mx-3"><?php echo $_SESSION['user']->login; ?></span>
+        <span class="fa fa-user fa-lg user-icon"></span>
+        <span class="mx-3 user-icon"><?php echo 'Salut '.$_SESSION['user']->login.'!'; ?></span>
       </button>
       <div class="dropdown-content">
-        <a href="http://<?php echo PATH; ?>/ControllerUser/profil">mon profil</a>
-        <a href="http://<?php echo PATH; ?>/ControllerUser/admin">tableau de bord</a>
-        <a href="http://<?php echo PATH; ?>/ControllerUser/disconnect">me deconnecter</a>
-      </div>
-    </div>
-
-      <a href="#" class="link">
-        <span class="fa fa-user fa-lg"></span>
-        <span><?php echo $_SESSION['user']->login; ?></span>
-        <ul class="dropdown_link">
-          <li><a href="http://<?php echo PATH; ?>/ControllerUser/profil">mon profil</a></li>
-          <?php if ($_SESSION['user']->id_droit == 200) { ?>
-          <li><a href="http://<?php echo PATH; ?>/ControllerAdmin/index">tableau de bord</a></li>
+          <a href="http://<?php echo PATH; ?>/ControllerUser/profil"><i class="bi bi-person-lines-fill header-icon"></i>mon profil</a>
+          <?php if ($_SESSION['user']->id_droit==200) {?>
+          <a href="http://<?php echo PATH; ?>/ControllerUser/admin"><i class="bi bi-card-checklist"></i>tableau de bord</a>
           <?php } ?>
-          <li><a href="http://<?php echo PATH; ?>/ControllerUser/disconnect">me deconnecter</a></li>
-        </ul>
-      </a>
-      <a href="#"><span class="header-icon fa fa-shopping-bag fa-lg">panier</span></a>
+          <a href="http://<?php echo PATH; ?>/ControllerUser/disconnect"><i class="bi bi-door-open"></i>me deconnecter</a>
+        </div>
+      </div>
+      <a href="#"><span class="header-icon bi bi-bag-check fa-lg m-2"></span>panier</a>
     </div>
   <?php } else
   { ?>

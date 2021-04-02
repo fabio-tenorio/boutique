@@ -7,60 +7,106 @@
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelAgenda;
+use DateInterval;
 use DateTime;
 
 class ControllerAgenda extends Controller {
 
-    public $creneau;
+    public $mainteant;
     public $lundi;
+    public $dimanche;
+    public $joursDeLaSemaine;
+    public $creneaux;
 
-    public function __construct()
-    {
-        $this->agenda = new ModelAgenda;
-        
-        // les infos pour remplir le créneau
-        
-        $this->jour = new \DateTime();
-        $this->an = $this->jour->format('Y');
-        $this->semaine = $this->jour->format('W');
-        $this->mois = $this->jour->setISODate($this->an, $this->semaine);
-        // le nombre du mois courant
-        $this->mois = $this->jour->format('m');
-        // le lundi (jour 01) de la semaine courante
-        // $this->jour->setTime(0, 0, 0);
-        if ($this->jour->format('N') === 1) {
-            // If the date is already a Monday, return it as-is
-            $this->lundi = $this->jour;
-        } else {
-            // Otherwise, return the date of the nearest Monday in the past
-            // This includes Sunday in the previous week instead of it being the start of a new week
-            $this->lundi = $this->jour->modify('last monday');
-        }        
-        // $this->lundi = $this->jour->format('d');
-        $this->dimanche = new \DateTime();
-        $this->dimanche = $this->jour->add(new \DateInterval('P6D'));
-        $this->message = '';
+    public function setMaintenant() {
+        $this->maintenant = new DateTime();
+        return $this->maintenant;
     }
 
     public function setLundi ($date) {
-            if ($date instanceof \DateTime) {
-                $date = clone $date;
-            } elseif (!$date) {
-                $date = new \DateTime();
-            } else {
-                $date = new \DateTime($date);
+        if ($date instanceof \DateTime) {
+            $date = clone $date;
+        } elseif (!$date) {
+            $date = new \DateTime();
+        } else {
+            $date = new \DateTime($date);
+        }
+        $date->setTime(0, 0, 0);
+        if ($date->format('N') == 1) {
+            // If the date is already a Monday, return it as-is
+            return $this->lundi = $date;
+        } else {
+            return $this->lundi= $date->modify('last monday');
+        }
+    }
+
+    public function setDimanche($lundi) {
+        if ($lundi instanceof \DateTime) {
+            $lundi = clone $lundi;
+        } elseif (!$lundi) {
+            $lundi = new \DateTime();
+        } else {
+            $lundi = new \DateTime($lundi);
+        }
+        $lundi->setTime(23, 59, 59);
+        return $this->dimanche = $lundi->add(new \DateInterval('P6D'));
+    }
+
+    public function setJoursDeLaSemaine($lundi) {
+        list($an, $mois, $jour) = explode("-", $lundi->format('Y-m-d'));
+        // Get the weekday of the given date
+        $chaqueJour = date('l',mktime('0','0','0', $mois, $jour, $an));
+        switch($chaqueJour) {
+            case 'Monday': $nombreDeJours = 0; break;
+            case 'Tuesday': $nombreDeJours = 1; break;
+            case 'Wednesday': $nombreDeJours = 2; break;
+            case 'Thursday': $nombreDeJours = 3; break;
+            case 'Friday': $nombreDeJours = 4; break;
+            case 'Saturday': $nombreDeJours = 5; break;
+            case 'Sunday': $nombreDeJours = 6; break;   
+        }
+        // Timestamp of the monday for that week
+        $lundi = mktime('0','0','0', $mois, $jour-$nombreDeJours, $an);
+        $secondesParJour = 86400;
+        // Get date for 7 days from Monday (inclusive)
+        for($i=0; $i<7; $i++)
+        {
+            $joursDeLaSemaine[$i] = date('d-m-Y',$lundi+($secondesParJour*$i));
+        }
+        return $joursDeLaSemaine;
+    }
+
+    public function setCreneaux(array $jours) {
+        $creneaux = [];
+        foreach ($jours as $value) {
+            
+            for ($i=0;$i<12;$i++) {
+                $heure = $i + 8;
+                $creneaux[$value][$i] = $value." ".$heure.":00:00";
+                $creneaux[$value][$i] = strtotime($creneaux[$value][$i]);
+                $creneaux[$value][$i] = date("d/m/Y H:i:s", $creneaux[$value][$i]);
             }
+        }
+        return $creneaux;
+    }
     
-            $date->setTime(0, 0, 0);
-    
-            if ($date->format('N') == 1) {
-                // If the date is already a Monday, return it as-is
-                return $this->lundi = $date;
-            } else {
-                // Otherwise, return the date of the nearest Monday in the past
-                // This includes Sunday in the previous week instead of it being the start of a new week
-                return $this->lundi= $date->modify('last monday');
-            }
+    public function __construct()
+    {
+        $this->agenda = new ModelAgenda;
+        // les infos pour remplir le créneau
+        $this->maintenant = new DateTime();
+        if ($this->maintenant->format('N') == 1) {
+            $this->lundi = $this->maintenant;
+        } else {
+            $this->lundi = $this->maintenant->modify('last monday');
+        }
+        $this->an = $this->maintenant->format('Y');
+        $this->semaine = $this->maintenant->format('W');
+        $this->mois = $this->maintenant->setISODate($this->an, $this->semaine);
+        $this->mois = $this->maintenant->format('m');
+        $this->dimanche = new \DateTime();
+        
+        $this->message = '';
     }
 
     // LA GESTION DES DONNÉES

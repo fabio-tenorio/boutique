@@ -21,7 +21,10 @@
     </select>
     <div class="form-group">
         <label class="text-dark" for="heuredebut">l'horaire du RDV</label>
-        <input class="form-control" type="time" name="heuredebut" value="<?=$this->creneau[1]?>" inactive/>
+        <!-- <input class="form-control" type="time" name="heuredebut" value="<?=$this->creneau[1]?>" inactive/> -->
+        <?php
+        echo '<time datetime="'.date('c').'">'.date('Y - m - d H : 00 : 00').'</time>';
+        ?>
     </div>
     <input class="btn btn-primary col-12 auto" type="submit" name="reserver" value="reserver" />
 </form>

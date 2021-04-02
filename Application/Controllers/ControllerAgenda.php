@@ -203,14 +203,14 @@ class ControllerAgenda extends Controller {
    }
 
    // LES REQUÊTES
-   public function reserverCreneau($date, $heure)
+   public function reserverCreneau($datetime)
    {
     // condition pour vérifier si les contrôles retournent true
         $data = [];
         if (isset($_POST['reserver']) && isset($_SESSION)) {
             $data['id_utilisateur']=$_SESSION["user"]->id;
             $data['titrereservation']=$_POST['titrereservation'];
-            $data['datedebut']=''.$date.' '.$heure;
+            $data['datedebut']= $datetime;
             if ($this->checkAll($data['datedebut'])===true)
             {
                 $this->agenda->reserver($data);

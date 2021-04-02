@@ -20,12 +20,13 @@ $creneaux = $this->setCreneaux($joursDeLaSemaine);
     </a>
     <h3 class="text-dark">
         <?php
-        if ($maintenant->format('H')<15) {
-            echo 'bonjour '.$_SESSION['user']->login.'!';
-        } else {
-            echo 'bonsoir '.$_SESSION['user']->login.'!';
-        }
-        echo $maintenant->format('m')."/".$maintenant->format('Y');?>
+        echo 'du lundi '.$lundi->format('d/m').' au dimanche '.$dimanche->format('d/m');
+        // if ($maintenant->format('H')<15) {
+        //     echo 'bonjour '.$_SESSION['user']->login.'!';
+        // } else {
+        //     echo 'bonsoir '.$_SESSION['user']->login.'!';
+        // }
+        // echo $maintenant->format('m')."/".$maintenant->format('Y');?>
     </h3>
     <a href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
@@ -58,12 +59,12 @@ $creneaux = $this->setCreneaux($joursDeLaSemaine);
             echo'<tr>';
             echo'<th class="agenda-heure" scope="row">'.$heure.'h</th>';
             foreach ($creneaux as $ligne) {
-                echo'<td>';
                 $creneauVide = true;
                 foreach ($this->allResa as $objects) {
                     foreach ($objects as $propertyName => $property) {
                         if ($propertyName == 'datedebut') {
                             if ($property == $ligne[$horaires]) {
+                                echo'<td class="text-center td-creneau-rempli>';
                                 echo "<h4>".$objects->titrereservation."</h4>";
                                 if ($objects->id_utilisateur===$_SESSION['user']->id) {
                                     echo('<a class="btn btn-warning col-12" href="http://');
@@ -78,10 +79,12 @@ $creneaux = $this->setCreneaux($joursDeLaSemaine);
                     }
                 }
                 if ($creneauVide === true) {
+                    echo '<td class="text-center td-creneau-vide my-auto">';
                     echo('<a href="http://');
                     echo PATH;
                     echo("/ControllerAgenda/formResaView/");
-                    echo $ligne[$horaires];
+                    $ligne[$horaires] = explode(' ', $ligne[$horaires]);
+                    echo $ligne[$horaires][0].'/'.$ligne[$horaires][1];
                     echo('">reserver ce créneau</a>');
                 }
                 echo'</td>';
@@ -89,59 +92,6 @@ $creneaux = $this->setCreneaux($joursDeLaSemaine);
             $heure++;
             echo '</tr>';
         }
-        // }
-                // foreach ($ligne as $colone) {
-                //     echo '<td>';
-                //     echo $colone;
-                //     echo '</td>';
-                // }
-            // echo '</tr>';
-            // }
-            
-            // for ($jour=0;$jour<7;$jour++)
-            // {
-            //     if ($heure==8 || $heure==9) {
-            //         $dateformat = $this->an."-".$this->mois."-".$this->lundi->format('d')." 0".$heure.":00:00";
-            //     } else {
-            //         $dateformat = $this->an."-".$this->mois."-".$this->lundi->format('d')." ".$heure.":00:00";
-            //     }
-            //     $creneau = new \DateTime($dateformat);
-            //     $interval = 'P'.$jour.'D';
-            //     $creneau = $creneau->add(new \DateInterval($interval));
-            //     $creneauVide = true;
-            //     foreach ($this->allResa as $objects) {
-            //         foreach ($objects as $propertyName => $property) {
-            //             if ($propertyName=='datedebut') {
-            //                 $property = explode (' ', $property);
-            //                 $property[1] = explode (':', $property[1]);
-            //                 if ($property[0]==$creneau->format('Y-m-d') && $property[1][0]==$creneau->format('h')) {
-            //                     echo '<td class="text-center td-creneau-rempli">';
-            //                     echo "<h4>".$objects->titrereservation."</h4>";
-            //                     if ($objects->id_utilisateur===$_SESSION['user']->id) {
-            //                         echo('<a class="btn btn-warning col-12" href="http://');
-            //                         echo PATH;
-            //                         echo("/ControllerAgenda/SupprimeResaView/");
-            //                         echo $objects->id;
-            //                         echo('">annuler</a>');
-            //                     }
-            //                     $creneauVide = false;
-            //                 }
-            //             }
-            //         }
-            //     }
-            //     if ($creneauVide === true) {
-            //         echo '<td class="text-center td-creneau-vide my-auto">';
-            //         echo('<a href="http://');
-            //         echo PATH;
-            //         echo("/ControllerAgenda/formResaView/");
-            //         echo $creneau->format('Y-m-d');
-            //         echo '/';
-            //         echo $creneau->format('H:00:00');
-            //         echo('">reserver ce créneau</a>');
-            //     }
-            //     echo('</td>');
-            // }
-        //     echo('</tr>');
-        // }
         ?>
     </table>
+</div>

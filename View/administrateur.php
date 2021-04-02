@@ -43,6 +43,7 @@ Nouvel article dans boutique
     <div class="row my-5">
         <div class="col border mx-3">
             <h2 class="text-center">Liste des utilisateurs</h2>
+            <?php var_dump($this->data); ?>
         <!-- select all dans login, nom, prenom, mail, date de naissance, date d'inscription sur le site
             à côté de chaque utilisateur, il y aura un bouton qui bascule vers la page profil-->
         </div>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5ubuntu0.5
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Client :  localhost:3306
--- Généré le :  Jeu 01 Avril 2021 à 13:46
--- Version du serveur :  5.7.33-0ubuntu0.18.04.1
--- Version de PHP :  7.2.24-0ubuntu0.18.04.7
+-- Hôte : localhost:8889
+-- Généré le : ven. 02 avr. 2021 à 13:30
+-- Version du serveur :  5.7.30
+-- Version de PHP : 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,10 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `boutique`
+-- Base de données : `boutique`
 --
-CREATE DATABASE IF NOT EXISTS `boutique` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `boutique`;
 
 -- --------------------------------------------------------
 
@@ -28,6 +26,7 @@ USE `boutique`;
 -- Structure de la table `article`
 --
 
+DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(11) NOT NULL,
   `id_theme` int(11) NOT NULL,
@@ -41,7 +40,7 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `article`
+-- Déchargement des données de la table `article`
 --
 
 INSERT INTO `article` (`id`, `id_theme`, `id_utilisateur`, `titrearticle`, `article`, `datearticle`, `id_produit`, `id_reservation`, `id_fournisseur`) VALUES
@@ -53,6 +52,7 @@ INSERT INTO `article` (`id`, `id_theme`, `id_utilisateur`, `titrearticle`, `arti
 -- Structure de la table `avis`
 --
 
+DROP TABLE IF EXISTS `avis`;
 CREATE TABLE `avis` (
   `id` int(11) NOT NULL,
   `avis` varchar(255) DEFAULT NULL,
@@ -66,13 +66,14 @@ CREATE TABLE `avis` (
 -- Structure de la table `categorie`
 --
 
+DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE `categorie` (
   `id` int(11) NOT NULL,
   `nom` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `categorie`
+-- Déchargement des données de la table `categorie`
 --
 
 INSERT INTO `categorie` (`id`, `nom`) VALUES
@@ -89,6 +90,7 @@ INSERT INTO `categorie` (`id`, `nom`) VALUES
 -- Structure de la table `client`
 --
 
+DROP TABLE IF EXISTS `client`;
 CREATE TABLE `client` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -102,7 +104,7 @@ CREATE TABLE `client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `client`
+-- Déchargement des données de la table `client`
 --
 
 INSERT INTO `client` (`id`, `id_utilisateur`, `nomtitulaireCB`, `numeroCB`, `validiteCB`, `code3chiffresCB`, `adresselivraison`, `id_panier`, `id_commande`) VALUES
@@ -114,6 +116,7 @@ INSERT INTO `client` (`id`, `id_utilisateur`, `nomtitulaireCB`, `numeroCB`, `val
 -- Structure de la table `commande`
 --
 
+DROP TABLE IF EXISTS `commande`;
 CREATE TABLE `commande` (
   `id` int(11) NOT NULL,
   `id_client` int(11) NOT NULL,
@@ -129,6 +132,7 @@ CREATE TABLE `commande` (
 -- Structure de la table `commande-client`
 --
 
+DROP TABLE IF EXISTS `commande-client`;
 CREATE TABLE `commande-client` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
@@ -150,6 +154,7 @@ CREATE TABLE `commande-client` (
 -- Structure de la table `conversation`
 --
 
+DROP TABLE IF EXISTS `conversation`;
 CREATE TABLE `conversation` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
@@ -169,13 +174,14 @@ CREATE TABLE `conversation` (
 -- Structure de la table `droit`
 --
 
+DROP TABLE IF EXISTS `droit`;
 CREATE TABLE `droit` (
   `id` int(11) NOT NULL,
   `nom` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `droit`
+-- Déchargement des données de la table `droit`
 --
 
 INSERT INTO `droit` (`id`, `nom`) VALUES
@@ -190,6 +196,7 @@ INSERT INTO `droit` (`id`, `nom`) VALUES
 -- Structure de la table `fournisseur`
 --
 
+DROP TABLE IF EXISTS `fournisseur`;
 CREATE TABLE `fournisseur` (
   `id` int(11) NOT NULL,
   `nomfournisseur` varchar(255) NOT NULL,
@@ -198,7 +205,7 @@ CREATE TABLE `fournisseur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `fournisseur`
+-- Déchargement des données de la table `fournisseur`
 --
 
 INSERT INTO `fournisseur` (`id`, `nomfournisseur`, `codepostale`, `statut`) VALUES
@@ -221,6 +228,7 @@ INSERT INTO `fournisseur` (`id`, `nomfournisseur`, `codepostale`, `statut`) VALU
 -- Structure de la table `message`
 --
 
+DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -233,9 +241,24 @@ CREATE TABLE `message` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Nouveaute-promo`
+--
+
+DROP TABLE IF EXISTS `Nouveaute-promo`;
+CREATE TABLE `Nouveaute-promo` (
+  `id` int(11) NOT NULL,
+  `id_produit` int(11) NOT NULL,
+  `nouveaute` varchar(255) NOT NULL,
+  `promo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `panier`
 --
 
+DROP TABLE IF EXISTS `panier`;
 CREATE TABLE `panier` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -249,6 +272,7 @@ CREATE TABLE `panier` (
 -- Structure de la table `panierhistoriqueadmin`
 --
 
+DROP TABLE IF EXISTS `panierhistoriqueadmin`;
 CREATE TABLE `panierhistoriqueadmin` (
   `aaa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -259,6 +283,7 @@ CREATE TABLE `panierhistoriqueadmin` (
 -- Structure de la table `produit`
 --
 
+DROP TABLE IF EXISTS `produit`;
 CREATE TABLE `produit` (
   `id` int(11) NOT NULL,
   `reference` varchar(55) NOT NULL,
@@ -273,7 +298,7 @@ CREATE TABLE `produit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `produit`
+-- Déchargement des données de la table `produit`
 --
 
 INSERT INTO `produit` (`id`, `reference`, `titreproduit`, `produit`, `stock`, `prix`, `dateproduit`, `id_categorie`, `id_fournisseur`, `id_avis`) VALUES
@@ -304,6 +329,7 @@ INSERT INTO `produit` (`id`, `reference`, `titreproduit`, `produit`, `stock`, `p
 -- Structure de la table `reponse`
 --
 
+DROP TABLE IF EXISTS `reponse`;
 CREATE TABLE `reponse` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -320,6 +346,7 @@ CREATE TABLE `reponse` (
 -- Structure de la table `reponsemes`
 --
 
+DROP TABLE IF EXISTS `reponsemes`;
 CREATE TABLE `reponsemes` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
@@ -335,6 +362,7 @@ CREATE TABLE `reponsemes` (
 -- Structure de la table `reservation`
 --
 
+DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -350,7 +378,7 @@ CREATE TABLE `reservation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `reservation`
+-- Déchargement des données de la table `reservation`
 --
 
 INSERT INTO `reservation` (`id`, `id_utilisateur`, `titrereservation`, `typeevenement`, `intervenant`, `datedebut`, `datefin`, `heuredebut`, `heurefin`, `id_produit`, `id_fournisseur`) VALUES
@@ -386,6 +414,7 @@ INSERT INTO `reservation` (`id`, `id_utilisateur`, `titrereservation`, `typeeven
 -- Structure de la table `theme`
 --
 
+DROP TABLE IF EXISTS `theme`;
 CREATE TABLE `theme` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
@@ -397,7 +426,7 @@ CREATE TABLE `theme` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `theme`
+-- Déchargement des données de la table `theme`
 --
 
 INSERT INTO `theme` (`id`, `id_droit`, `visibilitetheme`, `titretheme`, `descriptiftheme`, `datetheme`, `id_utilisateur`) VALUES
@@ -413,6 +442,7 @@ INSERT INTO `theme` (`id`, `id_droit`, `visibilitetheme`, `titretheme`, `descrip
 -- Structure de la table `utilisateurs`
 --
 
+DROP TABLE IF EXISTS `utilisateurs`;
 CREATE TABLE `utilisateurs` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
@@ -427,17 +457,17 @@ CREATE TABLE `utilisateurs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `utilisateurs`
+-- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id`, `id_droit`, `login`, `motpasse`, `prenom`, `nom`, `mail`, `telephone`, `datenaissance`, `dateinscription`) VALUES
 (14, 1, 'client_quatre', '$2y$10$jl3j8MCwwB3AehgZhKelZu4u9pbfcAUyFu7MQEoNis9XPBDgCXDjm', 'client', 'quatre', 'clientquatre@boutique.fr', '6666666666', NULL, NULL),
 (15, 1, 'iris', 'UkbNhHwApyRhB0KP', 'iris', 'debian-sys-maint', 'iris@boutique.fr', '45647879', NULL, NULL),
 (16, 1, 'fabio', '$2y$10$n8r18D/1tsMquItpQbrPNuRpX8oiaFIyAv1FrOpDihk7F.DbXHcLy', 'Fabio', 'Tenorio', 'fabio@boutique.fr', '123456789', NULL, NULL),
-(17, 200, 'admin', '$2y$10$I/AsLWR5YWhiOWraKaWzEuhNrZVrABgsYgnTK03zZJ6VqgkLyL/FG', 'admin', 'admin', 'admin@boutique.fr', '123456789', NULL, NULL);
+(17, 200, 'admin', '$2y$10$I/AsLWR5YWhiOWraKaWzEuhNrZVrABgsYgnTK03zZJ6VqgkLyL/FG', 'admin', 'aaa', 'admin@boutique.fr', '123456789', NULL, NULL);
 
 --
--- Index pour les tables exportées
+-- Index pour les tables déchargées
 --
 
 --
@@ -501,6 +531,12 @@ ALTER TABLE `message`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
+-- Index pour la table `Nouveaute-promo`
+--
+ALTER TABLE `Nouveaute-promo`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `panier`
 --
 ALTER TABLE `panier`
@@ -549,7 +585,7 @@ ALTER TABLE `utilisateurs`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
@@ -557,76 +593,97 @@ ALTER TABLE `utilisateurs`
 --
 ALTER TABLE `article`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT pour la table `avis`
 --
 ALTER TABLE `avis`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT pour la table `commande-client`
 --
 ALTER TABLE `commande-client`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `conversation`
 --
 ALTER TABLE `conversation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `droit`
 --
 ALTER TABLE `droit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+
 --
 -- AUTO_INCREMENT pour la table `fournisseur`
 --
 ALTER TABLE `fournisseur`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `Nouveaute-promo`
+--
+ALTER TABLE `Nouveaute-promo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `panier`
 --
 ALTER TABLE `panier`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
 --
 -- AUTO_INCREMENT pour la table `reponse`
 --
 ALTER TABLE `reponse`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `reponsemes`
 --
 ALTER TABLE `reponsemes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
 --
 -- AUTO_INCREMENT pour la table `theme`
 --
 ALTER TABLE `theme`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

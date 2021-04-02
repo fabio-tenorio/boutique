@@ -234,10 +234,10 @@ class ControllerUser extends Controller {
         header("Refresh:0,url=$url");
     }
 
-    public function admin($data=null)
+    /**public function admin($data=null)
     {
         $this->render('administrateur', $data);
-    }
+    }*/
         
 }
 

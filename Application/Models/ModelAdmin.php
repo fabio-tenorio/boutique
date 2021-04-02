@@ -14,6 +14,8 @@ class ModelAdmin extends Model {
         // $this->connectDb();
         echo "je suis modelAdmin";
     }
+
+    
 }
 
 ?>

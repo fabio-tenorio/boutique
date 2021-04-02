@@ -8,7 +8,7 @@ $lundi = $this->setLundi($maintenant);
 $dimanche = $this->setDimanche($lundi);
 $joursDeLaSemaine = $this->setJoursDeLaSemaine($lundi);
 $creneaux = $this->setCreneaux($joursDeLaSemaine);
-$this->bonne_affichage($creneaux);
+// $this->bonne_affichage($creneaux);
 ?>
 
 <h2 class="my-4 text-dark text-center">Planning</h2>
@@ -59,7 +59,31 @@ $this->bonne_affichage($creneaux);
             echo'<th class="agenda-heure" scope="row">'.$heure.'h</th>';
             foreach ($creneaux as $ligne) {
                 echo'<td>';
-                echo $ligne[$horaires];
+                $creneauVide = true;
+                foreach ($this->allResa as $objects) {
+                    foreach ($objects as $propertyName => $property) {
+                        if ($propertyName == 'datedebut') {
+                            if ($property == $ligne[$horaires]) {
+                                echo "<h4>".$objects->titrereservation."</h4>";
+                                if ($objects->id_utilisateur===$_SESSION['user']->id) {
+                                    echo('<a class="btn btn-warning col-12" href="http://');
+                                    echo PATH;
+                                    echo("/ControllerAgenda/SupprimeResaView/");
+                                    echo $objects->id;
+                                    echo('">annuler</a>');
+                                }
+                                $creneauVide = false;
+                            }
+                        }
+                    }
+                }
+                if ($creneauVide === true) {
+                    echo('<a href="http://');
+                    echo PATH;
+                    echo("/ControllerAgenda/formResaView/");
+                    echo $ligne[$horaires];
+                    echo('">reserver ce créneau</a>');
+                }
                 echo'</td>';
             }
             $heure++;

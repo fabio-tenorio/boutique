@@ -12,7 +12,12 @@ Autoloader::register();
 ini_set('display_errors', 'on');
 error_reporting(E_ALL);
 
-$params = explode('/', $_GET['p']);
+if (isset($_GET['p'])) {
+    $params = explode('/', $_GET['p']);
+} else {
+    $_GET['p'] = '';
+    $params = explode('/', $_GET['p']);
+}
 
 foreach($params as $key=>$value) {
     if (count($params) < 2) {

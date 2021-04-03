@@ -11,6 +11,9 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 ?>
 
 <div id="main_accueil">
+    <section>
+        <img id="accueil-bg" src="<?php echo IMAGES; ?>salondecoiffure.jpg" alt="salon">
+    </section>
     <section id="section_prestations">
         <h2 class="h2 section_title">nos prestations</h2>
         <div class="row">

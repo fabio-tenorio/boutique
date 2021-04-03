@@ -49,6 +49,11 @@ main {
     background-color: whitesmoke;
 }
 
+#accueil-bg {
+  width: 100%;
+  margin: auto;
+}
+
 header {
     background-color: #FFFFFF;
     width: 100%;

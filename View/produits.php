@@ -93,7 +93,25 @@
             </ol>
         </aside>
     </section>
-<table>
+    <section>
+        <ul>
+            <li>
+                <div>
+                    <img src="#" alt="produit">
+                </div>
+                <article>
+                    <h5>Titre du produit</h5>
+                    <p>description du produit</p>
+                </article>
+                <form action="#" method="POST">
+                    <input type="number" placeholder="qte.">
+                    <button type="submit">ajouter au panier</button>
+                    <button type="submit">passer à la commande</button>
+                </form>
+            </li>
+        </ul>
+    </section>
+    <table>
         <thead>
             <tr>
                 <th scope="col">trier par:</th>

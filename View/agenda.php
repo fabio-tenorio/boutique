@@ -78,15 +78,34 @@ $creneaux = $this->setCreneaux($joursDeLaSemaine);
                         }
                     }
                 }
-                if ($creneauVide === true) {
-                    echo '<td class="text-center td-creneau-vide my-auto">';
+                if ($creneauVide === true) { ?>
+                    <td class="text-center td-creneau-vide">
+                    <form action="#" method="POST">
+                        <?php
+                        $ligne[$horaires] = explode(' ', $ligne[$horaires]);
+                        // echo $ligne[$horaires][0] ?>
+                        <select class="custom-select" name="titrereservation" aria-label="Default select example" required>
+                            <option value="" selected>nos prestations</option>
+                            <option value="soin complet">Soin complet</option>
+                            <option value="soin des mains">Soin des mains</option>
+                            <option value="soin des pieds">Soin des pieds</option>
+                            <option value="pose d'ongles">Pose d'ongles</option>
+                            <option value="maquillage">Maquillage</option>
+                            <option value="fete des meres">Fete des meres</option>
+                            <option value="nouvelle annee">Nouvelle annee</option>
+                            <option value="soin ete">Soin ete</option>
+                            <option value="soin rentree">Soin rentree</option>
+                        </select>
+                        <input class="col-12 auto my-3" type="submit" name="reserver" value="reserver"/>
+                    </form>
+                    <!-- echo '<td class="text-center td-creneau-vide my-auto">';
                     echo('<a href="http://');
                     echo PATH;
                     echo("/ControllerAgenda/formResaView/");
                     $ligne[$horaires] = explode(' ', $ligne[$horaires]);
                     echo $ligne[$horaires][0].'/'.$ligne[$horaires][1];
-                    echo('">reserver ce créneau</a>');
-                }
+                    echo('">reserver ce créneau</a>'); -->
+                <?php }
                 echo'</td>';
             }
             $heure++;

@@ -3,6 +3,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     --bluemondrian: #225095;
     --yellowmondrian: #FAC901;
     --redmondrian: #dd0100;
@@ -64,10 +65,17 @@ header nav {
 }
 
 header nav a {
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-weight: bold;
     font-size: 0.8rem;
     }
+
+.nav-inferieur {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
 
 a:hover {
     text-decoration: none;
@@ -95,6 +103,10 @@ a:hover {
     align-items: center;
     transition-duration: 0.5s;
     color: var(--redmondrian);
+}
+
+address a {
+  text-transform: lowercase;
 }
 
 #rightlinks {
@@ -186,7 +198,7 @@ link:hover > .dropdown_link {
     flex-direction: column;
     align-self: center;
     justify-content: space-around;
-    padding: 50px 0 10px 0;
+    padding: 30px 0;
 }
 
 #logo h1 {
@@ -672,4 +684,16 @@ link:hover > .dropdown_link {
 
 .produitstars li {
     padding: 0 5px;
+}
+
+/* RESPONSIVE */
+
+@media only screen and (max-width: 375px) {
+  .nav-inferieur {
+    display: inline-grid;
+    grid-template-columns: 120px auto 120px;
+  }  
+  .search-nav-bar {
+    width: 55%;
+  } */
 }

@@ -11,7 +11,8 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 ?>
 
 <div id="main_accueil">
-    <section class="carousel" aria-label="Gallery">
+    <!-- <section class="carousel" aria-label="Gallery">
+        <h2>votre sallon en ligne</h2>
         <ol class="carousel__viewport">
             <li id="carousel__slide1"
                 tabindex="0"
@@ -103,7 +104,7 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
                 </li>
             </ol>
         </aside>
-    </section>
+    </section> -->
     <section id="section_prestations">
         <h2 class="h2 section_title">nos prestations</h2>
         <div class="row">

@@ -5,7 +5,7 @@
 Namespace App\Application\Models;
 use App\Application\Model;
 
-class ModelProduit extends Model 
+class ModelProduits extends Model 
 {
 
     public $table;

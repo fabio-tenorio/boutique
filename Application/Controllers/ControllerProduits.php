@@ -5,7 +5,7 @@
 
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
-Use App\Application\Models\ModelProduit;
+Use App\Application\Models\ModelProduits;
 
 class ControllerProduits extends Controller 
 {
@@ -23,7 +23,7 @@ class ControllerProduits extends Controller
 
     public function __construct()
     {
-        $this->user = new ModelProduit();
+        $this->user = new ModelProduits;
         if (isset($_SESSION['user']))
         {
             $this->id = $_SESSION['user']->id;
@@ -32,18 +32,18 @@ class ControllerProduits extends Controller
         }
     }
 
-    public function index()
-    {
-        //je vérifie si il y a quelqun connecté
-        if (isset($_SESSION['user']))
-        {
-            $this->render('accueil', $_SESSION['user']);
-        }
-        else
-        {
-            $this->render('accueil');
-        }
-    }
+    // public function index()
+    // {
+    //     //je vérifie si il y a quelqun connecté
+    //     if (isset($_SESSION['user']))
+    //     {
+    //         $this->render('accueil', $_SESSION['user']);
+    //     }
+    //     else
+    //     {
+    //         $this->render('accueil');
+    //     }
+    // }
 
 
 

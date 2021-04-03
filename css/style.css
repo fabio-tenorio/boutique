@@ -688,12 +688,14 @@ link:hover > .dropdown_link {
 
 /* RESPONSIVE */
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 414px) {
+  .nav-inferieur 
+  
   .nav-inferieur {
     display: inline-grid;
     grid-template-columns: 120px auto 120px;
   }  
   .search-nav-bar {
-    width: 55%;
-  } */
+    display: none;
+  }
 }

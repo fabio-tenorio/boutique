@@ -9,6 +9,18 @@ $dimanche = $this->setDimanche($lundi);
 $joursDeLaSemaine = $this->setJoursDeLaSemaine($lundi);
 $creneaux = $this->setCreneaux($joursDeLaSemaine);
 // $this->bonne_affichage($creneaux);
+
+// faire un formulaire qui affiche
+// quelle prestation? (select)
+// quelle jour de la semaine (input date)
+// une fois validé, afficher les horaires disponibles dans la semaine qui correspond à la date choisie
+// afficher la date en dessus et les horaires dans un tableau (sans button, seulement l'horaire comme lien)
+// les horaires déjà reservés par d'autres clients apparaissent en gris
+// les horaires reservés par la personne connectée apparaissent avec un button annuler rdv
+// une fois le tout validé, envoyer vers une page qui suggère des produits qui vont avec la prestation (shampoing, vernis, lixa)
+// si la personne ajoute un ou + produits au panier, alors elle voit deux liens: un vers le panier, l'autre vers la commande.
+// si elle valide juste la prestation, alors en email est envoyé avec la confirmation de la réservation.
+
 ?>
 
 <h2 class="my-4 text-dark text-center">Planning</h2>

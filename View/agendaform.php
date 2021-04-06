@@ -15,25 +15,26 @@
             <?php
             $heure = explode (':', $data[5]);
             echo $heure[0].' heures';
+            var_dump($this->creneau);
             ?>
         </h4>
     </div>
     <div class="col">
-        <form class="form" method="POST" action="http://<?php echo PATH;?>/ControllerAgenda/reserverCreneau/<?php ?>">
+        <form class="form" method="POST" action="http://<?php echo PATH;?>/ControllerAgenda/reserverCreneau/<?=$this->creneau?>">
             <h5 class="text-center">Selectionnez le service</h5>
-            <select class="custom-select my-4" name="titrereservation" aria-label="Default select example" required>
-                <option value="" selected>Nos prestations</option>
-                <option value="soin complet">Soin complet</option>
-                <option value="soin des mains">Soin des mains</option>
-                <option value="soin des pieds">Soin des pieds</option>
-                <option value="pose d'ongles">Pose d'ongles</option>
-                <option value="maquillage">Maquillage</option>
-                <option value="fete des meres">Fete des meres</option>
-                <option value="nouvelle annee">Nouvelle annee</option>
-                <option value="soin ete">Soin ete</option>
-                <option value="soin rentree">Soin rentree</option>
+            <select class="creneau-jours custom-select" name="titrereservation" aria-label="Default select example" required>
+                <option value="" selected>nos prestations</option>
+                <option value="soin complet">Soin complet - 40 &#8364;</option>
+                <option value="soin des mains">Soin des mains - 15 &#8364;</option>
+                <option value="soin des pieds">Soin des pieds - 15 &#8364;</option>
+                <option value="pose d'ongles">Pose d'ongles - 13 &#8364;</option>
+                <option value="maquillage">Maquillage - 20 &#8364;</option>
+                <option value="fete des meres">Fete des meres - 30 &#8364;</option>
+                <option value="nouvelle annee">Nouvelle annee - 30 &#8364;</option>
+                <option value="soin ete">Soin ete - 20 &#8364;</option>
+                <option value="soin rentree">Soin rentree - 15 &#8364;</option>
             </select>
-            <input class="btn btn-primary col-12 auto" type="submit" name="reserver" value="reserver" />
+            <input class="btn btn-primary creneau-jours col-12 auto my-3" type="submit" name="reserver" value="reserver"/>    
         </form>
     </div>
 </div>

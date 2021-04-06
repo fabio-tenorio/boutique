@@ -129,50 +129,53 @@ class ControllerAgenda extends Controller {
         // $now = $now->format('Y-m-d H:00:00');
         $reservation = new DateTime($data);
         // $reservation = $reservation->format('Y-m-d H:00:00');
-        // var_dump($day);
         $interval = $now->diff($reservation);
-        echo $interval->days;
-        // echo "la difference entre ".$now." et ".$data." est ".$difference;
+        $negative = ( $interval->invert ? '-' : '' );
+        if ($negative.$interval->d > 0) {
+            if ($reservation->format('H') >= 8 || $reservation->format('H') <= 20) {
+                return true;
+            } else {
+                return false;
+            }
+        } elseif ($interval->d == 0) {
+            if ($negative.$interval->h > 1) {
+                if ($reservation->format('H') >= 8 || $reservation->format('H') <= 20) {
+                    return true;
+                }
+            }
+        } else {
+            return false;
+        }
     }
 
-    // public function checkConflict($data)
-    // {
-    //     $allResa = $this->all_reservations();
-    //     $cetteResa = explode (' ', $data['datedebut']);
-    //     // var_dump($allResa);
-    //     $check = true;
-    //     foreach($allResa as $value) {
-    //         foreach($value as $key => $property) {
-    //             if ($key=='datedebut')
-    //             {
-    //                 $autreResa = explode(' ', $property);
-    //                 if ($cetteResa[0] == $autreResa[0])
-    //                 {
-    //                     if ($cetteResa[1] == $autreResa[1])
-    //                     {
-    //                         $check = false;
-    //                     }
-    //                     else
-    //                     {
-    //                         $check = true;
-    //                     }
-    //                 }
-    //                 else
-    //                 {
-    //                     $check = true;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     if ($check === true)
-    //     {
-    //         return true;
-    //     }
-    //     else
-    //     {
-    //         return false;
-    //     }
-    // }
+    public function checkConflict($data)
+    {
+        $allResa = $this->all_reservations();
+        $check = true;
+        foreach($allResa as $value) {
+            foreach($value as $key => $property) {
+                if ($key=='datedebut')
+                {
+                    if ($data === $property)
+                    {
+                        $check = false;
+                    }
+                    else
+                    {
+                        $check = true;
+                    }
+                }
+            }
+        }
+        if ($check === true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     // méthode qui regroupe tous les contrôles sur le formulaire
     // il faut utiliser le triple égal pour que tous les contrôles marchent bien
@@ -181,13 +184,13 @@ class ControllerAgenda extends Controller {
     {
         if ($this->checkMoment($data)===true)
         {
-            // if ($this->checkConflict($data)===true) {
+            if ($this->checkConflict($data)===true) {
                 return true;
-            // }
-            // else
-            // {
-            //     return $this->message = 'Cet horaire est déjà réservé';
-            // }
+            }
+            else
+            {
+                return $this->message = 'Cet horaire est déjà réservé';
+            }
         }
         else
         {
@@ -214,7 +217,8 @@ class ControllerAgenda extends Controller {
             if ($this->checkAll($data['datedebut'])===true)
             {
                 $this->agenda->reserver($data);
-                $this->index();
+                $this->message = 'réservation réussie';
+                $this->index($this->message);
             } else
             {
                 $this->index();
@@ -250,15 +254,17 @@ class ControllerAgenda extends Controller {
         return $tableau;
     }
 
-    public function index()
+    public function index($message = '')
     {
         $this->allResa = $this->all_reservations();
         $this->render('agenda', $this->allResa);
     }
 
-    public function formResaView($date, $heure)
+    public function formResaView($jour, $mois, $an, $heure)
     {   
-        $this->creneau = [$date, $heure];
+        $date = $an."-".$mois."-".$jour;
+        $this->creneau = $date.' '.$heure;
+        $this->creneau = date('Y-m-d H:00:00', strtotime($this->creneau));
         $this->render('agendaform', $this->creneau);
     }
 
@@ -266,6 +272,20 @@ class ControllerAgenda extends Controller {
     {
         $this->creneau = $this->one_reservation($id);
         $this->render('agendasupprime', $this->creneau);
+    }
+
+    public function semaineEnPlus($lundi) {
+        $this->autreSemaine = true;
+        $lundi = new DateTime($lundi);
+        $this->setLundi($lundi->add(new DateInterval('P1W')));
+        $this->index();
+    }
+
+    public function semaineEnMoins($lundi) {
+        $this->autreSemaine = true;
+        $lundi = new DateTime($lundi);
+        $this->setLundi($lundi->sub(new DateInterval('P1W')));
+        $this->index();
     }
 
 }

@@ -627,15 +627,43 @@ link:hover > .dropdown_link {
     width: 30px;
 }
 
-/* .creneau-jours {
+.creneau-jours {
     font-size: .8rem;
     max-width: 1fr;
 }
 
-.td-creneau-vide {
+.row-creneau {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
+
+.jour-creneau {
+  display: flex;
+  flex-direction: column;
+  background-color: yellow;
+  margin: 0 20px;
+  padding: 20px;
+  border: 2px solid #1f1f1f;
+  font-weight: bold;
+}
+
+.heure-creneau {
+  padding: 15px;
+  margin: 0 20px;
+  border-bottom: 1px solid #1f1f1f;
+}
+
+.creneau-rempli {
+  font-style: italic;
+  background-color: #CCC;
+}
+
+/* .td-creneau-vide {
     padding: 0;
     font-size: .6rem;
-} */
+    width: 40px;
+}
 
 .td-creneau-vide a {
     padding: 15px 10px;
@@ -654,7 +682,7 @@ link:hover > .dropdown_link {
 
 .td-creneau-rempli h4 {
     font-size: .8rem;
-}
+} */
 
 .agenda-supprime-box {
     border: 1px solid gray;

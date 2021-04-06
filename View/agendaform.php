@@ -15,7 +15,6 @@
             <?php
             $heure = explode (':', $data[5]);
             echo $heure[0].' heures';
-            var_dump($this->creneau);
             ?>
         </h4>
     </div>

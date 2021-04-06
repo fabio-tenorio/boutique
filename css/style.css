@@ -642,16 +642,18 @@ link:hover > .dropdown_link {
   display: flex;
   flex-direction: column;
   background-color: yellow;
-  margin: 0 20px;
+  margin: 0 10px;
   padding: 20px;
+  min-width: 9rem;
   border: 2px solid #1f1f1f;
   font-weight: bold;
 }
 
 .heure-creneau {
-  padding: 15px;
-  margin: 0 20px;
-  border-bottom: 1px solid #1f1f1f;
+  padding: 10px 0;
+  margin: 0 10px;
+  border-bottom: 1px solid #EEE;
+  min-height: 4.5rem;
 }
 
 .creneau-rempli {

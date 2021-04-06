@@ -96,8 +96,9 @@ $creneaux = $this->setCreneaux($joursDeLaSemaine);
                                     $heureAffichee = explode (':', $heure[1]);
                                     $heureAffichee = $heureAffichee[0].'h';
                                     echo '<li class="heure-creneau creneau-rempli text-center">';
-                                    echo $heureAffichee;
+                                    echo $heureAffichee.'<br>';
                                     if ($objects->id_utilisateur===$_SESSION['user']->id) {
+                                        echo '<span>'.$objects->titrereservation.'</span>';
                                         echo('<a class="mx-2 btn btn-danger" href="http://');
                                         echo PATH;
                                         echo("/ControllerAgenda/SupprimeResaView/");

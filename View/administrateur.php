@@ -10,7 +10,6 @@ Création du discussion sur blog
 Nouvel article dans boutique
 
 */
-var_dump($_POST);
 ?>
 
 <div class="container">
@@ -44,7 +43,21 @@ var_dump($_POST);
     <div class="row my-5">
         <div class="col border mx-3">
             <h2 class="text-center">Liste des utilisateurs</h2>
-            <?php var_dump($this->data['products']); ?>
+            <?php
+                foreach($this->data['allusers'] as $user) {
+                    echo '<li class="list-group-item product-list">';
+                    echo '<input type="checkbox" value="'.$user->id.'" name="'.$user->id.'">';
+                    echo '<span class="mx-2">'.$user->prenom.'</span>';
+                    echo '<span class="mx-2">'.$user->nom.'</span>';
+                    echo '<br>';
+                    echo '<span class="mx-2">'.$user->login.'</span>';
+                    echo '<span class="mx-2 badge badge-primary badge-pill">'.$user->id_droit.'</span>';
+                    echo '<br>';
+                    echo '<span class="mx-2">'.$user->mail.'</span>';
+                    echo '<span class="mx-2">'.$user->telephone.'</span>';
+                    echo '</li>';
+                }
+            ?>
         <!-- select all dans login, nom, prenom, mail, date de naissance, date d'inscription sur le site
             à côté de chaque utilisateur, il y aura un bouton qui bascule vers la page profil-->
         </div>
@@ -54,16 +67,16 @@ var_dump($_POST);
                 <!-- <form action="#" method='POST'> -->
                 <form action="http://<?php echo PATH; ?>/ControllerAdmin/supprimerProduit" method='POST'>
                 <?php
-            foreach($this->data['products'] as $product) {
-                echo '<li class="list-group-item product-list">';
-                echo '<input type="checkbox" value="'.$product->id.'" name="'.$product->id.'">';
-                echo '<span class="mx-2">'.$product->titreproduit.'</span>';
-                echo '<span class="mx-2">'.$product->prix.'</span>';
-                echo '<span class="mx-2 badge badge-primary badge-pill">'.$product->stock.'</span>';
-                echo '<span class="mx-2">'.$product->dateproduit.'</span>';
-                echo '</li>';
-                }
-                ?>
+                foreach($this->data['products'] as $product) {
+                    echo '<li class="list-group-item product-list">';
+                    echo '<input type="checkbox" value="'.$product->id.'" name="'.$product->id.'">';
+                    echo '<span class="mx-2">'.$product->titreproduit.'</span>';
+                    echo '<span class="mx-2">'.$product->prix.' &#8364;</span>';
+                    echo '<span class="mx-2 badge badge-primary badge-pill">'.$product->stock.'</span>';
+                    echo '<span class="mx-2">'.$product->dateproduit.'</span>';
+                    echo '</li>';
+                    }
+                    ?>
                 <button class="btn btn-danger col-sm-12 mx-auto my-3" type="submit" name="supprimerProduit">supprimer le(s) produit(s)</button>
                 </form>
             </ul>

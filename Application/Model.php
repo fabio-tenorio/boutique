@@ -124,14 +124,15 @@ abstract class Model
     
     //je supprime les infos d'une ligne donnée (par id) dans un tableau donnée
     public function delete($table, $id)
-    {   
-        $mytable = array_search($table, array_flip($this->whitelist));
-        if ($table == $mytable) {
-            $stmt = $this->connect_db()->prepare("DELETE FROM ".$table." WHERE id=:id");
-            $stmt->bindParam(":id", $id, \PDO::PARAM_INT);
-            $stmt->execute();
-            $stmt->bindValue(':id', $id);
-            return $stmt->execute();
+    {
+        foreach($this->whitelist as $value) {
+            if ($table === $value) {
+                $stmt = $this->connect_db()->prepare("DELETE FROM ".$table." WHERE id=:id");
+                $stmt->bindParam(":id", $id, \PDO::PARAM_INT);
+                $stmt->execute();
+                $stmt->bindValue(':id', $id);
+                return $stmt->execute();
+            }
         }
     }
 }

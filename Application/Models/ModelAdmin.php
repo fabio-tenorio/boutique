@@ -6,6 +6,7 @@ Requêtes spécifiques admin
 
 Namespace App\Application\Models;
 use App\Application\Model;
+use App\Application\Models\ModelProduits;
 
 class ModelAdmin extends Model {
     
@@ -15,6 +16,9 @@ class ModelAdmin extends Model {
         echo "je suis modelAdmin";
     }
 
+    public function deleteProduct($id) {
+        $this->delete('produit', $id);
+    }
     
 }
 

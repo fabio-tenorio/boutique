@@ -1,4 +1,18 @@
+<div>
+    <div> <!-- gray part of the background --
+    
+    </div>
+    <div>
+
+    </div>
+</div>
+
+
+
 <div class="container">
+
+
+
 <section class="carousel" aria-label="Gallery">
         <h2>votre sallon en ligne</h2>
         <ol class="carousel__viewport">

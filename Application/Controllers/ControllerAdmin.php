@@ -16,7 +16,9 @@ Nouvel article dans boutique
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelProduit;
+use App\Application\Models\ModelProduits;
 use App\Application\Models\ModelUser;
+use App\Application\Models\ModelAdmin;
 
 class ControllerAdmin extends ControllerUser 
 {
@@ -26,6 +28,7 @@ class ControllerAdmin extends ControllerUser
     public function __construct()
     {
         $this->admin = new ModelUser();
+        $this->adminProducts = new ModelAdmin();
         if(isset($_SESSION['user']->login) AND $_SESSION['user']->id_droit == 200 )
         {
             $this->id = $_SESSION['user']->id;
@@ -40,14 +43,26 @@ class ControllerAdmin extends ControllerUser
         return $this->admin->get_all_users();
     }
 
+    public function admin_products() {
+        $this->produitsAdmin = new ModelProduits;
+        return $this->produitsAdmin->get_all_produits();
+    }
+
+    public function supprimerProduit() {
+        foreach($_POST as $id) {
+            $this->adminProducts->deleteProduct($id);
+        }
+        $this->index();
+    }
 
     public function index()
     {
         if(isset($_SESSION['user']->login) AND $_SESSION['user']->id_droit == 200 )
         {
             $this->data=[];
-            $this->data[] = $_SESSION ['user'];
-            $this->data[] = $this->admin_users();
+            $this->data['user'] = $_SESSION ['user'];
+            $this->data['allusers'] = $this->admin_users();
+            $this->data['products'] = $this->admin_products();
             $this->render('administrateur', $this->data);
         }
         else

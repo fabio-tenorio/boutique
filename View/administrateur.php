@@ -10,6 +10,7 @@ Création du discussion sur blog
 Nouvel article dans boutique
 
 */
+var_dump($_POST);
 ?>
 
 <div class="container">
@@ -43,12 +44,29 @@ Nouvel article dans boutique
     <div class="row my-5">
         <div class="col border mx-3">
             <h2 class="text-center">Liste des utilisateurs</h2>
-            <?php var_dump($this->data); ?>
+            <?php var_dump($this->data['products']); ?>
         <!-- select all dans login, nom, prenom, mail, date de naissance, date d'inscription sur le site
             à côté de chaque utilisateur, il y aura un bouton qui bascule vers la page profil-->
         </div>
         <div class="col border mx-3">
             <h2 class="text-center">Liste des produits</h2>
+            <ul class="list-group list-group-flush">
+                <!-- <form action="#" method='POST'> -->
+                <form action="http://<?php echo PATH; ?>/ControllerAdmin/supprimerProduit" method='POST'>
+                <?php
+            foreach($this->data['products'] as $product) {
+                echo '<li class="list-group-item product-list">';
+                echo '<input type="checkbox" value="'.$product->id.'" name="'.$product->id.'">';
+                echo '<span class="mx-2">'.$product->titreproduit.'</span>';
+                echo '<span class="mx-2">'.$product->prix.'</span>';
+                echo '<span class="mx-2 badge badge-primary badge-pill">'.$product->stock.'</span>';
+                echo '<span class="mx-2">'.$product->dateproduit.'</span>';
+                echo '</li>';
+                }
+                ?>
+                <button class="btn btn-danger col-sm-12 mx-auto my-3" type="submit" name="supprimerProduit">supprimer le(s) produit(s)</button>
+                </form>
+            </ul>
         <!-- select all produits: nom, reference, prix, catégorie, fournisseur
         en bas de la liste, un petit form pour l'ajout d'un nouveau produit-->
         </div>

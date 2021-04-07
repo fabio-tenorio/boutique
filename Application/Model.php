@@ -14,6 +14,10 @@ abstract class Model
     private $db_charset = 'utf8mb4';
     protected $_PDO;
 
+    public function __construct() {
+        $this->whitelist = array ('utilisateurs', 'reservation', 'produit', 'panier');
+    }
+
     public function connect_db()
     {
         $dsn = "mysql:host=" . $this->db_host . ";dbname=" . $this->db_name . ";charset=" . $this->db_charset;
@@ -120,9 +124,15 @@ abstract class Model
     
     //je supprime les infos d'une ligne donnée (par id) dans un tableau donnée
     public function delete($table, $id)
-    {
-        $result = $this->connect_db()->prepare("DELETE FROM `$table` WHERE id=$id");
-        return $result->execute();
+    {   
+        $mytable = array_search($table, array_flip($this->whitelist));
+        if ($table == $mytable) {
+            $stmt = $this->connect_db()->prepare("DELETE FROM ".$table." WHERE id=:id");
+            $stmt->bindParam(":id", $id, \PDO::PARAM_INT);
+            $stmt->execute();
+            $stmt->bindValue(':id', $id);
+            return $stmt->execute();
+        }
     }
 }
 

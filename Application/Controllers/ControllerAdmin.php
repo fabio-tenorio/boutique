@@ -55,6 +55,12 @@ class ControllerAdmin extends ControllerUser
         $this->index();
     }
 
+    public function nouveauProduit() {
+        $data = $_POST;
+        $this->adminProducts->insert_product($data);
+        return $this->index();
+    }
+
     public function index()
     {
         if(isset($_SESSION['user']->login) AND $_SESSION['user']->id_droit == 200 )

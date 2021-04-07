@@ -87,7 +87,11 @@ Nouvel article dans boutique
     <div class="row my-5">
         <div class="col border mx-2">
             <h4 class="text-center">Nouveau produit</h4>
-            <form action="<?php echo PATH?>">
+            <form action="http://<?php echo PATH; ?>/ControllerAdmin/nouveauProduit" method="POST">
+                <div class="input-group my-2">
+                    <span class="input-group-text" for="reference">Réference du produit</span>
+                    <input class="form-control" type="text" id="reference" name="reference">
+                </div>
                 <div class="input-group">
                     <span class="input-group-text" for="titreproduit">Le nom du produit</span>
                     <input class="form-control" type="text" id="titreproduit" name="titreproduit">
@@ -97,14 +101,10 @@ Nouvel article dans boutique
                     <input class="form-control" type="text" id="produit" name="produit">
                 </div>
                 <div class="input-group my-2">
-                    <span class="input-group-text" for="reference">Réference du produit</span>
-                    <input class="form-control" type="text" id="reference" name="reference">
-                </div>
-                <div class="input-group my-2">
                     <span class="input-group-text" for="prix">Prix du produit</span>
                     <input class="form-control" type="number" id="prix" name="prix">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <select class="form-select" aria-label="Default select example">
                         <option selected>la catégorie du produit</option>
                         <?php
@@ -123,7 +123,7 @@ Nouvel article dans boutique
                         <option value="#">fantaise</option>
                         <option value="#">matériel</option>
                     </select>
-                </div>
+                </div> -->
                 <button type="submit" class="btn btn-primary col-12 mx-auto">ajouter le produit</button>
             </form>
         </div>

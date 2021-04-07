@@ -23,13 +23,18 @@ class ControllerProduits extends Controller
 
     public function __construct()
     {
-        $this->user = new ModelProduits;
+        $this->produit = new ModelProduits;
+        // $this->user = new ModelProduits;
         if (isset($_SESSION['user']))
         {
             $this->id = $_SESSION['user']->id;
             $this->login = $_SESSION['user']->login;
             $this->message = '';
         }
+    }
+
+    public function allProduits() {
+        return $this->produit->get_all_produits();
     }
 
     // public function index()
@@ -59,6 +64,10 @@ class ControllerProduits extends Controller
         {
             $this->render('produits');
         }
+    }
+
+    public function prestations() {
+        $this->render('prestations');
     }
 
     public function produitfiche() {

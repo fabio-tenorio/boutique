@@ -11,7 +11,7 @@
         <a class="nav-link mx-3" href="http://<?php echo PATH;?>/ControllerUser/index">Accueil<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link mx-3" href="#">Prestations</a>
+        <a class="nav-link mx-3" href="http://<?php echo PATH; ?>/ControllerProduits/prestations">Prestations</a>
       </li>
       <li class="nav-item">
         <a class="nav-link mx-3" href="http://<?php echo PATH; ?>/ControllerProduits/index">produits</a>

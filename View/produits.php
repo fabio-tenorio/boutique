@@ -11,7 +11,7 @@ $listeProduits = $this->allProduits();
             <div class="row">
                 <div class="col-md-5 col-sm-12 col-xs-12">
                     <div class="product-image">
-                        <img src="<?=IMAGES;?>palette.jpg" alt="Card image cap" class="card-img-top img-responsive">
+                        <img src="<?=IMAGES;?><?=$value->imageproduit;?>" alt="Card image cap" class="card-img-top img-responsive">
                         <span class="tag2 hot">
                         PROMO
                         </span>

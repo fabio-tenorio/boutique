@@ -1477,3 +1477,23 @@ link:hover > .dropdown_link {
     flex-direction: row;
     justify-content: space-between;
   }
+
+  /* PANIER */
+
+  .table-panier {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .table-total {
+    align-self: flex-end;
+  }
+
+  /* COMMANDE */
+
+  .commande {
+    border: 1px solid #616161;
+    box-shadow: 1px 2px 3px #1f1f1f;
+    padding: 22px;
+  }

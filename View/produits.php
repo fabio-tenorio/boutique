@@ -6,12 +6,12 @@ $listeProduits = $this->allProduits();
 <div class="container">
     <!-- <div class="row"> -->
         <div class="col-xs-12 col-md-12"> 
-        <?php foreach ($listeProduits as $value) { ?>
+        <?php foreach ($listeProduits as $produit) { ?>
         <div class="prod-info-main prod-wrap clearfix">
             <div class="row">
                 <div class="col-md-5 col-sm-12 col-xs-12">
                     <div class="product-image">
-                        <img src="<?=IMAGES;?><?=$value->imageproduit;?>" alt="Card image cap" class="card-img-top img-responsive">
+                        <img src="<?=IMAGES;?><?=$produit->imageproduit;?>" alt="Card image cap" class="card-img-top img-responsive">
                         <span class="tag2 hot">
                         PROMO
                         </span>
@@ -21,24 +21,24 @@ $listeProduits = $this->allProduits();
                     <div class="product-deatil">
                         <h5 class="name">
                             <a href="#">
-                                <?=$value->titreproduit;?>
+                                <?=$produit->titreproduit;?>
                             </a>
                             <a href="#">
                                 <span>Product Category</span>
                             </a>                           
                         </h5>
                         <p class="price-container">
-                            <span><?=$value->prix;?></span>
+                            <span><?=$produit->prix;?></span>
                         </p>
                         <span class="tag1"></span>
                     </div>
                     <div class="description">
-                        <p><?=$value->produit;?></p>
+                        <p><?=$produit->produit;?></p>
                     </div> 
                     <div class="product-info smart-form">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="btn btn-danger">ajouter au panier</a>
+                            <a href="http://<?php echo PATH; ?>/ControllerProduits/panier/<?=$produit->id;?>" class="btn btn-danger">ajouter au panier</a>
                             <a href="javascript:void(0);" class="btn btn-info">détails</a>
                         </div>
                         <div class="col-md-12">

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 4.6.6deb5ubuntu0.5
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le : ven. 02 avr. 2021 à 13:30
--- Version du serveur :  5.7.30
--- Version de PHP : 7.4.9
+-- Client :  localhost:3306
+-- Généré le :  Ven 09 Avril 2021 à 09:53
+-- Version du serveur :  5.7.33-0ubuntu0.18.04.1
+-- Version de PHP :  7.2.24-0ubuntu0.18.04.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,8 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `boutique`
+-- Base de données :  `boutique`
 --
+CREATE DATABASE IF NOT EXISTS `boutique` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `boutique`;
 
 -- --------------------------------------------------------
 
@@ -26,7 +28,6 @@ SET time_zone = "+00:00";
 -- Structure de la table `article`
 --
 
-DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(11) NOT NULL,
   `id_theme` int(11) NOT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `article`
+-- Contenu de la table `article`
 --
 
 INSERT INTO `article` (`id`, `id_theme`, `id_utilisateur`, `titrearticle`, `article`, `datearticle`, `id_produit`, `id_reservation`, `id_fournisseur`) VALUES
@@ -52,7 +53,6 @@ INSERT INTO `article` (`id`, `id_theme`, `id_utilisateur`, `titrearticle`, `arti
 -- Structure de la table `avis`
 --
 
-DROP TABLE IF EXISTS `avis`;
 CREATE TABLE `avis` (
   `id` int(11) NOT NULL,
   `avis` varchar(255) DEFAULT NULL,
@@ -66,14 +66,13 @@ CREATE TABLE `avis` (
 -- Structure de la table `categorie`
 --
 
-DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE `categorie` (
   `id` int(11) NOT NULL,
   `nom` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `categorie`
+-- Contenu de la table `categorie`
 --
 
 INSERT INTO `categorie` (`id`, `nom`) VALUES
@@ -90,7 +89,6 @@ INSERT INTO `categorie` (`id`, `nom`) VALUES
 -- Structure de la table `client`
 --
 
-DROP TABLE IF EXISTS `client`;
 CREATE TABLE `client` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -104,7 +102,7 @@ CREATE TABLE `client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `client`
+-- Contenu de la table `client`
 --
 
 INSERT INTO `client` (`id`, `id_utilisateur`, `nomtitulaireCB`, `numeroCB`, `validiteCB`, `code3chiffresCB`, `adresselivraison`, `id_panier`, `id_commande`) VALUES
@@ -116,7 +114,6 @@ INSERT INTO `client` (`id`, `id_utilisateur`, `nomtitulaireCB`, `numeroCB`, `val
 -- Structure de la table `commande`
 --
 
-DROP TABLE IF EXISTS `commande`;
 CREATE TABLE `commande` (
   `id` int(11) NOT NULL,
   `id_client` int(11) NOT NULL,
@@ -132,7 +129,6 @@ CREATE TABLE `commande` (
 -- Structure de la table `commande-client`
 --
 
-DROP TABLE IF EXISTS `commande-client`;
 CREATE TABLE `commande-client` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
@@ -154,7 +150,6 @@ CREATE TABLE `commande-client` (
 -- Structure de la table `conversation`
 --
 
-DROP TABLE IF EXISTS `conversation`;
 CREATE TABLE `conversation` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
@@ -174,14 +169,13 @@ CREATE TABLE `conversation` (
 -- Structure de la table `droit`
 --
 
-DROP TABLE IF EXISTS `droit`;
 CREATE TABLE `droit` (
   `id` int(11) NOT NULL,
   `nom` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `droit`
+-- Contenu de la table `droit`
 --
 
 INSERT INTO `droit` (`id`, `nom`) VALUES
@@ -196,7 +190,6 @@ INSERT INTO `droit` (`id`, `nom`) VALUES
 -- Structure de la table `fournisseur`
 --
 
-DROP TABLE IF EXISTS `fournisseur`;
 CREATE TABLE `fournisseur` (
   `id` int(11) NOT NULL,
   `nomfournisseur` varchar(255) NOT NULL,
@@ -205,7 +198,7 @@ CREATE TABLE `fournisseur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `fournisseur`
+-- Contenu de la table `fournisseur`
 --
 
 INSERT INTO `fournisseur` (`id`, `nomfournisseur`, `codepostale`, `statut`) VALUES
@@ -228,7 +221,6 @@ INSERT INTO `fournisseur` (`id`, `nomfournisseur`, `codepostale`, `statut`) VALU
 -- Structure de la table `message`
 --
 
-DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -244,7 +236,6 @@ CREATE TABLE `message` (
 -- Structure de la table `Nouveaute-promo`
 --
 
-DROP TABLE IF EXISTS `Nouveaute-promo`;
 CREATE TABLE `Nouveaute-promo` (
   `id` int(11) NOT NULL,
   `id_produit` int(11) NOT NULL,
@@ -258,7 +249,6 @@ CREATE TABLE `Nouveaute-promo` (
 -- Structure de la table `panier`
 --
 
-DROP TABLE IF EXISTS `panier`;
 CREATE TABLE `panier` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -272,7 +262,6 @@ CREATE TABLE `panier` (
 -- Structure de la table `panierhistoriqueadmin`
 --
 
-DROP TABLE IF EXISTS `panierhistoriqueadmin`;
 CREATE TABLE `panierhistoriqueadmin` (
   `aaa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -283,45 +272,43 @@ CREATE TABLE `panierhistoriqueadmin` (
 -- Structure de la table `produit`
 --
 
-DROP TABLE IF EXISTS `produit`;
 CREATE TABLE `produit` (
   `id` int(11) NOT NULL,
-  `reference` varchar(55) NOT NULL,
-  `titreproduit` varchar(255) NOT NULL,
-  `produit` text NOT NULL,
+  `reference` varchar(55) DEFAULT NULL,
+  `titreproduit` varchar(255) DEFAULT NULL,
+  `produit` text,
   `stock` int(25) DEFAULT NULL,
-  `prix` decimal(6,2) NOT NULL,
-  `dateproduit` datetime NOT NULL,
-  `id_categorie` int(11) NOT NULL,
-  `id_fournisseur` int(11) NOT NULL,
-  `id_avis` int(11) DEFAULT NULL
+  `prix` decimal(6,2) DEFAULT NULL,
+  `dateproduit` datetime DEFAULT NULL,
+  `id_categorie` int(11) DEFAULT NULL,
+  `id_fournisseur` int(11) DEFAULT NULL,
+  `id_avis` int(11) DEFAULT NULL,
+  `imageproduit` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `produit`
+-- Contenu de la table `produit`
 --
 
-INSERT INTO `produit` (`id`, `reference`, `titreproduit`, `produit`, `stock`, `prix`, `dateproduit`, `id_categorie`, `id_fournisseur`, `id_avis`) VALUES
-(1, '100', 'crememain', 'Le panier affichera le stock réel à partir de la somme des produits avec le même id catégorie du pdt', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL),
-(2, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL),
-(3, '300', 'vernirose', 'splendide', NULL, '12.00', '2021-03-02 00:00:00', 0, 0, NULL),
-(4, '100', 'crememain', '200 ml', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL),
-(5, '100', 'crememain', '200 ml', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL),
-(6, '100', 'crememain', '200 ml', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL),
-(7, '100', 'crememain', '200 ml', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL),
-(8, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL),
-(9, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL),
-(10, '1000', 'sechecheveux', 'extra', NULL, '150.00', '2021-03-02 00:00:00', 0, 0, NULL),
-(11, '1000', 'sechecheveux', 'extra', NULL, '150.00', '2021-03-02 00:00:00', 0, 0, NULL),
-(12, '1001', 'coupeongle', 'dangereux', NULL, '25.00', '2021-03-02 00:00:00', 0, 0, NULL),
-(13, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL),
-(14, '1003', 'tondeuse', 'tendance', NULL, '99.00', '2021-03-02 00:00:00', 0, 0, NULL),
-(15, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL),
-(16, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL),
-(17, '1', 'soinfetedesmeres', 'une merveille', NULL, '50.00', '2021-03-02 00:00:00', 1, 1, NULL),
-(18, '2', 'lissagebresilien', 'pile poils', NULL, '75.00', '2021-03-02 00:00:00', 1, 1, NULL),
-(19, '3', 'manucure', 'bien', NULL, '45.00', '2021-03-02 00:00:00', 1, 1, NULL),
-(20, '4', 'taouageephemere', 'jusqu\'au bout des ongles', NULL, '15.00', '2021-03-02 00:00:00', 1, 1, NULL);
+INSERT INTO `produit` (`id`, `reference`, `titreproduit`, `produit`, `stock`, `prix`, `dateproduit`, `id_categorie`, `id_fournisseur`, `id_avis`, `imageproduit`) VALUES
+(1, '100', 'crème pour les mains', 'Une crème hydratante est un produit cosmétique qui hydrate la peau et empêche sa déshydratation en reconstituant le film hydrolipidique, protection naturelle de la peau éliminée par le savon durant la toilette', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL, 'palette.jpg'),
+(2, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
+(7, '100', 'crememain', '200 ml', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
+(8, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
+(9, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
+(10, '1000', 'sechecheveux', 'extra', NULL, '150.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
+(11, '1000', 'sechecheveux', 'extra', NULL, '150.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
+(12, '1001', 'coupeongle', 'dangereux', NULL, '25.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
+(13, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
+(14, '1003', 'tondeuse', 'tendance', NULL, '99.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
+(15, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
+(16, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
+(17, '1', 'soinfetedesmeres', 'une merveille', NULL, '50.00', '2021-03-02 00:00:00', 1, 1, NULL, NULL),
+(18, '2', 'lissagebresilien', 'pile poils', NULL, '75.00', '2021-03-02 00:00:00', 1, 1, NULL, NULL),
+(19, '3', 'manucure', 'bien', NULL, '45.00', '2021-03-02 00:00:00', 1, 1, NULL, NULL),
+(20, '4', 'taouageephemere', 'jusqu\'au bout des ongles', NULL, '15.00', '2021-03-02 00:00:00', 1, 1, NULL, NULL),
+(21, '123', 'tondeuse', 'Une tondeuse est, dans le domaine de la coiffure un outil servant à couper les cheveux.', NULL, '20.00', NULL, NULL, NULL, NULL, NULL),
+(22, '222', 'lissage brésilien', 'Le lissage brésilien, également appelé traitement brésilien à la kératine, est un traitement des cheveux', NULL, '30.00', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -329,7 +316,6 @@ INSERT INTO `produit` (`id`, `reference`, `titreproduit`, `produit`, `stock`, `p
 -- Structure de la table `reponse`
 --
 
-DROP TABLE IF EXISTS `reponse`;
 CREATE TABLE `reponse` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -346,7 +332,6 @@ CREATE TABLE `reponse` (
 -- Structure de la table `reponsemes`
 --
 
-DROP TABLE IF EXISTS `reponsemes`;
 CREATE TABLE `reponsemes` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
@@ -362,7 +347,6 @@ CREATE TABLE `reponsemes` (
 -- Structure de la table `reservation`
 --
 
-DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
@@ -378,35 +362,16 @@ CREATE TABLE `reservation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `reservation`
+-- Contenu de la table `reservation`
 --
 
 INSERT INTO `reservation` (`id`, `id_utilisateur`, `titrereservation`, `typeevenement`, `intervenant`, `datedebut`, `datefin`, `heuredebut`, `heurefin`, `id_produit`, `id_fournisseur`) VALUES
-(1, 15, 'maquillage', NULL, NULL, '2021-03-25 12:00:00', NULL, NULL, NULL, NULL, NULL),
-(2, 15, 'soin des mains', NULL, NULL, '2021-03-24 11:00:00', NULL, NULL, NULL, NULL, NULL),
-(3, 15, 'maquillage', NULL, NULL, '2021-03-25 08:00:00', NULL, NULL, NULL, NULL, NULL),
-(5, 15, 'soin complet', NULL, NULL, '2021-03-26 09:00:00', NULL, NULL, NULL, NULL, NULL),
-(7, 15, 'fete des meres', NULL, NULL, '2021-03-26 12:00:00', NULL, NULL, NULL, NULL, NULL),
-(9, 15, 'soin rentree', NULL, NULL, '2021-03-27 16:00:00', NULL, NULL, NULL, NULL, NULL),
-(10, 15, 'pose d\'ongles', NULL, NULL, '2021-03-28 13:00:00', NULL, NULL, NULL, NULL, NULL),
-(11, 17, 'soin complet', NULL, NULL, '2021-03-27 10:00:00', NULL, NULL, NULL, NULL, NULL),
-(29, 17, 'fete des meres', NULL, NULL, '2021-03-31 10:00:00', NULL, NULL, NULL, NULL, NULL),
-(30, 17, 'soin des mains', NULL, NULL, '2021-04-02 04:00:00', NULL, NULL, NULL, NULL, NULL),
-(31, 17, 'pose d\'ongles', NULL, NULL, '2021-04-03 12:00:00', NULL, NULL, NULL, NULL, NULL),
-(32, 15, 'soin complet', NULL, NULL, '2021-04-01 02:00:00', NULL, NULL, NULL, NULL, NULL),
-(33, 15, 'fete des meres', NULL, NULL, '2021-03-29 06:00:00', NULL, NULL, NULL, NULL, NULL),
-(34, 15, 'maquillage', NULL, NULL, '2021-04-04 06:00:00', NULL, NULL, NULL, NULL, NULL),
-(35, 15, 'pose d\'ongles', NULL, NULL, '2021-04-01 17:00:00', NULL, NULL, NULL, NULL, NULL),
-(36, 15, 'maquillage', NULL, NULL, '2021-04-01 10:00:00', NULL, NULL, NULL, NULL, NULL),
-(37, 15, 'maquillage', NULL, NULL, '2021-04-01 12:00:00', NULL, NULL, NULL, NULL, NULL),
-(38, 15, 'nouvelle annee', NULL, NULL, '2021-04-03 11:00:00', NULL, NULL, NULL, NULL, NULL),
-(39, 15, 'maquillage', NULL, NULL, '2021-04-03 14:00:00', NULL, NULL, NULL, NULL, NULL),
-(40, 15, 'pose d\'ongles', NULL, NULL, '2021-04-03 15:00:00', NULL, NULL, NULL, NULL, NULL),
-(41, 15, 'fete des meres', NULL, NULL, '2021-03-30 19:00:00', NULL, NULL, NULL, NULL, NULL),
-(42, 16, 'pose d\'ongles', NULL, NULL, '2021-04-02 13:00:00', NULL, NULL, NULL, NULL, NULL),
-(43, 16, 'maquillage', NULL, NULL, '2021-04-03 14:00:00', NULL, NULL, NULL, NULL, NULL),
-(44, 16, 'pose d\'ongles', NULL, NULL, '2021-04-04 15:00:00', NULL, NULL, NULL, NULL, NULL),
-(45, 16, 'pose d\'ongles', NULL, NULL, '2021-04-03 13:00:00', NULL, NULL, NULL, NULL, NULL);
+(70, 16, 'pose d\'ongles', NULL, NULL, '2021-04-07 12:00:00', NULL, NULL, NULL, NULL, NULL),
+(72, 16, 'fete des meres', NULL, NULL, '2021-04-08 16:00:00', NULL, NULL, NULL, NULL, NULL),
+(73, 16, 'maquillage', NULL, NULL, '2021-05-28 11:00:00', NULL, NULL, NULL, NULL, NULL),
+(75, 16, 'soin des mains', NULL, NULL, '2021-04-10 11:00:00', NULL, NULL, NULL, NULL, NULL),
+(77, 18, 'soin des pieds', NULL, NULL, '2021-04-09 15:00:00', NULL, NULL, NULL, NULL, NULL),
+(78, 18, 'soin des mains', NULL, NULL, '2021-04-09 12:00:00', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -414,7 +379,6 @@ INSERT INTO `reservation` (`id`, `id_utilisateur`, `titrereservation`, `typeeven
 -- Structure de la table `theme`
 --
 
-DROP TABLE IF EXISTS `theme`;
 CREATE TABLE `theme` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
@@ -426,7 +390,7 @@ CREATE TABLE `theme` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `theme`
+-- Contenu de la table `theme`
 --
 
 INSERT INTO `theme` (`id`, `id_droit`, `visibilitetheme`, `titretheme`, `descriptiftheme`, `datetheme`, `id_utilisateur`) VALUES
@@ -442,7 +406,6 @@ INSERT INTO `theme` (`id`, `id_droit`, `visibilitetheme`, `titretheme`, `descrip
 -- Structure de la table `utilisateurs`
 --
 
-DROP TABLE IF EXISTS `utilisateurs`;
 CREATE TABLE `utilisateurs` (
   `id` int(11) NOT NULL,
   `id_droit` int(11) NOT NULL,
@@ -457,17 +420,18 @@ CREATE TABLE `utilisateurs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `utilisateurs`
+-- Contenu de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id`, `id_droit`, `login`, `motpasse`, `prenom`, `nom`, `mail`, `telephone`, `datenaissance`, `dateinscription`) VALUES
 (14, 1, 'client_quatre', '$2y$10$jl3j8MCwwB3AehgZhKelZu4u9pbfcAUyFu7MQEoNis9XPBDgCXDjm', 'client', 'quatre', 'clientquatre@boutique.fr', '6666666666', NULL, NULL),
 (15, 1, 'iris', 'UkbNhHwApyRhB0KP', 'iris', 'debian-sys-maint', 'iris@boutique.fr', '45647879', NULL, NULL),
 (16, 1, 'fabio', '$2y$10$n8r18D/1tsMquItpQbrPNuRpX8oiaFIyAv1FrOpDihk7F.DbXHcLy', 'Fabio', 'Tenorio', 'fabio@boutique.fr', '123456789', NULL, NULL),
-(17, 200, 'admin', '$2y$10$I/AsLWR5YWhiOWraKaWzEuhNrZVrABgsYgnTK03zZJ6VqgkLyL/FG', 'admin', 'aaa', 'admin@boutique.fr', '123456789', NULL, NULL);
+(17, 200, 'admin', '$2y$10$I/AsLWR5YWhiOWraKaWzEuhNrZVrABgsYgnTK03zZJ6VqgkLyL/FG', 'admin', 'aaa', 'admin@boutique.fr', '123456789', NULL, NULL),
+(18, 1, 'roxan', '$2y$10$cgUIrH1RK7q1bHZWHxISGe.Zyi5Juog1OLNN02B/CMqsn6giVlK96', 'therry', 'roxan', 'roxan@boutique.fr', '123456789', NULL, NULL);
 
 --
--- Index pour les tables déchargées
+-- Index pour les tables exportées
 --
 
 --
@@ -585,7 +549,7 @@ ALTER TABLE `utilisateurs`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
@@ -593,97 +557,81 @@ ALTER TABLE `utilisateurs`
 --
 ALTER TABLE `article`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT pour la table `avis`
 --
 ALTER TABLE `avis`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT pour la table `commande-client`
 --
 ALTER TABLE `commande-client`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT pour la table `conversation`
 --
 ALTER TABLE `conversation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT pour la table `droit`
 --
 ALTER TABLE `droit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
-
 --
 -- AUTO_INCREMENT pour la table `fournisseur`
 --
 ALTER TABLE `fournisseur`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
 --
 -- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT pour la table `Nouveaute-promo`
 --
 ALTER TABLE `Nouveaute-promo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT pour la table `panier`
 --
 ALTER TABLE `panier`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT pour la table `reponse`
 --
 ALTER TABLE `reponse`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT pour la table `reponsemes`
 --
 ALTER TABLE `reponsemes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 --
 -- AUTO_INCREMENT pour la table `theme`
 --
 ALTER TABLE `theme`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

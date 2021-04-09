@@ -2,7 +2,7 @@
 session_start();
 
 require_once 'autoloader.php';
-
+// require_once 'phpmailer.php';
 use App\Autoloader;
 // on en a besoin afin d'afficher la page 404
 use App\Application\Controllers\ControllerUser as ControllerUser;

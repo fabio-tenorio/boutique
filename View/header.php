@@ -73,7 +73,12 @@
   </form>
   <ul>
     <li class="nav-item">
-      <a class="nav-link" href="#"><i class="mx-2 bi bi-cart3"></i>panier</a>
+      <a class="nav-link" href="http://<?php echo PATH;?>/ControllerProduits/panier">
+      <?php if (isset($_SESSION['nombreDeProduits']) && $_SESSION['nombreDeProduits'] > 0) {
+        echo '<span>'.$_SESSION['nombreDeProduits'].'</span>';
+      } ?>
+      <i class="mx-2 bi bi-cart3"></i>panier</a>
+      <!-- echo '<a href="http://'.PATH.'/ControllerProduits/viderPanier">vider</a>'; -->
     </li>
   </ul>
 </nav>

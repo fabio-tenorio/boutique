@@ -73,7 +73,8 @@ Nouvel article dans boutique
                     echo '<span class="mx-2">'.$product->titreproduit.'</span>';
                     echo '<span class="mx-2">'.$product->prix.' &#8364;</span>';
                     echo '<span class="mx-2 badge badge-primary badge-pill">'.$product->stock.'</span>';
-                    echo '<span class="mx-2">'.$product->dateproduit.'</span>';
+                    $date = explode (' ', $product->dateproduit);
+                    echo '<span class="mx-2">'.$date[0].'</span>';
                     echo '</li>';
                     }
                     ?>
@@ -99,6 +100,10 @@ Nouvel article dans boutique
                 <div class="input-group my-2">
                     <span class="input-group-text" for="produit">Description du produit</span>
                     <input class="form-control" type="text" id="produit" name="produit">
+                </div>
+                <div class="input-group my-2">
+                    <span class="input-group-text" for="stock">Quantité en stock</span>
+                    <input class="form-control" type="number" id="stock" name="stock">
                 </div>
                 <div class="input-group my-2">
                     <span class="input-group-text" for="prix">Prix du produit</span>

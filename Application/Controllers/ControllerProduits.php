@@ -57,6 +57,33 @@ class ControllerProduits extends Controller
 
     // }
 
+    public function calculerQuantiteProduit($id_produits) {
+        // foreach($_POST
+        // $id_produits = $_POST;
+    }
+
+    public function calculerProduitTotal ($prix, $fois) {
+        return $this->produitTotal = $prix * $fois;
+    }
+
+    public function calculerSousTotal () {
+        foreach($_POST as $produitId => $prix) {
+            $produitId = explode('-', $produitId);
+            var_dump($produitId);
+        }
+        // var_dump($panierId);
+        foreach($_SESSION['panier'] as $produit) {
+            var_dump($_POST);
+            var_dump($produit->prix);
+        }
+        
+        var_dump($_POST);
+        $this->nombreDeProduits = sizeof($_SESSION['panier']);
+        foreach($_POST as $value) {
+            echo $value;
+        }
+    }
+
     public function ajouterAuPanier($id) {
         $this->listeDesProduits = $this->produit->get_all_produits();
         foreach ($this->listeDesProduits as $produit) {
@@ -64,7 +91,6 @@ class ControllerProduits extends Controller
                 $_SESSION['panier'][] = $produit++;
             }
         }
-        var_dump($_SESSION['panier']);
         $this->nombreDeProduits = sizeof($_SESSION['panier']);
         $_SESSION['nombreDeProduits'] = $this->nombreDeProduits;
         $this->render('produits');

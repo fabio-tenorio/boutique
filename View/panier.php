@@ -1,11 +1,12 @@
 <?php
 $listeproduits = $_SESSION['panier'];
+$this->bonne_affichage($_POST);
 ?>
 <div class="container">
     <div class="row table-panier">
         <div class="col-sm-12 my-5">
-            <h2>Mon panier</h2>
-            <table class="table">
+            <h2 class="text-center my-3">Mon panier</h2>
+            <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
                     <th scope="col"></th>
@@ -17,6 +18,7 @@ $listeproduits = $_SESSION['panier'];
                     </tr>
                 </thead>
                 <tbody>
+                    <form action="http://<?php echo PATH; ?>/ControllerProduits/calculerSousTotal/" method="POST">
                         <?php foreach ($listeproduits as $produit) { ?>
                             <tr>
                             <th scope="row"><i class="bi bi-trash"></i></th>
@@ -24,15 +26,17 @@ $listeproduits = $_SESSION['panier'];
                             <td><?=$produit->titreproduit;?></td>
                             <td>&#8364; <?=$produit->prix;?></td>
                             <td>
-                                <form action="#" method="POST">
-                                    <input type="number" name="qteproduit">
-                                </form>
+                                <input type="number" name="<?=$produit->id?>-quantite" value="1">
                             </td>
                             <td>
                                 sous-total<!-- sous-total -->
                             </td>
                         </tr>
                         <?php } ?>
+                        <tr>
+                            <td colspan="6"><button type="submit" name="updatepanier" class="btn btn-warning float-right">Mettre à jour le panier</button></td>
+                        </tr>
+                    </form>
                 </tbody>
             </table>
         </div>

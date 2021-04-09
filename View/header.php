@@ -73,7 +73,7 @@
   </form>
   <ul>
     <li class="nav-item">
-      <a class="nav-link" href="http://<?php echo PATH;?>/ControllerProduits/panier">
+      <a class="nav-link" href="http://<?php echo PATH;?>/ControllerProduits/CalculerTotal">
       <?php if (isset($_SESSION['nombreDeProduits']) && $_SESSION['nombreDeProduits'] > 0) {
         echo '<span>'.$_SESSION['nombreDeProduits'].'</span>';
       } ?>

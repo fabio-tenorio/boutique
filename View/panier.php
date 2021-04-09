@@ -5,7 +5,7 @@ if (isset($_SESSION['panier'])) {
 };
 // $this->bonne_affichage($this->panierTotal);
 // $this->bonne_affichage($this->produitTotal);
-// var_dump($_POST);
+var_dump($_SESSION);
 ?>
 <div class="container">
     <div class="row table-panier">

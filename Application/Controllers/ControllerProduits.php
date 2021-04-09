@@ -58,17 +58,20 @@ class ControllerProduits extends Controller
         // récuperer la quantité du produit en $_POST
         $quantiteProduits = $_POST;
         unset($quantiteProduits['updatepanier']);
-        var_dump($quantiteProduits);
-        foreach($_SESSION['panier'] as $produit) {
-            foreach($quantiteProduits as $produitId => $quantite) {
-                if ($produit->id == $produitId) {
-                    $produit->quantite = $quantite;
-                    $this->panierTotal[$produit->id] = $this->calculerSousTotal($produit->prix, $quantite);
+        // var_dump($quantiteProduits);
+        if (isset($_SESSION['panier'])) {
+            $this->panierTotal = array();
+            foreach($_SESSION['panier'] as $produit) {
+                foreach($quantiteProduits as $produitId => $quantite) {
+                    if ($produit->id == $produitId) {
+                        $produit->quantite = $quantite;
+                        $this->panierTotal[$produit->id] = $this->calculerSousTotal($produit->prix, $quantite);
+                    }
                 }
             }
+            $this->total = array_sum($this->panierTotal);
         }
-        $this->total = array_sum($this->panierTotal);
-        return $this->render('panier', $this->total);
+        return $this->render('panier');
         // récuperer le prix du produit en $_SESSION['panier']
         // appeler la méthode qui calcule quantite * prix
         // retourner le résultat
@@ -104,9 +107,10 @@ class ControllerProduits extends Controller
         foreach($_SESSION['panier'] as $produit) {
             if ($produit->id == $id) {
                 unset($_SESSION['panier'][$id]);
+                $_SESSION['nombreDeProduits']--;
             }
         }
-        $this->render('panier');
+        $this->calculerTotal();
     }
 
     public function viderPanier() {

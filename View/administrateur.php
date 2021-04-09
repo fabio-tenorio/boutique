@@ -135,6 +135,21 @@ Nouvel article dans boutique
                         <span class="input-group-text">nom</span>
                         <input class="form-control" type="text" id="nomfournisseur" name="nomfournisseur">
                     </div>
+                    <div class="input-group my-2">
+                        <span class="input-group-text">code postal</span>
+                        <input class="form-control" type="text" id="codepostal" name="codepostal">
+                    </div>
+                    <div class="input-group my-2">
+                        <span class="input-group-text">statut</span>
+                        <select class="statut" name="statut" aria-label="statut" required>
+                            <option value="" selected>statut</option>
+                            <option value="nouveau">nouveau</option>
+                            <option value="actif">actif</option>
+                            <option value="inactif">inactif</option>
+                            <option value="premium">premium</option>
+                        </select>
+                        <input class="form-control" type="text" id="nomfournisseur" name="nomfournisseur">
+                    </div>
                     <button type="submit" class="btn btn-primary col-12 mx-auto">ajouter nouveau fournisseur</button>
                 </form>
             </div>

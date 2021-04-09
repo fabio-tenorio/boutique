@@ -24,7 +24,7 @@ class ModelProduits extends Model
     }
 
     //je vérifie si il y a quelqun enregistré sur la bdd avec les données fournis par ControllerUser 
-    public function get_one_user($login, $mail=null)
+    /*public function get_one_user($login, $mail=null)
     {
         $stmt = $this->connect_db()->prepare("SELECT id, id_droit, login, motpasse, mail FROM `utilisateurs` WHERE login=:login OR mail=:mail");
         $stmt->execute([':login'=>$login, ':mail'=>$mail]);
@@ -36,7 +36,17 @@ class ModelProduits extends Model
     {
         // $this->connectDb();
         echo "Je suis ModelProduit ";
+    }*/
+
+
+    public function get_one_produit($reference)
+    {
+        $stmt = $this->connect_db()->prepare("SELECT * FROM `produit` WHERE reference=:reference");
+        $stmt->execute([':reference'=>$reference]);
+        $produit = $stmt->fetch(\PDO::FETCH_OBJ);
+        return $produit;
     }
+
 }
 
 ?>

@@ -9,12 +9,39 @@ Use App\Application\Controller;
 Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
 // $ControllerAccueil = new $ControllerAccueil;
 ?>
-
-<div id="main_accueil">
-    <section>
-        <img id="accueil-bg" src="<?php echo IMAGES; ?>salondecoiffure.jpg" alt="salon">
-    </section>
-    <section id="section_prestations">
+<div class="main-accueil">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+        <img class="d-block w-100 img-slide" src="<?php echo IMAGES; ?>salondecoiffure.jpg" alt="First slide">
+        <div class="carousel-caption d-none d-md-block">
+            <h2>Votre salon en ligne</h2>
+            <h3>Découvrez nos nouvelles prestations</h3>
+        </div>
+        </div>
+        <div class="carousel-item">
+        <img class="d-block w-100 img-slide" src="<?php echo IMAGES; ?>fetemeres.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+        <img class="d-block w-100 img-slide" src="<?php echo IMAGES; ?>lissage.jpeg" alt="Third slide">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+    </div>
+</div>
+<section id="section_prestations">
         <h2 class="h2 section_title">nos prestations</h2>
         <div class="row">
             <div class="col-sm-3">
@@ -101,5 +128,4 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
             </div>
         </div>
     </section>
-</div>
 </html>

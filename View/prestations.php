@@ -1,13 +1,6 @@
-<div>
-    <div> <!-- gray part of the background --
-    
-    </div>
-    <div>
+<?php
 
-    </div>
-</div>
-
-
+?>
 
 <div class="container">
 

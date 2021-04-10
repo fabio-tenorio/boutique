@@ -71,14 +71,18 @@
       <input class="search-nav-bar form-control mr-sm-2" type="search" placeholder="rechercher" aria-label="Search">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
   </form>
-  <ul>
+  <ul class="panier-header">
     <li class="nav-item">
-      <a class="nav-link" href="http://<?php echo PATH;?>/ControllerProduits/CalculerTotal">
+      <a class="nav-link" href="http://<?php echo PATH;?>/ControllerProduits/panier">
       <?php if (isset($_SESSION['nombreDeProduits']) && $_SESSION['nombreDeProduits'] > 0) {
         echo '<span>'.$_SESSION['nombreDeProduits'].'</span>';
       } ?>
       <i class="mx-2 bi bi-cart3"></i>panier</a>
-      <!-- echo '<a href="http://'.PATH.'/ControllerProduits/viderPanier">vider</a>'; -->
+    </li>
+    <li class="nav-item">
+      <?php if (isset($_SESSION['panier'])) { ?>
+              <a class="nav-link btn btn-warning btn-sm" href="http://<?=PATH;?>/ControllerProduits/viderPanier/">vider</a>
+      <?php } ?>
     </li>
   </ul>
 </nav>

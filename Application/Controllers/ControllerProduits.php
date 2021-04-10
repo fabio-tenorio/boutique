@@ -1,8 +1,5 @@
 <?php
 
-/*
-*/
-
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelProduits;
@@ -33,18 +30,6 @@ class ControllerProduits extends Controller
         }
     }
 
-    // function verif_panier($ref_article)
-    // {
-    //     /* On initialise la variable de retour */
-    //     $present = false;
-    //     /* On vérifie les numéros de références des articles et on compare avec l'article à vérifier */
-    //     if( count($_SESSION['panier']['id_article']) > 0 && array_search($ref_article,$_SESSION['panier']['id_article']) !== false)
-    //     {
-    //         $present = true;
-    //     }
-    //     return $present;
-    // } 
-
     public function allProduits() {
         return $this->produit->get_all_produits();
     }
@@ -53,16 +38,13 @@ class ControllerProduits extends Controller
         return $this->produitTotal = $prix * $fois;
     }
 
-    public function calculerTotal () {
-        // $this->panierTotal = array();
-        // récuperer la quantité du produit en $_POST
-        $quantiteProduits = $_POST;
-        unset($quantiteProduits['updatepanier']);
-        // var_dump($quantiteProduits);
-        if (isset($_SESSION['panier'])) {
+    public function panier () {
+        if (isset($_POST['updatepanier']) and isset($_SESSION['panier'])) {
+            $panier = $_POST;
+            unset($panier['updatepanier']);
             $this->panierTotal = array();
             foreach($_SESSION['panier'] as $produit) {
-                foreach($quantiteProduits as $produitId => $quantite) {
+                foreach($panier as $produitId => $quantite) {
                     if ($produit->id == $produitId) {
                         $produit->quantite = $quantite;
                         $this->panierTotal[$produit->id] = $this->calculerSousTotal($produit->prix, $quantite);
@@ -70,24 +52,21 @@ class ControllerProduits extends Controller
                 }
             }
             $this->total = array_sum($this->panierTotal);
+            $this->render('panier');
+        } elseif (!isset($_POST['updatepanier']) and isset($_SESSION['panier'])) {
+            $panier = $_SESSION['panier'];
+            $this->panierTotal = array();
+            foreach($panier as $produit) {
+                $this->panierTotal[$produit->id] = $this->calculerSousTotal($produit->prix, $produit->quantite);
+            }
+            $this->total = array_sum($this->panierTotal);
+            $this->render('panier');
+        } else {
+            $_SESSION['panier'] = array ();
+            $this->panierTotal = array ();
+            $this->total = 0;
+            $this->render('panier');
         }
-        return $this->render('panier');
-        // récuperer le prix du produit en $_SESSION['panier']
-        // appeler la méthode qui calcule quantite * prix
-        // retourner le résultat
-        // calculer qte du produit * prix du produit
-        //
-        // faire l'addition de tous les résultats obtenus
-        // returner la somme comme $this->panierTotal;
-        
-        // // var_dump($panierId);
-        // foreach($_SESSION['panier'] as $produit) {
-        //     var_dump($produit->prix);
-        // }
-        // $this->nombreDeProduits = sizeof($_SESSION['panier']);
-        // foreach($_POST as $value) {
-        //     echo $value;
-        // }
     }
 
     public function ajouterAuPanier($id) {
@@ -110,19 +89,15 @@ class ControllerProduits extends Controller
                 $_SESSION['nombreDeProduits']--;
             }
         }
-        $this->calculerTotal();
+        $this->panier();
     }
 
     public function viderPanier() {
-        if (isset($_SESSION['panier']) && $_SESSION['panier'] > 0) {
+        if (isset($_SESSION['panier'])) {
             unset($_SESSION['panier']);
+            unset($_SESSION['nombreDeProduits']);
         }
-        $this->nombreDeProduits = 0;
         $this->render('produits');
-    }
-
-    public function panier() {
-        $this->render('panier');
     }
 
     public function commande() {

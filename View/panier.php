@@ -1,11 +1,5 @@
 <?php
-if (isset($_SESSION['panier'])) {
-    $listeproduits = $_SESSION['panier'];
-    // var_dump($listeproduits);
-};
-// $this->bonne_affichage($this->panierTotal);
-// $this->bonne_affichage($this->produitTotal);
-var_dump($_SESSION);
+$listeproduits = $_SESSION['panier'];
 ?>
 <div class="container">
     <div class="row table-panier">
@@ -23,13 +17,12 @@ var_dump($_SESSION);
                     </tr>
                 </thead>
                 <tbody>
-                    <form action="http://<?php echo PATH;?>/ControllerProduits/calculerTotal/" method="POST">
+                    <form action="http://<?php echo PATH;?>/ControllerProduits/panier/" method="POST">
                         <?php
-                        if (isset($_SESSION['panier'])) {
-                            foreach ($listeproduits as $produit) { ?>
+                        foreach ($listeproduits as $produit) { ?>
                         <tr>
                             <th scope="row"><a href="http://<?php echo PATH;?>/ControllerProduits/supprimerDuPanier/<?=$produit->id;?>"><i class="bi bi-trash"></i></a></th>
-                            <td><?=$produit->imageproduit;?></td>
+                            <td><img src="<?=IMAGES;?><?=$produit->imageproduit;?>" class="img-produit-panier"></td>
                             <td><?=$produit->titreproduit;?></td>
                             <td>&#8364; <?=$produit->prix;?></td>
                             <td>
@@ -37,16 +30,15 @@ var_dump($_SESSION);
                             </td>
                             <td>
                                 <?php foreach ($this->panierTotal as $id => $sousTotal) {
-                                    if ($produit->id == $id) {
-                                        echo $sousTotal.' &#8364;';
-                                    }
-                                } ?>
+                                if ($produit->id == $id) {
+                                    echo $sousTotal.' &#8364;';
+                                }
+                            } ?>
                             </td>
                         </tr>
-                        <?php }
-                            } ?>
+                        <?php } ?>
                         <tr>
-                            <td colspan="6"><button type="submit" name="updatepanier" class="btn btn-warning float-right">Mettre à jour le panier</button></td>
+                            <td colspan="6"><button type="submit" name="updatepanier" class="btn btn-success float-right">Mettre à jour le panier</button></td>
                         </tr>
                     </form>
                 </tbody>
@@ -60,7 +52,9 @@ var_dump($_SESSION);
                 <tr>
                     <!-- variable $this->panierTotal -->
                     <td>total (sans TVA)</td>
-                    <td><?= $this->total.' &#8364';?></td>
+                    <td>
+                        <?= $this->total.' &#8364'; ?>
+                    </td>
                 </tr>
                 <!-- <tr>
                     <td>total (TVA incluse)</td>

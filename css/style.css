@@ -1457,15 +1457,11 @@ link:hover > .dropdown_link {
     }
  
     .prod-info-main .product-image {
- 
         border-right: 1px solid #dfe5e9
- 
     }
  
     .prod-info-main .product-info {
- 
         position: relative
- 
     }
  
   }
@@ -1480,10 +1476,22 @@ link:hover > .dropdown_link {
 
   /* PANIER */
 
+  .panier-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
   .table-panier {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .img-produit-panier {
+    width: 4rem;
+    height: 4rem;
   }
 
   .table-total {

@@ -10,6 +10,10 @@ Création du discussion sur blog
 Nouvel article dans boutique
 
 */
+var_dump($_POST);
+if ($this->message !== '') {
+    echo '<p class="btn btn-warning text-center">'.$this->message.'</p>';
+}
 ?>
 
 <div class="container">
@@ -27,17 +31,16 @@ Nouvel article dans boutique
                 </div>
                 <div class="col-6 border">
                     <h3 class="text-center">Mois en cours</h3>
-                    <!-- la même chose que le mois précédent, sauf que pour le mois en cours -->
                 </div>
             </div>
         </div>
         <div class="col border mx-3">
             <h2 class="text-center">Valeur du stock</h2>
-            <!-- faire un select all de tout les produits sur la bdd et calculer la somme de leurs prix -->
+            <p>La valeur totale des produits dans votre stock est actuellement de <strong><?=$this->valeurStock;?> &#8364;</strong>.</p>
         </div>
         <div class="col border mx-3">
             <h2 class="text-center">Quantité totale du stock</h2>
-            <!-- faire un select all de tout les produits sur la bdd et calculer la somme de leurs quantités -->
+            <p>Vous avez un total de <strong><?=$this->stock?></strong> produits en stock</p>
         </div>
     </div>
     <div class="row my-5">
@@ -91,23 +94,23 @@ Nouvel article dans boutique
             <form action="http://<?php echo PATH; ?>/ControllerAdmin/nouveauProduit" method="POST">
                 <div class="input-group my-2">
                     <span class="input-group-text" for="reference">Réference du produit</span>
-                    <input class="form-control" type="text" id="reference" name="reference">
+                    <input class="form-control" type="text" id="reference" name="reference" required>
                 </div>
                 <div class="input-group">
                     <span class="input-group-text" for="titreproduit">Le nom du produit</span>
-                    <input class="form-control" type="text" id="titreproduit" name="titreproduit">
+                    <input class="form-control" type="text" id="titreproduit" name="titreproduit" required>
                 </div>
                 <div class="input-group my-2">
                     <span class="input-group-text" for="produit">Description du produit</span>
-                    <input class="form-control" type="text" id="produit" name="produit">
+                    <input class="form-control" type="text" id="produit" name="produit" required>
                 </div>
                 <div class="input-group my-2">
                     <span class="input-group-text" for="stock">Quantité en stock</span>
-                    <input class="form-control" type="number" id="stock" name="stock">
+                    <input class="form-control" type="number" id="stock" name="stock" required>
                 </div>
                 <div class="input-group my-2">
                     <span class="input-group-text" for="prix">Prix du produit</span>
-                    <input class="form-control" type="number" id="prix" name="prix">
+                    <input class="form-control" type="text" id="prix" name="prix" required>
                 </div>
                 <!-- <div class="form-group">
                     <select class="form-select" aria-label="Default select example">

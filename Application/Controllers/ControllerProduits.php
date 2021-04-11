@@ -101,27 +101,33 @@ class ControllerProduits extends Controller
     }
 
     public function commande() {
-        $this->render('commandevalider');
+        if (isset($_SESSION['panier'])) {
+            $panier = $_SESSION['panier'];
+            $this->panierTotal = array();
+            foreach($panier as $produit) {
+                $this->panierTotal[$produit->id] = $this->calculerSousTotal($produit->prix, $produit->quantite);
+            }
+            $this->total = array_sum($this->panierTotal);
+            $this->render('commandevalider');
+        } else {
+            $_SESSION['panier'] = array ();
+            $this->panierTotal = array ();
+            $this->total = 0;
+            $this->render('commandevalider');
+        }
     }
 
-    public function index()
+    public function produits()
     {
-        //je vérifie si il y a quelqun connecté
-        if (isset($_SESSION['user']))
-        {
-            $this->render('produits', $_SESSION['user']);
-        }
-        else
-        {
-            $this->render('produits');
-        }
+        $this->render('produits');
     }
 
     public function prestations() {
         $this->render('prestations');
     }
 
-    public function produitfiche() {
+    public function produitfiche($id) {
+        $this->ficheproduit = $this->produit->get_one_produit($id);
         $this->render('produitfiche');
     }
 }

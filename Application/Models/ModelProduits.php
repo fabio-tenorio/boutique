@@ -39,10 +39,10 @@ class ModelProduits extends Model
     }*/
 
 
-    public function get_one_produit($reference)
+    public function get_one_produit($id)
     {
-        $stmt = $this->connect_db()->prepare("SELECT * FROM `produit` WHERE reference=:reference");
-        $stmt->execute([':reference'=>$reference]);
+        $stmt = $this->connect_db()->prepare("SELECT * FROM `produit` WHERE id=:id");
+        $stmt->execute([':id'=>$id]);
         $produit = $stmt->fetch(\PDO::FETCH_OBJ);
         return $produit;
     }

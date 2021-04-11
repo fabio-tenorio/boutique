@@ -46,10 +46,6 @@ class ModelAdmin extends Model {
         return $this->insert('produit', $data);
     }
 
-
-
-
-    
     public function update_product($data, $id)
     {
         return $this->update('produit', $data, $id);
@@ -59,10 +55,13 @@ class ModelAdmin extends Model {
         $this->delete('produit', $id);
     }
 
-
-
-
-
+    public function allStock() {
+        $sql = "SELECT stock FROM produit";
+        $stmt = $this->connect_db()->prepare($sql);
+        $stmt->execute();
+        $stock = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stock;
+    }
 
     public function new_fournisseur_data($data)
     {

@@ -39,7 +39,7 @@ $listeProduits = $this->allProduits();
                     <div class="row">
                         <div class="col-md-12">
                             <a href="http://<?php echo PATH; ?>/ControllerProduits/ajouterAuPanier/<?php echo $produit->id;?>" class="btn btn-danger">ajouter au panier</a>
-                            <a href="javascript:void(0);" class="btn btn-info">détails</a>
+                            <a href="http://<?php echo PATH; ?>/ControllerProduits/produitfiche/<?php echo $produit->id;?>" class="btn btn-info">détails</a>
                         </div>
                         <div class="col-md-12">
                             <div class="rating">Rating:

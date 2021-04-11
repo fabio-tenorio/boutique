@@ -5,11 +5,10 @@ Affiche 1 produit, avec photo, descriptif et AVIS
 
 C'est la même vue pour chaque produit, seul le contenu change
 */
+var_dump($this->ficheproduit);
 ?>
 <div class="container">
-<!--Section: Block Content-->
 <section class="my-5 mb-5">
-
   <div class="row">
     <div class="col-md-6 mb-4 mb-md-0">
 
@@ -23,7 +22,7 @@ C'est la même vue pour chaque produit, seul le contenu change
             <figure class="view overlay rounded z-depth-1 main-img">
               <a href="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg"
                 data-size="710x823">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg"
+                <img src="<?=IMAGES;?><?=$this->ficheproduit->imageproduit;?>"
                   class="img-fluid z-depth-1">
               </a>
             </figure>
@@ -88,8 +87,8 @@ C'est la même vue pour chaque produit, seul le contenu change
     </div>
     <div class="col-md-6">
 
-      <h5>Fantasy T-shirt</h5>
-      <p class="mb-2 text-muted text-uppercase small">Shirts</p>
+      <h5><?=$this->ficheproduit->titreproduit?></h5>
+      <p class="mb-2 text-muted text-uppercase small"><?=$this->ficheproduit->id_categorie?></p>
       <ul class="rating produitstars">
         <li>
             <i class="bi bi-star bi-sm text-primary"></i>
@@ -107,30 +106,10 @@ C'est la même vue pour chaque produit, seul le contenu change
             <i class="bi bi-star bi-sm text-primary"></i>
         </li>
       </ul>
-      <p><span class="mr-1"><strong>$12.99</strong></span></p>
-      <p class="pt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
-        error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
-        officia quis dolore quos sapiente tempore alias.</p>
-      <div class="table-responsive">
-        <table class="table table-sm table-borderless mb-0">
-          <tbody>
-            <tr>
-              <th class="pl-0 w-25" scope="row"><strong>Model</strong></th>
-              <td>Shirt 5407X</td>
-            </tr>
-            <tr>
-              <th class="pl-0 w-25" scope="row"><strong>Color</strong></th>
-              <td>Black</td>
-            </tr>
-            <tr>
-              <th class="pl-0 w-25" scope="row"><strong>Delivery</strong></th>
-              <td>USA, Europe</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <p><span class="mr-1"><strong><?=$this->ficheproduit->prix?> &#8364;</strong></span></p>
+      <p class="pt-1"><?=$this->ficheproduit->produit;?></p>
       <hr>
-      <div class="table-responsive mb-2">
+      <!-- <div class="table-responsive mb-2">
         <table class="table table-sm table-borderless">
           <tbody>
             <tr>
@@ -149,10 +128,10 @@ C'est la même vue pour chaque produit, seul le contenu change
             </tr>
           </tbody>
         </table>
-      </div>
-      <button type="button" class="btn btn-primary btn-md mr-1 mb-2">Buy now</button>
+      </div> -->
+      <button type="button" class="btn btn-primary btn-md mr-1 mb-2">acheter maintenant</button>
       <button type="button" class="btn btn-light btn-md mr-1 mb-2"><i
-          class="bi bi-shopping-cart pr-2"></i>Add to cart</button>
+          class="bi bi-shopping-cart pr-2"></i>ajouter au panier</button>
     </div>
   </div>
   <div class="classic-tabs border rounded px-4 pt-1">
@@ -170,8 +149,8 @@ C'est la même vue pour chaque produit, seul le contenu change
   </ul>
   <div class="tab-content" id="advancedTabContent">
     <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-      <h5>Product Description</h5>
-      <p class="small text-muted text-uppercase mb-2">Shirts</p>
+      <h5></h5>
+      <!-- <p class="small text-muted text-uppercase mb-2">Shirts</p> -->
       <ul class="rating produitstars">
         <li>
           <i class="bi bi-star bi-sm text-primary"></i>
@@ -189,30 +168,28 @@ C'est la même vue pour chaque produit, seul le contenu change
           <i class="bi bi-star bi-sm text-primary"></i>
         </li>
       </ul>
-      <h6>12.99 $</h6>
-      <p class="pt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
-        error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
-        officia quis dolore quos sapiente tempore alias.</p>
+      <h6><?=$this->ficheproduit->prix?></h6>
+      <p class="pt-1"><?=$this->ficheproduit->produit?></p>
     </div>
     <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
-      <h5>Additional Information</h5>
+      <h5>Détails techniques</h5>
       <table class="table table-striped table-bordered mt-3">
         <thead>
           <tr>
-            <th scope="row" class="w-150 dark-grey-text h6">Weight</th>
+            <th scope="row" class="w-150 dark-grey-text h6">Marque</th>
             <td><em>0.3 kg</em></td>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row" class="w-150 dark-grey-text h6">Dimensions</th>
+            <th scope="row" class="w-150 dark-grey-text h6">Poid</th>
             <td><em>50 × 60 cm</em></td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-      <h5><span>1</span> review for <span>Fantasy T-shirt</span></h5>
+      <h5><span>1</span> les avis sur <span class=""><?=$this->ficheproduit->titreproduit?></span></h5>
       <div class="media mt-3 mb-4">
         <img class="d-flex mr-3 z-depth-1" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg" width="62" alt="Generic placeholder image">
         <div class="media-body">

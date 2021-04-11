@@ -50,8 +50,20 @@ main {
 }
 
 .img-slide {
-  width: 100%;
+  width: inherit;
   height: 80%;
+  opacity: 0.5;
+}
+
+.text-slide {
+  background-color: lightcoral;
+  position: absolute;
+  top: 10px;
+}
+
+.text-slide h2, .text-slide h3 {
+  text-align: left;
+  align-self: baseline;
 }
 
 header {

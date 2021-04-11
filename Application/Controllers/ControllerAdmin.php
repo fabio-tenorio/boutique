@@ -35,6 +35,8 @@ class ControllerAdmin extends ControllerUser
             $this->login = $_SESSION['user']->login;
             $this->id_droit = $_SESSION['user']->id_droit;
             $this->message = '';
+            $this->stock = $this->sommeStock();
+            $this->valeurStock = $this->valeurStock();
         }
     }
     
@@ -57,6 +59,25 @@ class ControllerAdmin extends ControllerUser
 
     public function nouveauProduit() {
         $data = $_POST;
+        intval($data['stock']);
+        if ($data['stock'] < 0) {
+            $this->message = "la valeur renseignée pour la quantité en stock d'un produit doit être un nombre entier positif";
+            return $this->index();
+        }
+        if ($data['prix'] == '') {
+            // $data['prix'] = 0.00;
+            $this->message = "la valeur renseignée pour le prix du produit doit être un chiffre positif au format X.XX ";
+            return $this->index();
+        } else {
+            floatval($data['prix']);
+            number_format($data['prix'], 2);
+        }
+            // if ($key === "stock" and is_int($value)===false) {
+            // 
+            // }
+            // if ($key === "prix" and is_int($value)===false) {
+            //     
+            // }
         $this->adminProducts->insert_product($data);
         return $this->index();
     }
@@ -77,7 +98,24 @@ class ControllerAdmin extends ControllerUser
         }
     }
 
-    
+    public function sommeStock() {
+        $stock = $this->adminProducts->allStock();
+        $result = 0;
+        foreach ($stock as $value) {
+            foreach($value as $quantiteStock) {
+                $result += $quantiteStock;
+            }            
+        }
+        return $result;
+    }
 
+    public function valeurStock() {
+        $produits = $this->admin_products();
+        $valeur = 0;
+        foreach ($produits as $produit) {
+            $valeur += $produit->prix * $produit->stock;
+        }
+        return $valeur;
+    }
 }        
     

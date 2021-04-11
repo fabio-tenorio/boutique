@@ -4,6 +4,7 @@
 Depuis panier, lien vers valider commande ou prévoir un onglet saisir commande
 NE PAS OUBLIER DE RÉCUPÉRER LES INFOS D'UN PANIER ET LA POSSIBILITÉ DE MODIFIER UN PANIER DANS COMMANDE
 */
+// var_dump($_SESSION);
 ?>
 
 <div class="container">
@@ -14,16 +15,16 @@ NE PAS OUBLIER DE RÉCUPÉRER LES INFOS D'UN PANIER ET LA POSSIBILITÉ DE MODIFI
             <div class="form-row">
                 <div class="form-group col-md-6">
                 <label for="prenom">Prenom</label>
-                <input type="text" class="form-control" id="prenom" placeholder="votre prénom">
+                <input type="text" class="form-control" id="prenom" placeholder="votre prénom" required>
                 </div>
                 <div class="form-group col-md-6">
                 <label for="nom">Nom</label>
-                <input type="text" class="form-control" id="nom" placeholder="votre nom">
+                <input type="text" class="form-control" id="nom" placeholder="votre nom" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="adresse">Adresse</label>
-                <input type="text" class="form-control" id="adresse" placeholder="Numéro de voie et nom de la rue">
+                <input type="text" class="form-control" id="adresse" placeholder="Numéro de voie et nom de la rue" required>
             </div>
             <div class="form-group">
                 <label for="complement"></label>
@@ -32,11 +33,11 @@ NE PAS OUBLIER DE RÉCUPÉRER LES INFOS D'UN PANIER ET LA POSSIBILITÉ DE MODIFI
             <div class="form-row">
                 <div class="form-group col-md-8">
                 <label for="ville">Ville</label>
-                <input type="text" class="form-control" id="ville">
+                <input type="text" class="form-control" id="ville" required>
                 </div>
                 <div class="form-group col-md-4">
                 <label for="departement">Département</label>
-                <select id="departement" class="form-control">
+                <select id="departement" class="form-control" required>
                     <option selected>Choose...</option>
                     <option>...</option>
                 </select>
@@ -44,7 +45,7 @@ NE PAS OUBLIER DE RÉCUPÉRER LES INFOS D'UN PANIER ET LA POSSIBILITÉ DE MODIFI
             </div>
             <div class="form-group">
                 <label for="codepostal">Code postal</label>
-                <input type="text" class="form-control" id="codepostal">
+                <input type="text" class="form-control" id="codepostal" required>
             </div>
             <div class="form-group">
                 <label for="telephone">telephone</label>
@@ -57,27 +58,31 @@ NE PAS OUBLIER DE RÉCUPÉRER LES INFOS D'UN PANIER ET LA POSSIBILITÉ DE MODIFI
             </form>
         </div>
         <div class="col my-2 commande">
-            <table class="table">
-                <thead class="thead-light">Votre commande</thead>
-                <tr>
-                    <th>Produit</th>
-                    <th>Sous-total</th>
-                </tr>
-                <tr>
-                    <td>nom du produit<span> x 1</span></td>
-                    <td>&#8364; prix du produit</td>
-                </tr>
-                <tr>
-                    <td>total (sans TVA)</td>
-                    <td>&#8364; prix total</td>
-                </tr>
-                <tr>
-                    <td>total (avec TVA)</td>
-                    <td>&#8364; prix total</td>
-                </tr>
-            </table>
-            <!-- striper -->
-            <button class="btn btn-primary col-sm-12 m-auto" type="submit" name="commander">commander</button>
+            <form action='#' method="POST">
+                <table class="table">
+                    <thead class="thead-light">Votre commande</thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Sous-total</th>
+                    </tr>
+                    <?php foreach($_SESSION['panier'] as $produit) { ?>
+                    <tr>
+                        <td><?=$produit->titreproduit?><span> x <?=$produit->quantite?></span></td>
+                        <td><?=$this->panierTotal[$produit->id];?> &#8364;</td>
+                    </tr>
+                    <?php } ?>
+                    <tr>
+                        <td>total (sans TVA)</td>
+                        <td><?=$this->total?> &#8364;</td>
+                    </tr>
+                    <!-- <tr>
+                        <td>total (avec TVA)</td>
+                        <td>&#8364; prix total</td>
+                    </tr> -->
+                </table>
+                <!-- striper -->
+                <button class="btn btn-primary col-sm-12 m-auto" type="submit" name="commander">commander</button>
+            </form>
         </div>
     </div>
 </div>

@@ -6,7 +6,7 @@ NE PAS OUBLIER DE RÉCUPÉRER LES INFOS D'UN PANIER ET LA POSSIBILITÉ DE MODIFI
 */
 // var_dump($_SESSION);
 require_once('../vendor/stripe/stripe-php/init.php');
-// $stripe = new \Stripe\StripeClient('sk_test_BQokikJOvBiI2HlWgH4olfQ2');
+//  $stripe = new \Stripe\StripeClient('sk_test_BQokikJOvBiI2HlWgH4olfQ2');
 $customer = $stripe->customers->create([
     'description' => 'example customer',
     'email' => 'email@example.com',

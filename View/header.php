@@ -80,7 +80,7 @@
       <i class="mx-2 bi bi-cart3"></i>panier</a>
     </li>
     <li class="nav-item">
-      <?php if (isset($_SESSION['panier'])) { ?>
+      <?php if (isset($_SESSION['panier']) and isset($_SESSION['nombreDeProduits']) and $_SESSION['nombreDeProduits'] > 0) { ?>
               <a class="nav-link btn btn-warning btn-sm" href="http://<?=PATH;?>/ControllerProduits/viderPanier/">vider</a>
       <?php } ?>
     </li>

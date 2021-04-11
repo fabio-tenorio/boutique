@@ -3,6 +3,7 @@
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelProduits;
+Use App;
 
 class ControllerProduits extends Controller 
 {
@@ -100,7 +101,7 @@ class ControllerProduits extends Controller
         $this->render('produits');
     }
 
-    public function commande() {
+    public function commande() {    
         if (isset($_SESSION['panier'])) {
             $panier = $_SESSION['panier'];
             $this->panierTotal = array();
@@ -115,6 +116,22 @@ class ControllerProduits extends Controller
             $this->total = 0;
             $this->render('commandevalider');
         }
+    }
+
+    public function stripe() {
+        // define ('STRIPE', str_replace("/boutique/Application/Controllers/ControllerProduits.php", "/boutique/vendor/autoload.php", __NAMESPACE__));
+        require './vendor/autoload.php';
+        // var_dump(require './vendor/autoload.php');
+        \Stripe\Stripe::setApiKey('sk_test_51If0n8GAVfFRDcyqyt7RWuzbgilod4eaJWk85bXVg8xTv1nu4XqTB0qgcfdtuINm84D5Jox1VsGdhhQe2D6XcOJu005WXivVx0');
+        $data = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+        $token = $data['stripeToken'];
+        $charge = \Stripe\Charge::create([
+        'amount' => 999,
+        'currency' => 'usd',
+        'description' => 'Example charge',
+        'source' => $token,
+        ]);
+        var_dump($token);
     }
 
     public function produits()

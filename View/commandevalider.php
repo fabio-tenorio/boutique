@@ -5,6 +5,14 @@ Depuis panier, lien vers valider commande ou prévoir un onglet saisir commande
 NE PAS OUBLIER DE RÉCUPÉRER LES INFOS D'UN PANIER ET LA POSSIBILITÉ DE MODIFIER UN PANIER DANS COMMANDE
 */
 // var_dump($_SESSION);
+require_once('../vendor/stripe/stripe-php/init.php');
+// $stripe = new \Stripe\StripeClient('sk_test_BQokikJOvBiI2HlWgH4olfQ2');
+$customer = $stripe->customers->create([
+    'description' => 'example customer',
+    'email' => 'email@example.com',
+    'payment_method' => 'pm_card_visa',
+]);
+echo $customer;
 ?>
 
 <div class="container">

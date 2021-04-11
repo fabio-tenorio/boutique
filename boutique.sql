@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Ven 09 Avril 2021 à 09:53
+-- Généré le :  Lun 12 Avril 2021 à 01:03
 -- Version du serveur :  5.7.33-0ubuntu0.18.04.1
 -- Version de PHP :  7.2.24-0ubuntu0.18.04.7
 
@@ -118,9 +118,7 @@ CREATE TABLE `commande` (
   `id` int(11) NOT NULL,
   `id_client` int(11) NOT NULL,
   `id_produit` int(11) NOT NULL,
-  `fraisexpedition` decimal(4,2) NOT NULL,
-  `datecommande` date NOT NULL,
-  `id_panier` int(11) NOT NULL
+  `datecommande` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -218,6 +216,18 @@ INSERT INTO `fournisseur` (`id`, `nomfournisseur`, `codepostale`, `statut`) VALU
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `lignecommande`
+--
+
+CREATE TABLE `lignecommande` (
+  `id_commande` int(11) DEFAULT NULL,
+  `id_produit` int(11) DEFAULT NULL,
+  `quantiteproduit` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `message`
 --
 
@@ -277,9 +287,9 @@ CREATE TABLE `produit` (
   `reference` varchar(55) DEFAULT NULL,
   `titreproduit` varchar(255) DEFAULT NULL,
   `produit` text,
-  `stock` int(25) DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
   `prix` decimal(6,2) DEFAULT NULL,
-  `dateproduit` datetime DEFAULT NULL,
+  `dateproduit` datetime DEFAULT CURRENT_TIMESTAMP,
   `id_categorie` int(11) DEFAULT NULL,
   `id_fournisseur` int(11) DEFAULT NULL,
   `id_avis` int(11) DEFAULT NULL,
@@ -291,24 +301,14 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id`, `reference`, `titreproduit`, `produit`, `stock`, `prix`, `dateproduit`, `id_categorie`, `id_fournisseur`, `id_avis`, `imageproduit`) VALUES
-(1, '100', 'crème pour les mains', 'Une crème hydratante est un produit cosmétique qui hydrate la peau et empêche sa déshydratation en reconstituant le film hydrolipidique, protection naturelle de la peau éliminée par le savon durant la toilette', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL, 'palette.jpg'),
-(2, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
-(7, '100', 'crememain', '200 ml', NULL, '19.50', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
-(8, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
-(9, '200', 'vernirouge', 'merveilleux', NULL, '15.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
-(10, '1000', 'sechecheveux', 'extra', NULL, '150.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
-(11, '1000', 'sechecheveux', 'extra', NULL, '150.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
-(12, '1001', 'coupeongle', 'dangereux', NULL, '25.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
-(13, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
-(14, '1003', 'tondeuse', 'tendance', NULL, '99.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
-(15, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
-(16, '1002', 'rasoir', 'yes', NULL, '69.00', '2021-03-02 00:00:00', 0, 0, NULL, NULL),
-(17, '1', 'soinfetedesmeres', 'une merveille', NULL, '50.00', '2021-03-02 00:00:00', 1, 1, NULL, NULL),
-(18, '2', 'lissagebresilien', 'pile poils', NULL, '75.00', '2021-03-02 00:00:00', 1, 1, NULL, NULL),
-(19, '3', 'manucure', 'bien', NULL, '45.00', '2021-03-02 00:00:00', 1, 1, NULL, NULL),
-(20, '4', 'taouageephemere', 'jusqu\'au bout des ongles', NULL, '15.00', '2021-03-02 00:00:00', 1, 1, NULL, NULL),
-(21, '123', 'tondeuse', 'Une tondeuse est, dans le domaine de la coiffure un outil servant à couper les cheveux.', NULL, '20.00', NULL, NULL, NULL, NULL, NULL),
-(22, '222', 'lissage brésilien', 'Le lissage brésilien, également appelé traitement brésilien à la kératine, est un traitement des cheveux', NULL, '30.00', NULL, NULL, NULL, NULL, NULL);
+(1, '100', 'crème pour les mains', 'Une crème hydratante est un produit cosmétique qui hydrate la peau et empêche sa déshydratation en reconstituant le film hydrolipidique, protection naturelle de la peau éliminée par le savon durant la toilette', 24, '19.50', '2021-03-02 00:00:00', 0, 0, NULL, 'palette.jpg'),
+(30, '1349751', 'kit manucure', 'La manucure ou le manucure est un soin de beauté destiné à embellir les mains et les ongles réalisé par un ou une prothésiste ongulaire.', 50, '30.00', '2021-04-10 23:53:13', NULL, NULL, NULL, 'kitmanucure.jpg'),
+(43, '5616', 'lissage brésilien', 'Le lissage brésilien est un traitement des cheveux', 1, '70.99', '2021-04-11 02:10:35', NULL, NULL, NULL, 'lissagebresilien.jpg'),
+(44, '58462', 'vernis pour les ongles', 'Vernis désigne généralement une substance transparente, sèche, permanente et brillante', 80, '15.99', '2021-04-11 02:12:34', NULL, NULL, NULL, 'vernisongle.jpg'),
+(45, '678212', 'tatouage éphémère', 'Un tatouage est un dessin décoratif et/ou symbolique permanent effectué sur la peau', 120, '12.30', '2021-04-11 02:13:54', NULL, NULL, NULL, 'tatouage.jpg'),
+(47, '56', 'coupe + shampoing homme', 'La coiffure est un art', 1, '17.00', '2021-04-11 02:18:55', NULL, NULL, NULL, 'coupehomme.webp'),
+(48, '54546', 'coupe + shampoing femme', 'La coiffure est un art pour arranger les cheveux, éventuellement de modifier leur aspect extérieur.', 1, '20.00', '2021-04-11 02:20:49', NULL, NULL, NULL, 'coupefemme.jpg'),
+(49, '37852', 'tondeuse', 'Une tondeuse est, dans le domaine de la coiffure un outil servant à couper les cheveux.', 20, '35.29', '2021-04-11 02:22:29', NULL, NULL, NULL, 'tondeuse.jpg');
 
 -- --------------------------------------------------------
 
@@ -416,7 +416,7 @@ CREATE TABLE `utilisateurs` (
   `mail` varchar(55) NOT NULL,
   `telephone` varchar(25) NOT NULL,
   `datenaissance` date DEFAULT NULL,
-  `dateinscription` date DEFAULT NULL
+  `dateinscription` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -427,8 +427,7 @@ INSERT INTO `utilisateurs` (`id`, `id_droit`, `login`, `motpasse`, `prenom`, `no
 (14, 1, 'client_quatre', '$2y$10$jl3j8MCwwB3AehgZhKelZu4u9pbfcAUyFu7MQEoNis9XPBDgCXDjm', 'client', 'quatre', 'clientquatre@boutique.fr', '6666666666', NULL, NULL),
 (15, 1, 'iris', 'UkbNhHwApyRhB0KP', 'iris', 'debian-sys-maint', 'iris@boutique.fr', '45647879', NULL, NULL),
 (16, 1, 'fabio', '$2y$10$n8r18D/1tsMquItpQbrPNuRpX8oiaFIyAv1FrOpDihk7F.DbXHcLy', 'Fabio', 'Tenorio', 'fabio@boutique.fr', '123456789', NULL, NULL),
-(17, 200, 'admin', '$2y$10$I/AsLWR5YWhiOWraKaWzEuhNrZVrABgsYgnTK03zZJ6VqgkLyL/FG', 'admin', 'aaa', 'admin@boutique.fr', '123456789', NULL, NULL),
-(18, 1, 'roxan', '$2y$10$cgUIrH1RK7q1bHZWHxISGe.Zyi5Juog1OLNN02B/CMqsn6giVlK96', 'therry', 'roxan', 'roxan@boutique.fr', '123456789', NULL, NULL);
+(17, 200, 'admin', '$2y$10$I/AsLWR5YWhiOWraKaWzEuhNrZVrABgsYgnTK03zZJ6VqgkLyL/FG', 'admin', 'aaa', 'admin@boutique.fr', '123456789', NULL, NULL);
 
 --
 -- Index pour les tables exportées
@@ -606,7 +605,7 @@ ALTER TABLE `panier`
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT pour la table `reponse`
 --

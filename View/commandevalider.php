@@ -1,5 +1,7 @@
 <?php
-
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+}
 ?>
 <!-- Vous êtes connecté en tant que <?php // $_SESSION['user']->prenom; ?> -->
 <!-- Souhaitez-vous récuperer les informations de votre profil pour faire le paiement? -->

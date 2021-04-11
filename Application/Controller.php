@@ -27,6 +27,8 @@ use ArrayObject;
 // Autoloader::register();
 
 abstract class Controller {
+
+    public $message = '';
     
     public function bonne_affichage($donnee)
     {

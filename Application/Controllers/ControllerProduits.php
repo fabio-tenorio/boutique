@@ -35,6 +35,28 @@ class ControllerProduits extends Controller
         return $this->produit->get_all_produits();
     }
 
+    public function verifierStock($produits) {
+        $stock = $this->allPRoduits();
+        $checkStock = true;
+        foreach($produits as $key=>$produit) {
+            foreach($stock as $produitDispo) {
+                if ($key == $produitDispo->id) {
+                    if ($produitDispo->stock - $produit < 0) {
+                        $this->message = "Désolé. On n'est dispose pas de cette quantité de produits";
+                        $checkStock = false;
+                    } else {
+                        $checkStock = true;
+                    }
+                }
+            }
+        }
+        if ($checkStock === true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function calculerSousTotal ($prix, $fois) {
         return $this->produitTotal = $prix * $fois;
     }
@@ -43,17 +65,27 @@ class ControllerProduits extends Controller
         if (isset($_POST['updatepanier']) and isset($_SESSION['panier'])) {
             $panier = $_POST;
             unset($panier['updatepanier']);
-            $this->panierTotal = array();
-            foreach($_SESSION['panier'] as $produit) {
-                foreach($panier as $produitId => $quantite) {
-                    if ($produit->id == $produitId) {
-                        $produit->quantite = $quantite;
-                        $this->panierTotal[$produit->id] = $this->calculerSousTotal($produit->prix, $quantite);
+            if ($this->verifierStock($panier) === true) {
+                $this->panierTotal = array();
+                foreach($_SESSION['panier'] as $produit) {
+                    foreach($panier as $produitId => $quantite) {
+                        if ($produit->id == $produitId) {
+                            $produit->quantite = $quantite;
+                            $this->panierTotal[$produit->id] = $this->calculerSousTotal($produit->prix, $quantite);
+                        }
                     }
                 }
+                $this->total = array_sum($this->panierTotal);
+                $this->render('panier');
+            } else {
+                $panier = $_SESSION['panier'];
+                $this->panierTotal = array();
+                foreach($panier as $produit) {
+                    $this->panierTotal[$produit->id] = $this->calculerSousTotal($produit->prix, $produit->quantite);
+                }
+                $this->total = array_sum($this->panierTotal);
+                $this->render('panier');
             }
-            $this->total = array_sum($this->panierTotal);
-            $this->render('panier');
         } elseif (!isset($_POST['updatepanier']) and isset($_SESSION['panier'])) {
             $panier = $_SESSION['panier'];
             $this->panierTotal = array();
@@ -116,6 +148,12 @@ class ControllerProduits extends Controller
             $this->total = 0;
             $this->render('commandevalider');
         }
+        if (isset($_SESSION['user'])) {
+            var_dump($_SESSION['user']);
+        } else {
+            $this->client = array();
+            var_dump($this->client);
+        }
     }
 
     public function stripe() {
@@ -131,7 +169,8 @@ class ControllerProduits extends Controller
         'description' => 'Example charge',
         'source' => $token,
         ]);
-        var_dump($token);
+        
+        print_r($charge);
     }
 
     public function produits()

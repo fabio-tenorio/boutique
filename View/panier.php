@@ -5,6 +5,11 @@ $listeproduits = $_SESSION['panier'];
     <div class="row table-panier">
         <div class="col-sm-12 my-5">
             <h2 class="text-center my-3">Mon panier</h2>
+            <?php
+                if ($this->message!='') {
+                    echo '<p class="btn btn-warning">'.$this->message.'</p>';
+                }
+            ?>
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>

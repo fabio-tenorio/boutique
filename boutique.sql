@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Lun 12 Avril 2021 à 01:03
+-- Généré le :  Lun 12 Avril 2021 à 16:41
 -- Version du serveur :  5.7.33-0ubuntu0.18.04.1
 -- Version de PHP :  7.2.24-0ubuntu0.18.04.7
 
@@ -91,13 +91,7 @@ INSERT INTO `categorie` (`id`, `nom`) VALUES
 
 CREATE TABLE `client` (
   `id` int(11) NOT NULL,
-  `id_utilisateur` int(11) NOT NULL,
-  `nomtitulaireCB` varchar(55) NOT NULL,
-  `numeroCB` varchar(25) NOT NULL,
-  `validiteCB` date NOT NULL,
-  `code3chiffresCB` int(11) NOT NULL,
   `adresselivraison` varchar(255) NOT NULL,
-  `id_panier` int(11) NOT NULL,
   `id_commande` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -105,8 +99,8 @@ CREATE TABLE `client` (
 -- Contenu de la table `client`
 --
 
-INSERT INTO `client` (`id`, `id_utilisateur`, `nomtitulaireCB`, `numeroCB`, `validiteCB`, `code3chiffresCB`, `adresselivraison`, `id_panier`, `id_commande`) VALUES
-(1, 6, 'client', '2137777777', '2022-04-26', 111, 'Marseille', 1, 0);
+INSERT INTO `client` (`id`, `adresselivraison`, `id_commande`) VALUES
+(1, 'Marseille', 0);
 
 -- --------------------------------------------------------
 
@@ -117,7 +111,6 @@ INSERT INTO `client` (`id`, `id_utilisateur`, `nomtitulaireCB`, `numeroCB`, `val
 CREATE TABLE `commande` (
   `id` int(11) NOT NULL,
   `id_client` int(11) NOT NULL,
-  `id_produit` int(11) NOT NULL,
   `datecommande` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -630,7 +623,7 @@ ALTER TABLE `theme`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

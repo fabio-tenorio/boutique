@@ -15,7 +15,7 @@ if ($this->message!=null) {
       </div>
       <div class="form-group row">
         <label for="motpasse">Mot de passe</label>
-        <input type="motpasse" class="form-control" name="motpasse" id="motpasse" placeholder="votre mot de passe">
+        <input type="password" class="form-control" name="motpasse" id="motpasse" placeholder="votre mot de passe">
       </div>
     </div>
       <div class="form-group row">

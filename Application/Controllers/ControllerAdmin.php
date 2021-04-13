@@ -1,17 +1,10 @@
 <?php
-
-/* 
-Permet l'accès à un page administration sur la page accueil
-Gère les droits users
-Permet l'accès aux pages admin et donc aux fonctions admin (supprimer un user, supprimer un message, mofifier des droits, )
-Historique du panier
-Accès aux infos du users (profil, panier, commande...)
+/* Permet l'accès à un page administration sur la page accueil
+Et donc aux fonctions admin (supprimer un user, supprimer un message, mofifier des droits, )
+Accès aux infos du users (profil, commande...)
 Création du discussion sur blog
 Nouvel article dans boutique
-
-"Créer un Évenement dans agenda sur plusieurs heures ou jours"
-
-*/
+Créer un Évenement dans agenda sur plusieurs heures ou jours */
 
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
@@ -65,19 +58,12 @@ class ControllerAdmin extends ControllerUser
             return $this->index();
         }
         if ($data['prix'] == '') {
-            // $data['prix'] = 0.00;
             $this->message = "la valeur renseignée pour le prix du produit doit être un chiffre positif au format X.XX ";
             return $this->index();
         } else {
             floatval($data['prix']);
             number_format($data['prix'], 2);
         }
-            // if ($key === "stock" and is_int($value)===false) {
-            // 
-            // }
-            // if ($key === "prix" and is_int($value)===false) {
-            //     
-            // }
         $this->adminProducts->insert_product($data);
         return $this->index();
     }

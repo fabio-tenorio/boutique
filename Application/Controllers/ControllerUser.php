@@ -3,8 +3,8 @@ Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelUser;
 
-class ControllerUser extends Controller {
-
+class ControllerUser extends Controller 
+{
     private $id;
     private $id_droit;
     protected $prenom;
@@ -41,7 +41,6 @@ class ControllerUser extends Controller {
     }
 
 // MÉTHODES LIÉES AUX MODELS
-
     public function all_users()
     {
         return $this->user->get_all_users();
@@ -93,9 +92,7 @@ class ControllerUser extends Controller {
             }
     }
             
-
     // MÉTHODES LIÉES AUX VIEWS
-
     public function inscription()
     {
         if (isset($_POST['login']))
@@ -214,17 +211,8 @@ class ControllerUser extends Controller {
 
         if (isset($_POST))
         {
-
-
-
-
-
             $this->update_profil($_POST);
         }
-
-
-
-
     } 
 
     public function disconnect()
@@ -233,13 +221,5 @@ class ControllerUser extends Controller {
         session_destroy();
         header("Refresh:0,url=$url");
     }
-
-    /**public function admin($data=null)
-    {
-        $this->render('administrateur', $data);
-    }*/
-        
 }
-
-    
 ?>

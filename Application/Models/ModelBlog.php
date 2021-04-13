@@ -1,8 +1,6 @@
 <?php
 
-/* 
-
-    PENSER À DEMANDER LA CONFIRMATION D'INSCRIPTION PAR UN MAIL DE CONFIRMATION 
+/* PENSER À DEMANDER LA CONFIRMATION D'INSCRIPTION PAR UN MAIL DE CONFIRMATION 
 
    Modifier une réponse par l'auteur
    Modifiers un massage par l'auteur
@@ -26,14 +24,13 @@
     BOUTON SIGNALER UN ABUS
 
     ENVOYER UN AVERTISSEMENT
-
 */
 
 Namespace App\Application\Models;
 use App\Application\Model;
 
-class ModelBlog extends Model {
-    
+class ModelBlog extends Model 
+{
     /* Function test
     public function connect()
     {
@@ -110,8 +107,7 @@ class ModelBlog extends Model {
         return $this->update('article', $data, $id);
     }
 
-    /* Pensez à rattacher les messages et réponses
-    */
+    /* Pensez à rattacher les messages et réponses */
 
     public function get_one_theme($id)
     {
@@ -130,5 +126,4 @@ class ModelBlog extends Model {
 
     /* Prévoir les articles, messages et réponses associés*/
 }
-
 ?>

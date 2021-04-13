@@ -1,29 +1,14 @@
 <?php
 
-/*
-*/
-
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
 
 class ControllerBlog extends Controller 
 {
-
-    /*
-    * Test qui marche
-    */
     public function index()
     {
         echo "Je suis ControllerBlog";
     }
-
-    /*
-    * Est-ce nécessaire ?
-    public function Construct()
-    {
-
-    }
-    */
     
     public function select_one_conversation($id)
     {
@@ -59,7 +44,5 @@ class ControllerBlog extends Controller
     {
 
     }
-
 }
-
 ?>

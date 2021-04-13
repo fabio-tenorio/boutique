@@ -55,16 +55,11 @@ $listeproduits = $_SESSION['panier'];
                 Total
                 </thead>
                 <tr>
-                    <!-- variable $this->panierTotal -->
                     <td>total (sans TVA)</td>
                     <td>
                         <?= $this->total.' &#8364'; ?>
                     </td>
                 </tr>
-                <!-- <tr>
-                    <td>total (TVA incluse)</td>
-                    <td>&#8364; 10000</td>
-                </tr> -->
                 <tr>
                     <td colspan="2">
                         <form action="http://<?php echo PATH;?>/ControllerProduits/commande" method="POST">

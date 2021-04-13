@@ -1,7 +1,5 @@
 <?php
-/*
-UN MODEL GÉNÉRAL QUI PERMET L'ACCÈS À DES DONNÉES DIFFÉRENTES DDB MYSQL
-*/
+/* UN MODEL GÉNÉRAL QUI PERMET L'ACCÈS À DES DONNÉES DIFFÉRENTES DDB MYSQL */
 
 Namespace App\Application;
 
@@ -136,5 +134,4 @@ abstract class Model
         }
     }
 }
-
 ?>

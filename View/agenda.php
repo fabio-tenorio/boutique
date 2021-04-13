@@ -12,18 +12,6 @@ if (!isset($this->autreSemaine)) {
 $dimanche = $this->setDimanche($lundi);
 $joursDeLaSemaine = $this->setJoursDeLaSemaine($lundi);
 $creneaux = $this->setCreneaux($joursDeLaSemaine);
-// var_dump($_POST);
-// $this->bonne_affichage($creneaux);
-// faire un formulaire qui affiche
-// quelle prestation? (select)
-// quelle jour de la semaine (input date)
-// une fois validé, afficher les horaires disponibles dans la semaine qui correspond à la date choisie
-// afficher la date en dessus et les horaires dans un tableau (sans button, seulement l'horaire comme lien)
-// les horaires déjà reservés par d'autres clients apparaissent en gris
-// les horaires reservés par la personne connectée apparaissent avec un button annuler rdv
-// une fois le tout validé, envoyer vers une page qui suggère des produits qui vont avec la prestation (shampoing, vernis, lixa)
-// si la personne ajoute un ou + produits au panier, alors elle voit deux liens: un vers le panier, l'autre vers la commande.
-// si elle valide juste la prestation, alors en email est envoyé avec la confirmation de la réservation.
 ?>
 
 <h2 class="my-4 text-dark text-center">Planning</h2>
@@ -55,7 +43,7 @@ $creneaux = $this->setCreneaux($joursDeLaSemaine);
         <?php
             foreach ($creneaux as $key=>$value) {
                 echo '<ul>';
-                // $key = str_replace('-', '/', $key);
+
                 $day=date('D', strtotime($key));
                 $dayNumber = date('d/m', strtotime($key));
                 switch ($day) {
@@ -90,7 +78,6 @@ $creneaux = $this->setCreneaux($joursDeLaSemaine);
                     foreach ($this->allResa as $objects) {
                         foreach ($objects as $propertyName => $property) {
                             if ($propertyName == 'datedebut') {
-                                // var_dump($property);
                                 if ($property == $datetime) {
                                     $heure = explode(' ', $horaires);
                                     $heureAffichee = explode (':', $heure[1]);
@@ -170,26 +157,6 @@ $creneaux = $this->setCreneaux($joursDeLaSemaine);
                         $ligne[$horaires] = explode(' ', $ligne[$horaires]);
                         ?>
                         <a href="<?php echo PATH;?>/ControllerAgenda/formResaView?<?= $ligne[$horaires][0].'/'.$ligne[$horaires][1];?>"><?=$ligne[$horaires][1]?></a>
-                    <!-- <form action="#" method="POST"> -->
-                        <?php
-                        // $ligne[$horaires] = explode(' ', $ligne[$horaires]);
-                        // $_GET['date']=$ligne[$horaires][0];
-                        // $_GET['horaire']=$ligne[$horaires][1];
-                        ?>
-                        <!-- <select class="creneau-jours custom-select" name="titrereservation" aria-label="Default select example" required>
-                            <option value="" selected>nos prestations</option>
-                            <option value="soin complet">Soin complet</option>
-                            <option value="soin des mains">Soin des mains</option>
-                            <option value="soin des pieds">Soin des pieds</option>
-                            <option value="pose d'ongles">Pose d'ongles<span></span></option>
-                            <option value="maquillage">Maquillage</option>
-                            <option value="fete des meres">Fete des meres</option>
-                            <option value="nouvelle annee">Nouvelle annee</option>
-                            <option value="soin ete">Soin ete</option>
-                            <option value="soin rentree">Soin rentree</option>
-                        </select>
-                        <input class="creneau-jours col-12 my-3" type="submit" name="reserver" value="reserver"/>
-                    </form> -->
                 <?php }
                         echo'</td>';
                     }

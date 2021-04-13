@@ -50,8 +50,6 @@ foreach($params as $key=>$value) {
         if (class_exists($MainController)) {
             $controller = new $MainController;
             if (method_exists($controller, $action)) {
-                // $arguments = new ReflectionMethod($controller, $action);
-                // $arguments = $arguments->getParameters();
                 $controller->$action(...$arguments);
             } else {
                 ControllerUser::page_error();   
@@ -59,8 +57,6 @@ foreach($params as $key=>$value) {
         } elseif (class_exists($OtherController)) {
             $controller = new $OtherController;
             if (method_exists($controller, $action)) {
-                // $arguments = new ReflectionMethod($controller, $action);
-                // $arguments = $arguments->getParameters();
                 $controller->$action(...$arguments);
             } else {
                 ControllerUser::page_error();

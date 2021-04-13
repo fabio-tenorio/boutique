@@ -1,6 +1,5 @@
 <?php
-/*
-Gestion de certaines erreurs
+/* Gestion de certaines erreurs
 
 Récupérer les titres et l'accès aux pages
 
@@ -11,9 +10,7 @@ Déterminer les différents controlers :
 1 controler agenda
 1 controler blog
 1 controler boutique (voir si nécessité de sous-controlers)
-1 controler produits
-   
-*/
+1 controler produits */
 
 namespace App\Application;
 use App\Application\Model as Model;
@@ -22,11 +19,8 @@ use App\Application\Models;
 use App\Autoloader;
 use ArrayObject;
 
-// require_once 'autoloader.php';
-
-// Autoloader::register();
-
-abstract class Controller {
+abstract class Controller 
+{
 
     public $message = '';
     
@@ -38,7 +32,6 @@ abstract class Controller {
     }
 
     // les méthodes qui permettent de charger un model
-    
     public function load_model($model)
     {
         // voir après si on peut se passer sans attribuer null par défault
@@ -46,12 +39,10 @@ abstract class Controller {
         {
             $modelPath = 'App\\'.'Application\\'.'Models\\'.$model;
             $this->$model = new $modelPath;
-            // ($this->$model);
             return $this->$model;
         }
     }
         // les méthodes concernant le View
-
         public function render(string $fichier, $data = null)
         {
             // d'abord le header
@@ -81,7 +72,6 @@ abstract class Controller {
         }
 
     // les méthodes qui permettent de charger un model
-
     public function loadModel($model)
     {
         if ($model!=null)
@@ -91,7 +81,4 @@ abstract class Controller {
         }
     }        
 }
-
-
-
 ?>

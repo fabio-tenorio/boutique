@@ -1,5 +1,4 @@
 <?php
-
 /* controller dédié aux réservations de rdv sur place à l'onglerie
 * et à l'éventuel paiement en amont des prestations préalablement choisies sur le créneau
 */
@@ -10,8 +9,8 @@ Use App\Application\Models\ModelAgenda;
 use DateInterval;
 use DateTime;
 
-class ControllerAgenda extends Controller {
-
+class ControllerAgenda extends Controller 
+{
     public $mainteant;
     public $lundi;
     public $dimanche;
@@ -110,7 +109,6 @@ class ControllerAgenda extends Controller {
     }
 
     // LA GESTION DES DONNÉES
-
     public function pickHour($string)
     {
         if (is_string($string)) {
@@ -122,13 +120,10 @@ class ControllerAgenda extends Controller {
     }
 
     // méthode pour controler si les donnés de la réservation sont cohérents avec le jour et l'heure au moment de la réservation
-
     public function checkMoment($data)
     {
         $now = new DateTime();
-        // $now = $now->format('Y-m-d H:00:00');
         $reservation = new DateTime($data);
-        // $reservation = $reservation->format('Y-m-d H:00:00');
         $interval = $now->diff($reservation);
         $negative = ( $interval->invert ? '-' : '' );
         if ($negative.$interval->d > 0) {
@@ -240,7 +235,6 @@ class ControllerAgenda extends Controller {
    }
 
     // LES VIEWS
-
     public function affichageTableau($row, $col)
     {
         for ($i=0;$i<$row;$i++)
@@ -287,8 +281,5 @@ class ControllerAgenda extends Controller {
         $this->setLundi($lundi->sub(new DateInterval('P1W')));
         $this->index();
     }
-
 }
-
-
 ?>

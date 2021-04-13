@@ -62,7 +62,7 @@ $listeproduits = $_SESSION['panier'];
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <form action="http://<?php echo PATH;?>/ControllerProduits/commande" method="POST">
+                        <form action="http://<?php echo PATH;?>/ControllerProduits/afficherCommande" method="POST">
                             <button class="btn btn-primary col-sm-12 m-auto" type="submit" name="commander">valider la commande</button>
                         </form>
                     </td>

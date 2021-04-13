@@ -27,5 +27,9 @@ class ModelProduits extends Model
         $produit = $stmt->fetch(\PDO::FETCH_OBJ);
         return $produit;
     }
+
+    public function update_stock_produit($data, $id) {
+        $this->update('produit', $data, $id);
+    }
 }
 ?>

@@ -37,10 +37,10 @@ class ControllerProduits extends Controller
     public function verifierStock($produits) {
         $stock = $this->allPRoduits();
         $checkStock = true;
-        foreach($produits as $key=>$produit) {
+        foreach($produits as $produit) {
             foreach($stock as $produitDispo) {
-                if ($key == $produitDispo->id) {
-                    if ($produitDispo->stock - $produit < 0) {
+                if ($produit->id == $produitDispo->id) {
+                    if ($produitDispo->stock - $produit->quantite < 0) {
                         $this->message = "Désolé. On n'est dispose pas de cette quantité de produits";
                         $checkStock = false;
                     } else {
@@ -134,18 +134,16 @@ class ControllerProduits extends Controller
 
     public function commande() {    
         if (isset($_SESSION['panier'])) {
-            $panier = $_SESSION['panier'];
+            $this->panier = $_SESSION['panier'];
             $this->panierTotal = array();
-            foreach($panier as $produit) {
+            foreach($this->panier as $produit) {
                 $this->panierTotal[$produit->id] = $this->calculerSousTotal($produit->prix, $produit->quantite);
             }
             $this->total = array_sum($this->panierTotal);
-            $this->render('commandevalider');
         } else {
             $_SESSION['panier'] = array ();
             $this->panierTotal = array ();
             $this->total = 0;
-            $this->render('commandevalider');
         }
         // if (isset($_SESSION['user'])) {
         //     var_dump($_SESSION['user']);
@@ -155,27 +153,52 @@ class ControllerProduits extends Controller
         // }
     }
 
-    public function stripe() {
-        // define ('STRIPE', str_replace("/boutique/Application/Controllers/ControllerProduits.php", "/boutique/vendor/autoload.php", __NAMESPACE__));
-        require './vendor/autoload.php';
-        // var_dump(require './vendor/autoload.php');
-        \Stripe\Stripe::setApiKey('sk_test_51If0n8GAVfFRDcyqyt7RWuzbgilod4eaJWk85bXVg8xTv1nu4XqTB0qgcfdtuINm84D5Jox1VsGdhhQe2D6XcOJu005WXivVx0');
-        $this->data = filter_var_array($_POST, FILTER_SANITIZE_STRING);
-        $token = $this->data['stripeToken'];
-        $charge = \Stripe\Charge::create([
-        'amount' => 999,
-        'currency' => 'usd',
-        'description' => 'Example charge',
-        'source' => $token,
-        ]);
-        $this->charge = $charge;
-        if ($this->charge->outcome->seller_message == "Payment complete.") {
-            $this->message = '<h1 class="text-center">Paiement confirmé</h1><h2 class="text-center">Merci de votre visite!</h2>';
-            $this->render('commandeconfirmation');
-        } else {
-            $this->message = '<h1 class="my-5 text-center">Paiement réfusé</h1><h2 class="my-5 text-center">Désolé. Un problème est survenu lors de la procedure de paiement.</h2>';
-            $this->render('commandeconfirmation');
+    public function updateStock($produitsPanier) {
+        $stock=$this->allProduits();
+        foreach($produitsPanier as $produitPanier) {
+            foreach($stock as $produitStock) {
+                if ($produitPanier->id === $produitStock->id) {
+                    $produitStock->stock = $produitStock->stock - $produitPanier->quantite;
+                    $data = ['stock'=>$produitStock->stock];
+                    $this->produit->update_stock_produit($data, $produitStock->id);
+                }
+            }
         }
+    }
+
+    public function stripe() {
+        $this->commande();
+        if ($this->total <= 0) {
+            $this->message = '<h1 class="my-5 text-center">Votre commande était vide</h1><h2 class="my-5 text-center">Aucun prélèvement a eu lieu</h2>';
+            return $this->render('commandeconfirmation');
+        } else {
+            if ($this->verifierStock($this->panier)===true) {
+                $this->updateStock($this->panier);
+                require './vendor/autoload.php';
+                \Stripe\Stripe::setApiKey('sk_test_51If0n8GAVfFRDcyqyt7RWuzbgilod4eaJWk85bXVg8xTv1nu4XqTB0qgcfdtuINm84D5Jox1VsGdhhQe2D6XcOJu005WXivVx0');
+                $this->data = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+                $token = $this->data['stripeToken'];
+                $charge = \Stripe\Charge::create([
+                'amount' => 999,
+                'currency' => 'usd',
+                'description' => 'Example charge',
+                'source' => $token,
+                ]);
+                $this->charge = $charge;
+                if ($this->charge->outcome->seller_message == "Payment complete.") {
+                    $this->message = '<h1 class="text-center">Paiement confirmé</h1><h2 class="text-center">Merci de votre visite!</h2>';
+                    $this->render('commandeconfirmation');
+                } else {
+                    $this->message = '<h1 class="my-5 text-center">Paiement réfusé</h1><h2 class="my-5 text-center">Désolé. Un problème est survenu lors de la procedure de paiement.</h2>';
+                    $this->render('commandeconfirmation');
+                }
+            }
+        }
+    }
+
+    public function afficherCommande() {
+        $this->commande();
+        $this->render('commandevalider');
     }
 
     public function produits()

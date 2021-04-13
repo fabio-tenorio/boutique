@@ -146,30 +146,28 @@ class ControllerProduits extends Controller
         $this->render('produits');
     }
 
-    public function commande() {    
-        if (isset($_SESSION['panier'])) {
-            $this->panier = $_SESSION['panier'];
-            $this->panierTotal = array();
-            foreach($this->panier as $produit) {
-                $this->panierTotal[$produit->id] = $this->calculerSousTotal($produit->prix, $produit->quantite);
-                $this->panierTotal[$produit->id] = number_format($this->panierTotal[$produit->id], 2, '.', ',');
+    public function commande() {
+        if (isset($_SESSION['user'])) {
+            if (isset($_SESSION['panier'])) {
+                $this->panier = $_SESSION['panier'];
+                $this->panierTotal = array();
+                foreach($this->panier as $produit) {
+                    $this->panierTotal[$produit->id] = $this->calculerSousTotal($produit->prix, $produit->quantite);
+                    $this->panierTotal[$produit->id] = number_format($this->panierTotal[$produit->id], 2, '.', ',');
+                }
+                $this->total = array_sum($this->panierTotal);
+                $this->total = number_format($this->total, 2, '.', ',');
+            } else {
+                $_SESSION['panier'] = array ();
+                $this->panierTotal = array ();
+                $this->total = 0;
             }
-            $this->total = array_sum($this->panierTotal);
-            $this->total = number_format($this->total, 2, '.', ',');
         } else {
-            $_SESSION['panier'] = array ();
-            $this->panierTotal = array ();
-            $this->total = 0;
+            $this->render('connexion');
         }
-        // if (isset($_SESSION['user'])) {
-        //     var_dump($_SESSION['user']);
-        // } else {
-        //     $this->client = array();
-        //     var_dump($this->client);
-        // }
     }
 
-    public function updateLigneCommande($produits) {
+    public function insertLigneCommande($produits) {
                 
     }
 

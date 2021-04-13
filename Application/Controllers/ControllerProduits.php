@@ -161,16 +161,22 @@ class ControllerProduits extends Controller
         require './vendor/autoload.php';
         // var_dump(require './vendor/autoload.php');
         \Stripe\Stripe::setApiKey('sk_test_51If0n8GAVfFRDcyqyt7RWuzbgilod4eaJWk85bXVg8xTv1nu4XqTB0qgcfdtuINm84D5Jox1VsGdhhQe2D6XcOJu005WXivVx0');
-        $data = filter_var_array($_POST, FILTER_SANITIZE_STRING);
-        $token = $data['stripeToken'];
+        $this->data = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+        $token = $this->data['stripeToken'];
         $charge = \Stripe\Charge::create([
         'amount' => 999,
         'currency' => 'usd',
         'description' => 'Example charge',
         'source' => $token,
         ]);
-        
-        print_r($charge);
+        $this->charge = $charge;
+        if ($this->charge->outcome->seller_message == "Payment complete.") {
+            $this->message = '<h1 class="text-center">Paiement confirmé</h1><h2 class="text-center">Merci de votre visite!</h2>';
+            $this->render('commandeconfirmation');
+        } else {
+            $this->message = '<h1 class="my-5 text-center">Paiement réfusé</h1><h2 class="my-5 text-center">Désolé. Un problème est survenu lors de la procedure de paiement.</h2>';
+            $this->render('commandeconfirmation');
+        }
     }
 
     public function produits()

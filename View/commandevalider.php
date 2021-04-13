@@ -1,6 +1,7 @@
 <?php
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
+    var_dump($user);
 }
 ?>
 <!-- Vous êtes connecté en tant que <?php // $_SESSION['user']->prenom; ?> -->
@@ -9,54 +10,42 @@ if (isset($_SESSION['user'])) {
     <h2 class="text-center my-5">Commande</h2>
     <div class="row">
         <section class="col-sm-8 my-2">
-            <form id ="payment-form" action="http://<?php echo PATH;?>/ControllerProduits/stripe/" method="POST">
+            <?php if (isset($user) and !isset($_POST['oui']) || !isset($_POST['non'])) { ?>
+                <h3>Vous êtes connecté en tant que <?=$user->prenom." ".$user->nom." (login:".$user->login.")";?></h3>
+                <h4>Souhaitez-vous récupérer les informations de votre profil pour la commande?</h4>
+                <form action="#" method="POST">
+                    <div class="form-group col-md-6">
+                        <button type="submit" name="oui" class="btn btn-primary" id="oui">oui</button>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <button type="submit" name="non" class="btn btn-warning" id="non">non</button>
+                    </div>
+                </form>
+            <?php } ?>
+            <?php if (isset($user) and isset($_POST['oui'])) { ?>
+                <form id ="payment-form" action="http://<?php echo PATH;?>/ControllerProduits/stripe/" method="POST">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                    <label for="prenom">Prenom</label>
-                    <input type="text" name="prenom" class="form-control" id="prenom" placeholder="votre prénom" required>
+                        <label for="prenom">Prénom</label>
+                        <input type="text" name="prenom" class="form-control" id="prenom" placeholder="<?=$user->prenom;?>" value="<?=$user->prenom;?>">
                     </div>
                     <div class="form-group col-md-6">
-                    <label for="nom">Nom</label>
-                    <input type="text" name="nom" class="form-control" id="nom" placeholder="votre nom de famille" required>
+                        <label for="nom">Nom</label>
+                        <input type="text" name="nom" class="form-control" id="nom" placeholder="<?=$user->nom;?>" value="<?=$user->nom;?>">
                     </div>
                     <div class="form-group col-md-6">
-                    <label for="mail">Votre e-mail</label>
-                    <input type="mail" name="mail" class="form-control" id="mail" placeholder="votre nom de famille" required>
+                        <label for="mail">Votre e-mail</label>
+                        <input type="mail" name="mail" class="form-control" id="mail" placeholder="<?=$user->mail;?>" value="<?=$user->mail;?>">
                     </div>
                     <div class="form-group col-md-6">
-                    <label for="telephone">téléphone</label>
-                    <input type="text" name="telephone" class="form-control" id="telephone" placeholder='ex: +33 6 78 90 12 34'>
-                    </div>
-                </div>
-                <!-- <div class="form-group">
-                    <label for="adresse">Adresse</label>
-                    <input type="text" class="form-control" id="adresse" placeholder="Numéro de voie et nom de la rue" required>
-                </div>
-                <div class="form-group">
-                    <label for="complement"></label>
-                    <input type="text" class="form-control" id="complement" placeholder="Bâtiment, appartement, lot, etc. (facultatif)">
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-8">
-                    <label for="ville">Ville</label>
-                    <input type="text" class="form-control" id="ville" required>
-                    </div>
-                    <div class="form-group col-md-4">
-                    <label for="departement">Département</label>
-                    <select id="departement" class="form-control" required>
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
+                        <label for="telephone">téléphone</label>
+                        <input type="tel" name="telephone" class="form-control" id="telephone" placeholder="<?=$user->telephone;?>" value="<?=$user->telephone;?>">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="codepostal">Code postal</label>
-                    <input type="text" class="form-control" id="codepostal" required>
-                </div> -->
-                <!-- <div class="form-group">
                     <label for="commentaire">Note de commande (facultatif)</label>
                     <textarea class="form-control" id="commentaire" name="commentaire" rows="3"></textarea>
-                </div> -->
+                </div>
                 <div class="form-row">
                         <div id="card-element" class="StripeElement form-control my-4">
                         <!-- A Stripe Element will be inserted here. -->
@@ -66,7 +55,42 @@ if (isset($_SESSION['user'])) {
                         <div id="card-errors" role="alert"></div>
                 </div>
                     <button name="payer" class="btn btn-primary col-sm-12 m-auto">payer</button>
-            </form>
+                </form>
+            <?php } else { ?>
+                <form id ="payment-form" action="http://<?php echo PATH;?>/ControllerProduits/stripe/" method="POST">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" name="prenom" class="form-control" id="prenom" placeholder="votre prénom">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="nom">Nom</label>
+                        <input type="text" name="nom" class="form-control" id="nom" placeholder="votre nom de famille">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="mail">Votre e-mail</label>
+                        <input type="email" name="mail" class="form-control" id="mail" placeholder="example@example.fr">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="telephone">téléphone</label>
+                        <input type="tel" name="telephone" class="form-control" id="telephone" placeholder="ex: +33 6 78 90 12 34">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="commentaire">Note de commande (facultatif)</label>
+                    <textarea class="form-control" id="commentaire" name="commentaire" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                        <div id="card-element" class="StripeElement form-control my-4">
+                        <!-- A Stripe Element will be inserted here. -->
+                        </div>
+                
+                        <!-- Used to display form errors. -->
+                        <div id="card-errors" role="alert"></div>
+                </div>
+                    <button name="payer" class="btn btn-primary col-sm-12 m-auto">payer</button>
+                </form>
+            <?php } ?>
         </section>
         <section class="col my-2 commande">    
             <table class="table">

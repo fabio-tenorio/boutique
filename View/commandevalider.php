@@ -1,7 +1,7 @@
 <?php
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
-    var_dump($user);
+    // var_dump($user);
 }
 ?>
 <!-- Vous êtes connecté en tant que <?php // $_SESSION['user']->prenom; ?> -->
@@ -10,15 +10,17 @@ if (isset($_SESSION['user'])) {
     <h2 class="text-center my-5">Commande</h2>
     <div class="row">
         <section class="col-sm-8 my-2">
-            <?php if (isset($user) and !isset($_POST['oui']) || !isset($_POST['non'])) { ?>
+            <?php if (isset($user) and !isset($_POST['oui']) and !isset($_POST['non'])) { ?>
                 <h3>Vous êtes connecté en tant que <?=$user->prenom." ".$user->nom." (login:".$user->login.")";?></h3>
                 <h4>Souhaitez-vous récupérer les informations de votre profil pour la commande?</h4>
                 <form action="#" method="POST">
-                    <div class="form-group col-md-6">
-                        <button type="submit" name="oui" class="btn btn-primary" id="oui">oui</button>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <button type="submit" name="non" class="btn btn-warning" id="non">non</button>
+                    <div class="form-row">
+                        <div class="form-group mx-auto col-sm-6">
+                            <button type="submit" name="oui" class="btn btn-primary col-12" id="oui">oui</button>
+                        </div>
+                        <div class="form-group mx-auto col">
+                            <button type="submit" name="non" class="btn btn-warning col-12" id="non">non</button>
+                        </div>
                     </div>
                 </form>
             <?php } ?>

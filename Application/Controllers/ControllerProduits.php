@@ -147,12 +147,12 @@ class ControllerProduits extends Controller
             $this->total = 0;
             $this->render('commandevalider');
         }
-        if (isset($_SESSION['user'])) {
-            var_dump($_SESSION['user']);
-        } else {
-            $this->client = array();
-            var_dump($this->client);
-        }
+        // if (isset($_SESSION['user'])) {
+        //     var_dump($_SESSION['user']);
+        // } else {
+        //     $this->client = array();
+        //     var_dump($this->client);
+        // }
     }
 
     public function stripe() {

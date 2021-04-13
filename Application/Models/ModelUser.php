@@ -3,8 +3,8 @@
 Namespace App\Application\Models;
 use App\Application\Model;
 
-class ModelUser extends Model {
-
+class ModelUser extends Model 
+{
     public $table;
     public $id;
     public $msg;
@@ -32,8 +32,7 @@ class ModelUser extends Model {
     }
 
     /*je récupère les données fournis par ControllerUser concernant le nouveau utilisateur
-    * je récupère aussi les noms des collones de la table utilisateur
-    */
+    * je récupère aussi les noms des collones de la table utilisateur */
 
     public function new_user_data($data)
     {
@@ -76,32 +75,5 @@ class ModelUser extends Model {
     {
         return $this->delete('utilisateurs', $id);
     }
-
-    // public function select_user($id)
-    // {
-    //     $sql = "SELECT * FROM utilisateurs WHERE id=$id";
-    //     $PDO = $this->connect_db()->prepare($sql);
-    //     $PDO->execute();
-    //     return $result = $PDO->fetch(\PDO::FETCH_OBJ);
-    //     // // $this->pdo->prepare("SELECT * FROM `utilisateurs` WHERE id=$id");
-    //     // $pdo->execute();
-    //     // $result = $pdo->rowcount(\PDO::FETCH_OBJ);
-    //     if ($result===1)
-    //     {
-    //         return "Vous êtes déjà inscrit";
-    //     }
-    //     else
-    //     {
-    //         return "Vous n'êtes pas inscrit";
-    //     }
-    // }
-
-    /*$this->_PDO->prepare("SELECT * FROM 'tableoproduit' WHERE id=''");
-        $this->_PDO->execute();
-        $this->_PDO->rowcount(PDO::FETCH_OBJ);*/
-
 }
-
-
-
 ?>

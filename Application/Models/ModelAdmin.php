@@ -8,8 +8,8 @@ Namespace App\Application\Models;
 use App\Application\Model;
 use App\Application\Models\ModelProduits;
 
-class ModelAdmin extends Model {
-    
+class ModelAdmin extends Model 
+{
     public function connect()
     {
         // $this->connectDb();
@@ -103,5 +103,4 @@ class ModelAdmin extends Model {
     }
     
 }
-
 ?>

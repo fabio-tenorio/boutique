@@ -5,7 +5,9 @@ Affiche 1 produit, avec photo, descriptif et AVIS
 
 C'est la même vue pour chaque produit, seul le contenu change
 */
+
 var_dump($this->ficheproduit);
+
 ?>
 <div class="container">
 <section class="my-5 mb-5">

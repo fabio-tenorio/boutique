@@ -1,12 +1,10 @@
 <?php
-/*
-*/
 
 Namespace App\Application\Models;
 use App\Application\Model;
 
-class ModelAgenda extends Model {
-    
+class ModelAgenda extends Model 
+{
     // vai no ModelAgenda e parte no ControllerAgenda
     public function selectReservations() {
         $tab=[];
@@ -27,7 +25,7 @@ class ModelAgenda extends Model {
         $req = $pdo->prepare("SELECT * FROM reservations WHERE 'datedebut' BETWEEN debut AND fin OR 'datefin' BETWEEN debut AND fin");
         $req->execute();
         $result = $req->fetchAll();
-//        $result = $req->rowCount();
+    // $result = $req->rowCount();
         if($result == 0)
         {
             return TRUE;
@@ -67,6 +65,4 @@ class ModelAgenda extends Model {
         return $result;      
     }
 }
-
-
 ?>

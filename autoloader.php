@@ -1,17 +1,14 @@
 <?php
-
 namespace App;
 
 class Autoloader
 {
-    
     public static function register()
     {
         spl_autoload_register([
             __CLASS__,
             'autoload'
         ]);
-        
         // pour les controllers et leurs méthodes
         $host  = $_SERVER['HTTP_HOST'];
         // pour les fichiers des images et le css
@@ -20,7 +17,6 @@ class Autoloader
         define ('PATH', $host.$uri);
         define ('IMAGES', str_replace("boutique/index.php", "boutique/images/", $_SERVER['PHP_SELF']));
         define ('CSS', str_replace("boutique/index.php", "boutique/css/",$_SERVER['PHP_SELF']));
-        
         // on a viré les constantes définies pour les chemins url
     }
     static function autoload($class_name)
@@ -34,5 +30,4 @@ class Autoloader
         }
     }
 }
-
 ?>

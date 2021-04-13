@@ -1,10 +1,4 @@
-<?php
-
-?>
-
 <div class="container">
-
-
 
 <section class="carousel" aria-label="Gallery">
         <h2>votre sallon en ligne</h2>

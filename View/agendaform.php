@@ -6,7 +6,6 @@
             <span class="text-muted">
             <?php
             $data = explode ('/', $_GET['p']);
-            // var_dump($data);
             echo $data[2].'/'.$data[3].'/'.$data[4];
             ?>
             </span>

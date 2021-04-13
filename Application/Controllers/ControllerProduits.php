@@ -7,7 +7,6 @@ Use App;
 
 class ControllerProduits extends Controller 
 {
-
     private $id;
     private $id_droit;
     protected $prenom;
@@ -187,5 +186,4 @@ class ControllerProduits extends Controller
         $this->render('produitfiche');
     }
 }
-
 ?>

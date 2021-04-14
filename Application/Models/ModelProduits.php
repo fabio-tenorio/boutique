@@ -20,6 +20,20 @@ class ModelProduits extends Model
         return $this->get_all('produit');
     }
 
+    public function get_all_prestations() {
+        $sql = "SELECT * FROM 'produits' WHERE id_categorie = 1 OR id_categorie = 50";
+        $stmt = $this->connect_db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function get_all_produits_physiques() {
+        $sql = "SELECT * FROM 'produits' WHERE id_categorie IS NOT 1 OR id_categorie IS NOT 50";
+        $stmt = $this->connect_db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function get_all_clients() {
         return $this->get_all('client');
     }

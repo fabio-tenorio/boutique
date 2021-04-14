@@ -2,6 +2,7 @@
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelUser;
+Use App\Application\Models\ModelProduits;
 
 class ControllerUser extends Controller 
 {
@@ -19,6 +20,7 @@ class ControllerUser extends Controller
     public function __construct()
     {
         $this->user = new ModelUser();
+        $this->produits = new ModelProduits();
         if (isset($_SESSION['user']))
         {
             $this->id = $_SESSION['user']->id;
@@ -90,6 +92,10 @@ class ControllerUser extends Controller
                 $this->render('profil', $this->message);
                 $this->user->delete_user($this->id);
             }
+    }
+
+    public function select_all_prestations() {
+        $this->produit->get_all_prestations();
     }
             
     // MÉTHODES LIÉES AUX VIEWS

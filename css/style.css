@@ -52,18 +52,34 @@ main {
 .img-slide {
   width: inherit;
   height: 80%;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
-.text-slide {
-  background-color: lightcoral;
+.text-slide-white {
+  /* background-color: lightcoral; */
   position: absolute;
   top: 10px;
 }
 
-.text-slide h2, .text-slide h3 {
+.text-slide-blue {
+    /* background-color: lightcoral; */
+    position: absolute;
+    color: var(--bluemondrian);
+    top: 10px;
+  }
+
+.text-slide-white h2, .text-slide-white h3 {
   text-align: left;
   align-self: baseline;
+}
+
+.text-slide-white h2 {
+    font-size: 4rem;
+}
+
+.text-slide-white h3 {
+    font-size: 2rem;
+    font-style: italic;
 }
 
 header {

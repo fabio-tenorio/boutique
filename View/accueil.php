@@ -19,8 +19,8 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100 img-slide" src="<?php echo IMAGES; ?>manucure.jpg" alt="First slide">
-            <div class="carousel-caption d-none d-md-block">
+            <img class="d-block w-100 img-slide" src="<?php echo IMAGES; ?>lissage.jpeg" alt="First slide">
+            <div class="carousel-caption text-slide-white d-none d-md-block">
                 <h2>Votre salon en ligne</h2>
                 <h3>Découvrez nos nouvelles prestations</h3>
             </div>
@@ -29,11 +29,11 @@ Use App\Application\Controllers\ControllerAccueil as ControllerAccueil;
         <img class="d-block w-100 img-slide" src="<?php echo IMAGES; ?>soinfetemeres.webp" alt="Second slide">
         </div>
         <div class="carousel-item">
-            <div class="carousel-caption text-slide d-none d-md-block">
+            <div class="carousel-caption text-slide-blue d-none d-md-block">
                 <h2>Votre salon en ligne</h2>
                 <h3>Découvrez nos nouvelles prestations</h3>
             </div>
-            <img class="d-block w-100 img-slide" src="<?php echo IMAGES; ?>lissage.jpeg" alt="Third slide">
+            <img class="d-block w-100 img-slide" src="<?php echo IMAGES; ?>manucure.jpg" alt="Third slide">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

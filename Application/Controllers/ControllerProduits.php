@@ -234,11 +234,11 @@ class ControllerProduits extends Controller
             $this->message = '<h1 class="my-5 text-center">Votre commande était vide</h1><h2 class="my-5 text-center">Aucun prélèvement a eu lieu</h2>';
             return $this->render('commandeconfirmation');
         } else {
-            foreach($this->panier as $key=>$value) {
-                if ($key == 'quantite') {
-                    $data[$key] = $value;
-                }
-            }
+            // foreach($this->panier as $key=>$value) {
+            //     if ($key == 'quantite') {
+            //         $data[$key] = $value;
+            //     }
+            // }
             if ($this->verifierStock($this->panier)===true) {
                 $total = str_replace('.', '', $this->total);
                 require './vendor/autoload.php';

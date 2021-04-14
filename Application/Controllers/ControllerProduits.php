@@ -34,6 +34,10 @@ class ControllerProduits extends Controller
         return $this->produit->get_all_produits();
     }
 
+    public function allClients() {
+        return $this->produit->get_all_clients();
+    }
+
     public function verifierStock($produits) {
         $stock = $this->allPRoduits();
         $checkStock = true;
@@ -167,8 +171,48 @@ class ControllerProduits extends Controller
         }
     }
 
+    public function insertClient() {
+        $data = array();
+        if (isset($_POST)) {
+            $data = $_POST;
+            unset($data['commentaire']);
+            unset($data['stripeToken']);
+        }
+        if (isset($_SESSION['user'])) {
+            $data['id_utilisateur'] = $_SESSION['user']->id;
+        } else {
+            $data['id_utilisateur'] = null;
+        }
+        $checkClient = false;
+        $clients = $this->allClients();
+        foreach ($clients as $client) {
+            if ($client->id_utilisateur === $data['id_utilisateur']) {
+                $checkClient = true;
+                $this->produit->update_client($data, $client->id);
+                return $this->lastId = $client->id;
+            }
+        }
+        if ($checkClient === false) {
+            $this->produit->insert_new_client($data);
+            $dernierClient = $this->allClients();
+            $this->lastId = 1;
+            foreach($dernierClient as $key => $client) {
+                $this->lastId = $client->id;
+            }
+            return $this->lastId;
+        }
+    }
+
+    public function insertCommande($data) {
+        $this->produit->insert_new_commande($data);
+    }
+
     public function insertLigneCommande($produits) {
-                
+        
+        foreach($produits as $produit) {
+            $data = [''];
+            $this->produit->insert_new_ligne_commande($data);
+        }
     }
 
     public function updateStock($produitsPanier) {
@@ -208,8 +252,13 @@ class ControllerProduits extends Controller
                 'source' => $token,
                 ]);
                 $this->charge = $charge;
+                $_POST['codepostal'] = $this->charge->billing_details->address->postal_code;
                 if ($this->charge->outcome->seller_message == "Payment complete.") {
                     $this->updateStock($this->panier);
+                    $this->insertClient();
+                    $data = ['id_client'=>$this->lastId, 'token'=>$token];
+                    $this->insertCommande($data);
+                    $this->insertLigneCommande($produit);
                     $this->message = '<h1 class="text-center">Paiement confirmé</h1><h2 class="text-center">Merci de votre visite!</h2>';
                     $this->render('commandeconfirmation');
                 } else {

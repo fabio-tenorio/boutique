@@ -1,13 +1,5 @@
 <?php
 
-/*
-Affiche 1 produit, avec photo, descriptif et AVIS
-
-C'est la même vue pour chaque produit, seul le contenu change
-*/
-
-var_dump($this->ficheproduit);
-
 ?>
 <div class="container">
 <section class="my-5 mb-5">
@@ -28,13 +20,13 @@ var_dump($this->ficheproduit);
                   class="img-fluid z-depth-1">
               </a>
             </figure>
-            <figure class="view overlay rounded z-depth-1" style="visibility: hidden;">
+            <!-- <figure class="view overlay rounded z-depth-1" style="visibility: hidden;">
               <a href="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
                 data-size="710x823">
                 <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
                   class="img-fluid z-depth-1">
               </a>
-            </figure>
+            </figure> -->
             <figure class="view overlay rounded z-depth-1" style="visibility: hidden;">
               <a href="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13a.jpg"
                 data-size="710x823">

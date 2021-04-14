@@ -20,6 +20,10 @@ class ModelProduits extends Model
         return $this->get_all('produit');
     }
 
+    public function get_all_clients() {
+        return $this->get_all('client');
+    }
+
     public function get_one_produit($id)
     {
         $stmt = $this->connect_db()->prepare("SELECT * FROM `produit` WHERE id=:id");
@@ -29,7 +33,23 @@ class ModelProduits extends Model
     }
 
     public function update_stock_produit($data, $id) {
-        $this->update('produit', $data, $id);
+        return $this->update('produit', $data, $id);
+    }
+
+    public function update_client($data, $id) {
+        return $this->update('client', $data, $id);
+    }
+
+    public function insert_new_client($data) {
+        return $this->insert('client', $data);
+    }
+
+    public function insert_new_commande($data) {
+        return $this->insert('commande', $data);
+    }
+
+    public function insert_new_ligne_commande($data) {
+        return $this->insert('lignecommande', $data);
     }
 }
 ?>

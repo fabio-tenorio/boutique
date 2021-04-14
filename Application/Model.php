@@ -44,10 +44,18 @@ abstract class Model
         $sql->execute([':id'=>$id]);
         return $sql->fetch(\PDO::FETCH_OBJ);
     }
+
+    public function get_last_one($table) {
+        $sql = "SELECT * FROM $table ORDER BY id DESC LIMIT 0, 1";
+        $stmt = $this->connect_db()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
     
     /**
      * Méthode permettant d'obtenir tous les enregistrements de la table choisie
      */
+
     public function get_all($table)
     {   
         $sql = $this->connect_db()->prepare("SELECT * FROM $table");

@@ -39,7 +39,7 @@ class ControllerProduits extends Controller
     }
 
     public function verifierStock($produits) {
-        $stock = $this->allPRoduits();
+        $stock = $this->allProduits();
         $checkStock = true;
         foreach($produits as $produitDemande) {
             foreach($stock as $produitDispo) {
@@ -208,9 +208,9 @@ class ControllerProduits extends Controller
     }
 
     public function insertLigneCommande($produits) {
-        
+        $lastCommande = $this->produit->select_last_commande();
         foreach($produits as $produit) {
-            $data = [''];
+            $data = ['id_commande'=>$lastCommande[0]['id'], 'id_produit'=>$produit->id, 'quantiteproduit'=>$produit->quantite];
             $this->produit->insert_new_ligne_commande($data);
         }
     }
@@ -258,7 +258,7 @@ class ControllerProduits extends Controller
                     $this->insertClient();
                     $data = ['id_client'=>$this->lastId, 'token'=>$token];
                     $this->insertCommande($data);
-                    $this->insertLigneCommande($produit);
+                    $this->insertLigneCommande($_SESSION['panier']);
                     $this->message = '<h1 class="text-center">Paiement confirmé</h1><h2 class="text-center">Merci de votre visite!</h2>';
                     $this->render('commandeconfirmation');
                 } else {

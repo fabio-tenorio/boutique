@@ -24,6 +24,10 @@ class ModelProduits extends Model
         return $this->get_all('client');
     }
 
+    public function select_last_commande() {
+        return $this->get_last_one('commande');
+    }
+
     public function get_one_produit($id)
     {
         $stmt = $this->connect_db()->prepare("SELECT * FROM `produit` WHERE id=:id");

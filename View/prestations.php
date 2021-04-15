@@ -5,7 +5,7 @@ $listeProduits = $this->allProduits();
     <div class="row">
     <?php foreach($listeProduits as $produit) {
     if ($produit->id_categorie == 1 || $produit->id_categorie == 10) {?>
-    <div class="card col-3 mx-auto px-0" style="width: 18rem;">
+    <div class="card col-3 mx-3 my-4 px-0" style="width: 18rem;">
         <img class="card-img-top prestation-img" src="<?=IMAGES;?><?=$produit->imageproduit;?>" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title"><?=$produit->titreproduit;?></h5>

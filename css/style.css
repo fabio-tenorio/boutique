@@ -1306,6 +1306,23 @@ link:hover > .dropdown_link {
 
   /* PAGE ADMIN - TABLEAU DE BORD */
 
+  .admin-chiffre {
+      font-size: 4rem;
+  }
+
+  .admin-carre {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+    border-radius: 5px;
+    transition: box-shadow, 0.5s;
+  }
+
+  .admin-carre:hover {
+      box-shadow: 5px 5px 10px 5px #616E7C;
+  }
+
   .product-list {
     display: flex;
     flex-direction: row;

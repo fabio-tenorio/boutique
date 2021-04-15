@@ -83,7 +83,7 @@
 
       <h5><?=$this->ficheproduit->titreproduit?></h5>
       <p class="mb-2 text-muted text-uppercase small"><?=$this->ficheproduit->id_categorie?></p>
-      <ul class="rating produitstars">
+      <!-- <ul class="rating produitstars">
         <li>
             <i class="bi bi-star bi-sm text-primary"></i>
         </li>
@@ -99,7 +99,7 @@
         <li>
             <i class="bi bi-star bi-sm text-primary"></i>
         </li>
-      </ul>
+      </ul> -->
       <p><span class="mr-1"><strong><?=$this->ficheproduit->prix?> &#8364;</strong></span></p>
       <p class="pt-1"><?=$this->ficheproduit->produit;?></p>
       <hr>

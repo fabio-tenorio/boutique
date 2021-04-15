@@ -1,13 +1,12 @@
 <?php
-// var_dump($_POST);
 $listeProduits = $this->allProduits();
-// $this->bonne_affichage($listeProduits);
 ?>
 
 <div class="container">
     <!-- <div class="row"> -->
         <div class="col-xs-12 col-md-12"> 
-        <?php foreach ($listeProduits as $produit) { ?>
+        <?php foreach ($listeProduits as $produit) {
+            if ($produit->id_categorie !=1 and $produit->id_categorie !=10) { ?>
         <div class="prod-info-main prod-wrap clearfix">
             <div class="row">
                 <div class="col-md-5 col-sm-12 col-xs-12">
@@ -29,7 +28,7 @@ $listeProduits = $this->allProduits();
                             </a>                           
                         </h5>
                         <p class="price-container">
-                            <span><?=$produit->prix;?></span>
+                            <span><?=$produit->prix;?> &#8364;</span>
                         </p>
                         <span class="tag1"></span>
                     </div>
@@ -56,25 +55,9 @@ $listeProduits = $this->allProduits();
             </div>
         </div>
     </div>
- <?php } ?> 
+ <?php }
+  } ?> 
 </div>
 </div>
-<!-- </div> -->
 </div>
-
-<!-- <div class="row">
-<?php foreach ($listeProduits as $value) { ?>
-    <div class="col-sm-3 my-3">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="<?=IMAGES;?>palette.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"><?=$value->titreproduit;?></h5>
-                <p class="card-text"><?=$value->produit;?></p>
-                <a href="#" class="col btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-<?php } ?>
-</div> -->
-
 

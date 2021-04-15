@@ -6,8 +6,6 @@ Permet l'accès aux pages admin et donc aux fonctions admin (supprimer un user, 
 Création du discussion sur blog
 Nouvel article dans boutique
 */
-
-var_dump($_POST);
 if ($this->message !== '') {
     echo '<p class="btn btn-warning text-center">'.$this->message.'</p>';
 }
@@ -16,7 +14,7 @@ if ($this->message !== '') {
 <div class="container">
     <h2 class="text-center my-4">Salut <?= $_SESSION['user']->login?>!</h2>
     <div class="row my-5">
-        <div class="col border mx-3 p-5">
+        <div class="col border bg-primary text-white admin-carre mx-3 p-5">
             <h2 class="text-center">Somme commande</h2>
             <div class="row">
                 <div class="col-6 border">
@@ -31,18 +29,18 @@ if ($this->message !== '') {
                 </div>
             </div>
         </div>
-        <div class="col border mx-3">
-            <h2 class="text-center">Valeur du stock</h2>
-            <p>La valeur totale des produits dans votre stock est actuellement de <strong><?=$this->valeurStock;?> &#8364;</strong>.</p>
+        <div class="col border admin-carre bg-warning mx-3">
+            <h2 class="text-center admin-chiffre"><?=$this->valeurStock;?> &#8364;</h2>
+            <p>C'est la valeur totale des produits dans votre stock actuellement</p>
         </div>
-        <div class="col border mx-3">
-            <h2 class="text-center">Quantité totale du stock</h2>
-            <p>Vous avez un total de <strong><?=$this->stock?></strong> produits en stock</p>
+        <div class="col border bg-info text-white admin-carre mx-3">
+            <h2 class="text-center admin-chiffre"><?=$this->stock?></h2>
+            <p>C'est la quantité totale de produits en stock actuellement</p>
         </div>
     </div>
     <div class="row my-5">
-        <div class="col border mx-3">
-            <h2 class="text-center">Liste des utilisateurs</h2>
+        <div class="col border bg-dark mx-3 py-5">
+            <h2 class="text-center text-light">Liste des utilisateurs</h2>
             <?php
                 foreach($this->data['allusers'] as $user) {
                     echo '<li class="list-group-item product-list">';
@@ -61,7 +59,7 @@ if ($this->message !== '') {
         <!-- select all dans login, nom, prenom, mail, date de naissance, date d'inscription sur le site
             à côté de chaque utilisateur, il y aura un bouton qui bascule vers la page profil-->
         </div>
-        <div class="col border mx-3">
+        <div class="col border bg-light mx-3">
             <h2 class="text-center">Liste des produits</h2>
             <ul class="list-group list-group-flush">
                 <!-- <form action="#" method='POST'> -->

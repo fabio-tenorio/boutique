@@ -13,9 +13,9 @@ $listeProduits = $this->allProduits();
                 <div class="col-md-5 col-sm-12 col-xs-12">
                     <div class="product-image">
                         <img src="<?=IMAGES;?><?=$produit->imageproduit;?>" alt="Card image cap" class="card-img-top img-responsive">
-                        <span class="tag2 hot">
+                        <!-- <span class="tag2 hot">
                         PROMO
-                        </span>
+                        </span> -->
                     </div>
                 </div>
                 <div class="col-md-7 col-sm-12 col-xs-12">
@@ -42,7 +42,7 @@ $listeProduits = $this->allProduits();
                             <a href="http://<?php echo PATH; ?>/ControllerProduits/ajouterAuPanier/<?php echo $produit->id;?>" class="btn btn-danger">ajouter au panier</a>
                             <a href="http://<?php echo PATH; ?>/ControllerProduits/produitfiche/<?php echo $produit->id;?>" class="btn btn-info">détails</a>
                         </div>
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <div class="rating">Rating:
                                 <label for="stars-rating-5"><i class="fa fa-star text-danger"></i></label>
                                 <label for="stars-rating-4"><i class="fa fa-star text-danger"></i></label>
@@ -50,7 +50,7 @@ $listeProduits = $this->allProduits();
                                 <label for="stars-rating-2"><i class="fa fa-star text-warning"></i></label>
                                 <label for="stars-rating-1"><i class="fa fa-star text-warning"></i></label>
                             </div>
-                        </div> 
+                        </div>  -->
                     </div>
                 </div>
             </div>

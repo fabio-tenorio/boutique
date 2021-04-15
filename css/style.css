@@ -242,11 +242,11 @@ link:hover > .dropdown_link {
   width: 2px;
   height: 8vh;
   top: 5%;
-  left: 250px;
+  left: 11rem;
   background-color: var(--yellowmondrian);
   visibility: hidden;
   transform: scaleY(0);
-  transition: all 0.2s ease-in-out 0s;
+  transition: all 0.5s ease-in-out 0s;
 }
 
 #logo h1:hover::before {
@@ -280,8 +280,6 @@ link:hover > .dropdown_link {
 }
 
 /* CARROUSEL */
-
-
 
 #section1 {
     width: 100%;
@@ -463,23 +461,40 @@ link:hover > .dropdown_link {
   display: flex;
   flex-direction: column;
   background-color: yellow;
-  margin: 0 10px;
+  margin: 0;
   padding: 20px;
   min-width: 9rem;
-  border: 2px solid #1f1f1f;
+  /* border: 2px solid #1f1f1f; */
   font-weight: bold;
 }
 
 .heure-creneau {
-  padding: 10px 0;
-  margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  padding: 5px;
   border-bottom: 1px solid #EEE;
   min-height: 4.5rem;
+  list-style: none;
+  border-radius: none;
+  transition: border-radius, 0.5s;
+}
+
+.heure-creneau:hover {
+    color: var(--bluemondrian);
+    background-color: #CBD2D9;
+    border-radius: 50%;
+}
+
+.heure-creneau a {
+    margin: auto;
 }
 
 .creneau-rempli {
+  color: blanchedalmond;
   font-style: italic;
-  background-color: #CCC;
+  background-color: var(--bluemondrian);
 }
 
 /* .td-creneau-vide {
@@ -508,7 +523,9 @@ link:hover > .dropdown_link {
 } */
 
 .agenda-supprime-box {
-    border: 1px solid gray;
+    /* border: 1px solid var(--bluemondrian); */
+    border-radius: 3px;
+    box-shadow: 5px 5px 15px 5px var(--bluemondrian);
     padding: 20vh;
     margin: 10vh 0;
 }
@@ -1354,4 +1371,10 @@ link:hover > .dropdown_link {
   
 .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
+}
+
+/* PAGE PRESTATIONS */
+
+.prestation-img {
+    height: 180px;
 }

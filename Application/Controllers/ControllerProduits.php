@@ -256,7 +256,7 @@ class ControllerProduits extends Controller
                 if ($this->charge->outcome->seller_message == "Payment complete.") {
                     $this->updateStock($this->panier);
                     $this->insertClient();
-                    $data = ['id_client'=>$this->lastId, 'token'=>$token];
+                    $data = ['id_client'=>$this->lastId, 'token'=>$token, 'total'=>$this->total];
                     $this->insertCommande($data);
                     $this->insertLigneCommande($_SESSION['panier']);
                     $this->message = '<h1 class="text-center">Paiement confirmé</h1><h2 class="text-center">Merci de votre visite!</h2>';

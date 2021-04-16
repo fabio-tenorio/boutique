@@ -42,6 +42,11 @@ class ModelAdmin extends Model
 
     public function insert_product($data)
     {
+        foreach($data as $chaine) {
+            if (is_string($chaine)) {
+                $this->connect_db()->quote($chaine);
+            }
+        }
         $data = $this->new_product_data($data);
         return $this->insert('produit', $data);
     }
@@ -55,12 +60,20 @@ class ModelAdmin extends Model
         $this->delete('produit', $id);
     }
 
+    // public function deleteUser($id) {
+    //     $this->delete('utilisateur', $id);
+    // }
+
     public function allStock() {
         $sql = "SELECT stock FROM produit";
         $stmt = $this->connect_db()->prepare($sql);
         $stmt->execute();
         $stock = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $stock;
+    }
+
+    public function all_categories() {
+        return $this->get_all('categorie');
     }
 
     public function new_fournisseur_data($data)

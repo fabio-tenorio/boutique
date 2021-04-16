@@ -11,6 +11,8 @@ abstract class Model
     private $db_name = 'boutique';
     private $db_charset = 'utf8mb4';
     protected $_PDO;
+    // private $whitelist;
+    private $whitelist = array ('utilisateurs', 'reservation', 'produit', 'panier');
 
     public function __construct() {
         $this->whitelist = array ('utilisateurs', 'reservation', 'produit', 'panier');

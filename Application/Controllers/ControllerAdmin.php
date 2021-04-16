@@ -17,11 +17,13 @@ class ControllerAdmin extends ControllerUser
 {
     private $id;
     private $id_droit;
+    protected $categories;
 
     public function __construct()
     {
         $this->admin = new ModelUser();
         $this->adminProducts = new ModelAdmin();
+        $this->categories = $this->selectCategories();
         if(isset($_SESSION['user']->login) AND $_SESSION['user']->id_droit == 200 )
         {
             $this->id = $_SESSION['user']->id;
@@ -46,6 +48,13 @@ class ControllerAdmin extends ControllerUser
     public function supprimerProduit() {
         foreach($_POST as $id) {
             $this->adminProducts->deleteProduct($id);
+        }
+        $this->index();
+    }
+
+    public function supprimerUtilisateur() {
+        foreach($_POST as $id) {
+            $this->admin->delete_user($id);
         }
         $this->index();
     }
@@ -82,6 +91,10 @@ class ControllerAdmin extends ControllerUser
         {
             $this->render('accueil');
         }
+    }
+
+    public function selectCategories() {
+        return $this->adminProducts->all_categories();
     }
 
     public function sommeStock() {

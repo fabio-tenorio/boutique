@@ -8,7 +8,6 @@
     --yellowmondrian: #FAC901;
     --redmondrian: #dd0100;
     font-family: 'Playfair Display', serif;
-    box-sizing: border-box;
     scrollbar-color: transparent transparent; /* thumb and track color */
     scrollbar-width: 0px;
 }

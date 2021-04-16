@@ -9,6 +9,7 @@ Nouvel article dans boutique
 if ($this->message !== '') {
     echo '<p class="btn btn-warning text-center">'.$this->message.'</p>';
 }
+var_dump($_POST);
 ?>
 
 <div class="container">
@@ -41,6 +42,7 @@ if ($this->message !== '') {
     <div class="row my-5">
         <div class="col border bg-dark mx-3 py-5">
             <h2 class="text-center text-light">Liste des utilisateurs</h2>
+            <form action="http://<?php echo PATH; ?>/ControllerAdmin/supprimerUtilisateur" method='POST'>
             <?php
                 foreach($this->data['allusers'] as $user) {
                     echo '<li class="list-group-item product-list">';
@@ -58,6 +60,8 @@ if ($this->message !== '') {
             ?>
         <!-- select all dans login, nom, prenom, mail, date de naissance, date d'inscription sur le site
             à côté de chaque utilisateur, il y aura un bouton qui bascule vers la page profil-->
+                <button type="submit" name="supprimerUtilisateur" class="btn btn-danger col-sm-12 mx-auto my-4">supprimer des utilisateurs</button>
+            </form>
         </div>
         <div class="col border bg-light mx-3">
             <h2 class="text-center">Liste des produits</h2>
@@ -107,26 +111,26 @@ if ($this->message !== '') {
                     <span class="input-group-text" for="prix">Prix du produit</span>
                     <input class="form-control" type="text" id="prix" name="prix" required>
                 </div>
-                <!-- <div class="form-group">
-                    <select class="form-select" aria-label="Default select example">
+                <div class="form-group">
+                    <select id="id_categorie" name="id_categorie" class="form-select" aria-label="Default select example">
                         <option selected>la catégorie du produit</option>
                         <?php
-                        foreach ($this->categories as $key=>$value) {
+                        foreach ($this->categories as $categorie) {
                             echo '<option value="';
-                            echo $value; //l'id_catégorie
-                            echo '#">';
-                            echo $value; //le nom de la catégorie
-                            echo 'soins internes</option>';
+                            echo $categorie->id; //l'id_catégorie
+                            echo '">';
+                            echo $categorie->titrecategorie; //le nom de la catégorie
+                            echo '</option>';
                         }
                         ?>
-                        <option value="#">soins internes</option>
+                        <!-- <option value="#">soins internes</option>
                         <option value="#">soins externes</option>
                         <option value="#">produit de soin</option>
                         <option value="#">produit de beauté</option>
                         <option value="#">fantaise</option>
-                        <option value="#">matériel</option>
+                        <option value="#">matériel</option> -->
                     </select>
-                </div> -->
+                </div>
                 <button type="submit" class="btn btn-primary col-12 mx-auto">ajouter le produit</button>
             </form>
         </div>

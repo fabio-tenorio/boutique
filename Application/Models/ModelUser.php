@@ -75,5 +75,12 @@ class ModelUser extends Model
     {
         return $this->delete('utilisateurs', $id);
     }
+
+    public function select_historique($id) {
+        $sql = "SELECT * FROM `utilisateurs` INNER JOIN `client` ON utilisateurs.id = client.id_utilisateur INNER JOIN `commande` ON commande.id_client = client.id INNER JOIN `lignecommande` ON lignecommande.id_commande = commande.id WHERE utilisateurs.id = $id";
+        $stmt = $this->connect_db()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
 }
 ?>

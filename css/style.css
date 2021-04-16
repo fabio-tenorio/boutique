@@ -367,6 +367,20 @@ link:hover > .dropdown_link {
     text-align: center;
 }
 
+/* PROFIL */
+
+.profil-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.profil-info {
+    background-color: red;
+    height: 20vh;
+}
+
 /* PAGE CONNEXION */
 
 #main_connexion {

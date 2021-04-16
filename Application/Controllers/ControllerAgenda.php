@@ -248,12 +248,6 @@ class ControllerAgenda extends Controller
         return $tableau;
     }
 
-    public function index($message = '')
-    {
-        $this->allResa = $this->all_reservations();
-        $this->render('agenda', $this->allResa);
-    }
-
     public function formResaView($jour, $mois, $an, $heure)
     {   
         $date = $an."-".$mois."-".$jour;
@@ -280,6 +274,16 @@ class ControllerAgenda extends Controller
         $lundi = new DateTime($lundi);
         $this->setLundi($lundi->sub(new DateInterval('P1W')));
         $this->index();
+    }
+
+    public function index($message = '')
+    {
+        if (isset($_SESSION['user'])) {
+            $this->allResa = $this->all_reservations();
+            $this->render('agenda', $this->allResa);
+        } else {
+            $this->render('connexion');
+        }
     }
 }
 ?>

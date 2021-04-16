@@ -212,6 +212,7 @@ class ControllerUser extends Controller
         {
             $data = $this->user;
             $data = $data->get_one('utilisateurs', $_SESSION['user']->id);
+            $this->historique = $this->historiqueAchat($_SESSION['user']->id);
             $this->render('profil', $data);
         }
 
@@ -219,13 +220,17 @@ class ControllerUser extends Controller
         {
             $this->update_profil($_POST);
         }
-    } 
+    }
 
     public function disconnect()
     {
         $url = "http://".PATH."/ControllerUser/index";
         session_destroy();
         header("Refresh:0,url=$url");
+    }
+
+    public function historiqueAchat($id) {
+        return $this->user->select_historique($id);
     }
 }
 ?>

@@ -16,15 +16,12 @@
       <li class="nav-item">
         <a class="nav-link mx-3" href="http://<?php echo PATH; ?>/ControllerProduits/produits">produits</a>
       </li>
-      <?php if (isset($_SESSION['user'])) { ?>
       <li class="nav-item">
         <a class="nav-link mx-3" href="http://<?php echo PATH;?>/ControllerAgenda/index">prendre RDV</a>
       </li>
-      <?php } else {?>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link mx-3" href="http://<?php echo PATH;?>/ControllerUser/connexion">prendre RDV</a>
-      </li>
-      <?php } ?>
+      </li> -->
     </ul>
   </div>
   <address class="mx-3">

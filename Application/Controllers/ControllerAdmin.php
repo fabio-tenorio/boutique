@@ -12,6 +12,7 @@ Use App\Application\Models\ModelProduit;
 use App\Application\Models\ModelProduits;
 use App\Application\Models\ModelUser;
 use App\Application\Models\ModelAdmin;
+use DateTime;
 
 class ControllerAdmin extends ControllerUser 
 {
@@ -24,6 +25,7 @@ class ControllerAdmin extends ControllerUser
         $this->admin = new ModelUser();
         $this->adminProducts = new ModelAdmin();
         $this->categories = $this->selectCategories();
+        $this->commandes = $this->adminCommandes();
         if(isset($_SESSION['user']->login) AND $_SESSION['user']->id_droit == 200 )
         {
             $this->id = $_SESSION['user']->id;
@@ -35,9 +37,22 @@ class ControllerAdmin extends ControllerUser
         }
     }
 
-    public function admin_commandes() {
+    public function adminCommandes() {
         $this->commandesAdmin = new ModelProduits;
-        $this->commandes = $this->commandesAdmin->get_all_commandes();
+        $now = new DateTime();
+        $month = $now->format('m');
+        $commandes = $this->commandesAdmin->get_all_commandes();
+        $this->moisPrecedent = 0;
+        $this->moisEnCours = 0;
+        foreach($commandes as $commande) {
+            if ($commande->datecommande < $month) {
+                // var_dump($commande);
+                $this->moisPrecedent += $commande->total;
+            } else {
+                // var_dump($commande);
+                $this->moisEnCours += $commande->total;
+            }
+        }
     }
     
     public function admin_users()

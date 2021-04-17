@@ -16,14 +16,15 @@ var_dump($_POST);
     <h2 class="text-center my-4">Salut <?= $_SESSION['user']->login?>!</h2>
     <div class="row my-5">
         <div class="col border bg-primary text-white admin-carre mx-3 p-5">
-            <h2 class="text-center">Somme commande</h2>
+            <h2 class="text-center">Somme des commandes</h2>
             <div class="row">
                 <div class="col-6 border">
-                    <h3  class="text-center">Mois précédent</h3>
-                    
+                    <h2 class="text-center"><?=$this->moisPrecedent;?> &#8364;</h3>
+                    <p class="text-center">mois précédent</p>
                 </div>
                 <div class="col-6 border">
-                    <h3 class="text-center">Mois en cours</h3>
+                    <h2 class="text-center"><?=$this->moisEnCours;?> &#8364;</h3>
+                    <p class="text-center">mois en cours</p>
                 </div>
             </div>
         </div>
@@ -32,7 +33,7 @@ var_dump($_POST);
             <p>C'est la valeur totale des produits dans votre stock actuellement</p>
         </div>
         <div class="col border bg-info text-white admin-carre mx-3">
-            <h2 class="text-center admin-chiffre"><?=$this->stock?></h2>
+            <h2 class="text-center admin-chiffre"><?=$this->stock;?></h2>
             <p>C'est la quantité totale de produits en stock actuellement</p>
         </div>
     </div>
@@ -109,7 +110,7 @@ var_dump($_POST);
                     <input class="form-control" type="text" id="prix" name="prix" required>
                 </div>
                 <div class="form-group">
-                    <select id="id_categorie" name="id_categorie" class="form-select" aria-label="Default select example">
+                    <select class="form-select col-12 form-select-lg" id="id_categorie" name="id_categorie" aria-label="Default select example">
                         <option selected>la catégorie du produit</option>
                         <?php
                         foreach ($this->categories as $categorie) {

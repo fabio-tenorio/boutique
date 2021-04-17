@@ -328,16 +328,17 @@ link:hover > .dropdown_link {
 }
 
 .produit-box {
-    margin: 20px 15px;
+    margin: 25px 15px;
     border-radius: 8px;
     -webkit-box-shadow: 2px 5px 15px 1px lightgray; 
     box-shadow: 2px 5px 15px 1px lightgray;
+    transition: margin, 0.5s;
 }
 
 .produit-box:hover {
     opacity: 0.8;
     cursor: pointer;
-    margin: 25px 38px;
+    margin: 20px 15px;
 }
 
 .produit-img {
@@ -385,6 +386,12 @@ link:hover > .dropdown_link {
 .profil-info {
     background-color: red;
     height: 20vh;
+}
+
+.data-profil {
+    font-weight: bold;
+    padding: 3px;
+    background-color: #CBD2D9;
 }
 
 /* PAGE CONNEXION */

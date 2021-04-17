@@ -1,8 +1,12 @@
 <?php
-$listeproduits = $_SESSION['panier'];
+if (isset($_SESSION['panier'])) {
+    $listeproduits = $_SESSION['panier'];
+} else {
+    $listeproduits = array();
+}
 ?>
 <div class="container">
-    <h1 class="text-center">profil</h1>
+    <h1 class="text-center">Votre profil</h1>
     <!-- <p>Please fill in this form to create an account.</p> -->
     <hr>
 <?php echo '<p class="text-center btn-btn-danger">'.$this->message.'</p>';?>
@@ -25,37 +29,36 @@ $listeproduits = $_SESSION['panier'];
         <input type="text" placeholder="<?= $data->mail ?>" name="mail" id="mail">
     </div>
 </div>
-<div class="row">
-    <div class="col-sm">
-        <label for="motpasse">Mot de passe</label>
-        <input type="password" placeholder="votre mot de passe" name="motpasse" id="motpasse">
+    <div class="row">
+        <div class="col-sm">
+            <label for="motpasse">Mot de passe</label>
+            <input type="password" placeholder="votre mot de passe" name="motpasse" id="motpasse">
+        </div>
+        <div class="col-sm">
+            <label for="confirmer_motpasse">Confirmation</label>
+            <input type="password" placeholder="Confirmez votre mot de passe" name="confirmer_motpasse" id="confirmer_motpasse">
+        </div>
+        <div class="col-sm">
+            <label for="telephone">téléphone</label>
+            <input type="tel" placeholder="<?= $data->telephone ?>" name="telephone" id="telephone">
+        </div>
+        <div class="col-sm">
+            <label for="dateanniversaire">date de naissance</label>
+            <input type="date" placeholder="" name="dateanniversaire" id="telephone">
+        </div>
     </div>
-    <div class="col-sm">
-        <label for="confirmer_motpasse">Confirmation</label>
-        <input type="password" placeholder="Confirmez votre mot de passe" name="confirmer_motpasse" id="confirmer_motpasse">
+    <div class="row">
+        <button type="submit" name="modifier" class="col-sm-6 btn btn-warning mr-5 my-4">Modifier</button>
+        <button type="submit" name="supprimer" class="col btn btn-danger ml-5 my-4" value='true'>Supprimer</button>
     </div>
-    <div class="col-sm">
-        <label for="telephone">téléphone</label>
-        <input type="tel" placeholder="<?= $data->telephone ?>" name="telephone" id="telephone">
-    </div>
-    <div class="col-sm">
-        <label for="dateanniversaire">date de naissance</label>
-        <input type="date" placeholder="" name="dateanniversaire" id="telephone">
-    </div>
-  </div>
-</div>
-<div class="row">
-    <button type="submit" name="modifier" class="btn btn-warning my-3">Modifier</button>
-    <button type="submit" name="supprimer" class="btn btn-danger my-3" value='true'>Supprimer</button>
-</div>
 </form>
 <?php
 if (isset($_POST['supprimer']) AND $_POST['supprimer']==true) 
 { ?>
     <form id="form_profil" action="http://<?php echo PATH; ?>/ControllerUser/del_user/" method="POST">
         <div class="container" id="form_profil_container">
-            <button type="submit" name="confirmer" class="btn btn-primary">Confirmer</button> 
             <p>Souhaitez-vous confirmer la suppresion de votre compte?</p>
+            <button type="submit" name="confirmer" class="btn btn-primary">Confirmer</button> 
             <button type="submit" name="annuler" class="btn btn-primary">Annuler</button>
         <div class="container signin">
     </form>
@@ -97,8 +100,10 @@ if (isset($_POST['supprimer']) AND $_POST['supprimer']==true)
             <ul class="list-group list-group-flush">
                 <?php
                 foreach($this->historique as $commande) {
-                    echo '<li>'.$commande->datecommande;
-                    echo $commande->total;
+                    $datecommande = new DateTime($commande->datecommande);
+                    echo '<li class="list-group-item text-center">votre achat du <span class="data-profil">'.$datecommande->format('d-m-Y').'</span>';
+                    echo ' à <span class="data-profil">'.$datecommande->format('H:i').'</span>';
+                    echo '<br>faisait un total de: <span class="data-profil">'.$commande->total.' &#8364;</span>';
                     echo '</li>';
                     }
                 ?>

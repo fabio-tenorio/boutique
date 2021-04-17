@@ -11,8 +11,8 @@ if (isset($_SESSION['user'])) {
     <div class="row">
         <section class="col-sm-8 my-2">
             <?php if (isset($user) and !isset($_POST['oui']) and !isset($_POST['non'])) { ?>
-                <h3>Vous êtes connecté en tant que <?=$user->prenom." ".$user->nom." (login:".$user->login.")";?></h3>
-                <h4>Souhaitez-vous récupérer les informations de votre profil pour la commande?</h4>
+                <p>Vous êtes connecté en tant que <?=$user->prenom." ".$user->nom." (".$user->login.")";?></p>
+                <p>Souhaitez-vous récupérer les informations de votre profil pour la commande?</p>
                 <form action="#" method="POST">
                     <div class="form-row">
                         <div class="form-group mx-auto col-sm-6">

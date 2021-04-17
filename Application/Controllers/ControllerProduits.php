@@ -259,6 +259,8 @@ class ControllerProduits extends Controller
                     $data = ['id_client'=>$this->lastId, 'token'=>$token, 'total'=>$this->total];
                     $this->insertCommande($data);
                     $this->insertLigneCommande($_SESSION['panier']);
+                    unset($_SESSION['panier']);
+                    unset($_SESSION['nombreDeProduits']);
                     $this->message = '<h1 class="text-center">Paiement confirmé</h1><h2 class="text-center">Merci de votre visite!</h2>';
                     $this->render('commandeconfirmation');
                 } else {

@@ -7,7 +7,14 @@
                     <div class="card-body">
                         <h5 class="card-title"><?=$product->titreproduit;?></h5>
                         <p class="card-text"><?=$product->produit;?></p>
-                        <a href="#" class="btn btn-primary col-sm-12">Go somewhere</a>
+                        <?php if ($product->id_categorie == 1 || $product->id_categorie == 10) { ?>
+                        <a href="http://<?php echo PATH;?>/ControllerAgenda/index" class="btn btn-primary">prendre un RDV</a>    
+                        <?php } else { ?>
+                            <div class="col-md-12">
+                                <a href="http://<?php echo PATH; ?>/ControllerProduits/ajouterAuPanier/<?php echo $produit->id;?>" class="btn btn-danger">ajouter au panier</a>
+                                <a href="http://<?php echo PATH; ?>/ControllerProduits/produitfiche/<?php echo $produit->id;?>" class="btn btn-info">détails</a>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

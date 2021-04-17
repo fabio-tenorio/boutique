@@ -2,7 +2,7 @@
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
 Use App\Application\Models\ModelUser;
-Use App\Application\Models\ModelProduits;
+Use App\Application\Controllers\ControllerProduits;
 
 class ControllerUser extends Controller 
 {
@@ -20,7 +20,7 @@ class ControllerUser extends Controller
     public function __construct()
     {
         $this->user = new ModelUser();
-        $this->produits = new ModelProduits();
+        $this->produits = new ControllerProduits();
         if (isset($_SESSION['user']))
         {
             $this->id = $_SESSION['user']->id;

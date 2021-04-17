@@ -9,22 +9,21 @@ Nouvel article dans boutique
 if ($this->message !== '') {
     echo '<p class="btn btn-warning text-center">'.$this->message.'</p>';
 }
-var_dump($_POST);
 ?>
 
 <div class="container">
     <h2 class="text-center my-4">Salut <?= $_SESSION['user']->login?>!</h2>
     <div class="row my-5">
         <div class="col border bg-primary text-white admin-carre mx-3 p-5">
-            <h2 class="text-center">Somme des commandes</h2>
+            <h2 class="text-center">Valeur des commandes</h2>
             <div class="row">
                 <div class="col-6 border">
                     <h2 class="text-center"><?=$this->moisPrecedent;?> &#8364;</h3>
-                    <p class="text-center">mois précédent</p>
+                    <p class="text-center">le total du mois précédent</p>
                 </div>
                 <div class="col-6 border">
                     <h2 class="text-center"><?=$this->moisEnCours;?> &#8364;</h3>
-                    <p class="text-center">mois en cours</p>
+                    <p class="text-center">le total du mois en cours</p>
                 </div>
             </div>
         </div>

@@ -69,5 +69,9 @@ class ModelProduits extends Model
     public function insert_new_ligne_commande($data) {
         return $this->insert('lignecommande', $data);
     }
+
+    public function get_all_commandes() {
+        return $this->get_all('commande');
+    }
 }
 ?>

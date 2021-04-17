@@ -20,10 +20,7 @@ var_dump($_POST);
             <div class="row">
                 <div class="col-6 border">
                     <h3  class="text-center">Mois précédent</h3>
-                    <!-- variable qui contient la somme de toutes les commandes du mois précédent
-                        il faut faire un select all dans la table commande de toutes les commandes datant du mois précedent
-                        il faut que la page sache dans quel mois on est 
-                        if faut calculer la somme de toutes les commandes selectionnées-->
+                    
                 </div>
                 <div class="col-6 border">
                     <h3 class="text-center">Mois en cours</h3>

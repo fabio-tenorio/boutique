@@ -19,9 +19,6 @@
       <li class="nav-item">
         <a class="nav-link mx-3" href="http://<?php echo PATH;?>/ControllerAgenda/index">prendre RDV</a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link mx-3" href="http://<?php echo PATH;?>/ControllerUser/connexion">prendre RDV</a>
-      </li> -->
     </ul>
   </div>
   <address class="mx-3">
@@ -64,8 +61,8 @@
     </li>
     <?php } ?>
   </ul>
-  <form class="form-inline my-1 my-sm-0">
-      <input class="search-nav-bar form-control mr-sm-2" type="search" placeholder="rechercher" aria-label="Search">
+  <form class="form-inline my-1 my-sm-0" action="http://<?php echo PATH;?>/ControllerProduits/searchButton" method="POST">
+      <input class="search-nav-bar form-control mr-sm-2" type="search" name="regex" placeholder="rechercher" aria-label="Search">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
   </form>
   <ul class="panier-header">

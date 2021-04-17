@@ -34,6 +34,11 @@ class ControllerAdmin extends ControllerUser
             $this->valeurStock = $this->valeurStock();
         }
     }
+
+    public function admin_commandes() {
+        $this->commandesAdmin = new ModelProduits;
+        $this->commandes = $this->commandesAdmin->get_all_commandes();
+    }
     
     public function admin_users()
     {

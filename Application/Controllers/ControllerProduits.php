@@ -287,5 +287,22 @@ class ControllerProduits extends Controller
         $this->ficheproduit = $this->produit->get_one_produit($id);
         $this->render('produitfiche');
     }
+
+    public function searchButton () {
+        $regex = $_POST['regex'];
+        $produits = $this->allProduits();
+        $regex = "/".$regex."/i";
+        $this->searchResult = [];
+        foreach ($produits as $produit) {
+            foreach ($produit as $propertyName => $property) {
+                if ($propertyName == "titreproduit" || $propertyName == "produit") {
+                    if (preg_match($regex, $property)!=0) {
+                        $this->searchResult[]= $produit;
+                    }
+                }
+            }
+        }
+        $this->render('recherche');
+    }
 }
 ?>

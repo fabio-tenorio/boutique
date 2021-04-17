@@ -5,7 +5,7 @@
     <div class="row">
       <!--Grid column-->
       <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-        <h5 class="text-uppercase">Sonia boutique en ligne</h5>
+        <h5 class="text-uppercase">Mondrian boutique en ligne</h5>
 
         <p>
         En ce qui concerne l'anatomie, un ongle est une partie dure
@@ -23,7 +23,7 @@
 
         <ul class="list-unstyled mb-0">
           <li>
-            <a href="#!" class="text-white">1, rue des Ongleries, Marseille</a>
+            <a href="#!" class="text-white">1, rue des Salons, Marseille</a>
           </li>
           <li>
             <a href="#!" class="text-white">France - 13001</a>
@@ -32,7 +32,7 @@
             <a href="#!" class="text-white">+33 6 78 91 23 45</a>
           </li>
           <li>
-            <a href="#!" class="text-white">soniaonglerie@onglerie.fr</a>
+            <a href="#!" class="text-white">mondriansalon@boutique.fr</a>
           </li>
         </ul>
       </div>
@@ -44,7 +44,7 @@
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!" class="text-white">Le blog de Sonia</a>
+            <a href="#!" class="text-white">Le blog de Mondrian</a>
           </li>
           <li>
             <a href="#!" class="text-white">notre histoire</a>
@@ -53,7 +53,7 @@
             <a href="#!" class="text-white">Essie</a>
           </li>
           <li>
-            <a href="#!" class="text-white">Link 4</a>
+            <a href="#!" class="text-white">L'Orésal</a>
           </li>
         </ul>
       </div>

@@ -41,11 +41,11 @@
       <?php echo $_SESSION['user']->login; ?>
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="http://<?php echo PATH;?>/ControllerUser/profil">Profil</a>
+        <a class="dropdown-item" href="http://<?php echo PATH;?>/ControllerUser/profil"><i class="bi bi-person-badge mr-2"></i>Profil</a>
         <?php if ($_SESSION['user']->id_droit == 200) { ?>
-        <a class="dropdown-item" href="http://<?php echo PATH;?>/ControllerAdmin/index">Tableau de bord</a>
+        <a class="dropdown-item" href="http://<?php echo PATH;?>/ControllerAdmin/index"><i class="bi bi-speedometer2 mr-2"></i>Tableau de bord</a>
         <?php } ?>
-        <a class="dropdown-item" href="http://<?php echo PATH;?>/ControllerUser/disconnect">Se deconnecter</a>
+        <a class="dropdown-item" href="http://<?php echo PATH;?>/ControllerUser/disconnect"><i class="bi bi-box-arrow-left mr-2"></i>Se deconnecter</a>
       </div>
     </li>
     <?php } else { ?>
@@ -55,8 +55,8 @@
       Membres
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="http://<?php echo PATH;?>/ControllerUser/connexion">connexion</a>
-        <a class="dropdown-item" href="http://<?php echo PATH;?>/ControllerUser/inscription">inscription</a>
+        <a class="dropdown-item" href="http://<?php echo PATH;?>/ControllerUser/connexion"><i class="bi bi-door-open mr-2"></i>connexion</a>
+        <a class="dropdown-item" href="http://<?php echo PATH;?>/ControllerUser/inscription"><i class="bi bi-box-arrow-in-right mr-2"></i>inscription</a>
       </div>
     </li>
     <?php } ?>

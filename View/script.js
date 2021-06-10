@@ -26,23 +26,3 @@ document.getElementById("buttonSearch").addEventListener("click", function()
             document.getElementById("formSearch")
         }
     })
-
-document.getElementById("fieldSearch").addEventListener("input", function() {
-    xhr = new XMLHttpRequest;
-    xhr.onreadystatechange = afficheRecherche;
-    xhr.open('GET', '?ControllerProduits/get_all_produits', true);
-    xhr.send();
-})
-function afficheRecherche() {
-    if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-            console.log(xhr.response);
-        } else {
-            console.log("error 404 or 500");
-            //404 - not found
-            //500 internal Server Error
-        }
-    } else {
-        // not ready yet
-    }
-}

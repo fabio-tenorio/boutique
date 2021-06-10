@@ -11,11 +11,11 @@ if ($this->message!=null) {
     <div class="form">
       <div class="form-group row">
         <label for="login">Login</label>
-        <input type="text" name="login" id="login" class="form-control" placeholder="votre pseudo ou votre e-mail">
+        <input type="text" name="login" id="login" class="form-control" placeholder="Saisir votre pseudo ou e-mail">
       </div>
       <div class="form-group row">
         <label for="motpasse">Mot de passe</label>
-        <input type="password" class="form-control" name="motpasse" id="motpasse" placeholder="votre mot de passe">
+        <input type="password" class="form-control" name="motpasse" id="motpasse" placeholder="Saisir votre mot de passe">
       </div>
     </div>
       <div class="form-group row">

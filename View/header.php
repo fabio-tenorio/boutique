@@ -1,4 +1,4 @@
-<nav class="nav-superieur navbar navbar-expand-lg navbar-light bg-light">
+<nav class="nav-superieur navbar navbar-expand-lg navbar-light">
   <a class="navbar-brand" href="http://<?php echo PATH;?>/ControllerUser/index" id="logo">
       <h1 class="text-center mr-3 header">S.nails</h1>
   </a>
@@ -29,7 +29,7 @@
     <a href='https://www.instagram.com/?hl=fr'><img id="instagram" src="<?php echo IMAGES; ?>instagram.png"></a>
   </div>
 </nav>
-<nav class="nav-inferieur nav-superieur navbar navbar-expand-lg navbar-light bg-light">
+<nav class="nav-inferieur nav-superieur navbar navbar-expand-lg navbar-light">
   <ul>
     <?php if (isset($_SESSION['user'])) { ?>
     <li class="membres-nav nav-item dropdown">

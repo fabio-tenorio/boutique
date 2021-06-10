@@ -92,7 +92,6 @@
                         }
                         
                         header {
-                            background-color: #FFFFFF;
                             width: 100%;
                             border-bottom: 1px solid gray;
                             box-shadow: 2px 3px 4px #f1f1f1f1;
@@ -419,6 +418,37 @@
                         }
                         
                         #img-connexion {
+                            background-image: url(../images/bg-cheveux.jpg);
+                            background-size: cover;
+                            height: inherit;
+                            width: 50%;
+                            border-radius: inherit;
+                            border-top-left-radius: 0;
+                            border-bottom-left-radius: 0;
+                            opacity: 0.5;
+                        }
+                        
+                        #main_inscription {
+                            margin: 20vh 2vh;
+                            border-radius: 10px;
+                            background-color: lightgray;
+                            display: flex;
+                            flex-direction: row-reverse;
+                            min-height: 50vh;
+                            width: 70%;
+                        }
+                        
+                        #main_inscription form {
+                            padding: 9vh;
+                        }
+                        
+                        #main_inscription form h1 {
+                            text-align: center;
+                            width: 100%;
+                            margin-bottom: 7vh;
+                        }
+                        
+                        #img-inscription {
                             background-image: url(../images/bg-cheveux.jpg);
                             background-size: cover;
                             height: inherit;

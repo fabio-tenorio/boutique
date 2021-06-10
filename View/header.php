@@ -58,10 +58,12 @@
     </li>
     <?php } ?>
   </ul>
-  <form id="formSearch" class="form-inline my-1 my-sm-0" action="http://<?php echo PATH;?>/ControllerProduits/searchButton" method="POST">
-    <input id="fieldSearch" class = "search-nav-bar form-control mr-sm-2" type = "search" name = "regex" placeholder = "rechercher" aria - label = "Search">
-      <button id="buttonSearch" class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
-  </form>
+  <div id="searchBar">
+    <form id="formSearch" class="form-inline my-1 my-sm-0" action="http://<?php echo PATH;?>/ControllerProduits/searchButton" method="POST">
+      <input id="fieldSearch" class ="search-nav-bar form-control mr-sm-2" type="search" name="regex" placeholder = "ex: sèche-cheveux" aria - label = "Search">
+    </form>
+    <button id="buttonSearch" class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+  </div>
   <ul class="panier-header">
     <li class="nav-item">
       <a class="nav-link" href="http://<?php echo PATH;?>/ControllerProduits/panier">

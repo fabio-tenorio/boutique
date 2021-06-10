@@ -291,6 +291,24 @@
                             text-transform: lowercase;
                             color: var(--yellowmondrian);
                         }
+
+                        #buttonregex {
+                            background-color: var(--bluemondrian);
+                            color: white;
+                            font-weight: bold;
+                            border-radius: 5px;
+                            padding: 5px;
+                            cursor: pointer;
+                            border: 1px solid var(--bluemondrian);
+                            transition: 0.2s ease;
+                        }
+
+                        #buttonregex:hover {
+                            color: var(--bluemondrian);
+                            background-color: #fff;
+                            box-shadow: 5px 5px 28px 0px var(--bluemondrian);
+                        }
+
                         /* CARROUSEL */
                         /* #section1 {
     width: 100%;

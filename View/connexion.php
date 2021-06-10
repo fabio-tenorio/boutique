@@ -7,7 +7,7 @@ if ($this->message!=null) {
   <div id="img-connexion">
   </div>
   <form action="http://<?php echo PATH; ?>/ControllerUser/connexion" method="POST">
-    <h1>connexion</h1>
+    <h1>Connexion</h1>
     <div class="form">
       <div class="form-group row">
         <label for="login">Login</label>
@@ -20,6 +20,9 @@ if ($this->message!=null) {
     </div>
       <div class="form-group row">
           <button type="submit" class="btn btn-primary">Me connecter</button>
+      </div>
+      <div class="form-group row">
+      <a class="btn btn-primary" href="http://<?php echo PATH;?>/ControllerUser/inscription">M'inscrire</a>
       </div>
   </form>
 </div>

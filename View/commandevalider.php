@@ -120,7 +120,8 @@ if (isset($_SESSION['user'])) {
     </div>
 </div>
 
-<script>
+<script src="<?php echo '../View/card.js'?>">
+
 // Set your publishable key: remember to change this to your live publishable key in production
 // See your keys here: https://dashboard.stripe.com/apikeys
 var stripe = Stripe(

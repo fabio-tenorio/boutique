@@ -1,5 +1,7 @@
 // Contient toutes le javascript
 
+console.log('OK')
+
 document.getElementById("fieldSearch").style.display = "none";
 
 var affichermasquer = 0;
@@ -20,9 +22,14 @@ document.getElementById("buttonSearch").addEventListener("click", function()
             let search = document.createElement('button');
             search.type = "submit";
             search.id = "buttonregex";
-            search.name="buttonregex";
+            search.name = "buttonregex";
             search.innerHTML = "rechercher";
             document.getElementById("formSearch").appendChild(search)
             document.getElementById("formSearch")
         }
-    })
+    }
+)
+
+$(document).on('input', '#fieldSearch', function() {
+    let inputVal = $(this).val()
+})

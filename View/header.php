@@ -17,16 +17,17 @@
         <a class="nav-link mx-3" href="http://<?php echo PATH; ?>/ControllerProduits/produits">Produits</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link mx-3" href="http://<?php echo PATH;?>/ControllerAgenda/index">Agenda RDV</a>
+        <a class="nav-link mx-3" href="https://calendly.com/olivier-puche/60min">Agenda RDV</a>
+        <!-- <a class="nav-link mx-3" href="http://<?php echo PATH;?>/ControllerAgenda/index">Agenda RDV</a> -->
       </li>
     </ul>
   </div>
   <address class="mx-3">
     <a href="mailto:mondrian@boutique.fr"><i class="mx-1 bi bi-envelope"></i>s.nails@boutique.fr</a><br>
-    <a href="tel:0606060606"><i class="mx-1 bi bi-phone-vibrate"></i> 0000000000</a>
+    <a href="tel:+33770034672"><i class="mx-1 bi bi-phone-vibrate"></i> +33 7 70 03 46 72</a>
   </address>
   <div>
-    <a href='https://www.instagram.com/?hl=fr'><img id="instagram" src="<?php echo IMAGES; ?>instagram.png"></a>
+    <a href='https://www.instagram.com/s.nails_salonrouge/'><img id="instagram" src="<?php echo IMAGES; ?>instagram.png"></a>
   </div>
 </nav>
 <nav class="nav-inferieur nav-superieur navbar navbar-expand-lg navbar-light bg-light">
@@ -58,11 +59,11 @@
     </li>
     <?php } ?>
   </ul>
-  <div id="searchBar">
+  <div id="searchBar" class="d-flex">
     <form id="formSearch" class="form-inline my-1 my-sm-0" action="http://<?php echo PATH;?>/ControllerProduits/searchButton" method="POST">
       <input id="fieldSearch" class ="search-nav-bar form-control mr-sm-2" type="search" name="regex" placeholder = "ex: sèche-cheveux" aria - label = "Search">
     </form>
-    <button id="buttonSearch" class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+    <button id="buttonSearch" class="btn btn-outline-primary my-1 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
   </div>
   <ul class="panier-header">
     <li class="nav-item">

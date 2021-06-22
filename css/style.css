@@ -293,6 +293,10 @@
                             color: var(--yellowmondrian);
                         }
 
+                        #searchBar {
+                            min-width: 15vw;
+                        }
+
                         #buttonregex {
                             background-color: var(--bluemondrian);
                             color: white;
@@ -308,6 +312,10 @@
                             color: var(--bluemondrian);
                             background-color: #fff;
                             box-shadow: 5px 5px 28px 0px var(--bluemondrian);
+                        }
+
+                        #buttonSearch {
+                            margin: auto;
                         }
 
                         /* CARROUSEL */
@@ -1078,4 +1086,185 @@
                         
                         .prestation-img {
                             height: 180px;
+                        }
+
+                        /* RGPD */
+
+                        #body_rgpd {
+                            background-color: #FFF;
+                        }
+                        
+                        #body_rgpd header a img {
+                            margin-top: 6rem;
+                        }
+                        
+                        #main_rgpd {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-between;
+                            padding: 3rem 20rem;
+                        }
+                        
+                        #main_rgpd h1 {
+                            font-weight: bold;
+                            color: var(--perma_darkblue);
+                            margin: 3rem 0;
+                        }
+                        
+                        #legaldata {
+                            display: grid;
+                            grid-template-columns: 50% auto;
+                            grid-template-rows: 50% 50%;
+                            grid-column-gap: 2rem;
+                            grid-row-gap: 3rem;
+                        }
+                        
+                        .legaldata_box {
+                            border: 1px solid var(--perma_darkblue);
+                            color: #000;
+                            text-align: center;
+                            padding: 2rem;
+                            border-radius: 10px;
+                            font-weight: normal;
+                            font-size: 1rem;
+                        }
+                        
+                        .legaldata_box h2 {
+                            font-weight: bold;
+                            font-size: 2rem;
+                            color: var(--perma_orange);
+                            margin-bottom: 2rem;
+                        }
+                        
+                        #rgpd_lead {
+                            margin-top: 6rem;
+                        }
+                        
+                        #rgpd_text {
+                            margin-top: 3rem;
+                            padding: 4rem;
+                        }
+                        
+                        .rgpd_article h3 {
+                            font-weight: bold;
+                            color: var(--perma_darkblue);
+                            margin-top: 3rem;
+                            margin-bottom: 2rem;
+                        }
+                        
+                        .rgpd_article p {
+                            text-align: justify;
+                            line-height: 2rem;
+                        }
+
+                        /* CALL TO ACTION  */
+
+                        #call_to_action {
+                            position: fixed;
+                            z-index: 3;
+                            top: 550px;
+                            left: 0;
+                        }
+                        
+                        #call_to_action_link {
+                            position: fixed;
+                            z-index: 2;
+                            top: 550px;
+                            left: -12px;
+                            padding: 1rem;
+                            border-radius: 0 10px 10px 0;
+                            display: flex;
+                            flex-direction: row;
+                            align-content: flex-end;
+                            background-color: var(--perma_green);
+                            color: white;
+                            font-weight: bold;
+                            border: none;
+                            box-shadow: var(--shadow-perma);
+                            transition: 0.2s ease;
+                        }
+                        
+                        #contact_section {
+                            font-size: 0.8rem;
+                        }
+                        
+                        #call_to_action_link:hover {
+                            left: 0;
+                        }
+                        
+                        #call_to_action_link svg {
+                            margin-right: 0.8rem;
+                        }
+
+                        .contact_section_show {
+                            background: -moz-linear-gradient(45deg, rgba(5,41,109,1) 2%, rgba(15,50,116,1) 50%, rgba(27,73,158,1) 100%);
+                            background: -webkit-linear-gradient(45deg, rgba(5,41,109,1) 2%, rgba(15,50,116,1) 50%, rgba(27,73,158,1) 100%);
+                            background: linear-gradient(45deg, rgba(5,41,109,1) 2%, rgba(15,50,116,1) 50%, rgba(27,73,158,1) 100%);
+                            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#05296d",endColorstr="#1b499e",GradientType=1);   
+                            height: 100vh;
+                            animation: showup 0.3s ease-in;
+                            display: flex;
+                            flex-direction: column;
+                            padding: 1rem 2rem;
+                            align-items: center;
+                            position: fixed;
+                            top: 88px;
+                            left: 0;
+                            z-index: 3;
+                        }
+                        
+                        #close_form_contact {
+                            align-self: flex-end;
+                            cursor: pointer;
+                        }
+                        
+                        #contact_logo {
+                            margin: 2rem 0;
+                            width: 15vw;
+                            height: auto;
+                        }
+                        
+                        #contact_article {
+                            color: #fff;
+                            width: 40vw;
+                            font-weight: bold;
+                        }
+                        
+                        #contact_article h1 {
+                            font-weight: bold;
+                        }
+                        
+                        textarea {
+                            resize: none;
+                        }
+                        
+                        #contact_button {
+                            border-radius: 5px;
+                            width: 100%;
+                            background-color: var(--perma_orange);
+                            padding: 2rem;
+                            font-size: 1.4rem;
+                            font-weight: bold;
+                            text-align: center;
+                            text-decoration: none;
+                            transition: 0.2s ease;
+                        }
+                        
+                        #contact_button:hover {
+                            box-shadow: -1px -1px 34px -5px rgba(51,166,204,0.75);
+                            -webkit-box-shadow: -1px -1px 34px -5px rgba(51,166,204,0.75);
+                            -moz-box-shadow: -1px -1px 34px -5px rgba(51,166,204,0.75);
+                            color: var(--perma_gray);
+                        }
+
+                        .contact_section_hide {
+                            display: none;
+                        }
+
+                        /* FOOTER  */
+
+                        #qrcode {
+                            width: 5vw;
+                            height: auto;
                         }

@@ -114,8 +114,42 @@ class ControllerAdmin extends ControllerUser
             floatval($data['prix']);
             number_format($data['prix'], 2);
         }
+        if (isset($_FILES)) {
+            $this->upload_produit($_FILES);
+            $data['imageproduit'] = $_FILES['imageproduit']['name'];
+        }
         $this->adminProducts->insert_product($data);
         return $this->index();
+    }
+
+    public function upload_produit($image)
+    {
+        if(isset($image['imageproduit'])){
+            $errors= array();
+            $file_name = $image['imageproduit']['name'];
+            $file_size =$image['imageproduit']['size'];
+            $file_tmp =$image['imageproduit']['tmp_name'];
+            $file_type=$image['imageproduit']['type'];
+            $file_extension = explode('.', $file_name);
+            $file_ext=strtolower(end($file_extension));
+            $extensions= array("jpeg","jpg","png");
+            
+            if(in_array($file_ext,$extensions)=== false){
+               $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+            }
+            
+            if($file_size > 2097152){
+               $errors[]='File size must be excately 2 MB';
+            }
+            
+            if(empty($errors)==true){
+                
+               move_uploaded_file($file_tmp, '/var/www/html/private/unit2/boutique/images/'.$file_name);
+               $this->message = "Success";
+            } else {
+               print_r($errors);
+            }
+        }
     }
 
     public function index()

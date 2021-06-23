@@ -60,10 +60,6 @@ class ModelAdmin extends Model
         $this->delete('produit', $id);
     }
 
-    // public function deleteUser($id) {
-    //     $this->delete('utilisateur', $id);
-    // }
-
     public function allStock() {
         $sql = "SELECT stock FROM produit";
         $stmt = $this->connect_db()->prepare($sql);

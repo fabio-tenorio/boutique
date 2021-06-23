@@ -40,6 +40,7 @@ if ($this->message !== '') {
         <div class="col border bg-dark mx-3 py-5">
             <h2 class="text-center text-light">Liste des utilisateurs</h2>
             <form action="http://<?php echo PATH; ?>/ControllerAdmin/supprimerUtilisateur" method='POST'>
+            <span>prénom</span><span>nom</span><span>login</span><span>login</span><span>status</span>
             <?php
                 foreach($this->data['allusers'] as $user) {
                     echo '<li class="list-group-item product-list">';
@@ -52,12 +53,39 @@ if ($this->message !== '') {
                     echo '<br>';
                     echo '<span class="mx-2">'.$user->mail.'</span>';
                     echo '<span class="mx-2">'.$user->telephone.'</span>';
+                    switch($user->id_droit) {
+                        case 1:
+                            echo '<span class="mx-2">membre</span>';
+                            break;
+                        case 10:
+                            echo '<span class="mx-2">client</span>';
+                            break;
+                        case 200:
+                            echo '<span class="mx-2">admin</span>';
+                            break;
+                    }
                     echo '</li>';
                 }
             ?>
         <!-- select all dans login, nom, prenom, mail, date de naissance, date d'inscription sur le site
             à côté de chaque utilisateur, il y aura un bouton qui bascule vers la page profil-->
                 <button type="submit" name="supprimerUtilisateur" class="btn btn-danger col-sm-12 mx-auto my-4">supprimer des utilisateurs</button>
+            </form>
+            <form action="http://<?php echo PATH; ?>/ControllerAdmin/change_droit" method='POST'>
+                <select name="id" class="form-select" aria-label="utilisateur">
+                    <option selected>selectionnez un utilisateur</option>
+                    <?php foreach ($this->data['allusers'] as $user) {
+                        echo '<option value='.$user->id.'>'.$user->login.'</option>';
+                    };?>
+                </select>
+                <select name="id_droit" class="form-select" aria-label="id_droit">
+                    <option selected>selectionnez son niveau d'accès au site</option>
+                    <?php
+                    foreach ($this->droit as $droit) {
+                        echo '<option value='.$droit->id.'>'.$droit->nom.'</option>';
+                    };?>
+                </select>
+                <button type="submit" class="btn btn-warning">valider</button>
             </form>
         </div>
         <div class="col border bg-light mx-3">

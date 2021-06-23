@@ -24,6 +24,7 @@ class ControllerAdmin extends ControllerUser
     {
         $this->admin = new ModelUser();
         $this->adminProducts = new ModelAdmin();
+        $this->droit = $this->adminProducts->get_all_droits();
         $this->categories = $this->selectCategories();
         $this->commandes = $this->adminCommandes();
         if(isset($_SESSION['user']->login) AND $_SESSION['user']->id_droit == 200 )
@@ -58,6 +59,26 @@ class ControllerAdmin extends ControllerUser
     public function admin_users()
     {
         return $this->admin->get_all_users();
+    }
+
+    public function get_droit()
+    {   
+        $this->droit = $this->adminProducts->get_all_droits();
+        return $this->droit;
+    }
+
+    public function change_droit()
+    {
+        $droit['id_droit'] = $_POST['id_droit'];
+        $id_utilisateur = $_POST['id'];
+        if (is_integer($id_utilisateur) and is_integer($droit['id_droit'])) {
+            $this->admin->update_user($droit, $id_utilisateur);
+            return $this->index();
+        } else {
+            $this->message = "vous n'avez pas renseigné tous les champs";
+            return $this->index();
+        }
+        
     }
 
     public function admin_products() {
@@ -105,6 +126,7 @@ class ControllerAdmin extends ControllerUser
             $this->data['user'] = $_SESSION ['user'];
             $this->data['allusers'] = $this->admin_users();
             $this->data['products'] = $this->admin_products();
+            $this->data['droits'] = $this->droit;
             $this->render('administrateur', $this->data);
         }
         else

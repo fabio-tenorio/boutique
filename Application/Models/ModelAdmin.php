@@ -114,6 +114,9 @@ class ModelAdmin extends Model
     public function deleteFournisseur($id) {
         $this->delete('fournisseur', $id);
     }
-    
+
+    public function get_all_droits() {
+        return $this->get_all('droit');
+    } 
 }
 ?>

@@ -1,3 +1,24 @@
+// js de perma
+
+document.getElementById("close_form_contact").addEventListener("click", closeContactForm);
+var insideForm = document.getElementById("contact_section");
+var contactButtons = document.getElementsByClassName("formcontact")
+for (let button=0; button < contactButtons.length; button++) {
+    contactButtons[button].addEventListener("click", showContactForm, false);
+}
+
+function showContactForm() {
+    document.getElementById("contact_section").className = 'contact_section_show';
+    // hideIfShown = true;
+    // return hideIfShown;
+}
+
+function closeContactForm() {
+    document.getElementById("contact_section").className = 'contact_section_hide';
+    // hideIfShown = false;
+    // return hideIfShown;
+}
+
 // Contient toutes le javascript
 
 console.log('OK')

@@ -12,6 +12,12 @@ $listeProduits = $this->produits->allProduits();
 ?>
 
 <div class="main-accueil">
+    <a class="formcontact" id="call_to_action_link" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+        </svg>
+        Nous contacter
+    </a>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -22,8 +28,8 @@ $listeProduits = $this->produits->allProduits();
         <div class="carousel-item active">
             <img class="d-block w-100 img-slide" src="<?php echo IMAGES; ?>lissage.jpeg" alt="First slide">
             <div class="carousel-caption text-slide-white d-none d-md-block">
-                <h2>Votre salon en ligne</h2>
-                <h3>bienvenue sur notre site!</h3>
+                <h2>Bienvenue sur notre site!</h2><br>
+                <h3>Rejoignez notre communauté <a href='https://www.instagram.com/s.nails_salonrouge/'><img id="instagram" src="<?php echo IMAGES; ?>instagram.png"></a></h3>
             </div>
         </div>
         <div class="carousel-item">

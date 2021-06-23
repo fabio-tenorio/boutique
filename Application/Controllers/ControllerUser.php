@@ -106,7 +106,8 @@ class ControllerUser extends Controller
             if (!empty($_POST['login']) AND !empty($_POST['mail']) AND !empty($_POST['motpasse']) 
             AND !empty($_POST['confirmer_motpasse']) 
             AND !empty($_POST['prenom']) AND !empty($_POST['nom']) 
-            AND !empty($_POST['telephone']) AND !empty($_POST['dateanniversaire']))
+            AND !empty($_POST['telephone']) AND !empty($_POST['dateanniversaire'])
+            AND !empty($_POST['subscribeRGPD']))
             { 
                 $user = $this->user_exists($_POST['login'], $_POST['mail']);
                 // $user génère un objet, si pas d'objet, renvoi d'un booléen : false
@@ -152,9 +153,9 @@ class ControllerUser extends Controller
             }
             else 
             {
-                $this->message = 'Vous devez renseigner tous les champs';
+                $this->message = 'Vous devez renseigner tous les champs et confirmer avoir lu les mentions légales';
                 return $this->render('inscription', $this->message); 
-            }  
+            }
         }
         else 
         {
@@ -231,6 +232,11 @@ class ControllerUser extends Controller
 
     public function historiqueAchat($id) {
         return $this->user->select_historique($id);
+    }
+
+    public function rgpd()
+    {
+        $this->render('mentionsLegales');
     }
 }
 ?>

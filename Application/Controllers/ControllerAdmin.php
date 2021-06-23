@@ -87,10 +87,20 @@ class ControllerAdmin extends ControllerUser
     }
 
     public function supprimerProduit() {
+        $tousLesProduits = $this->admin_products();
         foreach($_POST as $id) {
+            foreach($tousLesProduits as $produit) {
+                if ($id == $produit->id) {
+                    $this->supprimerImageProduit($produit->imageproduit);
+                }
+            }
             $this->adminProducts->deleteProduct($id);
         }
         $this->index();
+    }
+
+    public function supprimerImageProduit($image) {
+        unlink('/var/www/html/private/unit2/boutique/images/'.$image);
     }
 
     public function supprimerUtilisateur() {

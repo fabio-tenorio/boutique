@@ -100,7 +100,9 @@ class ControllerAdmin extends ControllerUser
     }
 
     public function supprimerImageProduit($image) {
-        unlink('/var/www/html/private/unit2/boutique/images/'.$image);
+        $file_path = str_replace('boutique', 'boutique'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$image, realpath(''));
+        unlink($file_path);
+        // unlink('/var/www/html/private/unit2/boutique/images/'.$image);
     }
 
     public function supprimerUtilisateur() {
@@ -113,7 +115,7 @@ class ControllerAdmin extends ControllerUser
     public function nouveauProduit() {
         $data = $_POST;
         intval($data['stock']);
-        if ($data['stock'] < 0) {
+        if (isset($data['stock']) && $data['stock'] < 0) {
             $this->message = "la valeur renseignée pour la quantité en stock d'un produit doit être un nombre entier positif";
             return $this->index();
         }
@@ -144,7 +146,7 @@ class ControllerAdmin extends ControllerUser
             $file_ext=strtolower(end($file_extension));
             $extensions= array("jpeg","jpg","png");
             
-            if(in_array($file_ext,$extensions)=== false){
+            if(in_array($file_ext,$extensions) === false){
                $errors[]="extension not allowed, please choose a JPEG or PNG file.";
             }
             
@@ -153,8 +155,8 @@ class ControllerAdmin extends ControllerUser
             }
             
             if(empty($errors)==true){
-                
-               move_uploaded_file($file_tmp, '/var/www/html/private/unit2/boutique/images/'.$file_name);
+               $file_path = str_replace('boutique', 'boutique'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$file_name, realpath('')); 
+               move_uploaded_file($file_tmp, $file_path);
                $this->message = "Success";
             } else {
                print_r($errors);

@@ -60,10 +60,6 @@ class ModelAdmin extends Model
         $this->delete('produit', $id);
     }
 
-    // public function deleteUser($id) {
-    //     $this->delete('utilisateur', $id);
-    // }
-
     public function allStock() {
         $sql = "SELECT stock FROM produit";
         $stmt = $this->connect_db()->prepare($sql);
@@ -74,6 +70,13 @@ class ModelAdmin extends Model
 
     public function all_categories() {
         return $this->get_all('categorie');
+    }
+
+    public function insert_categorie($categorie)
+    {
+        if (is_array($categorie)) {
+            return $this->insert('categorie', $categorie);
+        }
     }
 
     public function new_fournisseur_data($data)

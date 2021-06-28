@@ -40,33 +40,41 @@ if ($this->message !== '') {
         <div class="col border bg-dark mx-3 py-5">
             <h2 class="text-center text-light">Liste des utilisateurs</h2>
             <form action="http://<?php echo PATH; ?>/ControllerAdmin/supprimerUtilisateur" method='POST'>
-            <span>prénom</span><span>nom</span><span>login</span><span>login</span><span>status</span>
+            <table class="table table-striped table-light table-hover">
+                <tr>
+                    <th></th>
+                    <th>prénom</th>
+                    <th>nom</th>
+                    <th>login</th>
+                    <th>email</th>
+                    <th>tél</th>
+                    <th>status</th>
+                </tr>
             <?php
                 foreach($this->data['allusers'] as $user) {
-                    echo '<li class="list-group-item product-list">';
-                    echo '<input type="checkbox" value="'.$user->id.'" name="'.$user->id.'">';
-                    echo '<span class="mx-2">'.$user->prenom.'</span>';
-                    echo '<span class="mx-2">'.$user->nom.'</span>';
-                    echo '<br>';
-                    echo '<span class="mx-2">'.$user->login.'</span>';
-                    echo '<span class="mx-2 badge badge-primary badge-pill">'.$user->id_droit.'</span>';
-                    echo '<br>';
-                    echo '<span class="mx-2">'.$user->mail.'</span>';
-                    echo '<span class="mx-2">'.$user->telephone.'</span>';
+                    echo '<tr>';
+                    // echo '<li class="list-group-item product-list">';
+                    echo '<td><input type="checkbox" value="'.$user->id.'" name="'.$user->id.'"></td>';
+                    echo '<td>'.$user->prenom.'</td>';
+                    echo '<td>'.$user->nom.'</td>';
+                    echo '<td>'.$user->login.'</td>';
+                    echo '<td class="mx-2">'.$user->mail.'</td>';
+                    echo '<td class="mx-2">'.$user->telephone.'</td>';
                     switch($user->id_droit) {
                         case 1:
-                            echo '<span class="mx-2">membre</span>';
+                            echo '<td class="mx-2">membre</td>';
                             break;
                         case 10:
-                            echo '<span class="mx-2">client</span>';
+                            echo '<td class="mx-2">client</td>';
                             break;
                         case 200:
-                            echo '<span class="mx-2">admin</span>';
+                            echo '<td class="mx-2">admin</td>';
                             break;
                     }
-                    echo '</li>';
+                    echo '</tr>';
                 }
             ?>
+            </table>
         <!-- select all dans login, nom, prenom, mail, date de naissance, date d'inscription sur le site
             à côté de chaque utilisateur, il y aura un bouton qui bascule vers la page profil-->
                 <button type="submit" name="supprimerUtilisateur" class="btn btn-danger col-sm-12 mx-auto my-4">supprimer des utilisateurs</button>
@@ -90,21 +98,29 @@ if ($this->message !== '') {
         </div>
         <div class="col border bg-light mx-3">
             <h2 class="text-center">Liste des produits</h2>
-            <ul class="list-group list-group-flush">
-                <!-- <form action="#" method='POST'> -->
                 <form action="http://<?php echo PATH; ?>/ControllerAdmin/supprimerProduit" method='POST'>
+                <table class="table table-light table-hover">
+                    <tr>
+                        <th></th>
+                        <th>nom</th>
+                        <th>prix</th>
+                        <th>quantité</th>
+                        <th>date</th>
+                    </tr>
                 <?php
                 foreach($this->data['products'] as $product) {
-                    echo '<li class="list-group-item product-list">';
-                    echo '<input type="checkbox" value="'.$product->id.'" name="'.$product->id.'">';
-                    echo '<span class="mx-2">'.$product->titreproduit.'</span>';
-                    echo '<span class="mx-2">'.$product->prix.' &#8364;</span>';
-                    echo '<span class="mx-2 badge badge-primary badge-pill">'.$product->stock.'</span>';
+                    // echo '<li class="list-group-item product-list">';
+                    echo '<tr>';
+                    echo '<td><input type="checkbox" value="'.$product->id.'" name="'.$product->id.'"></td>';
+                    echo '<td class="mx-2">'.$product->titreproduit.'</td>';
+                    echo '<td class="mx-2">'.$product->prix.' &#8364;</td>';
+                    echo '<td class="mx-2 badge badge-primary badge-pill">'.$product->stock.'</td>';
                     $date = explode (' ', $product->dateproduit);
-                    echo '<span class="mx-2">'.$date[0].'</span>';
-                    echo '</li>';
+                    echo '<td class="mx-2">'.$date[0].'</td>';
+                    echo '</tr>';
                     }
                     ?>
+                </table>
                 <button class="btn btn-danger col-sm-12 mx-auto my-3" type="submit" name="supprimerProduit">supprimer le(s) produit(s)</button>
                 </form>
             </ul>
@@ -115,7 +131,7 @@ if ($this->message !== '') {
     <div class="row my-5">
         <div class="col border mx-2">
             <h4 class="text-center">Nouveau produit</h4>
-            <form action="http://<?php echo PATH; ?>/ControllerAdmin/nouveauProduit" method="POST">
+            <form enctype="multipart/form-data" action="http://<?php echo PATH; ?>/ControllerAdmin/nouveauProduit" method="POST">
                 <div class="input-group my-2">
                     <span class="input-group-text" for="reference">Réference du produit</span>
                     <input class="form-control" type="text" id="reference" name="reference" required>
@@ -136,6 +152,10 @@ if ($this->message !== '') {
                     <span class="input-group-text" for="prix">Prix du produit</span>
                     <input class="form-control" type="text" id="prix" name="prix" required>
                 </div>
+                <div class="input-group my-2">
+                    <span class="input-group-text" for="imageproduit">Image du produit</span>
+                    <input class="form-control" type="file" id="imageproduit" name="imageproduit">
+                </div>
                 <div class="form-group">
                     <select class="form-select col-12 form-select-lg" id="id_categorie" name="id_categorie" aria-label="Default select example">
                         <option selected>la catégorie du produit</option>
@@ -148,12 +168,6 @@ if ($this->message !== '') {
                             echo '</option>';
                         }
                         ?>
-                        <!-- <option value="#">soins internes</option>
-                        <option value="#">soins externes</option>
-                        <option value="#">produit de soin</option>
-                        <option value="#">produit de beauté</option>
-                        <option value="#">fantaise</option>
-                        <option value="#">matériel</option> -->
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary col-12 mx-auto">ajouter le produit</button>
@@ -189,10 +203,10 @@ if ($this->message !== '') {
         <div class="col border mx-2">
             <h4 class="text-center">Nouvelle catégorie produit</h4>
             <div class="container">
-                <form action="#" method="post">
+                <form action="http://<?php echo PATH; ?>/ControllerAdmin/nouvelleCategorie" method="POST">
                     <div class="input-group my-2">
                         <span class="input-group-text">nouvelle catégorie</span>
-                        <input class="form-control" type="text" id="categorie" name="categorie">
+                        <input class="form-control" type="text" id="titrecategorie" name="titrecategorie">
                     </div>
                     <button type="submit" class="btn btn-primary col-12 mx-auto">ajouter nouvelle catégorie</button>
                 </form>

@@ -153,7 +153,7 @@ if ($this->message !== '') {
                     <input class="form-control" type="text" id="prix" name="prix" required>
                 </div>
                 <div class="input-group my-2">
-                    <span class="input-group-text" for="prix">Image du produit</span>
+                    <span class="input-group-text" for="imageproduit">Image du produit</span>
                     <input class="form-control" type="file" id="imageproduit" name="imageproduit">
                 </div>
                 <div class="form-group">
@@ -203,10 +203,10 @@ if ($this->message !== '') {
         <div class="col border mx-2">
             <h4 class="text-center">Nouvelle catégorie produit</h4>
             <div class="container">
-                <form action="#" method="post">
+                <form action="http://<?php echo PATH; ?>/ControllerAdmin/nouvelleCategorie" method="POST">
                     <div class="input-group my-2">
                         <span class="input-group-text">nouvelle catégorie</span>
-                        <input class="form-control" type="text" id="categorie" name="categorie">
+                        <input class="form-control" type="text" id="titrecategorie" name="titrecategorie">
                     </div>
                     <button type="submit" class="btn btn-primary col-12 mx-auto">ajouter nouvelle catégorie</button>
                 </form>

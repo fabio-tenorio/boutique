@@ -20,7 +20,7 @@
     <title>Sonia | boutique en ligne</title>
 </head>
 <body>
-    <div id="call_to_action">
+    <!-- <div id="call_to_action">
         <a class="formcontact" id="call_to_action_link" href="#">
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                 <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
@@ -36,26 +36,21 @@
                 <p>Si ce que nous proposons vous intéresse, nous sommes prêts à engager une réflexion commune sur votre situation. Contactez nous!</p>
                 <form action="" method="post">
                     <div class="form-group">
-                        <!-- <label for="societe">Société</label> -->
                         <input type="text" class="form-control mb-3" id="societe" name="societe" placeholder="Votre entreprise, coopérative, ou institution">
                     </div>
                     <div class="display-flex row">
                         <div class="col">
-                            <!-- <label for="prenom">prénom</label> -->
                             <input class="form-control mb-3" type="text" id="prenom" name="prenom" placeholder="Votre prénom">
                         </div>
                         <div class="col sm-6">
-                            <!-- <label for="prenom">nom</label> -->
                             <input class="form-control mb-3" type="text" id="nom" name="nom" placeholder="Votre nom">
                         </div>
                     </div>
                     <div class="display-flex row">
                         <div class="col">
-                            <!-- <label>Email</label> -->
                             <input class="form-control mb-3" id="email" type="mail" placeholder="Votre email">
                         </div>
                         <div class="col sm-6">
-                            <!-- <label>tel</label> -->
                             <input class="form-control mb-3" id="tel" type="phone" placeholder="Votre téléphone">
                         </div>
                     </div>
@@ -70,7 +65,7 @@
                 </form>
             </article>
         </section>
-    </div>
+    </div> -->
     <header>
         <?= $contentHeader ?>
     </header>

@@ -6,49 +6,49 @@ if (isset($_SESSION['panier'])) {
 }
 ?>
 <div class="container">
-    <h1 class="text-center">Votre profil</h1>
+    <h1 class="text-center my-5">Votre profil</h1>
     <!-- <p>Please fill in this form to create an account.</p> -->
     <hr>
 <?php echo '<p class="text-center btn-btn-danger">'.$this->message.'</p>';?>
-    <form id="form_profil" action="http://<?php echo PATH; ?>/ControllerUser/profil/" method="POST">
+    <form class="container" id="form_profil" action="http://<?php echo PATH; ?>/ControllerUser/profil/" method="POST">
     <div class="row">
-    <div class="col-sm">
-        <label for="prenom">Prénom</label>
-        <input type="text" placeholder="<?= $data->prenom ?>" name="prenom" id="prenom">
+        <div class="col-lg my-2 col-sm-6">
+            <label for="prenom">Prénom</label>
+            <input class="col-sm-12" type="text" placeholder="<?= $data->prenom ?>" name="prenom" id="prenom">
+        </div>
+        <div class="col-lg my-2 col-sm-6">
+            <label for="prenom">Nom</label>
+            <input class="col-sm-12" type="text" placeholder="<?= $data->nom ?>" name="nom" id="nom">
+        </div>
+        <div class="col-lg my-2 col-sm-6">
+            <label for="login">Login</label>
+            <input class="col-sm-12" type="text" placeholder="<?= $data->login ?>" name="login" id="login">
+        </div>
+        <div class="col-lg my-2 col-sm-6">
+            <label for="mail">E-mail</label>
+            <input class="col-sm-12" type="text" placeholder="<?= $data->mail ?>" name="mail" id="mail">
+        </div>
     </div>
-    <div class="col-sm">
-        <label for="prenom">Nom</label>
-        <input type="text" placeholder="<?= $data->nom ?>" name="nom" id="nom">
-    </div>
-    <div class="col-sm">
-        <label for="login">Login</label>
-        <input type="text" placeholder="<?= $data->login ?>" name="login" id="login">
-    </div>
-    <div class="col-sm">
-        <label for="mail">E-mail</label>
-        <input type="text" placeholder="<?= $data->mail ?>" name="mail" id="mail">
-    </div>
-</div>
-    <div class="row">
-        <div class="col-sm">
+    <div class="row my-4">
+        <div class="col-lg my-2 col-sm-12">
             <label for="motpasse">Mot de passe</label>
-            <input type="password" placeholder="votre mot de passe" name="motpasse" id="motpasse">
+            <input class="col-sm-12" type="password" placeholder="votre mot de passe" name="motpasse" id="motpasse">
         </div>
-        <div class="col-sm">
+        <div class="col-lg my-2 col-sm-12">
             <label for="confirmer_motpasse">Confirmation</label>
-            <input type="password" placeholder="Confirmez votre mot de passe" name="confirmer_motpasse" id="confirmer_motpasse">
+            <input class="col-sm-12" type="password" placeholder="Confirmez votre mot de passe" name="confirmer_motpasse" id="confirmer_motpasse">
         </div>
-        <div class="col-sm">
+        <div class="col-lg my-2">
             <label for="telephone">téléphone</label>
-            <input type="tel" placeholder="<?= $data->telephone ?>" name="telephone" id="telephone">
+            <input class="col-sm-12" type="tel" placeholder="<?= $data->telephone ?>" name="telephone" id="telephone">
         </div>
-        <div class="col-sm">
+        <div class="col-lg my-2">
             <label for="dateanniversaire">date de naissance</label>
-            <input type="date" placeholder="" name="dateanniversaire" id="telephone">
+            <input class="col-sm-12" type="date" placeholder="" name="dateanniversaire" id="telephone">
         </div>
     </div>
     <div class="row">
-        <button type="submit" name="modifier" class="col-sm-6 btn btn-warning mr-5 my-4">Modifier</button>
+        <button type="submit" name="modifier" class="col btn btn-warning mr-5 my-4">Modifier</button>
         <button type="submit" name="supprimer" class="col btn btn-danger ml-5 my-4" value='true'>Supprimer</button>
     </div>
 </form>

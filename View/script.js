@@ -44,7 +44,7 @@ document.getElementById("buttonSearch").addEventListener("click", function()
             search.type = "submit";
             search.id = "buttonregex";
             search.name = "buttonregex";
-            search.innerHTML = "rechercher";
+            search.innerHTML = "valider";
             document.getElementById("formSearch").appendChild(search)
             document.getElementById("formSearch")
         }

@@ -365,6 +365,8 @@ link:hover>.dropdown_link {
 
 .produit-box {
     margin: 25px 15px;
+    height: 85vh;
+    width: auto;
     border-radius: 8px;
     -webkit-box-shadow: 2px 5px 15px 1px lightgray;
     box-shadow: 2px 5px 15px 1px lightgray;
@@ -378,15 +380,31 @@ link:hover>.dropdown_link {
 }
 
 .produit-img {
-    height: 150px;
+    width: inherit;
+    height: 50%;
 }
 
+.card-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.card-text {
+    background-color: whitesmoke;
+    height: 15vh;
+    width: 250px;
+    overflow: scroll; 
+}
+
+.button-produit {
+
+}
 
 /* PAGE INSCRIPTION */
 
 #main_inscription {
     margin: 25vh 0;
-    padding: 5vh 0;
+    /* padding: 5vh 0; */
     border-radius: 10px;
     background-color: lightgray;
     width: 70%;
@@ -397,21 +415,21 @@ link:hover>.dropdown_link {
     flex-direction: column;
     align-items: center;
     justify-content: stretch;
+    width: 50%;
 }
 
-#form_inscription_container {
+/* #form_inscription_container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     width: 100%;
     padding: 5vh 0;
-}
+} */
 
 .formgroup #main_inscription h1 {
     text-align: center;
 }
-
 
 /* PROFIL */
 
@@ -443,7 +461,8 @@ link:hover>.dropdown_link {
     display: flex;
     flex-direction: row-reverse;
     min-height: 50vh;
-    width: 70%;
+    /* width: 70%; */
+    width: auto;
 }
 
 #main_connexion form {
@@ -468,13 +487,14 @@ link:hover>.dropdown_link {
 }
 
 #main_inscription {
-    margin: 20vh 2vh;
+    margin: 20vh 1vh;
     border-radius: 10px;
     background-color: lightgray;
     display: flex;
     flex-direction: row-reverse;
     min-height: 50vh;
-    width: 70%;
+    /* width: 70%; */
+    min-width: 80%;
 }
 
 #champsinscription {
@@ -484,24 +504,23 @@ link:hover>.dropdown_link {
 }
 
 #champsinscription div {
-    background-color: red;
     width: 100%;
 }
 
 #main_inscription form {
-    padding: 9vh;
+    padding: 2vh;
 }
 
 #main_inscription form h1 {
     text-align: center;
-    width: 100%;
+    /* width: 100%; */
     margin-bottom: 7vh;
 }
 
 #img-inscription {
     background-image: url(../images/bg-cheveux.jpg);
     background-size: cover;
-    height: inherit;
+    /* height: inherit; */
     width: 50%;
     border-radius: inherit;
     border-top-left-radius: 0;
@@ -675,6 +694,14 @@ link:hover>.dropdown_link {
 /* RESPONSIVE */
 
 @media only screen and (max-width: 414px) {
+    #img-inscription {
+        display: none;
+    }
+
+    #form_inscription {
+        width: 100%;
+    }
+    
     .nav-inferieur {
         display: inline-grid;
         grid-template-columns: 120px auto 120px;
@@ -697,6 +724,8 @@ link:hover>.dropdown_link {
     margin-bottom: 20px;
     margin-top: 10px;
     background: #fff;
+    height: auto;
+    width: auto;
     padding: 6px;
     -webkit-box-shadow: 0 1px 4px 0 rgba(21, 180, 255, 0.5);
     box-shadow: 0 1px 1px 0 rgba(21, 180, 255, 0.5);
@@ -705,11 +734,15 @@ link:hover>.dropdown_link {
 .prod-info-main .product-image {
     background-color: #EBF8FE;
     display: block;
-    min-height: 238px;
+    max-height: inherit;
     overflow: hidden;
     position: relative;
     border: 1px solid #CEEFFF;
     padding-top: 40px;
+}
+
+.product-image img {
+    height: 32vh;
 }
 
 .rotprod {

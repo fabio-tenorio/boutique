@@ -12,12 +12,12 @@ $listeProduits = $this->produits->allProduits();
 ?>
 
 <div class="main-accueil">
-    <a class="formcontact" id="call_to_action_link" href="#">
+    <!-- <a class="formcontact" id="call_to_action_link" href="#">
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
             <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
         </svg>
         Nous contacter
-    </a>
+    </a> -->
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -69,7 +69,7 @@ $listeProduits = $this->produits->allProduits();
                     <div class="card-body">
                         <h5 class="card-title"><?=$produit->titreproduit;?></h5>
                         <p class="card-text"><?=$produit->produit?></p>
-                        <a href="http://<?php echo PATH;?>/ControllerAgenda/index" class="btn btn-primary">prendre un RDV</a>
+                        <a href="http://<?php echo PATH;?>/ControllerAgenda/index" class="btn btn-primary col-12 mx-auto button-produit">prendre un RDV</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@ $listeProduits = $this->produits->allProduits();
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-12 col-xs-12">
-                        <div class="product-deatil">
+                        <div class="product-detail">
                             <h5 class="name">
                                 <a href="#">
                                     <?=$produit->titreproduit;?>

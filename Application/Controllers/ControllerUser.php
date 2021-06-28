@@ -236,7 +236,7 @@ class ControllerUser extends Controller
 
     public function rgpd()
     {
-        $this->render('mentionsLegales');
+        $this->render('mentionslegales');
     }
 }
 ?>

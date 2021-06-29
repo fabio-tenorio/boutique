@@ -8,7 +8,6 @@ Créer un Évenement dans agenda sur plusieurs heures ou jours */
 
 Namespace App\Application\Controllers;
 Use App\Application\Controller;
-Use App\Application\Models\ModelProduit;
 use App\Application\Models\ModelProduits;
 use App\Application\Models\ModelUser;
 use App\Application\Models\ModelAdmin;
@@ -127,40 +126,53 @@ class ControllerAdmin extends ControllerUser
             number_format($data['prix'], 2);
         }
         if (isset($_FILES)) {
-            $this->upload_produit($_FILES);
+            $this->upload_imageproduit($_FILES);
             $data['imageproduit'] = $_FILES['imageproduit']['name'];
         }
         $this->adminProducts->insert_product($data);
         return $this->index();
     }
 
-    public function upload_produit($image)
+    public function upload_imageproduit($image)
     {
-        if(isset($image['imageproduit'])){
+        if (isset($image['imageproduit'])) {
             $errors= array();
             $file_name = $image['imageproduit']['name'];
             $file_size =$image['imageproduit']['size'];
             $file_tmp =$image['imageproduit']['tmp_name'];
             $file_type=$image['imageproduit']['type'];
+            $file_error=$image['imageproduit']['error'];
             $file_extension = explode('.', $file_name);
             $file_ext=strtolower(end($file_extension));
             $extensions= array("jpeg","jpg","png");
             
-            if(in_array($file_ext,$extensions) === false){
-               $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-            }
-            
-            if($file_size > 2097152){
-               $errors[]='File size must be excately 2 MB';
-            }
-            
-            if(empty($errors)==true){
-               $file_path = str_replace('boutique', 'boutique'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$file_name, realpath('')); 
-               move_uploaded_file($file_tmp, $file_path);
-               $this->message = "Success";
+            if ($file_error === UPLOAD_ERR_OK) {
+                if ($file_size > 2097152 || $file_size === 0) {
+                    $errors[]='La taille du fichier ne peut pas dépasser les 2 MB';
+                    $this->message = $errors[0];
+                    return $this->message;
+                }
+                if (in_array($file_ext, $extensions) === false) {
+                    $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+                    $this->message = $errors[0];
+                    return $this->message;
+                }
+                if (empty($errors)==true) {
+                    $file_path = str_replace('boutique', 'boutique'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$file_name, realpath(''));
+                    move_uploaded_file($file_tmp, $file_path);
+                    $this->message = "Success";
+                }
             } else {
-               print_r($errors);
+                $this->message = "Échec d'insertion de l'image ";
+                return $this->message;
             }
+        }
+    }
+
+    public function nouvelleCategorie() {
+        if (isset($_POST['titrecategorie'])) {
+            $this->adminProducts->insert_categorie($_POST);
+            $this->index();
         }
     }
 

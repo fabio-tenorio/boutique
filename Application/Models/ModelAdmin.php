@@ -72,6 +72,13 @@ class ModelAdmin extends Model
         return $this->get_all('categorie');
     }
 
+    public function insert_categorie($categorie)
+    {
+        if (is_array($categorie)) {
+            return $this->insert('categorie', $categorie);
+        }
+    }
+
     public function new_fournisseur_data($data)
     {
         $insert_values = [];
